@@ -1,5 +1,5 @@
 <template>
-    <section id="a-propos" class="relative py-32 overflow-hidden">
+    <section id="a-propos" class="relative py-24 overflow-hidden">
         <!-- Background animé avec effet courant d'eau -->
         <div class="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-white to-indigo-50/80">
             <!-- Courants d'eau animés -->
@@ -19,9 +19,9 @@
         <div class="container mx-auto px-4 lg:px-12 max-w-7xl relative z-10">
 
             <!-- En-tête parfaitement centré -->
-            <div class="flex flex-col items-center justify-center text-center mb-16 lg:mb-20">
+            <div class="flex flex-col items-center justify-center text-center mb-12 lg:mb-16">
                 <!-- Ligne décorative centrée -->
-                <div class="flex items-center justify-center space-x-4 mb-6 lg:mb-8">
+                <div class="flex items-center justify-center space-x-4 mb-4 lg:mb-6">
                     <div class="w-12 lg:w-16 h-0.5 bg-gradient-to-r from-transparent to-[#01b4d5]"></div>
                     <span class="text-[#01b4d5] font-medium tracking-widest text-xs lg:text-sm uppercase whitespace-nowrap">
                         L'Excellence Numérique
@@ -31,21 +31,21 @@
 
                 <!-- Titre principal parfaitement centré -->
                 <div class="w-full flex flex-col items-center justify-center">
-                    <h1 class="text-3xl md:text-5xl lg:text-7xl font-bold text-gray-900 mb-6 lg:mb-8 tracking-tight leading-tight text-center">
+                    <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 lg:mb-6 tracking-tight leading-tight text-center">
                         QUI <span class="text-[#01b4d5]">SOMMES-NOUS</span> ?
                     </h1>
                 </div>
 
                 <!-- Sous-titre centré -->
                 <div class="w-full flex justify-center">
-                    <p class="text-lg md:text-xl lg:text-2xl text-gray-700 max-w-2xl lg:max-w-3xl font-light leading-relaxed text-center">
+                    <p class="text-base md:text-lg lg:text-xl text-gray-700 max-w-2xl lg:max-w-3xl font-light leading-relaxed text-center">
                         Précurseurs de l'éducation digitale en Afrique francophone
                     </p>
                 </div>
             </div>
 
             <!-- Contenu principal avec ordre inversé sur mobile -->
-            <div class="flex flex-col lg:grid lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-20 lg:mb-24">
+            <div class="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-start mb-16 lg:mb-20">
                 
                 <!-- Colonne image - Premier sur mobile -->
                 <div class="relative order-1 lg:order-2 w-full">
@@ -54,7 +54,7 @@
                         <img 
                             src="" 
                             alt="Campus ESCEN Lomé"
-                            class="w-full h-[400px] lg:h-[600px] object-cover"
+                            class="w-full h-[350px] lg:h-[500px] object-cover"
                         />
                         <!-- Overlay subtil -->
                         <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
@@ -63,7 +63,7 @@
                     <!-- Carte statistique superposée -->
                     <div class="absolute -bottom-3 -left-3 lg:-bottom-6 lg:-left-6 bg-white/90 backdrop-blur-sm rounded-xl lg:rounded-2xl p-3 lg:p-6 shadow-2xl border border-white/20">
                         <div class="text-center">
-                            <div class="text-xl lg:text-3xl font-black text-[#01b4d5] mb-1">1ère</div>
+                            <div class="text-xl lg:text-2xl font-black text-[#01b4d5] mb-1">1ère</div>
                             <div class="text-xs lg:text-sm font-bold text-gray-700 uppercase tracking-wide">École en Digital</div>
                         </div>
                     </div>
@@ -88,18 +88,18 @@
                 </div>
 
                 <!-- Colonne texte à droite - Deuxième sur mobile -->
-                <div class="space-y-8 lg:space-y-12 order-2 lg:order-1 w-full">
+                <div class="space-y-6 lg:space-y-8 order-2 lg:order-1 w-full">
                     <!-- Mission avec design carte premium -->
                     <div class="bg-white/80 backdrop-blur-sm rounded-2xl lg:rounded-3xl p-6 lg:p-8 border border-white/20 shadow-lg">
                         <div class="text-center mb-4 lg:mb-6">
-                            <div class="w-10 h-10 lg:w-16 lg:h-16 bg-[#01b4d5] rounded-xl lg:rounded-2xl flex items-center justify-center shadow-lg mx-auto mb-3 lg:mb-4">
-                                <svg class="w-5 h-5 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="w-10 h-10 lg:w-14 lg:h-14 bg-[#01b4d5] rounded-xl lg:rounded-2xl flex items-center justify-center shadow-lg mx-auto mb-3 lg:mb-4">
+                                <svg class="w-5 h-5 lg:w-6 lg:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
                             </div>
-                            <h3 class="text-xl lg:text-3xl font-bold text-gray-900">Notre Mission Fondatrice</h3>
+                            <h3 class="text-lg lg:text-2xl font-bold text-gray-900">Notre Mission Fondatrice</h3>
                         </div>
-                        <p class="text-sm lg:text-lg leading-6 lg:leading-8 text-gray-700 text-justify">
+                        <p class="text-sm lg:text-base leading-6 lg:leading-7 text-gray-700 text-justify">
                             Former et accompagner une nouvelle génération d'étudiants, tout en perfectionnant
                             l'expertise des cadres d'entreprise francophones dans les domaines stratégiques de
                             l'Économie Numérique, de l'Informatique, de l'Intelligence Artificielle et du Génie
@@ -108,12 +108,12 @@
                     </div>
 
                     <!-- Engagement avec icônes alignées sur la même ligne -->
-                    <div class="grid grid-cols-2 gap-4 lg:gap-8 items-start">
+                    <div class="grid grid-cols-2 gap-4 lg:gap-6 items-start">
                         <!-- Siège Stratégique -->
                         <div class="space-y-3 lg:space-y-4">
                             <div class="flex justify-center lg:justify-center">
-                                <div class="w-10 h-10 lg:w-16 lg:h-16 bg-gray-800 rounded-lg lg:rounded-xl flex items-center justify-center">
-                                    <svg class="w-4 h-4 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="w-10 h-10 lg:w-14 lg:h-14 bg-gray-800 rounded-lg lg:rounded-xl flex items-center justify-center">
+                                    <svg class="w-4 h-4 lg:w-6 lg:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -121,8 +121,8 @@
                                     </svg>
                                 </div>
                             </div>
-                            <h4 class="text-base lg:text-2xl font-bold text-gray-900 text-center lg:text-center">Siège Stratégique</h4>
-                            <p class="text-xs lg:text-lg leading-5 lg:leading-7 text-gray-700 text-justify lg:text-justify">
+                            <h4 class="text-sm lg:text-xl font-bold text-gray-900 text-center">Siège Stratégique</h4>
+                            <p class="text-xs lg:text-base leading-5 lg:leading-6 text-gray-700 text-justify">
                                 Université privée établie à <span class="font-semibold text-[#01b4d5]">Lomé, Togo</span>,
                                 positionnée comme hub numérique régional.
                             </p>
@@ -131,15 +131,15 @@
                         <!-- Excellence Académique -->
                         <div class="space-y-3 lg:space-y-4">
                             <div class="flex justify-center lg:justify-center">
-                                <div class="w-10 h-10 lg:w-16 lg:h-16 bg-gray-800 rounded-lg lg:rounded-xl flex items-center justify-center">
-                                    <svg class="w-4 h-4 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="w-10 h-10 lg:w-14 lg:h-14 bg-gray-800 rounded-lg lg:rounded-xl flex items-center justify-center">
+                                    <svg class="w-4 h-4 lg:w-6 lg:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                     </svg>
                                 </div>
                             </div>
-                            <h4 class="text-base lg:text-2xl font-bold text-gray-900 text-center lg:text-center">Excellence Académique</h4>
-                            <p class="text-xs lg:text-lg leading-5 lg:leading-7 text-gray-700 text-justify lg:text-justify">
+                            <h4 class="text-sm lg:text-xl font-bold text-gray-900 text-center">Excellence Académique</h4>
+                            <p class="text-xs lg:text-base leading-5 lg:leading-6 text-gray-700 text-justify">
                                 Éducation premium adaptée aux exigences du marché du travail numérique globalisé.
                             </p>
                         </div>
@@ -148,20 +148,20 @@
             </div>
 
             <!-- Chiffres clés avec animation au scroll -->
-            <div ref="statsSection" class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 mt-12 lg:mt-20">
+            <div ref="statsSection" class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mt-8 lg:mt-16">
                 <div 
                     v-for="(stat, index) in stats" 
                     :key="index"
                     class="text-center bg-white/60 backdrop-blur-sm rounded-xl lg:rounded-2xl p-4 lg:p-6 border border-white/20 shadow-sm transition-all duration-1000 transform"
                     :class="{'animate-counter': isStatsVisible}"
                 >
-                    <div class="text-2xl lg:text-4xl md:text-5xl font-black text-[#01b4d5] mb-1 lg:mb-3">
+                    <div class="text-xl lg:text-3xl font-black text-[#01b4d5] mb-1 lg:mb-2">
                         <span :data-target="stat.value" class="counter-value">
                             {{ isStatsVisible ? 0 : stat.value }}
                         </span>
                         <span v-if="stat.suffix">{{ stat.suffix }}</span>
                     </div>
-                    <div class="text-xs lg:text-base font-semibold text-gray-700 uppercase tracking-wider">
+                    <div class="text-xs lg:text-sm font-semibold text-gray-700 uppercase tracking-wider">
                         {{ stat.label }}
                     </div>
                 </div>
@@ -182,25 +182,6 @@ const stats = [
     { value: 1000, suffix: '+', label: 'Étudiants' },
     { value: 50, suffix: '+', label: 'Partenaires' },
     { value: 2, label: 'Formats' }
-]
-
-const keyPoints = [
-    {
-        title: 'Pédagogie Avant-Gardiste',
-        subtitle: 'Programmes uniques fusionnant théorie et pratique réelle'
-    },
-    {
-        title: 'Réseau Élite',
-        subtitle: 'Communauté professionnelle internationale et influente'
-    },
-    {
-        title: 'Flexibilité Digitale',
-        subtitle: 'Formation hybride : présentiel premium et online excellence'
-    },
-    {
-        title: 'Expertise de Pointe',
-        subtitle: 'Focus sur IA, FinTech, E-commerce et transformation digitale'
-    }
 ]
 
 // Observer pour détecter quand la section statistiques est visible
@@ -390,12 +371,12 @@ section {
 }
 
 @media (max-width: 768px) {
-    .text-3xl {
-        font-size: 2rem;
+    .text-2xl {
+        font-size: 1.75rem;
     }
 
-    .text-7xl {
-        font-size: 3rem;
+    .text-5xl {
+        font-size: 2.5rem;
     }
 
     .grid.grid-cols-2.lg\:grid-cols-4 {
@@ -406,11 +387,6 @@ section {
     /* Texte justifié sur mobile */
     .text-justify {
         text-align: justify;
-    }
-    
-    /* Titres centrés sur mobile */
-    .text-center {
-        text-align: center;
     }
     
     /* Ajustements pour mobile */
@@ -424,12 +400,12 @@ section {
 }
 
 @media (max-width: 640px) {
-    .text-3xl {
-        font-size: 1.75rem;
+    .text-2xl {
+        font-size: 1.5rem;
     }
 
-    .text-7xl {
-        font-size: 2.5rem;
+    .text-5xl {
+        font-size: 2rem;
     }
 
     .grid.grid-cols-2.lg\:grid-cols-4 {
@@ -443,7 +419,7 @@ section {
     }
     
     /* Optimisation mobile */
-    .space-y-8 {
+    .space-y-6 {
         space-y: 1rem;
     }
     

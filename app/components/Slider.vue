@@ -1,5 +1,5 @@
 <template>
-  <section class="relative h-[70vh] min-h-[600px] overflow-hidden">
+  <section class="relative h-[60vh] min-h-[500px] overflow-hidden">
     <!-- Slides Container -->
     <div class="relative h-full w-full">
       <div 
@@ -22,40 +22,40 @@
 
         <!-- Contenu du slide -->
         <div class="relative h-full flex items-center">
-          <div class="container mx-auto px-6 lg:px-8">
-            <div class="max-w-4xl space-y-10">
+          <div class="container mx-auto px-4 lg:px-8">
+            <div class="max-w-2xl space-y-6">
               <!-- Badge -->
               <div 
                 v-if="slide.badge"
-                class="inline-block bg-[#01b4d5] text-white px-8 py-4 rounded-full text-lg font-bold animate-fade-in-up shadow-2xl"
+                class="inline-block bg-[#01b4d5] text-white px-4 py-2 rounded-full text-sm font-bold animate-fade-in-up shadow-lg"
               >
                 {{ slide.badge }}
               </div>
 
               <!-- Titre principal -->
-              <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight animate-fade-in-up tracking-tight">
+              <h1 class="text-3xl md:text-4xl lg:text-4xl font-black text-white leading-snug animate-fade-in-up tracking-tight">
                 {{ slide.title }}
               </h1>
 
               <!-- Sous-titre -->
-              <p class="text-2xl md:text-3xl lg:text-4xl text-white leading-relaxed animate-fade-in-up delay-200 font-bold">
+              <p class="text-xl md:text-xl lg:text-xl text-white leading-relaxed animate-fade-in-up delay-200 font-bold">
                 {{ slide.subtitle }}
               </p>
 
               <!-- Description -->
               <p 
                 v-if="slide.description"
-                class="text-xl md:text-2xl text-gray-100 max-w-2xl leading-9 animate-fade-in-up delay-400 font-medium"
+                class="text-lg md:text-lg text-gray-100 max-w-xl leading-7 animate-fade-in-up delay-400 font-medium"
               >
                 {{ slide.description }}
               </p>
 
-              <!-- Boutons d'action -->
-              <div class="flex flex-col sm:flex-row gap-8 animate-fade-in-up delay-600 pt-6">
+              <!-- Boutons d'action - Version compacte -->
+              <div class="flex flex-row flex-wrap gap-3 animate-fade-in-up delay-600 pt-4">
                 <NuxtLink 
                   v-if="slide.primaryButton"
                   :to="slide.primaryButton.link"
-                  class="bg-white text-gray-900 hover:bg-gray-100 px-12 py-6 rounded-2xl font-black text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl text-center min-w-[250px] border-4 border-white"
+                  class="bg-white text-gray-900 hover:bg-gray-100 px-5 py-3 rounded-xl font-bold text-sm md:text-base transition-all duration-300 transform hover:scale-105 shadow-lg border-2 border-white whitespace-nowrap flex-1 min-w-[130px] max-w-[180px] text-center"
                 >
                   {{ slide.primaryButton.text }}
                 </NuxtLink>
@@ -63,9 +63,8 @@
                 <NuxtLink 
                   v-if="slide.secondaryButton"
                   :to="slide.secondaryButton.link"
-                  class="bg-transparent bg-hover text-white border-4 border-white hover:bg-white hover:text-red-900 px-12 py-6 rounded-2xl font-black text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl text-center min-w-[250px]"
-                   style="border: 1px solid white !important;color: white !important;"
-                  >
+                  class="bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900 px-5 py-3 rounded-xl font-bold text-sm md:text-base transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap flex-1 min-w-[130px] max-w-[180px] text-center"
+                >
                   {{ slide.secondaryButton.text }}
                 </NuxtLink>
               </div>
@@ -79,32 +78,32 @@
     <!-- Flèches -->
     <button 
       @click="prevSlide"
-      class="absolute left-6 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-50 text-gray-900 p-5 rounded-full transition-all duration-300 z-10 shadow-2xl"
+      class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-50 text-gray-900 p-3 rounded-full transition-all duration-300 z-10 shadow-lg"
       aria-label="Slide précédent"
     >
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
     
     <button 
       @click="nextSlide"
-      class="absolute right-6 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-50 text-gray-900 p-5 rounded-full transition-all duration-300 z-10 shadow-2xl"
+      class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-50 text-gray-900 p-3 rounded-full transition-all duration-300 z-10 shadow-lg"
       aria-label="Slide suivant"
     >
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
       </svg>
     </button>
 
     <!-- Indicateurs de slide -->
-    <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex space-x-5 z-10">
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
       <button 
         v-for="(slide, index) in slides" 
         :key="index"
         @click="goToSlide(index)"
         :class="[
-          'w-5 h-5 rounded-full transition-all duration-300 shadow-2xl border-2 border-white',
+          'w-3 h-3 rounded-full transition-all duration-300 shadow-lg border border-white',
           currentSlide === index ? 'bg-white scale-125' : 'bg-transparent hover:bg-white hover:bg-opacity-50'
         ]"
         :aria-label="`Aller au slide ${index + 1}`"
@@ -112,15 +111,15 @@
     </div>
 
     <!-- Défilement automatique -->
-    <div class="absolute bottom-8 right-8 flex items-center space-x-3 text-white text-lg z-10">
+    <div class="absolute bottom-6 right-6 flex items-center space-x-2 text-white text-sm z-10">
       <button 
         @click="toggleAutoplay"
-        class="bg-white bg-opacity-30 hover:bg-opacity-50 text-gray-900 p-4 rounded-full transition-all duration-300 shadow-2xl"
+        class="bg-white bg-opacity-30 hover:bg-opacity-50 text-gray-900 p-2 rounded-full transition-all duration-300 shadow-lg"
         :aria-label="autoplay ? 'Arrêter le défilement automatique' : 'Démarrer le défilement automatique'"
       >
         <svg 
           v-if="autoplay" 
-          class="w-6 h-6" 
+          class="w-4 h-4" 
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24"
@@ -129,7 +128,7 @@
         </svg>
         <svg 
           v-else 
-          class="w-6 h-6" 
+          class="w-4 h-4" 
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24"
@@ -152,22 +151,22 @@ let autoplayInterval
 // Tableau des slides avec différentes images
 const slides = [
   {
-    image: '/valeurs/bg.jpg',
+    image: '/slider/slide1.jpg',
     badge: 'Excellence Académique',
     title: 'Formez-vous aux Métiers du Digital',
     subtitle: 'Devenez un expert en commerce et économie numérique',
     description: 'L\'ESCEN vous prépare aux carrières d\'avenir avec des formations innovantes et adaptées aux besoins du marché.',
     primaryButton: {
-      text: 'Découvrir nos formations',
+      text: 'Formations',
       link: '/formations'
     },
     secondaryButton: {
-      text: 'Nous contacter',
+      text: 'Contact',
       link: '/contact'
     }
   },
   {
-    image: '/valeurs/bg.jpg',
+    image: '/slider/slide2.jpg',
     badge: 'Innovation Pédagogique',
     title: 'Une Pédagogie Tournée vers l\'Avenir',
     subtitle: 'Apprenez avec les méthodes les plus modernes',
@@ -177,18 +176,18 @@ const slides = [
       link: '/a-propos'
     },
     secondaryButton: {
-      text: 'Télécharger la brochure',
+      text: 'Brochure',
       link: '/brochure'
     }
   },
   {
-    image: '/valeurs/bg.jpg',
+    image: '/slider/slide3.jpg',
     badge: 'Carrière Internationale',
     title: 'Ouvrez-vous sur le Monde',
     subtitle: 'Des opportunités à l\'international',
     description: 'Étudiez à l\'étranger et développez votre réseau professionnel international avec nos partenariats mondiaux.',
     primaryButton: {
-      text: 'Voir les partenariats',
+      text: 'Partenariats',
       link: '/international'
     },
     secondaryButton: {
@@ -240,11 +239,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-
-.bg-hover:hover{
-    background-color: #01abcc;
-    border: none;
-}
 /* Animations personnalisées */
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
@@ -265,7 +259,7 @@ onUnmounted(() => {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -275,89 +269,111 @@ onUnmounted(() => {
 
 /* Amélioration de la lisibilité sur mobile */
 @media (max-width: 768px) {
-  .h-\[70vh\] {
-    height: 80vh;
+  .h-\[60vh\] {
+    height: 70vh;
   }
   
-  .min-h-\[600px\] {
-    min-height: 500px;
+  .min-h-\[500px\] {
+    min-height: 400px;
   }
   
-  .text-5xl {
-    font-size: 2.5rem;
-  }
-  
-  .text-2xl {
-    font-size: 1.5rem;
-  }
-  
-  .text-xl {
-    font-size: 1.25rem;
-  }
-  
-  .space-y-10 {
-    space-y: 2rem;
-  }
-  
-  .px-12 {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-  
-  .py-6 {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
-  
-  .min-w-\[250px\] {
-    min-width: 220px;
-  }
-  
-  .gap-8 {
-    gap: 1.5rem;
-  }
-  
-  .p-5 {
-    padding: 1.25rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .text-5xl {
-    font-size: 2rem;
-  }
-  
-  .text-2xl {
-    font-size: 1.25rem;
+  .text-3xl {
+    font-size: 1.75rem;
   }
   
   .text-xl {
     font-size: 1.125rem;
   }
   
-  .space-y-10 {
+  .text-lg {
+    font-size: 1rem;
+  }
+  
+  .space-y-6 {
     space-y: 1.5rem;
   }
   
-  .px-6 {
-    padding-left: 1rem;
-    padding-right: 1rem;
+  .min-w-\[130px\] {
+    min-width: 120px;
   }
   
-  .left-6 {
-    left: 1rem;
+  .max-w-\[180px\] {
+    max-width: 160px;
+  }
+}
+
+@media (max-width: 640px) {
+  .text-3xl {
+    font-size: 1.5rem;
   }
   
-  .right-6 {
-    right: 1rem;
+  .text-xl {
+    font-size: 1rem;
   }
   
-  .bottom-12 {
-    bottom: 2.5rem;
+  .text-lg {
+    font-size: 0.9rem;
   }
   
-  .min-w-\[250px\] {
-    min-width: 200px;
+  .space-y-6 {
+    space-y: 1rem;
+  }
+  
+  .px-5 {
+    padding-left: 0.875rem;
+    padding-right: 0.875rem;
+  }
+  
+  .py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+  
+  .text-sm {
+    font-size: 0.875rem;
+  }
+  
+  .min-w-\[130px\] {
+    min-width: 110px;
+  }
+  
+  .max-w-\[180px\] {
+    max-width: 140px;
+  }
+  
+  .gap-3 {
+    gap: 0.75rem;
+  }
+}
+
+/* Pour les très petits écrans */
+@media (max-width: 380px) {
+  .min-w-\[130px\] {
+    min-width: 100px;
+  }
+  
+  .max-w-\[180px\] {
+    max-width: 120px;
+  }
+  
+  .px-5 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  .text-sm {
+    font-size: 0.8rem;
+  }
+}
+
+/* Version desktop spécifique */
+@media (min-width: 1024px) {
+  .max-w-2xl {
+    max-width: 42rem;
+  }
+  
+  .max-w-xl {
+    max-width: 36rem;
   }
 }
 </style>

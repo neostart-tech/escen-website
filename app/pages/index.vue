@@ -4,6 +4,9 @@
     <NosValeurs/>
     <Vision/>
     <Cta/>
+    <Temoignage/>
+    <PartenairesFlag/>
+
 </template>
 
 
@@ -13,4 +16,6 @@ import AboutUS from "~/components/AboutUS.vue";
 import NosValeurs from "~/components/NosValeurs.vue";
 import Vision from "~/components/Vision.vue";
 import Cta from "~/components/Cta.vue";
+import Temoignage from "~/components/Temoignage.vue";
+import PartenairesFlag from "~/components/PartenairesFlag.vue";
 </script>

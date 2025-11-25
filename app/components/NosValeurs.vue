@@ -1,64 +1,61 @@
 <template>
-    <section id="valeurs" class="relative py-20 lg:py-28 overflow-hidden">
-        <!-- Background image avec overlay dégradé bleu conservé -->
+    <section id="valeurs" class="relative py-16 lg:py-20 overflow-hidden">
+        <!-- Background image avec overlay bleu foncé -->
         <div class="absolute inset-0">
             <img 
                 src="/valeurs/bg.jpg" 
                 alt="Background valeurs ESCEN"
                 class="w-full h-full object-cover"
             />
-            <!-- Overlay dégradé bleu très subtil conservé -->
-            <div class="absolute inset-0 bg-gradient-to-br from-[#01b4d5]/70 to-[#01b4d5]/70 backdrop-blur-[1px]"></div>
+            <!-- Overlay bleu foncé #202a50 -->
+            <div class="absolute inset-0 bg-[#202a50]/95 backdrop-blur-[2px]"></div>
         </div>
 
         <!-- Éléments décoratifs géométriques plus discrets -->
-        <div class="absolute top-10 right-10 w-32 h-32 border border-white/20 rounded-full animate-pulse-slow"></div>
-        <div class="absolute bottom-16 left-10 w-24 h-24 border border-white/15 rounded-lg rotate-45 animate-float-medium"></div>
-        <div class="absolute top-1/2 left-1/4 w-16 h-16 border border-white/10 rounded-full animate-float-slow"></div>
+        <div class="absolute top-8 right-8 w-24 h-24 border border-white/15 rounded-full animate-pulse-slow"></div>
+        <div class="absolute bottom-12 left-8 w-20 h-20 border border-white/10 rounded-lg rotate-45 animate-float-medium"></div>
+        <div class="absolute top-1/2 left-1/4 w-12 h-12 border border-white/5 rounded-full animate-float-slow"></div>
 
-        <div class="container mx-auto px-4 lg:px-8 max-w-6xl relative z-10">
+        <div class="container mx-auto px-4 lg:px-8 max-w-5xl relative z-10">
             <!-- En-tête minimaliste -->
-            <div class="text-center mb-16 lg:mb-20 animate-slide-up">
-                <div class="inline-flex items-center gap-4 mb-6">
-                    <div class="w-8 h-px bg-gradient-to-r from-transparent to-white/60"></div>
-                    <span class="text-white/80 font-medium text-sm tracking-wider uppercase">
+            <div class="text-center mb-12 lg:mb-16 animate-slide-up">
+                <div class="inline-flex items-center gap-4 mb-4">
+                    <div class="w-6 h-px bg-gradient-to-r from-transparent to-white/50"></div>
+                    <span class="text-white/70 font-medium text-sm tracking-wider uppercase">
                         Notre ADN
                     </span>
-                    <div class="w-8 h-px bg-gradient-to-l from-transparent to-white/60"></div>
+                    <div class="w-6 h-px bg-gradient-to-l from-transparent to-white/50"></div>
                 </div>
 
-                <h2 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 tracking-tight">
+                <h2 class="text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-4 tracking-tight">
                     Nos <span class="text-white">Valeurs</span>
                 </h2>
                 
-                <p class="text-lg lg:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+                <p class="text-base lg:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
                     Les piliers fondamentaux qui guident notre vision de l'éducation numérique
                 </p>
             </div>
 
             <!-- Grille des valeurs redesign -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-6">
                 <!-- Excellence -->
                 <div class="animate-card-1">
-                    <div class="group relative bg-white/20 backdrop-blur-xl rounded-2xl p-8 border border-white/30 hover:border-white/50 transition-all duration-500 h-full hover:transform hover:-translate-y-2 shadow-xl hover:shadow-2xl">
-                        <!-- Fond gradient au survol -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        
+                    <div class="group relative bg-gradient-to-br from-white/15 to-white/10 backdrop-blur-xl rounded-xl p-6 border border-white/25 hover:bg-gradient-to-br hover:from-white/25 hover:to-white/20 transition-all duration-500 h-full hover:transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
                         <!-- Icône moderne -->
-                        <div class="relative z-10 text-center mb-6">
-                            <div class="w-16 h-16 bg-white/30 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg shadow-white/20 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 border border-white/40">
-                                <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                                    <svg class="w-6 h-6 text-[#01b4d5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="relative z-10 text-center mb-4">
+                            <div class="w-14 h-14 bg-white/25 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-md shadow-white/15 mx-auto mb-3 group-hover:scale-105 transition-transform duration-300 border border-white/35">
+                                <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
+                                    <svg class="w-5 h-5 text-[#202a50]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                     </svg>
                                 </div>
                             </div>
-                            <h3 class="text-2xl font-bold text-white group-hover:text-white transition-colors duration-300">Excellence</h3>
+                            <h3 class="text-xl font-bold text-white group-hover:text-white transition-colors duration-300">Excellence</h3>
                         </div>
 
                         <!-- Contenu -->
                         <div class="relative z-10">
-                            <p class="text-white/95 leading-7 text-center text-base">
+                            <p class="text-white/95 leading-6 text-center text-sm">
                                 Nous cultivons l'excellence à travers la qualité de nos enseignements, 
                                 l'expertise de nos intervenants et l'exigence de notre pédagogie.
                             </p>
@@ -68,25 +65,22 @@
 
                 <!-- Innovation -->
                 <div class="animate-card-2">
-                    <div class="group relative bg-white/20 backdrop-blur-xl rounded-2xl p-8 border border-white/30 hover:border-white/50 transition-all duration-500 h-full hover:transform hover:-translate-y-2 shadow-xl hover:shadow-2xl">
-                        <!-- Fond gradient au survol -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        
+                    <div class="group relative bg-gradient-to-br from-white/15 to-white/10 backdrop-blur-xl rounded-xl p-6 border border-white/25 hover:bg-gradient-to-br hover:from-white/25 hover:to-white/20 transition-all duration-500 h-full hover:transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
                         <!-- Icône moderne -->
-                        <div class="relative z-10 text-center mb-6">
-                            <div class="w-16 h-16 bg-white/30 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg shadow-white/20 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 border border-white/40">
-                                <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                                    <svg class="w-6 h-6 text-[#01b4d5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="relative z-10 text-center mb-4">
+                            <div class="w-14 h-14 bg-white/25 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-md shadow-white/15 mx-auto mb-3 group-hover:scale-105 transition-transform duration-300 border border-white/35">
+                                <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
+                                    <svg class="w-5 h-5 text-[#202a50]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                                     </svg>
                                 </div>
                             </div>
-                            <h3 class="text-2xl font-bold text-white group-hover:text-white transition-colors duration-300">Innovation</h3>
+                            <h3 class="text-xl font-bold text-white group-hover:text-white transition-colors duration-300">Innovation</h3>
                         </div>
 
                         <!-- Contenu -->
                         <div class="relative z-10">
-                            <p class="text-white/95 leading-7 text-center text-base">
+                            <p class="text-white/95 leading-6 text-center text-sm">
                                 Nous repoussons les limites grâce à des méthodologies innovantes 
                                 et des filières adaptées aux enjeux technologiques contemporains.
                             </p>
@@ -96,25 +90,22 @@
 
                 <!-- Professionnalisme & Leadership -->
                 <div class="animate-card-3">
-                    <div class="group relative bg-white/20 backdrop-blur-xl rounded-2xl p-8 border border-white/30 hover:border-white/50 transition-all duration-500 h-full hover:transform hover:-translate-y-2 shadow-xl hover:shadow-2xl">
-                        <!-- Fond gradient au survol -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        
+                    <div class="group relative bg-gradient-to-br from-white/15 to-white/10 backdrop-blur-xl rounded-xl p-6 border border-white/25 hover:bg-gradient-to-br hover:from-white/25 hover:to-white/20 transition-all duration-500 h-full hover:transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
                         <!-- Icône moderne -->
-                        <div class="relative z-10 text-center mb-6">
-                            <div class="w-16 h-16 bg-white/30 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg shadow-white/20 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 border border-white/40">
-                                <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                                    <svg class="w-6 h-6 text-[#01b4d5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="relative z-10 text-center mb-4">
+                            <div class="w-14 h-14 bg-white/25 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-md shadow-white/15 mx-auto mb-3 group-hover:scale-105 transition-transform duration-300 border border-white/35">
+                                <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
+                                    <svg class="w-5 h-5 text-[#202a50]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
                                     </svg>
                                 </div>
                             </div>
-                            <h3 class="text-2xl font-bold text-white group-hover:text-white transition-colors duration-300">Leadership</h3>
+                            <h3 class="text-xl font-bold text-white group-hover:text-white transition-colors duration-300">Leadership</h3>
                         </div>
 
                         <!-- Contenu -->
                         <div class="relative z-10">
-                            <p class="text-white/95 leading-7 text-center text-base">
+                            <p class="text-white/95 leading-6 text-center text-sm">
                                 Nous formons des leaders capables d'impacter leur environnement 
                                 et de créer les entreprises de demain.
                             </p>
@@ -124,11 +115,11 @@
             </div>
 
             <!-- Séparateur épuré -->
-            <div class="text-center mt-16 animate-fade-in">
-                <div class="inline-flex items-center gap-6 text-white/70">
-                    <div class="w-20 h-px bg-gradient-to-r from-transparent to-white/50"></div>
-                    <span class="text-sm font-medium tracking-wide">L'excellence au service du numérique</span>
-                    <div class="w-20 h-px bg-gradient-to-l from-transparent to-white/50"></div>
+            <div class="text-center mt-12 animate-fade-in">
+                <div class="inline-flex items-center gap-4 text-white/60">
+                    <div class="w-16 h-px bg-gradient-to-r from-transparent to-white/40"></div>
+                    <span class="text-xs font-medium tracking-wide">L'excellence au service du numérique</span>
+                    <div class="w-16 h-px bg-gradient-to-l from-transparent to-white/40"></div>
                 </div>
             </div>
         </div>
@@ -146,10 +137,10 @@
         transform: translateY(0px) translateX(0px) rotate(0deg); 
     }
     33% { 
-        transform: translateY(-20px) translateX(10px) rotate(120deg); 
+        transform: translateY(-15px) translateX(8px) rotate(120deg); 
     }
     66% { 
-        transform: translateY(10px) translateX(-15px) rotate(240deg); 
+        transform: translateY(8px) translateX(-12px) rotate(240deg); 
     }
 }
 
@@ -158,7 +149,7 @@
         transform: translateY(0px) rotate(0deg); 
     }
     50% { 
-        transform: translateY(-15px) rotate(180deg); 
+        transform: translateY(-12px) rotate(180deg); 
     }
 }
 
@@ -194,7 +185,7 @@
 @keyframes slideUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
@@ -218,12 +209,12 @@
 
 @keyframes pulseSlow {
     0%, 100% {
-        opacity: 0.3;
+        opacity: 0.2;
         transform: scale(1);
     }
     50% {
-        opacity: 0.6;
-        transform: scale(1.1);
+        opacity: 0.4;
+        transform: scale(1.05);
     }
 }
 
@@ -231,50 +222,54 @@
 @media (max-width: 1024px) {
     .grid.grid-cols-1.lg\:grid-cols-3 {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
-        max-width: 28rem;
+        gap: 1.25rem;
+        max-width: 24rem;
         margin: 0 auto;
     }
 }
 
 @media (max-width: 768px) {
-    .text-4xl {
+    .text-3xl {
+        font-size: 1.875rem;
+    }
+    
+    .text-5xl {
+        font-size: 2.5rem;
+    }
+    
+    .p-6 {
+        padding: 1.25rem;
+    }
+    
+    .mb-12 {
+        margin-bottom: 3rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .text-3xl {
+        font-size: 1.75rem;
+    }
+    
+    .text-5xl {
         font-size: 2.25rem;
     }
     
-    .text-6xl {
-        font-size: 3rem;
-    }
-    
-    .p-8 {
-        padding: 1.5rem;
+    .py-16 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
     }
     
     .mb-16 {
         margin-bottom: 4rem;
     }
-}
-
-@media (max-width: 640px) {
-    .text-4xl {
-        font-size: 2rem;
+    
+    .p-6 {
+        padding: 1rem;
     }
     
-    .text-6xl {
-        font-size: 2.5rem;
-    }
-    
-    .py-20 {
-        padding-top: 4rem;
-        padding-bottom: 4rem;
-    }
-    
-    .mb-20 {
-        margin-bottom: 5rem;
-    }
-    
-    .p-8 {
-        padding: 1.25rem;
+    .gap-6 {
+        gap: 1rem;
     }
 }
 </style>
