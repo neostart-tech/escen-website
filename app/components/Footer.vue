@@ -215,7 +215,7 @@ const quickLinks = [
 
 // Formations comme liste simple
 const formations = [
-    { name: 'Licence Professionnelle', href: '/formations/licence-professionnelle' },
+    { name: 'Licence Professionnelle', href: '/licenceprofessionelle' },
     { name: 'Master Professionnel', href: '/formations/master-professionnel' },
     { name: 'Executive Education', href: '/formations/executive-education' },
     { name: 'Certificats', href: '/formations/certificats' }
