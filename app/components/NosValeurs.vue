@@ -8,7 +8,7 @@
                 class="w-full h-full object-cover"
             />
             <!-- Overlay bleu foncé #202a50 -->
-            <div class="absolute inset-0 bg-[#202a50]/95 backdrop-blur-[2px]"></div>
+            <div class="absolute inset-0 bg-[#202a50]/75 backdrop-blur-[2px]"></div>
         </div>
 
         <!-- Éléments décoratifs géométriques plus discrets -->

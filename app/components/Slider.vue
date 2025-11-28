@@ -151,7 +151,7 @@ let autoplayInterval
 // Tableau des slides avec différentes images
 const slides = [
   {
-    image: '/slider/slide1.jpg',
+    image: '/valeurs/bg.jpg',
     badge: 'Excellence Académique',
     title: 'Formez-vous aux Métiers du Digital',
     subtitle: 'Devenez un expert en commerce et économie numérique',
@@ -166,7 +166,7 @@ const slides = [
     }
   },
   {
-    image: '/slider/slide2.jpg',
+    image: '/valeurs/bg.jpg',
     badge: 'Innovation Pédagogique',
     title: 'Une Pédagogie Tournée vers l\'Avenir',
     subtitle: 'Apprenez avec les méthodes les plus modernes',
@@ -181,7 +181,7 @@ const slides = [
     }
   },
   {
-    image: '/slider/slide3.jpg',
+    image: '/valeurs/bg.jpg',
     badge: 'Carrière Internationale',
     title: 'Ouvrez-vous sur le Monde',
     subtitle: 'Des opportunités à l\'international',
