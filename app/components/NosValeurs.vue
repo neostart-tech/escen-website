@@ -16,7 +16,7 @@
         <div class="absolute bottom-12 left-8 w-20 h-20 border border-white/10 rounded-lg rotate-45 animate-float-medium"></div>
         <div class="absolute top-1/2 left-1/4 w-12 h-12 border border-white/5 rounded-full animate-float-slow"></div>
 
-        <div class="container mx-auto px-4 lg:px-8 max-w-5xl relative z-10">
+        <div class="container mx-auto px-4 lg:px-8 max-w-6xl relative z-10">
             <!-- En-tête minimaliste -->
             <div class="text-center mb-12 lg:mb-16 animate-slide-up">
                 <div class="inline-flex items-center gap-4 mb-4">
@@ -36,10 +36,10 @@
                 </p>
             </div>
 
-            <!-- Grille des valeurs redesign -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-6">
+            <!-- Grille des valeurs - RESPONSIVE CORRIGÉ -->
+            <div class="valeurs-grid">
                 <!-- Excellence -->
-                <div class="animate-card-1">
+                <div class="valeur-card animate-card-1">
                     <div class="group relative bg-gradient-to-br from-white/15 to-white/10 backdrop-blur-xl rounded-xl p-6 border border-white/25 hover:bg-gradient-to-br hover:from-white/25 hover:to-white/20 transition-all duration-500 h-full hover:transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
                         <!-- Icône moderne -->
                         <div class="relative z-10 text-center mb-4">
@@ -64,7 +64,7 @@
                 </div>
 
                 <!-- Innovation -->
-                <div class="animate-card-2">
+                <div class="valeur-card animate-card-2">
                     <div class="group relative bg-gradient-to-br from-white/15 to-white/10 backdrop-blur-xl rounded-xl p-6 border border-white/25 hover:bg-gradient-to-br hover:from-white/25 hover:to-white/20 transition-all duration-500 h-full hover:transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
                         <!-- Icône moderne -->
                         <div class="relative z-10 text-center mb-4">
@@ -88,8 +88,8 @@
                     </div>
                 </div>
 
-                <!-- Professionnalisme & Leadership -->
-                <div class="animate-card-3">
+                <!-- Leadership -->
+                <div class="valeur-card animate-card-3">
                     <div class="group relative bg-gradient-to-br from-white/15 to-white/10 backdrop-blur-xl rounded-xl p-6 border border-white/25 hover:bg-gradient-to-br hover:from-white/25 hover:to-white/20 transition-all duration-500 h-full hover:transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
                         <!-- Icône moderne -->
                         <div class="relative z-10 text-center mb-4">
@@ -218,17 +218,51 @@
     }
 }
 
-/* Améliorations responsive */
-@media (max-width: 1024px) {
-    .grid.grid-cols-1.lg\:grid-cols-3 {
-        grid-template-columns: 1fr;
+/* CORRECTION RESPONSIVE - GARANTIR 3 SUR MÊME LIGNE OU 1 PAR LIGNE */
+
+/* Grille des valeurs - Version desktop : 3 colonnes */
+.valeurs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+/* Version tablette large : 3 colonnes réduites */
+@media (max-width: 1280px) {
+    .valeurs-grid {
+        grid-template-columns: repeat(3, 1fr);
         gap: 1.25rem;
-        max-width: 24rem;
-        margin: 0 auto;
+    }
+    
+    .container {
+        max-width: 1000px;
     }
 }
 
+/* Version tablette : 1 colonne pour éviter tout problème de layout */
+@media (max-width: 1024px) {
+    .valeurs-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    /* Sur tablette, les cartes occupent toute la largeur */
+    .valeur-card {
+        width: 100%;
+    }
+}
+
+/* Version mobile */
 @media (max-width: 768px) {
+    .valeurs-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        max-width: 100%;
+    }
+    
     .text-3xl {
         font-size: 1.875rem;
     }
@@ -244,9 +278,21 @@
     .mb-12 {
         margin-bottom: 3rem;
     }
+    
+    /* Assurer que les cartes prennent toute la largeur sur mobile */
+    .valeur-card {
+        width: 100%;
+        margin: 0 auto;
+    }
 }
 
+/* Version petit mobile */
 @media (max-width: 640px) {
+    .valeurs-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
     .text-3xl {
         font-size: 1.75rem;
     }
@@ -270,6 +316,46 @@
     
     .gap-6 {
         gap: 1rem;
+    }
+    
+    /* Optimisations pour très petits écrans */
+    .container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+}
+
+/* Garantir l'alignement parfait des cartes */
+.valeur-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* S'assurer que toutes les cartes ont la même hauteur */
+.valeur-card > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.valeur-card .relative.z-10 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Réduction des animations pour accessibilité */
+@media (prefers-reduced-motion: reduce) {
+    .animate-float-slow,
+    .animate-float-medium,
+    .animate-slide-up,
+    .animate-card-1,
+    .animate-card-2,
+    .animate-card-3,
+    .animate-fade-in,
+    .animate-pulse-slow {
+        animation: none !important;
     }
 }
 </style>

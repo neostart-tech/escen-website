@@ -35,8 +35,9 @@
                                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full items-center">
                                     <div class="lg:col-span-1">
                                         <div class="relative group">
-                                            <div class="relative rounded-xl overflow-hidden shadow-lg transform group-hover:scale-105 transition-transform duration-500">
-                                                <div class="aspect-square bg-gradient-to-br from-gray-100 to-gray-200">
+                                            <!-- Image qui prend toute la largeur disponible -->
+                                            <div class="relative rounded-xl overflow-hidden shadow-lg transform group-hover:scale-105 transition-transform duration-500 testimonial-image w-full">
+                                                <div class="aspect-square bg-gradient-to-br from-gray-100 to-gray-200 w-full">
                                                     <img 
                                                         :src="testimonial.photo" 
                                                         :alt="testimonial.name"
@@ -46,14 +47,15 @@
                                                 </div>
                                             </div>
                                             
-                                            <div class="absolute -bottom-4 -right-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-200 w-56 transform group-hover:scale-105 transition-all duration-500">
-                                                <h3 class="text-lg font-bold text-gray-900 mb-1">{{ testimonial.name }}</h3>
+                                            <!-- Info card responsive qui ne cache pas le visage -->
+                                            <div class="absolute bottom-2 right-2 lg:bottom-4 lg:right-4 bg-white/95 backdrop-blur-sm rounded-xl p-3 lg:p-4 shadow-lg border border-gray-200 w-[calc(100%-1rem)] max-w-[200px] lg:max-w-[240px] xl:max-w-[280px] transform group-hover:scale-105 transition-all duration-500 testimonial-info responsive-info-card">
+                                                <h3 class="text-sm lg:text-base font-bold text-gray-900 mb-1 leading-tight line-clamp-2">{{ testimonial.name }}</h3>
                                                 <p class="text-[#01b4d5] font-semibold text-xs mb-1">{{ testimonial.role }}</p>
-                                                <p class="text-gray-600 text-xs">{{ testimonial.detail }}</p>
+                                                <p class="text-gray-600 text-xs leading-relaxed line-clamp-2">{{ testimonial.detail }}</p>
                                                 <p class="text-gray-500 text-xs mt-1">{{ testimonial.country }}</p>
                                                 
                                                 <div class="inline-flex items-center gap-1 bg-[#01b4d5]/10 text-[#01b4d5] px-2 py-1 rounded-full text-xs font-medium mt-2">
-                                                    <svg class="w-2 h-2" fill="currentColor" viewBox="0 0 20 20">
+                                                    <svg class="w-2 h-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
                                                     </svg>
                                                     {{ testimonial.type }}
@@ -135,9 +137,6 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- Navigation rapide par photos -->
-                
             </div>
         </div>
     </section>
@@ -278,12 +277,52 @@ onUnmounted(() => {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-    .lg\:col-span-1, .lg\:col-span-2 {
+/* Styles pour la responsive info card */
+.responsive-info-card {
+    box-sizing: border-box;
+}
+
+/* Pour limiter le texte sur 2 lignes */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* MÊME TAILLE D'IMAGE POUR TOUS LES ÉCRANS */
+.testimonial-image {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .grid.grid-cols-1.lg\:grid-cols-3 {
+        grid-template-columns: 1fr 2fr;
+        gap: 2rem;
+    }
+    
+    .lg\:col-span-1 {
         grid-column: span 1;
     }
     
+    .lg\:col-span-2 {
+        grid-column: span 1;
+    }
+    
+    .relative.h-\[500px\].lg\:h-\[400px\] {
+        height: 380px;
+        min-height: 380px;
+    }
+    
+    .responsive-info-card {
+        max-width: 220px;
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 768px) {
     .grid.grid-cols-1.lg\:grid-cols-3 {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -293,9 +332,16 @@ onUnmounted(() => {
         height: auto;
         min-height: 500px;
     }
-}
-
-@media (max-width: 768px) {
+    
+    .responsive-info-card {
+        max-width: 180px;
+        padding: 0.75rem;
+    }
+    
+    .testimonial-image {
+        margin: 0 auto;
+    }
+    
     .text-2xl.lg\:text-3xl.xl\:text-4xl {
         font-size: 1.75rem;
     }
@@ -303,27 +349,63 @@ onUnmounted(() => {
     .bg-white.rounded-2xl.p-6.lg\:p-8 {
         padding: 1rem;
     }
-    
-    /* SUPPRIMÉ: Pas de flex-direction column pour les boutons */
-    /* .flex.justify-center.items-center.gap-4.mt-8 {
-        flex-direction: column;
-        gap: 0.75rem;
-    } */
-    
-    .flex.gap-2.mx-4 {
-        margin: 0;
-    }
 }
 
 @media (max-width: 640px) {
+    .responsive-info-card {
+        max-width: 160px;
+        padding: 0.5rem;
+        bottom: 0.5rem;
+        right: 0.5rem;
+    }
+    
+    .responsive-info-card h3 {
+        font-size: 0.8rem;
+    }
+    
+    .responsive-info-card p {
+        font-size: 0.7rem;
+    }
+    
     .flex.justify-center.mt-6.gap-3 {
         flex-wrap: wrap;
         gap: 0.75rem;
     }
+}
+
+@media (max-width: 480px) {
+    .responsive-info-card {
+        max-width: 140px;
+        padding: 0.4rem;
+    }
     
-    .w-12.h-12 {
-        width: 2.5rem;
-        height: 2.5rem;
+    .responsive-info-card h3 {
+        font-size: 0.75rem;
+    }
+    
+    .container.mx-auto.px-4.lg\:px-6 {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+}
+
+/* S'assurer que l'image prend bien toute la largeur sur mobile */
+@media (max-width: 1024px) {
+    .testimonial-image {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* Réduction des animations pour accessibilité */
+@media (prefers-reduced-motion: reduce) {
+    .animate-pulse-slow,
+    .animate-float-slow,
+    .transition-transform,
+    .group-hover\:scale-105,
+    .group-hover\:scale-110 {
+        animation: none !important;
+        transition: none !important;
     }
 }
 </style>
