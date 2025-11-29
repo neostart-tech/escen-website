@@ -27,22 +27,68 @@
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                    <!-- Informations de contact -->
-                    <div class="lg:col-span-1 space-y-8">
+                    <!-- Informations de contact - Premier sur mobile -->
+                    <div class="lg:col-span-1 space-y-8 order-2 lg:order-1">
                         <!-- Bloc contact -->
                         <div class="space-y-6">
-                            <div v-for="(info, index) in contactInfo" :key="index" 
-                                 class="flex items-start gap-4 p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
+                            <!-- Téléphone -->
+                            <div class="flex items-start gap-4 p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
                                 <div class="flex-shrink-0 w-12 h-12 bg-[#01b4d5] rounded-xl flex items-center justify-center">
-                                    <component :is="info.icon" class="w-6 h-6 text-white" />
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                    </svg>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="font-semibold text-gray-900 text-lg mb-1">{{ info.title }}</h3>
-                                    <p class="text-gray-500 text-sm mb-2">{{ info.description }}</p>
-                                    <div v-if="info.link" class="text-[#01b4d5] font-medium hover:text-[#0056b3] transition-colors">
-                                        {{ info.value }}
-                                    </div>
-                                    <div v-else class="text-gray-900 font-medium">{{ info.value }}</div>
+                                    <h3 class="font-semibold text-gray-900 text-lg mb-1">Téléphone</h3>
+                                    <p class="text-gray-500 text-sm mb-2">Disponible du lundi au vendredi</p>
+                                    <a href="tel:+33123456789" class="text-[#01b4d5] font-medium hover:text-[#0056b3] transition-colors">
+                                        +33 1 23 45 67 89
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="flex items-start gap-4 p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
+                                <div class="flex-shrink-0 w-12 h-12 bg-[#01b4d5] rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-gray-900 text-lg mb-1">Email</h3>
+                                    <p class="text-gray-500 text-sm mb-2">Réponse sous 24h</p>
+                                    <a href="mailto:contact@escen.fr" class="text-[#01b4d5] font-medium hover:text-[#0056b3] transition-colors">
+                                        contact@escen.fr
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Adresse -->
+                            <div class="flex items-start gap-4 p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
+                                <div class="flex-shrink-0 w-12 h-12 bg-[#01b4d5] rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-gray-900 text-lg mb-1">Adresse</h3>
+                                    <p class="text-gray-500 text-sm mb-2">Venez nous rencontrer</p>
+                                    <div class="text-gray-900 font-medium">123 Avenue du Digital, 75001 Paris</div>
+                                </div>
+                            </div>
+
+                            <!-- Horaires -->
+                            <div class="flex items-start gap-4 p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
+                                <div class="flex-shrink-0 w-12 h-12 bg-[#01b4d5] rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-gray-900 text-lg mb-1">Horaires</h3>
+                                    <p class="text-gray-500 text-sm mb-2">Lun-Ven: 9h-18h | Sam: 9h-13h</p>
+                                    <div class="text-gray-900 font-medium">Fermé le dimanche</div>
                                 </div>
                             </div>
                         </div>
@@ -51,17 +97,27 @@
                         <div class="pt-6 border-t border-gray-200">
                             <h4 class="font-semibold text-gray-900 text-lg mb-4">Suivez-nous</h4>
                             <div class="flex gap-3">
-                                <a v-for="social in socialLinks" :key="social.name" 
-                                   :href="social.url" 
-                                   class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-gray-600 hover:bg-[#01b4d5] hover:text-white transition-all duration-300 shadow-sm">
-                                    <component :is="social.icon" class="w-5 h-5" />
+                                <a href="#" class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-gray-600 hover:bg-[#01b4d5] hover:text-white transition-all duration-300 shadow-sm">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-gray-600 hover:bg-[#01b4d5] hover:text-white transition-all duration-300 shadow-sm">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-gray-600 hover:bg-[#01b4d5] hover:text-white transition-all duration-300 shadow-sm">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                                    </svg>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Formulaire de contact -->
-                    <div class="lg:col-span-2">
+                    <!-- Formulaire de contact - Deuxième sur mobile -->
+                    <div class="lg:col-span-2 order-1 lg:order-2">
                         <div class="bg-white rounded-3xl shadow-lg p-8 md:p-12">
                             <div class="mb-8">
                                 <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
@@ -220,35 +276,6 @@
 <script setup>
 import { ref, reactive } from 'vue'
 
-// Icônes
-const PhoneIcon = {
-  template: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>`
-}
-
-const MailIcon = {
-  template: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>`
-}
-
-const MapIcon = {
-  template: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>`
-}
-
-const ClockIcon = {
-  template: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>`
-}
-
-const LinkedinIcon = {
-  template: `<path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>`
-}
-
-const TwitterIcon = {
-  template: `<path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>`
-}
-
-const FacebookIcon = {
-  template: `<path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>`
-}
-
 // State du formulaire
 const form = reactive({
     firstName: '',
@@ -260,44 +287,6 @@ const form = reactive({
 })
 
 const loading = ref(false)
-
-// Données de contact
-const contactInfo = [
-    {
-        icon: PhoneIcon,
-        title: "Téléphone",
-        description: "Disponible du lundi au vendredi",
-        value: "+33 1 23 45 67 89",
-        link: "tel:+33123456789"
-    },
-    {
-        icon: MailIcon,
-        title: "Email",
-        description: "Réponse sous 24h",
-        value: "contact@escen.fr",
-        link: "mailto:contact@escen.fr"
-    },
-    {
-        icon: MapIcon,
-        title: "Adresse",
-        description: "Venez nous rencontrer",
-        value: "123 Avenue du Digital, 75001 Paris",
-        link: null
-    },
-    {
-        icon: ClockIcon,
-        title: "Horaires",
-        description: "Lun-Ven: 9h-18h | Sam: 9h-13h",
-        value: "Fermé le dimanche",
-        link: null
-    }
-]
-
-const socialLinks = [
-    { name: 'LinkedIn', icon: LinkedinIcon, url: '#' },
-    { name: 'Twitter', icon: TwitterIcon, url: '#' },
-    { name: 'Facebook', icon: FacebookIcon, url: '#' }
-]
 
 // Méthodes
 const submitForm = async () => {
