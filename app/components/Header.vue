@@ -210,7 +210,7 @@
         <!-- Bouton CTA mobile -->
         <div class="mt-6 md:mt-8 space-y-3 md:space-y-4">
           <NuxtLink
-            to="/inscription"
+            to="https://escen.neostart.tech/candidatures/faire-mon-depot"
             @click="isMobileMenuOpen = false"
             class="flex items-center justify-center space-x-1 md:space-x-2 w-full bg-gradient-to-r from-[#01b4d5] to-[#0199b8] text-white text-center py-2 md:py-3 px-3 md:px-4 rounded-lg font-semibold hover:shadow-lg transition-all text-sm md:text-base"
           >
@@ -277,16 +277,13 @@ const navigation = [
   { 
     name: 'Formations', 
     submenu: [
-      { name: 'Licence Professionnelle', href: '/licence-professionelle' },
-      { name: 'Master Professionnel', href: '/master-professionnel' },
-      { name: 'Executive Education', href: '/executive-education' },
+      { name: 'Licence Professionnelle', href: '/formations/licence-professionelle' },
+      { name: 'Master Professionnel', href: '/formations/master-professionnel' },
+      { name: 'Executive Education', href: '/formations/executive-education' },
       { name: 'Certificats', href: '/formations/certificats' }
     ]
   },
-  { 
-    name: 'S\'inscrire', 
-    href: '/inscription' 
-  },
+ 
   { 
     name: 'Actualités', 
     href: '/actualites' 

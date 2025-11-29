@@ -1,64 +1,13 @@
 <template>
     <div class="min-h-screen bg-white">
         <!-- Breadcrumb -->
-        <section class="relative py-12 lg:py-20 bg-cover bg-center bg-no-repeat overflow-hidden"
-            style="background-image: url('/valeurs/bg.jpg');">
-            <!-- Overlay en dégradé -->
-            <div class="absolute inset-0 bg-gradient-to-r from-[#019fbf] to-[#202a50] opacity-90"></div>
-
-            <!-- Éléments décoratifs -->
-            <div class="absolute inset-0 overflow-hidden">
-                <div class="absolute top-10 left-10 w-72 h-72 bg-[#01b4d5]/10 rounded-full blur-3xl"></div>
-                <div class="absolute bottom-10 right-10 w-96 h-96 bg-[#0056b3]/10 rounded-full blur-3xl"></div>
-                <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-[#01b4d5]/5 rounded-full blur-3xl"></div>
-            </div>
-
-            <div class="container mx-auto px-4 lg:px-6 max-w-7xl relative z-10">
-                <!-- Breadcrumb Centré -->
-                <nav class="flex items-center justify-center space-x-2 text-sm text-white/80 mb-6">
-                    <a href="/" class="hover:text-white transition-colors duration-200 flex items-center gap-1">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                        </svg>
-                        Accueil
-                    </a>
-                    <span class="text-white/50">/</span>
-                    <a href="/formations" class="hover:text-white transition-colors duration-200">Formations</a>
-                    <span class="text-white/50">/</span>
-                    <span class="text-white font-semibold">Licences Professionnelles</span>
-                </nav>
-
-                <div class="text-center text-white">
-                    <div class="inline-flex items-center gap-4 mb-6">
-                        <div class="w-12 h-px bg-gradient-to-r from-transparent to-[#01b4d5]"></div>
-                        <span class="text-[#01b4d5] font-semibold text-sm tracking-widest uppercase">
-                            Formations Professionnelles
-                        </span>
-                        <div class="w-12 h-px bg-gradient-to-l from-transparent to-[#01b4d5]"></div>
-                    </div>
-
-                    <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 tracking-tight">
-                        LICENCES <span class="text-[#01b4d5]">PROFESSIONNELLES</span>
-                    </h1>
-
-                    <p class="text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
-                        Formez-vous aux métiers d'avenir avec nos licences professionnelles en 3 ans
-                    </p>
-
-                    <div
-                        class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-2xl px-6 py-4 border border-white/20">
-                        <svg class="w-6 h-6 text-[#01b4d5]" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <span class="text-white font-semibold">Durée : 3 ans (6 semestres) - Système LMD</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        <Breadcrumb title="Licences Professionnelles" subtitle="Formations Professionnelles"
+            description="Formez-vous aux métiers d'avenir avec nos licences professionnelles en 3 ans"
+            duration="Durée : 3 ans (6 semestres) - Système LMD" backgroundImage="/valeurs/bg.jpg" :breadcrumb="[
+                { label: 'Accueil', href: '/' },
+                { label: 'Formations', href: '/formations' },
+                { label: 'Licences Professionnelles' }
+            ]" />
         <!-- Barre de recherche et filtres améliorée -->
         <section class="py-8 bg-white border-b border-gray-100">
             <div class="container mx-auto px-4 lg:px-6 max-w-7xl">
@@ -66,25 +15,18 @@
                     <!-- Barre de recherche stylisée -->
                     <div class="relative flex-1 max-w-xl w-full">
                         <div class="relative">
-                            <input 
-                                v-model="searchQuery"
-                                type="text" 
-                                placeholder="Rechercher une formation..."
-                                class="w-full pl-12 pr-10 py-3 rounded-xl border border-gray-200 focus:border-[#01b4d5] focus:ring-2 focus:ring-[#01b4d5]/20 transition-all duration-300 bg-white shadow-sm text-gray-700 placeholder-gray-400"
-                            >
-                            <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" 
-                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            <input v-model="searchQuery" type="text" placeholder="Rechercher une formation..."
+                                class="w-full pl-12 pr-10 py-3 rounded-xl border border-gray-200 focus:border-[#01b4d5] focus:ring-2 focus:ring-[#01b4d5]/20 transition-all duration-300 bg-white shadow-sm text-gray-700 placeholder-gray-400">
+                            <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
-                            <button 
-                                v-if="searchQuery"
-                                @click="searchQuery = ''"
-                                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-200"
-                            >
+                            <button v-if="searchQuery" @click="searchQuery = ''"
+                                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-200">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                          d="M6 18L18 6M6 6l12 12" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
                         </div>
@@ -104,10 +46,8 @@
                         <!-- Sélecteur d'éléments par page -->
                         <div class="flex items-center gap-2">
                             <span class="text-gray-600 whitespace-nowrap">Afficher</span>
-                            <select 
-                                v-model="itemsPerPage"
-                                class="px-3 py-2 rounded-lg border border-gray-200 focus:border-[#01b4d5] focus:ring-2 focus:ring-[#01b4d5]/20 bg-white text-gray-700 text-sm"
-                            >
+                            <select v-model="itemsPerPage"
+                                class="px-3 py-2 rounded-lg border border-gray-200 focus:border-[#01b4d5] focus:ring-2 focus:ring-[#01b4d5]/20 bg-white text-gray-700 text-sm">
                                 <option value="2">2</option>
                                 <option value="4">4</option>
                                 <option value="6">6</option>
@@ -124,30 +64,28 @@
         <section class="py-12 lg:py-20 bg-white">
             <div class="container mx-auto px-4 lg:px-6 max-w-7xl">
                 <!-- Message si aucune formation trouvée -->
-                <div v-if="filteredFormations.length === 0" 
-                     class="text-center py-16">
-                    <svg class="w-24 h-24 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                              d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <div v-if="filteredFormations.length === 0" class="text-center py-16">
+                    <svg class="w-24 h-24 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">Aucune formation trouvée</h3>
                     <p class="text-gray-600 mb-8 max-w-md mx-auto">
-                        Aucune formation ne correspond à votre recherche "{{ searchQuery }}". 
+                        Aucune formation ne correspond à votre recherche "{{ searchQuery }}".
                         Essayez d'autres termes ou consultez toutes nos formations.
                     </p>
-                    <button 
-                        @click="searchQuery = ''"
-                        class="bg-[#01b4d5] hover:bg-[#0056b3] text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg"
-                    >
+                    <button @click="searchQuery = ''"
+                        class="bg-[#01b4d5] hover:bg-[#0056b3] text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg">
                         Voir toutes les formations
                     </button>
                 </div>
 
                 <!-- Boucle sur les formations paginées -->
                 <div v-else>
-                    <div v-for="(formation, index) in paginatedFormations" :key="formation.id" 
-                         class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20 lg:mb-28">
-                        
+                    <div v-for="(formation, index) in paginatedFormations" :key="formation.id"
+                        class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20 lg:mb-28">
+
                         <!-- Image à gauche pour les index pairs, à droite pour les index impairs -->
                         <div :class="getFormationOrder(index)">
                             <div class="relative group">
@@ -155,13 +93,15 @@
                                     <img :src="formation.image" :alt="formation.titre"
                                         class="w-full h-[400px] object-cover transform group-hover:scale-105 transition-transform duration-700"
                                         @error="handleImageError">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent"></div>
+                                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent">
+                                    </div>
                                 </div>
                                 <!-- Icône positionnée différemment selon l'index -->
                                 <div :class="getIconPosition(index)">
-                                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                              :d="formation.icon" />
+                                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            :d="formation.icon" />
                                     </svg>
                                 </div>
                             </div>
@@ -184,8 +124,8 @@
 
                             <!-- Points clés -->
                             <div class="space-y-4 mb-8">
-                                <div v-for="point in formation.pointsCles" :key="point" 
-                                     class="flex items-center gap-3 text-gray-700">
+                                <div v-for="point in formation.pointsCles" :key="point"
+                                    class="flex items-center gap-3 text-gray-700">
                                     <div :class="getPointClasses(index)"></div>
                                     <span>{{ point }}</span>
                                 </div>
@@ -194,15 +134,14 @@
                             <!-- Boutons avec couleurs dynamiques -->
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <button :class="getPrimaryButtonClasses(index)"
-                                        @click="telechargerBrochure(formation.id)">
+                                    @click="telechargerBrochure(formation.id)">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                     </svg>
                                     Télécharger la brochure
                                 </button>
-                                <button :class="getSecondaryButtonClasses(index)"
-                                        @click="voirDetails(formation.id)">
+                                <button :class="getSecondaryButtonClasses(index)" @click="voirDetails(formation.id)">
                                     En savoir plus
                                 </button>
                             </div>
@@ -212,55 +151,42 @@
                     <!-- Pagination simplifiée -->
                     <div v-if="totalPages > 1" class="flex justify-center items-center gap-2 mt-12">
                         <!-- Bouton précédent -->
-                        <button 
-                            @click="previousPage"
-                            :disabled="currentPage === 1"
-                            :class="[
-                                'flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300',
-                                currentPage === 1
-                                    ? 'text-gray-400 cursor-not-allowed'
-                                    : 'text-gray-600 hover:text-[#01b4d5] hover:bg-gray-50'
-                            ]"
-                        >
+                        <button @click="previousPage" :disabled="currentPage === 1" :class="[
+                            'flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300',
+                            currentPage === 1
+                                ? 'text-gray-400 cursor-not-allowed'
+                                : 'text-gray-600 hover:text-[#01b4d5] hover:bg-gray-50'
+                        ]">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                      d="M15 19l-7-7 7-7" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7" />
                             </svg>
                             Précédent
                         </button>
 
                         <!-- Numéros de page -->
                         <div class="flex items-center gap-1">
-                            <button 
-                                v-for="page in visiblePages" 
-                                :key="page"
-                                @click="goToPage(page)"
-                                :class="[
-                                    'w-9 h-9 rounded-lg font-medium transition-all duration-300 text-sm',
-                                    page === currentPage
-                                        ? 'bg-[#01b4d5] text-white shadow-md'
-                                        : 'text-gray-600 hover:bg-gray-100'
-                                ]"
-                            >
+                            <button v-for="page in visiblePages" :key="page" @click="goToPage(page)" :class="[
+                                'w-9 h-9 rounded-lg font-medium transition-all duration-300 text-sm',
+                                page === currentPage
+                                    ? 'bg-[#01b4d5] text-white shadow-md'
+                                    : 'text-gray-600 hover:bg-gray-100'
+                            ]">
                                 {{ page }}
                             </button>
                         </div>
 
                         <!-- Bouton suivant -->
-                        <button 
-                            @click="nextPage"
-                            :disabled="currentPage === totalPages"
-                            :class="[
-                                'flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300',
-                                currentPage === totalPages
-                                    ? 'text-gray-400 cursor-not-allowed'
-                                    : 'text-gray-600 hover:text-[#01b4d5] hover:bg-gray-50'
-                            ]"
-                        >
+                        <button @click="nextPage" :disabled="currentPage === totalPages" :class="[
+                            'flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300',
+                            currentPage === totalPages
+                                ? 'text-gray-400 cursor-not-allowed'
+                                : 'text-gray-600 hover:text-[#01b4d5] hover:bg-gray-50'
+                        ]">
                             Suivant
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                      d="M9 5l7 7-7 7" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
                             </svg>
                         </button>
                     </div>
@@ -289,7 +215,7 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
-
+import Breadcrumb from '~/components/Breadcrumb.vue'
 // États réactifs
 const searchQuery = ref('')
 const currentPage = ref(1)
@@ -364,9 +290,9 @@ const filteredFormations = computed(() => {
     if (!searchQuery.value) {
         return formations
     }
-    
+
     const query = searchQuery.value.toLowerCase()
-    return formations.filter(formation => 
+    return formations.filter(formation =>
         formation.titre.toLowerCase().includes(query) ||
         formation.description.toLowerCase().includes(query) ||
         formation.pointsCles.some(point => point.toLowerCase().includes(query))
@@ -387,7 +313,7 @@ const visiblePages = computed(() => {
     const pages = []
     const total = totalPages.value
     const current = currentPage.value
-    
+
     if (total <= 5) {
         for (let i = 1; i <= total; i++) {
             pages.push(i)
@@ -407,7 +333,7 @@ const visiblePages = computed(() => {
             }
         }
     }
-    
+
     return pages
 })
 
@@ -448,8 +374,8 @@ const getFormationOrder = (index) => {
 const getIconPosition = (index) => {
     const globalIndex = (currentPage.value - 1) * itemsPerPage.value + index
     const baseClasses = 'absolute w-24 h-24 rounded-2xl flex items-center justify-center shadow-2xl'
-    return globalIndex % 2 === 0 
-        ? `${baseClasses} -bottom-6 -right-6 bg-[#01b4d5]` 
+    return globalIndex % 2 === 0
+        ? `${baseClasses} -bottom-6 -right-6 bg-[#01b4d5]`
         : `${baseClasses} -bottom-6 -left-6 bg-[#0056b3]`
 }
 
@@ -461,8 +387,8 @@ const getContentPosition = (index) => {
 const getBadgeClasses = (index) => {
     const globalIndex = (currentPage.value - 1) * itemsPerPage.value + index
     const baseClasses = 'inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-6'
-    return globalIndex % 2 === 0 
-        ? `${baseClasses} bg-[#01b4d5]/10 text-[#01b4d5]` 
+    return globalIndex % 2 === 0
+        ? `${baseClasses} bg-[#01b4d5]/10 text-[#01b4d5]`
         : `${baseClasses} bg-[#0056b3]/10 text-[#0056b3]`
 }
 
@@ -474,8 +400,8 @@ const getPointClasses = (index) => {
 const getPrimaryButtonClasses = (index) => {
     const globalIndex = (currentPage.value - 1) * itemsPerPage.value + index
     const baseClasses = 'text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center gap-3'
-    return globalIndex % 2 === 0 
-        ? `${baseClasses} bg-[#01b4d5] hover:bg-[#0056b3]` 
+    return globalIndex % 2 === 0
+        ? `${baseClasses} bg-[#01b4d5] hover:bg-[#0056b3]`
         : `${baseClasses} bg-[#0056b3] hover:bg-[#01b4d5]`
 }
 
