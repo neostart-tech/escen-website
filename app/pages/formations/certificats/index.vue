@@ -1,12 +1,12 @@
 <template>
     <div class="min-h-screen bg-white">
         <!-- Breadcrumb -->
-      <Breadcrumb title="EXECUTIVE EDUCATION" subtitle="EXECUTIVE EDUCATION"
-            description="Formez-vous aux métiers d'avenir avec nos executive master et executive certificates"
+      <Breadcrumb title="NOS CERTIFICATS" subtitle="NOS CERTIFICATS"
+            description="ESCEN propose des certificats en Marketing Digital ; Finance Digitale ; Management de Projets Numériques."
             duration="" backgroundImage="/valeurs/bg.jpg" :breadcrumb="[
                 { label: 'Accueil', href: '/' },
                 { label: 'Formations', href: '#' },
-                { label: 'EXECUTIVE EDUCATION' }
+                { label: 'NOS CERTIFICATS' }
             ]" />
 
         <!-- Barre de recherche et filtres améliorée -->
@@ -224,21 +224,60 @@ const itemsPerPage = ref(4)
 
 // Tableau des formations
 const formations = [
-  
-    {
-        id: 2,
-        type: "Executive Master",
-        titre: "Finance Digitale",
-        description: "L’Executive Master en Finance Digitale forme des dirigeants et cadres supérieurs capables, d’une part, de conduire la transformation numérique dans le secteur financier et, d’autre part, de maîtriser les technologies émergentes (blockchain, IA, big data, fintech) ainsi que les stratégies financières digitales pour anticiper et relever les nouveaux défis économiques mondiaux.",
-        image: "/formations/financedigital2.jpg",
-        icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1",
-       
-        brochure: "/brochures/finance-digitale.pdf",
-        detailsUrl: "/formations/finance-digitale"
-    }
-    
+  {
+    id: 1,
+    type: "Certificat Professionnel",
+    titre: "Marketing Digital",
+    description:
+      "Ce certificat permet d’acquérir les fondamentaux du marketing digital afin de concevoir, déployer et optimiser des campagnes performantes sur les canaux numériques.",
+    image: "/formations/marketingdigital2.jpg",
+    icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
+    pointsCles: [
+      "Initiation au marketing digital & réseaux sociaux",
+      "Création de campagnes et contenus performants",
+      "Analyse des performances (KPIs, analytics)",
+    ],
+    brochure: "/brochures/marketing-digital.pdf",
+    detailsUrl: "/formations/marketing-digital",
+  },
 
-]
+  {
+    id: 2,
+    type: "Certificat Professionnel",
+    titre: "Finance Digitale",
+    description:
+      "Ce certificat forme aux nouveaux outils digitaux appliqués à la finance : fintech, paiements numériques, gestion digitale des services financiers et compréhension des nouveaux modèles économiques.",
+    image: "/formations/financedigital2.jpg",
+    icon:
+      "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1",
+    pointsCles: [
+      "Comprendre la fintech et ses usages",
+      "Initiation aux services financiers digitaux",
+      "Paiements électroniques et sécurité numérique",
+    ],
+    brochure: "/brochures/finance-digitale.pdf",
+    detailsUrl: "/formations/finance-digitale",
+  },
+
+  {
+    id: 3,
+    type: "Certificat Professionnel",
+    titre: "Gestion de Projets Digitaux",
+    description:
+      "Ce certificat initie aux méthodes modernes de gestion de projets numériques, permettant de planifier, organiser et suivre un projet digital de bout en bout.",
+    image: "/formations/managementprojet2.jpg",
+    icon:
+      "M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+    pointsCles: [
+      "Bases du management de projets (Agile & classique)",
+      "Outils de pilotage de projets digitaux",
+      "Organisation & coordination d’équipes",
+    ],
+    brochure: "/brochures/management-projets.pdf",
+    detailsUrl: "/formations/management-projets",
+  },
+];
+
 
 // Computed properties
 const filteredFormations = computed(() => {

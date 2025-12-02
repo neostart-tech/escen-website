@@ -228,7 +228,7 @@ const formations = [
         type: "Licence Professionnelle",
         titre: "Marketing Digital & e-commerce",
         description: "La licence en Marketing Digital & e-commerce prépare les étudiants à devenir de véritables professionnels du Marketing Digital et du e-commerce en leur donnant les outils et les codes nécessaires.",
-        image: "/valeurs/bg.jpg",
+        image: "/formations/marketingDigital.jpg",
         icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
         pointsCles: [
             "Stratégies digitales et réseaux sociaux",
@@ -236,14 +236,14 @@ const formations = [
             "Analytics et performance marketing"
         ],
         brochure: "/brochures/marketing-digital.pdf",
-        detailsUrl: "/formations/marketingDigital.jpg"
+        detailsUrl: ""
     },
     {
         id: 2,
         type: "Licence Professionnelle",
         titre: "Finance Digitale",
         description: "L'objectif de la licence professionnelle en Finance Digitale est de former de manière opérationnelle des professionnels capables de développer des compétences en services financiers digitaux et en gestion dans le domaine des Fintech et de l'inclusion financière.",
-        image: "/valeurs/bg.jpg",
+        image: "/formations/financedigital.jpg",
         icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1",
         pointsCles: [
             "Fintech et services financiers innovants",
@@ -251,14 +251,14 @@ const formations = [
             "Gestion des risques digitaux"
         ],
         brochure: "/brochures/finance-digitale.pdf",
-        detailsUrl: "/formations/financedigital.jpg"
+        detailsUrl: ""
     },
     {
         id: 3,
         type: "Licence Professionnelle",
         titre: "Management de Projets Numériques",
         description: "La licence professionnelle en Management de Projets Numériques forme des leaders de la transformation numérique capables de gérer et de mener à bien des projets dans le domaine numérique.",
-        image: "/valeurs/bg.jpg",
+        image: "/formations/managementprojet.jpg",
         icon: "M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
         pointsCles: [
             "Gestion de projets agiles et waterfall",
@@ -266,14 +266,14 @@ const formations = [
             "Management d'équipes pluridisciplinaires"
         ],
         brochure: "/brochures/management-projets.pdf",
-        detailsUrl: "/formations/managementprojet.jpg"
+        detailsUrl: ""
     },
     {
         id: 4,
         type: "Licence Professionnelle",
         titre: "Intelligence Artificielle & Génie Logiciel",
         description: "La licence professionnelle en Intelligence Artificielle forme des spécialistes capables de concevoir, développer et déployer des solutions intelligentes dans divers secteurs.",
-        image: "/valeurs/bg.jpg",
+        image: "/formations/intelligenceartificielle.jpg",
         icon: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
         pointsCles: [
             "Machine Learning et Deep Learning",
@@ -281,7 +281,7 @@ const formations = [
             "Data Science et analyse prédictive"
         ],
         brochure: "/brochures/intelligence-artificielle.pdf",
-        detailsUrl: "/formations/intelligence-artificielle"
+        detailsUrl: ""
     }
 ]
 

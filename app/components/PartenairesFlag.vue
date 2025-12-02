@@ -106,7 +106,7 @@ const countries = [
     { name: "Côte d'Ivoire", flag: "/payspartenaire/Cote_ivoire.png" },
     { name: "Guinée", flag: "/payspartenaire/guineeC.png" },
     { name: "Niger", flag: "/payspartenaire/Niger.png" },
-    { name: "Tchad", flag: "/payspartenaire/tchad.png" }
+    { name: "Tchad", flag: "/payspartenaire/thad.png" }
 ]
 
 // Calcul du nombre d'éléments par slide selon la largeur d'écran

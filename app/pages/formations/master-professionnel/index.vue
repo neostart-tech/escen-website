@@ -229,7 +229,7 @@ const formations = [
         type: "Master professionel",
         titre: "Marketing Digital",
         description: "Le programme du Master en Marketing digital forme des professionnels capables de maîtriser les techniques avancées de marketing numérique ainsi que les stratégies de développement d’une entreprise via les canaux digitaux.",
-        image: "/valeurs/bg.jpg",
+        image: "/formations/marketingdigital2.jpg",
         icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
         pointsCles: [
             "Stratégies digitales et réseaux sociaux",
@@ -244,7 +244,7 @@ const formations = [
         type: "Master professionel",
         titre: "Finance Digitale",
         description: "Le Master en Finance Digitale forme des professionnels capables, d’une part, de piloter la transformation numérique des services financiers et, d’autre part, de maîtriser les technologies innovantes et les stratégies financières digitales pour répondre aux nouveaux défis économiques et technologiques.",
-        image: "/valeurs/bg.jpg",
+        image: "/formations/financedigital2.jpg",
         icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1",
         pointsCles: [
             "Fintech et services financiers innovants",
@@ -259,7 +259,7 @@ const formations = [
         type: "Master professionel",
         titre: "Management de Projets Numériques",
         description: "Le Master en Management de Projets Numériques forme des professionnels capables d’une part, de piloter la transformation digitale d’entreprise et d’autre part, de maîtriser les techniques avancées et les stratégies de management de projets.",
-        image: "/valeurs/bg.jpg",
+        image: "/formations/managementprojet2.jpg",
         icon: "M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
         pointsCles: [
             "Gestion de projets agiles et waterfall",

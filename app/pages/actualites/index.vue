@@ -8,68 +8,69 @@
             ]" backgroundImage="/valeurs/bg.jpg" />
 
         <!-- Header avec Contrôles -->
-  <header class="bg-white shadow-sm">
-    <div class="container mx-auto px-4 sm:px-6 py-6 lg:py-8">
-        <!-- Barre de Contrôles - Layout horizontal -->
-        <div class="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between bg-white rounded-xl lg:rounded-2xl p-4 lg:p-6 shadow-sm">
-            <!-- Zone de Recherche - Gauche -->
-            <div class="w-full lg:w-auto lg:flex-1 lg:max-w-md">
-                <div class="relative">
-                    <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 lg:w-5 lg:h-5 text-gray-400" 
-                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <input 
-                        type="text" 
-                        v-model="searchQuery" 
-                        placeholder="Rechercher un article..."
-                        class="w-full pl-10 lg:pl-12 pr-4 py-2 lg:py-3 bg-white border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#01b4d5] focus:border-transparent transition-all duration-300 text-sm lg:text-base"
-                    >
+        <header class="bg-white shadow-sm">
+            <div class="container mx-auto px-4 sm:px-6 py-6 lg:py-8">
+                <!-- Barre de Contrôles - Layout horizontal -->
+                <div class="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between bg-white rounded-xl lg:rounded-2xl p-4 lg:p-6 shadow-sm">
+                    <!-- Zone de Recherche - Gauche -->
+                    <div class="w-full lg:w-auto lg:flex-1 lg:max-w-md">
+                        <div class="relative">
+                            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 lg:w-5 lg:h-5 text-gray-400" 
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            <input 
+                                type="text" 
+                                v-model="searchQuery" 
+                                placeholder="Rechercher un article..."
+                                class="w-full pl-10 lg:pl-12 pr-4 py-2 lg:py-3 bg-white border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#01b4d5] focus:border-transparent transition-all duration-300 text-sm lg:text-base"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Filtres et Sélecteur - Droite -->
+                    <div class="flex flex-col sm:flex-row gap-3 lg:gap-4 items-stretch sm:items-center w-full lg:w-auto">
+                        <!-- Filtre Catégories -->
+                        <select 
+                            v-model="activeCategory"
+                            class="w-full sm:w-48 px-3 lg:px-4 py-2 lg:py-3 bg-white border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#01b4d5] focus:border-transparent transition-all duration-300 text-sm lg:text-base"
+                        >
+                            <option value="all">Toutes les catégories</option>
+                            <option value="digital">Transformation Digital</option>
+                            <option value="innovation">Innovation</option>
+                            <option value="education">Éducation</option>
+                            <option value="career">Carrière</option>
+                            <option value="event">Événements</option>
+                        </select>
+
+                        <!-- Sélecteur d'articles par page -->
+                        <div class="flex items-center justify-between sm:justify-start gap-3 w-full sm:w-auto">
+                            <span class="text-xs lg:text-sm text-gray-600 whitespace-nowrap">Articles/page :</span>
+                            <select 
+                                v-model="articlesPerPage" 
+                                @change="currentPage = 1"
+                                class="w-20 px-3 lg:px-4 py-2 lg:py-3 bg-white border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#01b4d5] focus:border-transparent transition-all duration-300 text-sm lg:text-base"
+                            >
+                                <option :value="4">4</option>
+                                <option :value="8">8</option>
+                                <option :value="12">12</option>
+                                <option :value="16">16</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="flex justify-center mt-4 lg:mt-6">
+                    <div class="bg-gray-100 rounded-full px-4 lg:px-6 py-1 lg:py-2">
+                        <span class="text-xs lg:text-sm text-gray-600">
+                            {{ filteredArticles.length }} article{{ filteredArticles.length > 1 ? 's' : '' }} trouvé{{ filteredArticles.length > 1 ? 's' : '' }}
+                        </span>
+                    </div>
                 </div>
             </div>
-
-            <!-- Filtres et Sélecteur - Droite -->
-            <div class="flex flex-col sm:flex-row gap-3 lg:gap-4 items-stretch sm:items-center w-full lg:w-auto">
-                <!-- Filtre Catégories -->
-                <select 
-                    v-model="activeCategory"
-                    class="w-full sm:w-48 px-3 lg:px-4 py-2 lg:py-3 bg-white border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#01b4d5] focus:border-transparent transition-all duration-300 text-sm lg:text-base"
-                >
-                    <option value="all">Toutes les catégories</option>
-                    <option value="digital">Transformation Digital</option>
-                    <option value="innovation">Innovation</option>
-                    <option value="education">Éducation</option>
-                    <option value="career">Carrière</option>
-                </select>
-
-                <!-- Sélecteur d'articles par page -->
-                <div class="flex items-center justify-between sm:justify-start gap-3 w-full sm:w-auto">
-                    <span class="text-xs lg:text-sm text-gray-600 whitespace-nowrap">Articles/page :</span>
-                    <select 
-                        v-model="articlesPerPage" 
-                        @change="currentPage = 1"
-                        class="w-20 px-3 lg:px-4 py-2 lg:py-3 bg-white border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#01b4d5] focus:border-transparent transition-all duration-300 text-sm lg:text-base"
-                    >
-                        <option :value="4">4</option>
-                        <option :value="8">8</option>
-                        <option :value="12">12</option>
-                        <option :value="16">16</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <!-- Stats -->
-        <div class="flex justify-center mt-4 lg:mt-6">
-            <div class="bg-gray-100 rounded-full px-4 lg:px-6 py-1 lg:py-2">
-                <span class="text-xs lg:text-sm text-gray-600">
-                    {{ filteredArticles.length }} article{{ filteredArticles.length > 1 ? 's' : '' }} trouvé{{ filteredArticles.length > 1 ? 's' : '' }}
-                </span>
-            </div>
-        </div>
-    </div>
-</header>
+        </header>
 
         <!-- Contenu Principal -->
         <main class="container mx-auto px-4 sm:px-6 py-6 lg:py-12">
@@ -77,9 +78,19 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
                 <article v-for="(article, index) in displayedArticles" :key="article.id"
                     class="group bg-white rounded-xl lg:rounded-2xl shadow-sm hover:shadow-lg lg:hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 lg:hover:-translate-y-2 overflow-hidden border border-gray-200">
-                    <!-- Image Header -->
-                    <div
-                        class="relative h-40 sm:h-44 lg:h-48 bg-gradient-to-br from-[#01b4d5] to-[#0056b3] overflow-hidden">
+                    <!-- Image Container -->
+                    <div class="relative h-40 sm:h-44 lg:h-48 overflow-hidden bg-gray-100">
+                        <!-- Image principale -->
+                        <img 
+                            :src="article.image" 
+                            :alt="article.title"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            loading="lazy"
+                        />
+                        
+                        <!-- Overlay gradient -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        
                         <!-- Badge Catégorie -->
                         <div class="absolute top-3 left-3 lg:top-4 lg:left-4">
                             <span
@@ -98,10 +109,6 @@
                                 </svg>
                                 <span class="hidden sm:inline">Featured</span>
                             </span>
-                        </div>
-
-                        <!-- Overlay au hover -->
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500">
                         </div>
                     </div>
 
@@ -235,17 +242,18 @@ const searchQuery = ref('')
 const articlesPerPage = ref(4)
 const currentPage = ref(1)
 
-// Données des articles
+// Données des articles avec images
 const articles = ref([
     {
         id: 1,
-        title: "L'intelligence artificielle redéfinit le commerce digital",
-        excerpt: "Exploration des dernières avancées en IA et leur impact sur les stratégies e-commerce et l'expérience client personnalisée.",
-        category: "digital",
+        title: "Rencontre avec le Ministre de l'Enseignement Supérieur et de la Recherche",
+        excerpt: "La délégation d'ESCEN reçue par le Ministre Kanka-Malik Natchaba pour discuter de l'avenir de l'enseignement supérieur numérique.",
+        category: "event",
         author: "Dr. Sophie Martin",
         date: "15 Nov 2024",
         readTime: "5 min",
-        featured: true
+        featured: true,
+        image: "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
         id: 2,
@@ -255,7 +263,8 @@ const articles = ref([
         author: "Pierre Dubois",
         date: "12 Nov 2024",
         readTime: "4 min",
-        featured: false
+        featured: false,
+        image: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
         id: 3,
@@ -265,7 +274,8 @@ const articles = ref([
         author: "Marie Laurent",
         date: "8 Nov 2024",
         readTime: "6 min",
-        featured: true
+        featured: true,
+        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
         id: 4,
@@ -275,87 +285,96 @@ const articles = ref([
         author: "Thomas Leroy",
         date: "5 Nov 2024",
         readTime: "7 min",
-        featured: false
+        featured: false,
+        image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
         id: 5,
-        title: "Cybersécurité à l'ère de l'entreprise digitale",
-        excerpt: "Stratégies avancées pour sécuriser vos données et systèmes dans un paysage numérique en constante mutation.",
+        title: "L'IA dans le marketing digital : tendances 2024",
+        excerpt: "Comment l'intelligence artificielle révolutionne les stratégies marketing et améliore l'expérience client.",
         category: "digital",
-        author: "Sarah Cohen",
-        date: "2 Nov 2024",
-        readTime: "5 min",
-        featured: true
+        author: "Alexandre Bernard",
+        date: "3 Nov 2024",
+        readTime: "6 min",
+        featured: false,
+        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
         id: 6,
-        title: "Green IT : l'avenir durable du digital",
-        excerpt: "Comment concilier innovation technologique et responsabilité environnementale dans votre stratégie digitale.",
-        category: "innovation",
-        author: "David Moreau",
-        date: "29 Oct 2024",
-        readTime: "4 min",
-        featured: false
+        title: "Cybersécurité : protéger son entreprise en 2024",
+        excerpt: "Les meilleures pratiques et outils pour sécuriser vos données et systèmes contre les cybermenaces.",
+        category: "digital",
+        author: "Claire Moreau",
+        date: "1 Nov 2024",
+        readTime: "8 min",
+        featured: false,
+        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
         id: 7,
-        title: "Data Science : les métiers de demain",
-        excerpt: "Panorama complet des nouvelles carrières émergentes dans le domaine de la data science et de l'analyse de données.",
-        category: "career",
-        author: "Laura Petit",
-        date: "25 Oct 2024",
-        readTime: "6 min",
-        featured: true
+        title: "Web3 : l'avenir d'internet",
+        excerpt: "Comprendre les concepts fondamentaux du Web3 et ses implications pour les entreprises et les individus.",
+        category: "innovation",
+        author: "Julien Petit",
+        date: "29 Oct 2024",
+        readTime: "7 min",
+        featured: false,
+        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
         id: 8,
-        title: "Pédagogie inversée dans l'enseignement supérieur",
-        excerpt: "Retour d'expérience sur l'implémentation des méthodes d'apprentissage actif dans les formations digitales modernes.",
-        category: "education",
-        author: "Prof. Alain Richard",
-        date: "20 Oct 2024",
+        title: "Soft skills : la clé du succès en entreprise",
+        excerpt: "Pourquoi les compétences humaines sont devenues aussi importantes que les compétences techniques.",
+        category: "career",
+        author: "Émilie Rousseau",
+        date: "26 Oct 2024",
         readTime: "5 min",
-        featured: false
+        featured: false,
+        image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
         id: 9,
-        title: "UX Design : créer des expériences mémorables",
-        excerpt: "Principes fondamentaux et tendances actuelles pour concevoir des interfaces qui captivent et convertissent les utilisateurs.",
-        category: "digital",
-        author: "Emma Lopez",
-        date: "18 Oct 2024",
-        readTime: "4 min",
-        featured: false
+        title: "L'adaptive learning personnalise l'éducation",
+        excerpt: "Comment les algorithmes d'apprentissage adaptatif révolutionnent l'enseignement supérieur.",
+        category: "education",
+        author: "Marc Lefebvre",
+        date: "24 Oct 2024",
+        readTime: "6 min",
+        featured: false,
+        image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
         id: 10,
-        title: "Entrepreneuriat digital en Afrique : défis et opportunités",
-        excerpt: "Analyse approfondie de l'écosystème startup africain et conseils pratiques pour lancer son projet dans le numérique.",
-        category: "innovation",
-        author: "Jean Koffi",
-        date: "15 Oct 2024",
+        title: "SEO 2024 : les nouvelles règles de Google",
+        excerpt: "Mise à jour sur les dernières mises à jour des algorithmes et les meilleures pratiques SEO.",
+        category: "digital",
+        author: "Nicolas Durand",
+        date: "22 Oct 2024",
         readTime: "7 min",
-        featured: true
+        featured: true,
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
         id: 11,
-        title: "Soft Skills : le secret des leaders digitaux",
-        excerpt: "Pourquoi l'intelligence émotionnelle et la communication sont devenues cruciales dans le management digital moderne.",
-        category: "career",
-        author: "Claire Bernard",
-        date: "12 Oct 2024",
+        title: "L'innovation frugale en entreprise",
+        excerpt: "Comment innover avec des ressources limitées et créer plus de valeur avec moins.",
+        category: "innovation",
+        author: "Sarah Cohen",
+        date: "20 Oct 2024",
         readTime: "5 min",
-        featured: false
+        featured: false,
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     },
     {
         id: 12,
-        title: "L'apprentissage continu à l'ère du numérique",
-        excerpt: "Stratégies efficaces pour maintenir ses compétences à jour dans un environnement technologique en perpétuel changement.",
-        category: "education",
-        author: "Dr. Michel Durand",
-        date: "8 Oct 2024",
-        readTime: "6 min",
-        featured: true
+        title: "La transformation digitale des PME",
+        excerpt: "Guide pratique pour les petites et moyennes entreprises pour réussir leur transformation numérique.",
+        category: "digital",
+        author: "Paul Martin",
+        date: "18 Oct 2024",
+        readTime: "8 min",
+        featured: false,
+        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     }
 ])
 
@@ -374,7 +393,8 @@ const filteredArticles = computed(() => {
         filtered = filtered.filter(article =>
             article.title.toLowerCase().includes(query) ||
             article.excerpt.toLowerCase().includes(query) ||
-            article.author.toLowerCase().includes(query)
+            article.author.toLowerCase().includes(query) ||
+            article.category.toLowerCase().includes(query)
         )
     }
 
@@ -428,7 +448,8 @@ const getCategoryName = (categoryId) => {
         'digital': 'Digital',
         'innovation': 'Innovation',
         'education': 'Éducation',
-        'career': 'Carrière'
+        'career': 'Carrière',
+        'event': 'Événement'
     }
     return categories[categoryId] || categoryId
 }
@@ -480,6 +501,12 @@ onUnmounted(() => {
     overflow: hidden;
 }
 
+/* Style pour les images */
+img {
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
 /* Responsive grid */
 @media (max-width: 640px) {
     .sm\:grid-cols-2 {
@@ -513,12 +540,16 @@ onUnmounted(() => {
 
 /* Amélioration du touch sur mobile */
 @media (max-width: 768px) {
-
     button,
     select {
         -webkit-tap-highlight-color: transparent;
         min-height: 44px;
         min-width: 44px;
     }
+}
+
+/* Animation pour le hover d'image */
+.group:hover img {
+    transform: scale(1.1);
 }
 </style>

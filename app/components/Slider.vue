@@ -234,12 +234,12 @@ const slides = [
     subtitle: 'Apprenez avec les méthodes les plus modernes',
     description: 'Notre approche pédagogique unique combine théorie et pratique pour une insertion professionnelle réussie.',
     primaryButton: {
-      text: 'En savoir plus',
-      link: '/a-propos'
+      text: 'Contact',
+      link: '/contact'
     },
     secondaryButton: {
-      text: 'Brochure',
-      link: '/brochure'
+      text: 'Contact',
+      link: '/contact'
     }
   },
   {
