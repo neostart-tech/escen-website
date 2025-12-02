@@ -236,7 +236,7 @@ const formations = [
             "Analytics et performance marketing"
         ],
         brochure: "/brochures/marketing-digital.pdf",
-        detailsUrl: "/formations/marketing-digital"
+        detailsUrl: "/formations/marketingDigital.jpg"
     },
     {
         id: 2,
@@ -251,7 +251,7 @@ const formations = [
             "Gestion des risques digitaux"
         ],
         brochure: "/brochures/finance-digitale.pdf",
-        detailsUrl: "/formations/finance-digitale"
+        detailsUrl: "/formations/financedigital.jpg"
     },
     {
         id: 3,
@@ -266,7 +266,7 @@ const formations = [
             "Management d'équipes pluridisciplinaires"
         ],
         brochure: "/brochures/management-projets.pdf",
-        detailsUrl: "/formations/management-projets"
+        detailsUrl: "/formations/managementprojet.jpg"
     },
     {
         id: 4,

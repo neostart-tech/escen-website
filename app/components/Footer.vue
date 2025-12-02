@@ -207,7 +207,6 @@ const socialLinks = [
 const quickLinks = [
     { name: 'Accueil', href: '/' },
     { name: 'À propos', href: '/a-propos' },
-    { name: 'Formations', href: '/formations' },
     { name: 'Actualités', href: '/actualites' },
     { name: 'Nous contacter', href: '/contact' },
     { name: 'Espace étudiants', href: '/espace-etudiants' }
@@ -215,7 +214,7 @@ const quickLinks = [
 
 // Formations comme liste simple
 const formations = [
-    { name: 'Licence Professionnelle', href: '/licenceprofessionelle' },
+    { name: 'Licence Professionnelle', href: 'formations/licence-professionelle' },
     { name: 'Master Professionnel', href: '/formations/master-professionnel' },
     { name: 'Executive Education', href: '/formations/executive-education' },
     { name: 'Certificats', href: '/formations/certificats' }
@@ -225,7 +224,7 @@ const formations = [
 const contactInfo = [
     {
         type: 'email',
-        value: 'contact@escen.fr',
+        value: 'hello@escen.university',
         label: 'Email',
         icon: defineComponent({
             template: `
@@ -237,7 +236,7 @@ const contactInfo = [
     },
     {
         type: 'phone',
-        value: '+33 1 23 45 67 89',
+        value: '+228 98 01 27 27',
         label: 'Téléphone',
         icon: defineComponent({
             template: `
@@ -249,7 +248,7 @@ const contactInfo = [
     },
     {
         type: 'address',
-        value: '123 Avenue du Digital, 75000 Paris',
+        value: 'Hountigomé, Rue en face Eglise Notre Dame du Liban, à 5 mn de l’aéroport de Lomé',
         label: 'Adresse',
         icon: defineComponent({
             template: `

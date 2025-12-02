@@ -97,16 +97,16 @@ const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1024
 
 // Données centralisées des pays
 const countries = [
-    { name: "Sénégal", flag: "/valeurs/bg.jpg" },
-    { name: "Togo", flag: "/valeurs/bg.jpg" },
-    { name: "Bénin", flag: "/valeurs/bg.jpg" },
-    { name: "Burkina Faso", flag: "/valeurs/bg.jpg" },
-    { name: "Burundi", flag: "/valeurs/bg.jpg" },
-    { name: "Congo", flag: "/valeurs/bg.jpg" },
-    { name: "Côte d'Ivoire", flag: "/valeurs/bg.jpg" },
-    { name: "Guinée", flag: "/valeurs/bg.jpg" },
-    { name: "Niger", flag: "/valeurs/bg.jpg" },
-    { name: "Tchad", flag: "/valeurs/bg.jpg" }
+    { name: "Sénégal", flag: "/payspartenaire/senegal.png" },
+    { name: "Togo", flag: "/payspartenaire/togo.png" },
+    { name: "Bénin", flag: "/payspartenaire/benin.png" },
+    { name: "Burkina Faso", flag: "/payspartenaire/burkina.png" },
+    { name: "Burundi", flag: "/payspartenaire/burundi.png" },
+    { name: "Congo", flag: "/payspartenaire/congo.png" },
+    { name: "Côte d'Ivoire", flag: "/payspartenaire/Cote_ivoire.png" },
+    { name: "Guinée", flag: "/payspartenaire/guineeC.png" },
+    { name: "Niger", flag: "/payspartenaire/Niger.png" },
+    { name: "Tchad", flag: "/payspartenaire/tchad.png" }
 ]
 
 // Calcul du nombre d'éléments par slide selon la largeur d'écran

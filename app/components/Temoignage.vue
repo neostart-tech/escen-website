@@ -155,7 +155,7 @@ const testimonials = [
         detail: "Chargé du cours transformation digitale",
         country: "",
         type: "Intervenant Expert",
-        photo: "/valeurs/bg.jpg",
+        photo: "/temoignage/Ibrahim_Dan_Karami.png",
         content: "J'apprécie de former de futurs spécialistes en économie numérique. Je suis ravi de voir l'engagement des apprenants et leur enthousiasme. Je suis impatient de voir l'impact que cela induira dans l'industrie du numérique."
     },
     {
@@ -164,7 +164,7 @@ const testimonials = [
         detail: "Chargé de cours finance digitale",
         country: "",
         type: "Intervenant Expert",
-        photo: "/valeurs/bg.jpg",
+        photo: "/temoignage/Mathias_Dekadjevi.png",
         content: "L'économie numérique est une véritable chance pour notre continent et je suis persuadé que le vivier en cours de constitution grâce à l'initiative ESCEN, fera progresser les limites d'une véritable inclusion financière des populations africaines."
     },
     {
@@ -173,7 +173,7 @@ const testimonials = [
         detail: "Licence en Management numérique",
         country: "République Démocratique du Congo",
         type: "Étudiante",
-        photo: "/valeurs/bg.jpg",
+        photo: "/temoignage/Benedicte.jpg",
         content: "Originaire du Congo, J'ai été impressionné par la qualité des cours dispensés par des experts du domaine qui ont fait leurs preuves. ESCEN a un réseau solide d'entreprises partenaires, ce qui m'a permis de trouver un stage enrichissant."
     },
     {
@@ -182,7 +182,7 @@ const testimonials = [
         detail: "Spécialisation technologies financières",
         country: "Togo",
         type: "Étudiant",
-        photo: "/valeurs/bg.jpg",
+        photo: "/temoignage/Akoesso_Akakpo.png",
         content: "Mon expérience à ESCEN m'a permis d'acquérir une solide compréhension des concepts financiers appliqués aux technologies numériques. Grâce à des cours pratiques et des études de cas, un choix idéal pour se spécialiser dans le numérique."
     },
     {
@@ -191,7 +191,7 @@ const testimonials = [
         detail: "Master Pro Finance Digitale",
         country: "Côte d'Ivoire",
         type: "Étudiant & Professionnel",
-        photo: "/valeurs/bg.jpg",
+        photo: "/temoignage/Williams_Sanou.jpg",
         content: "Mon expérience dans ce programme de Master Pro Finance digitale est assez satisfaisante. Le programme est bien fourni et chaque participant se retrouve facilement, quel que soit son background. Les intervenants étaient très expérimentés."
     },
     {
@@ -200,7 +200,7 @@ const testimonials = [
         detail: "Spécialisation stratégies digitales",
         country: "Bénin",
         type: "Étudiante",
-        photo: "/images/temoignages/emeraude-avoce.jpg",
+        photo: "/temoignage/Emeraude_Avoce.png",
         content: "Ce qui fait d'ESCEN une école particulière est la combinaison parfaite entre théorie et pratique et les filières porteuses d'avenir. Quoi de mieux que d'être formés par des professionnels dans un cadre convivial et confortable."
     }
 ]

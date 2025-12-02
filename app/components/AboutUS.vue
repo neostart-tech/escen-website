@@ -52,7 +52,7 @@
                     <!-- Image principale - Pleine largeur sur mobile -->
                     <div class="relative rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl w-full">
                         <img 
-                            src="" 
+                            src="/temoignage/Emeraude_Avoce.png" 
                             alt="Campus ESCEN Lomé"
                             class="w-full h-[350px] lg:h-[500px] object-cover"
                         />
