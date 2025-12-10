@@ -116,7 +116,7 @@ const itemsPerSlide = computed(() => {
     } else if (windowWidth.value < 1024) { // Tablet
         return 3
     } else { // Desktop
-        return 4
+        return 6
     }
 })
 

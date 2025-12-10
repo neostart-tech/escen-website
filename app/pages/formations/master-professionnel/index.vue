@@ -1,7 +1,7 @@
 <template>
     <div class="min-h-screen bg-white">
         <!-- Breadcrumb -->
-      <Breadcrumb title="Master Professionnels" subtitle="Formations Professionnelles"
+        <Breadcrumb title="Master Professionnels" subtitle="Formations Professionnelles"
             description="Formez-vous aux métiers d'avenir avec nos master professionnels en 2 ans"
             duration="Durée : 2 ans (4 semestres) - Système LMD- Cours du soir en distanciel" backgroundImage="/valeurs/bg.jpg" :breadcrumb="[
                 { label: 'Accueil', href: '/' },
@@ -132,16 +132,16 @@
                                 </div>
                             </div>
 
-                            <!-- Boutons avec couleurs dynamiques -->
+                            <!-- Boutons avec couleurs dynamiques - MODIFIÉS -->
                             <div class="flex flex-col sm:flex-row gap-4">
-                                <button :class="getPrimaryButtonClasses(index)"
-                                    @click="telechargerBrochure(formation.id)">
+                                <a :href="formation.brochure" target="_blank" rel="noopener noreferrer"
+                                    :class="getPrimaryButtonClasses(index)">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                     </svg>
                                     Télécharger la brochure
-                                </button>
+                                </a>
                                 <button :class="getSecondaryButtonClasses(index)" @click="voirDetails(formation.id)">
                                     En savoir plus
                                 </button>
@@ -216,19 +216,23 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '~/components/Breadcrumb.vue'
+
+const router = useRouter()
+
 // États réactifs
 const searchQuery = ref('')
 const currentPage = ref(1)
 const itemsPerPage = ref(4)
 
-// Tableau des formations
+// Tableau des formations MIS À JOUR
 const formations = [
     {
         id: 1,
         type: "Master professionel",
         titre: "Marketing Digital",
-        description: "Le programme du Master en Marketing digital forme des professionnels capables de maîtriser les techniques avancées de marketing numérique ainsi que les stratégies de développement d’une entreprise via les canaux digitaux.",
+        description: "Le programme du Master en Marketing digital forme des professionnels capables de maîtriser les techniques avancées de marketing numérique ainsi que les stratégies de développement d'une entreprise via les canaux digitaux.",
         image: "/formations/marketingdigital2.jpg",
         icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
         pointsCles: [
@@ -236,14 +240,14 @@ const formations = [
             "E-commerce et marketplace management",
             "Analytics et performance marketing"
         ],
-        brochure: "/brochures/marketing-digital.pdf",
-        detailsUrl: "/formations/marketing-digital"
+        brochure: "/pdf/Fiche_Master_MD.pdf",
+        detailsUrl: "/formations/master-professionnel/marketing-digital"
     },
     {
         id: 2,
         type: "Master professionel",
         titre: "Finance Digitale",
-        description: "Le Master en Finance Digitale forme des professionnels capables, d’une part, de piloter la transformation numérique des services financiers et, d’autre part, de maîtriser les technologies innovantes et les stratégies financières digitales pour répondre aux nouveaux défis économiques et technologiques.",
+        description: "Le Master en Finance Digitale forme des professionnels capables, d'une part, de piloter la transformation numérique des services financiers et, d'autre part, de maîtriser les technologies innovantes et les stratégies financières digitales pour répondre aux nouveaux défis économiques et technologiques.",
         image: "/formations/financedigital2.jpg",
         icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1",
         pointsCles: [
@@ -251,14 +255,14 @@ const formations = [
             "Inclusion financière et bancarisation",
             "Gestion des risques digitaux"
         ],
-        brochure: "/brochures/finance-digitale.pdf",
-        detailsUrl: "/formations/finance-digitale"
+        brochure: "/pdf/Fiche_Master_FD.pdf",
+        detailsUrl: "/formations/master-professionnel/finance-digitale"
     },
     {
         id: 3,
         type: "Master professionel",
         titre: "Management de Projets Numériques",
-        description: "Le Master en Management de Projets Numériques forme des professionnels capables d’une part, de piloter la transformation digitale d’entreprise et d’autre part, de maîtriser les techniques avancées et les stratégies de management de projets.",
+        description: "Le Master en Management de Projets Numériques forme des professionnels capables d'une part, de piloter la transformation digitale d'entreprise et d'autre part, de maîtriser les techniques avancées et les stratégies de management de projets.",
         image: "/formations/managementprojet2.jpg",
         icon: "M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
         pointsCles: [
@@ -266,10 +270,9 @@ const formations = [
             "Transformation digitale des organisations",
             "Management d'équipes pluridisciplinaires"
         ],
-        brochure: "/brochures/management-projets.pdf",
-        detailsUrl: "/formations/management-projets"
-    },
-
+        brochure: "/pdf/Fiche_Master_MPN.pdf",
+        detailsUrl: "/formations/master-professionnel/management-projets"
+    }
 ]
 
 // Computed properties
@@ -418,17 +421,11 @@ const handleImageError = (event) => {
     `
 }
 
-const telechargerBrochure = (formationId) => {
-    const formation = formations.find(f => f.id === formationId)
-    if (formation) {
-        console.log(`Téléchargement de la brochure: ${formation.brochure}`)
-    }
-}
-
+// MODIFIÉ : voir détails
 const voirDetails = (formationId) => {
     const formation = formations.find(f => f.id === formationId)
-    if (formation) {
-        console.log(`Navigation vers: ${formation.detailsUrl}`)
+    if (formation && formation.detailsUrl) {
+        router.push(formation.detailsUrl)
     }
 }
 

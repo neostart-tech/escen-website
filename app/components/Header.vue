@@ -3,45 +3,47 @@
     <!-- Header Component FIXE -->
     <header class="bg-white shadow-sm fixed top-0 left-0 right-0 z-50">
       <!-- Barre supérieure avec informations de contact -->
-      <div class="bg-[#202a50] text-white py-1.5 px-4 hidden md:block">
-        <div class="container mx-auto">
-          <div class="flex flex-col md:flex-row justify-between items-center space-y-1 md:space-y-0">
-            <!-- Informations de contact gauche -->
-            <div class="flex flex-wrap items-center justify-center gap-3 text-xs">
-              <div class="flex items-center space-x-1">
-                <svg class="w-3 h-3 text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                </svg>
-                <span class="whitespace-nowrap">hello@escen.university</span>
-              </div>
-              <div class="hidden sm:flex items-center space-x-1">
-                <svg class="w-3 h-3 text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM12 3v10l3-3h6V3h-9z"/>
-                </svg>
-                <span class="whitespace-nowrap">+228 98 01 27 27</span>
-              </div>
-            </div>
-            
-            <!-- Informations de droite -->
-            <div class="flex flex-wrap items-center justify-center gap-2 text-xs">
-              <div class="flex items-center space-x-1">
-                <svg class="w-3 h-3 text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
-                </svg>
-                <span class="whitespace-nowrap">Lun-Ven: 8h-18h</span>
-              </div>
-              <div class="hidden md:flex items-center space-x-2">
-                <NuxtLink to="https://escen.neostart.tech/espace-enseignant/espace-professeur" target="_blank" class="hover:text-[#01b4d5] transition-colors text-xs whitespace-nowrap">Espace Enseignant</NuxtLink>
-                <span class="text-gray-400">|</span>
-                <NuxtLink to="https://escen.neostart.tech/espace-etudiant" target="_blank" class="hover:text-[#01b4d5] transition-colors text-xs whitespace-nowrap">Intranet</NuxtLink>
-              </div>
-            </div>
-          </div>
+        <div class="bg-[#202a50] text-white py-1.5 px-34 md:px-44 hidden md:block">
+
+      <!-- augmentation du padding horizontal -->
+    <div class="container mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center space-y-1 md:space-y-0">
+      <!-- Informations de contact gauche -->
+      <div class="flex flex-wrap items-center justify-center gap-3 text-xs">
+        <div class="flex items-center space-x-2"> <!-- espace entre icône et texte augmenté -->
+          <svg class="w-3 h-3 text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+          <span class="whitespace-nowrap">hello@escen.university</span>
+        </div>
+        <div class="hidden sm:flex items-center space-x-2"> <!-- espacement plus large -->
+          <svg class="w-3 h-3 text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM12 3v10l3-3h6V3h-9z"/>
+          </svg>
+          <span class="whitespace-nowrap">+228 98 01 27 27</span>
         </div>
       </div>
 
-      <!-- Navigation principale -->
-      <nav class="bg-white py-2 md:py-3 px-4">
+      <!-- Informations de droite -->
+      <div class="flex flex-wrap items-center justify-center gap-4 text-xs"> <!-- plus d’espace entre les items -->
+        <div class="flex items-center space-x-2">
+          <svg class="w-3 h-3 text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+          </svg>
+          <span class="whitespace-nowrap">Lun-Ven: 8h-18h</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-3">
+          <NuxtLink to="https://escen.neostart.tech/espace-enseignant/espace-professeur" target="_blank" class="hover:text-[#01b4d5] transition-colors text-xs whitespace-nowrap">Espace Enseignant</NuxtLink>
+          <span class="text-gray-400">|</span>
+          <NuxtLink to="https://escen.neostart.tech/espace-etudiant" target="_blank" class="hover:text-[#01b4d5] transition-colors text-xs whitespace-nowrap">Intranet</NuxtLink>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <!-- Navigation principale --> 
+        <nav class="bg-white py-1.5 px-34 md:px-44">
         <div class="container mx-auto">
           <div class="flex items-center justify-between">
             <!-- Logo réduit -->
@@ -66,7 +68,7 @@
                     <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M7 10l5 5 5-5z"/>
                     </svg>
-                  </button>
+                  </button> 
                   
                   <!-- Sous-menu -->
                   <div class="absolute top-full left-0 mt-1 w-56 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 z-50">

@@ -5,7 +5,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
 
                 <!-- Colonne 1: Logo et description -->
-                <div class="lg:col-span-1 space-y-6">
+                <div class="lg:col-span-1 space-y-6 pl-2 md:pl-3 lg:pl-4">
                     <!-- Logo très agrandi sur fond blanc -->
                     <div class="bg-white p-6 rounded-2xl shadow-lg inline-block">
                         <NuxtLink to="/" class="inline-block">
@@ -238,7 +238,7 @@ const quickLinks = [
 
 // Formations comme liste simple
 const formations = [
-    { name: 'Licence Professionnelle', href: 'formations/licence-professionelle' },
+    { name: 'Licence Professionnelle', href: 'formations/licence-professionnelle' },
     { name: 'Master Professionnel', href: '/formations/master-professionnel' },
     { name: 'Executive Education', href: '/formations/executive-education' },
     { name: 'Certificats', href: '/formations/certificats' }
