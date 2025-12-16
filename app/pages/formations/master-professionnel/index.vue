@@ -11,7 +11,7 @@
 
         <!-- Barre de recherche et filtres améliorée -->
         <section class="py-8 bg-white border-b border-gray-100">
-            <div class="container mx-auto px-4 lg:px-6 max-w-7xl">
+            <div class="container mx-auto px-20 lg:px-22 max-w-7xl">
                 <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
                     <!-- Barre de recherche stylisée -->
                     <div class="relative flex-1 max-w-xl w-full">
@@ -63,7 +63,7 @@
 
         <!-- Formations Section -->
         <section class="py-12 lg:py-20 bg-white">
-            <div class="container mx-auto px-4 lg:px-6 max-w-7xl">
+            <div class="container mx-auto px-20 lg:px-22 max-w-7xl">
                 <!-- Message si aucune formation trouvée -->
                 <div v-if="filteredFormations.length === 0" class="text-center py-16">
                     <svg class="w-24 h-24 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor"

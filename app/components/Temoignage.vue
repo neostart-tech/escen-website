@@ -22,7 +22,7 @@
             </div>
             <div class="relative">
                 <div class="relative">
-                    <div class="relative h-[500px] lg:h-[400px] overflow-hidden rounded-2xl">
+                    <div class="relative h-[500px] lg:h-[400px] overflow-hidden rounded-2xl ">
                         <div class="flex transition-transform duration-700 ease-out"
                              :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
                              

@@ -21,7 +21,7 @@
 
             <!-- Contenu du slide - DÉCALÉ VERS LA DROITE AVEC PADDING LEFT AUGMENTÉ -->
             <div class="relative h-full flex items-center z-10">
-              <div class="pl-[100px] lg:pl-[120px] xl:pl-[180px] pr-12 lg:pr-16 py-8 w-full">
+              <div class="pl-[100px] lg:pl-[120px] xl:pl-[100px] pr-12 lg:pr-16 py-8 w-full">
                 <div class="max-w-md space-y-4">
                   <!-- Badge -->
                   <div v-if="slide.badge"

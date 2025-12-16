@@ -27,7 +27,7 @@
             </div>
 
             <!-- Disposition verticale créative -->
-            <div class="vision-timeline">
+            <div class="vision-timeline mx-14 md:mx-16">
                 <!-- Vision 1 - Gauche -->
                 <div class="vision-item item-1" :class="{ 'animate-in': isSectionVisible }">
                     <div class="item-content">

@@ -10,7 +10,8 @@
             </div>
         </div>
 
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-32">
+         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-32">
+
             <!-- En-tête minimaliste -->
             <div class="text-center mb-16 md:mb-20 lg:mb-28">
                 <div class="inline-flex items-center gap-2 mb-4 md:mb-6">
@@ -31,7 +32,7 @@
             </div>
 
             <!-- Section Image + Texte avec design élégant -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-24 items-center mb-20 md:mb-24 lg:mb-28">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-24 items-center mx-20 md:mx-22 lg:mb-28">
                 <!-- Image avec effet sophistiqué -->
                 <div class="relative order-2 lg:order-1">
                     <div class="aspect-[4/3] relative overflow-hidden rounded-lg shadow-lg">
@@ -62,7 +63,7 @@
                 <div class="order-1 lg:order-2">
                     <!-- Section Mission -->
                     <div class="mb-10 md:mb-12">
-                        <div class="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
+                        <div class="flex items-center gap-3 md:gap-4 mb-10 md:mb-12">
                             <div class="w-8 md:w-12 h-px bg-[#01b4d5]"></div>
                             <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">Notre Mission</h2>
                         </div>
@@ -143,7 +144,7 @@
                 </div>
                 
                 <!-- Nouvelle grid des statistiques - Compacte -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mx-14 md:mx-16">
                     <!-- Année de Fondation -->
                     <div 
                         class="relative bg-gradient-to-b from-white to-gray-50 rounded-xl p-4 md:p-5 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 group"
@@ -346,7 +347,7 @@ const startCounter = (type, targetValue) => {
                 counterRef.value.innerHTML = `${displayValue}<span class="text-lg md:text-xl text-[#01b4d5]">${suffix}</span>`
             }
             
-            animationFrame = requestAnimationFrame(animate)
+            animationFrame = requestAnimationFrame(animate) 
         } else {
             // Animation terminée, afficher la valeur finale
             let finalValue

@@ -5,7 +5,7 @@
       <!-- Barre supérieure avec informations de contact -->
       <div class="bg-[#202a50] text-white py-1.5">
         <!-- Conteneur full width -->
-        <div class="flex flex-col md:flex-row justify-between items-center mx-4 md:mx-6">
+        <div class="flex flex-col md:flex-row justify-between items-center mx-20 md:mx-22">
           <!-- Informations de contact gauche - alignées à gauche -->
           <div class="flex flex-wrap items-center gap-4 text-xs">
             <div class="flex items-center space-x-1.5">
@@ -39,7 +39,7 @@
       </div>
 
       <!-- Navigation principale --> 
-        <nav class="bg-white py-1.5 px-0.5 md:px-5">
+        <nav class="bg-white py-1.5 px-0.5 mx-20 md:mx-22">
         <div class="container mx-auto">
           <div class="flex items-center justify-between">
             <!-- Logo réduit -->
