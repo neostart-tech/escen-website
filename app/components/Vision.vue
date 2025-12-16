@@ -1,137 +1,130 @@
 <template>
     <section id="vision" ref="visionSection" class="vision-section">
-        <!-- Éléments décoratifs de fond -->
-        <div class="background-elements">
-            <div class="deco-circle deco-1"></div>
-            <div class="deco-square deco-2"></div>
-            <div class="deco-circle deco-3"></div>
+        <!-- Ligne verticale de connexion -->
+        <div class="timeline-line" :class="{ 'animate-in': isSectionVisible }"></div>
+        
+        <!-- Points de connexion sur la ligne -->
+        <div class="connection-points">
+            <div class="connection-point" :class="{ 'animate-in': isSectionVisible }" style="top: 20%"></div>
+            <div class="connection-point" :class="{ 'animate-in': isSectionVisible }" style="top: 40%"></div>
+            <div class="connection-point" :class="{ 'animate-in': isSectionVisible }" style="top: 60%"></div>
+            <div class="connection-point" :class="{ 'animate-in': isSectionVisible }" style="top: 80%"></div>
         </div>
 
         <div class="container">
             <!-- En-tête -->
             <div class="header" :class="{ 'animate-in': isSectionVisible }">
-                <div class="title-decoration">
-                    <div class="line left-line"></div>
-                    <span class="badge">Notre Ambition</span>
-                    <div class="line right-line"></div>
+                <div class="header-content">
+                    <span class="section-label">Notre Vision</span>
+                    <h2 class="main-title">
+                        Les <span class="highlight">4 Piliers</span> Fondamentaux
+                    </h2>
+                    <p class="section-description">
+                        Une approche structurée autour de principes essentiels pour façonner 
+                        l'avenir de l'économie numérique
+                    </p>
                 </div>
-                
-                <h2 class="main-title">
-                    Notre <span class="highlight">Vision</span>
-                </h2>
-                
-                <p class="subtitle">
-                    Une approche stratégique articulée autour de 4 piliers fondamentaux
-                    pour façonner l'avenir de l'économie numérique
-                </p>
             </div>
 
-            <!-- Grille des visions -->
-            <div class="visions-grid">
-                <!-- Vision 1 -->
-                <div class="vision-card" :class="{ 'animate-in': isSectionVisible }" data-delay="0">
-                    <div class="card-inner">
-                        <div class="card-header">
-                            <div class="number-badge">
-                                <span class="number">01</span>
-                                <div class="badge-glow"></div>
+            <!-- Disposition verticale créative -->
+            <div class="vision-timeline">
+                <!-- Vision 1 - Gauche -->
+                <div class="vision-item item-1" :class="{ 'animate-in': isSectionVisible }">
+                    <div class="item-content">
+                        <div class="item-number">01</div>
+                        <div class="item-card">
+                            <div class="card-header">
+                                <h3 class="card-title">FORMER</h3>
+                                <div class="card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 14l9-5-9-5-9 5 9 5z" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M12 14v6l9-5M12 20l-9-5" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                </div>
                             </div>
-                            <h3 class="card-title">FORMER</h3>
-                            <div class="title-underline"></div>
-                        </div>
-                        
-                        <div class="card-content">
-                            <p class="card-text">
-                                Former des étudiants hautement qualifiés, aptes à intégrer immédiatement
-                                le marché de l'emploi ou à créer leur propre start-up innovante dans
-                                l'écosystème numérique mondial avec des compétences pratiques et théoriques solides.
-                            </p>
-                        </div>
-
-                        <div class="card-corners">
-                            <div class="corner top-right"></div>
-                            <div class="corner bottom-left"></div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Former des étudiants hautement qualifiés, aptes à intégrer immédiatement
+                                    le marché de l'emploi ou à créer leur propre start-up innovante dans
+                                    l'écosystème numérique mondial avec des compétences pratiques et théoriques solides.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Vision 2 -->
-                <div class="vision-card" :class="{ 'animate-in': isSectionVisible }" data-delay="1">
-                    <div class="card-inner">
-                        <div class="card-header">
-                            <div class="number-badge">
-                                <span class="number">02</span>
-                                <div class="badge-glow"></div>
+                <!-- Vision 2 - Droite -->
+                <div class="vision-item item-2" :class="{ 'animate-in': isSectionVisible }">
+                    <div class="item-content">
+                        <div class="item-number">02</div>
+                        <div class="item-card">
+                            <div class="card-header">
+                                <h3 class="card-title">CONNECTER</h3>
+                                <div class="card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M8 12h8M12 16V8" stroke="currentColor" stroke-width="2"/>
+                                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                </div>
                             </div>
-                            <h3 class="card-title">CONNECTER</h3>
-                            <div class="title-underline"></div>
-                        </div>
-                        
-                        <div class="card-content">
-                            <p class="card-text">
-                                Connecter étroitement la formation universitaire avec les réalités dynamiques
-                                du marché de l'emploi et l'évolution constante de l'économie numérique moderne,
-                                créant ainsi un pont essentiel entre théorie académique et pratique professionnelle.
-                            </p>
-                        </div>
-
-                        <div class="card-corners">
-                            <div class="corner top-left"></div>
-                            <div class="corner bottom-right"></div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Connecter étroitement la formation universitaire avec les réalités dynamiques
+                                    du marché de l'emploi et l'évolution constante de l'économie numérique moderne,
+                                    créant ainsi un pont essentiel entre théorie académique et pratique professionnelle.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Vision 3 -->
-                <div class="vision-card" :class="{ 'animate-in': isSectionVisible }" data-delay="2">
-                    <div class="card-inner">
-                        <div class="card-header">
-                            <div class="number-badge">
-                                <span class="number">03</span>
-                                <div class="badge-glow"></div>
+                <!-- Vision 3 - Gauche -->
+                <div class="vision-item item-3" :class="{ 'animate-in': isSectionVisible }">
+                    <div class="item-content">
+                        <div class="item-number">03</div>
+                        <div class="item-card">
+                            <div class="card-header">
+                                <h3 class="card-title">CONTRIBUER</h3>
+                                <div class="card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"/>
+                                        <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                </div>
                             </div>
-                            <h3 class="card-title">CONTRIBUER</h3>
-                            <div class="title-underline"></div>
-                        </div>
-                        
-                        <div class="card-content">
-                            <p class="card-text">
-                                Contribuer activement au développement de l'écosystème économique et numérique
-                                grâce à l'émergence d'une nouvelle génération de spécialistes, d'experts et
-                                d'entrepreneurs formés aux technologies les plus avancées du secteur digital.
-                            </p>
-                        </div>
-
-                        <div class="card-corners">
-                            <div class="corner top-right"></div>
-                            <div class="corner bottom-left"></div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Contribuer activement au développement de l'écosystème économique et numérique
+                                    grâce à l'émergence d'une nouvelle génération de spécialistes, d'experts et
+                                    d'entrepreneurs formés aux technologies les plus avancées du secteur digital.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Vision 4 -->
-                <div class="vision-card" :class="{ 'animate-in': isSectionVisible }" data-delay="3">
-                    <div class="card-inner">
-                        <div class="card-header">
-                            <div class="number-badge">
-                                <span class="number">04</span>
-                                <div class="badge-glow"></div>
+                <!-- Vision 4 - Droite -->
+                <div class="vision-item item-4" :class="{ 'animate-in': isSectionVisible }">
+                    <div class="item-content">
+                        <div class="item-number">04</div>
+                        <div class="item-card">
+                            <div class="card-header">
+                                <h3 class="card-title">PLATEFORME DE RÉFÉRENCE</h3>
+                                <div class="card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M12 7v6l3 3" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                </div>
                             </div>
-                            <h3 class="card-title">PLATEFORME<br>DE RÉFÉRENCE</h3>
-                            <div class="title-underline"></div>
-                        </div>
-                        
-                        <div class="card-content">
-                            <p class="card-text">
-                                Faire d'ESCEN une plateforme d'excellence et de référence internationale
-                                où se forment et s'épanouissent les futurs champions et leaders de
-                                l'Économie Numérique en Afrique et dans le monde entier.
-                            </p>
-                        </div>
-
-                        <div class="card-corners">
-                            <div class="corner top-left"></div>
-                            <div class="corner bottom-right"></div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Faire d'ESCEN une plateforme d'excellence et de référence internationale
+                                    où se forment et s'épanouissent les futurs champions et leaders de
+                                    l'Économie Numérique en Afrique et dans le monde entier.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -158,7 +151,7 @@ onMounted(() => {
             })
         },
         {
-            threshold: 0.2,
+            threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         }
     )
@@ -176,83 +169,82 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Variables CSS */
+/* Variables */
 .vision-section {
-    --primary-color: #01b4d5;
-    --primary-dark: #0056b3;
-    --text-dark: #1f2937;
-    --text-light: #6b7280;
-    --bg-white: #ffffff;
-    --bg-gray: #f9fafb;
-    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    --shadow-hover: 0 25px 50px -12px rgba(1, 180, 213, 0.25);
-    --border-radius: 20px;
-    --transition: all 0.3s ease;
+    --primary: #01b4d5;
+    --primary-dark: #0194b0;
+    --secondary: #202a50;
+    --light: #ffffff;
+    --light-gray: #f8fafc;
+    --dark: #1e293b;
+    --text: #334155;
+    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 25px 50px -12px rgba(1, 180, 213, 0.15);
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Section principale */
 .vision-section {
     position: relative;
-    padding: 5rem 1rem;
-    background: var(--bg-white);
-    overflow: hidden;
+    padding: 5rem 1.5rem;
+    background: linear-gradient(135deg, var(--light) 0%, var(--light-gray) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
 .container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
     position: relative;
-    z-index: 10;
+    z-index: 2;
 }
 
-/* Éléments de fond */
-.background-elements {
+/* Ligne de timeline verticale */
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 0;
+    background: linear-gradient(to bottom, var(--primary), transparent);
+    z-index: 1;
+    transition: height 1.5s ease-out;
+}
+
+.timeline-line.animate-in {
+    height: 80%;
+}
+
+/* Points de connexion */
+.connection-points {
     position: absolute;
     inset: 0;
-    pointer-events: none;
-    overflow: hidden;
+    z-index: 1;
 }
 
-.deco-circle,
-.deco-square {
+.connection-point {
     position: absolute;
-    border: 1px solid var(--primary-color);
-    opacity: 0.1;
-    animation: float 15s ease-in-out infinite;
-}
-
-.deco-circle {
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 16px;
+    height: 16px;
+    background: var(--primary);
     border-radius: 50%;
+    border: 4px solid var(--light);
+    box-shadow: 0 0 0 4px rgba(1, 180, 213, 0.3);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.deco-square {
-    border-radius: 8px;
-    transform: rotate(45deg);
+.connection-point.animate-in {
+    transform: translate(-50%, -50%) scale(1);
 }
 
-.deco-1 {
-    width: 100px;
-    height: 100px;
-    top: 10%;
-    left: 5%;
-    animation-delay: 0s;
-}
-
-.deco-2 {
-    width: 80px;
-    height: 80px;
-    bottom: 20%;
-    right: 5%;
-    animation-delay: 5s;
-}
-
-.deco-3 {
-    width: 60px;
-    height: 60px;
-    top: 40%;
-    right: 15%;
-    animation-delay: 10s;
-}
+.connection-point:nth-child(1) { transition-delay: 0.3s; }
+.connection-point:nth-child(2) { transition-delay: 0.6s; }
+.connection-point:nth-child(3) { transition-delay: 0.9s; }
+.connection-point:nth-child(4) { transition-delay: 1.2s; }
 
 /* En-tête */
 .header {
@@ -266,430 +258,361 @@ onUnmounted(() => {
 .header.animate-in {
     opacity: 1;
     transform: translateY(0);
+    transition-delay: 0.2s;
 }
 
-.title-decoration {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.line {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-    flex: 1;
-    max-width: 100px;
-    transition: var(--transition);
-}
-
-.badge {
-    color: var(--primary-color);
-    font-weight: 600;
+.section-label {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+    color: white;
     font-size: 0.875rem;
+    font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    transition: var(--transition);
-}
-
-.header.animate-in .line {
-    max-width: 120px;
-}
-
-.header.animate-in .badge {
-    transform: scale(1.05);
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 20px rgba(1, 180, 213, 0.2);
 }
 
 .main-title {
     font-size: 3rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
+    font-weight: 800;
+    color: var(--dark);
     line-height: 1.2;
+    margin-bottom: 1rem;
 }
 
 .highlight {
-    color: var(--primary-color);
+    color: var(--primary);
+    position: relative;
 }
 
-.subtitle {
-    font-size: 1.25rem;
-    color: var(--text-light);
-    max-width: 800px;
+.highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: rgba(1, 180, 213, 0.2);
+    border-radius: 4px;
+    z-index: -1;
+}
+
+.section-description {
+    font-size: 1.125rem;
+    color: var(--text);
+    max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
 }
 
-/* Grille des visions - CORRECTION APPLIQUÉE ICI */
-.visions-grid {
-    display: grid;
-    gap: 2rem;
-    /* Desktop large - 4 colonnes */
-    grid-template-columns: repeat(4, 1fr);
+/* Timeline verticale */
+.vision-timeline {
+    position: relative;
+    z-index: 2;
 }
 
-/* Tablette et desktop moyen - 2 colonnes à partir de 1025px jusqu'à 1279px */
-@media (min-width: 1025px) and (max-width: 1279px) {
-    .visions-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.75rem;
+/* Items de vision */
+.vision-item {
+    display: flex;
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: var(--transition);
+}
+
+.vision-item.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.item-1 { transition-delay: 0.4s; }
+.item-2 { transition-delay: 0.5s; }
+.item-3 { transition-delay: 0.6s; }
+.item-4 { transition-delay: 0.7s; }
+
+/* Items pairs (droite) */
+.item-2,
+.item-4 {
+    flex-direction: row-reverse;
+    transform: translateX(50px);
+}
+
+.item-2.animate-in,
+.item-4.animate-in {
+    transform: translateX(0);
+}
+
+.item-content {
+    width: 45%;
+    position: relative;
+}
+
+/* Numéro */
+.item-number {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 6rem;
+    font-weight: 900;
+    color: rgba(1, 180, 213, 0.1);
+    line-height: 1;
+    z-index: 0;
+    transition: var(--transition);
+}
+
+.item-1 .item-number,
+.item-3 .item-number {
+    right: -120px;
+}
+
+.item-2 .item-number,
+.item-4 .item-number {
+    left: -120px;
+}
+
+.vision-item:hover .item-number {
+    color: rgba(1, 180, 213, 0.15);
+    transform: translateY(-50%) scale(1.05);
+}
+
+/* Carte */
+.item-card {
+    position: relative;
+    background: var(--light);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow);
+    border: 2px solid transparent;
+    z-index: 1;
+    transition: var(--transition);
+}
+
+.vision-item:hover .item-card {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(1, 180, 213, 0.3);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.card-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin: 0;
+    line-height: 1.2;
+    transition: var(--transition);
+}
+
+.vision-item:hover .card-title {
+    color: var(--primary);
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(1, 180, 213, 0.1);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 1rem;
+    transition: var(--transition);
+}
+
+.card-icon svg {
+    width: 32px;
+    height: 32px;
+    color: var(--primary);
+    transition: var(--transition);
+}
+
+.vision-item:hover .card-icon {
+    background: var(--primary);
+    transform: rotate(10deg);
+}
+
+.vision-item:hover .card-icon svg {
+    color: var(--light);
+}
+
+.card-body {
+    position: relative;
+    z-index: 1;
+}
+
+.card-text {
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 1.05rem;
+    margin: 0;
+    text-align: justify;
+    transition: var(--transition);
+}
+
+.vision-item:hover .card-text {
+    color: var(--dark);
+}
+
+/* Effet de bordure dégradée au survol */
+.item-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--primary), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.vision-item:hover .item-card::before {
+    opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .vision-item {
+        width: 100%;
+        margin-bottom: 3rem;
     }
     
-    .card-inner {
-        min-height: 360px;
-        padding: 1.75rem 1.5rem;
+    .item-content {
+        width: 100%;
     }
     
-    .main-title {
-        font-size: 2.75rem;
+    .item-number {
+        display: none;
+    }
+    
+    .timeline-line,
+    .connection-points {
+        display: none;
+    }
+    
+    .vision-item,
+    .item-2.animate-in,
+    .item-4.animate-in {
+        transform: translateX(0) !important;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .card-icon {
+        margin-left: 0;
+        margin-top: 1rem;
     }
 }
 
-/* Tablette classique */
-@media (max-width: 1024px) {
-    .visions-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-    
-    .main-title {
-        font-size: 2.5rem;
-    }
-    
-    .subtitle {
-        font-size: 1.125rem;
-    }
-    
-    .card-inner {
-        min-height: 350px;
-        padding: 1.5rem 1.25rem;
-    }
-    
-    .number {
-        width: 60px;
-        height: 60px;
-        font-size: 1.125rem;
-    }
-}
-
-/* Mobile */
 @media (max-width: 768px) {
     .vision-section {
-        padding: 3rem 1rem;
-    }
-    
-    .visions-grid {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
+        padding: 4rem 1rem;
     }
     
     .header {
         margin-bottom: 3rem;
     }
     
-    .title-decoration {
-        gap: 1rem;
+    .main-title {
+        font-size: 2.5rem;
     }
     
-    .line {
-        max-width: 60px !important;
-    }
-    
-    .badge {
+    .section-label {
+        padding: 0.5rem 1.5rem;
         font-size: 0.8rem;
     }
     
-    .main-title {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-    }
-    
-    .subtitle {
+    .section-description {
         font-size: 1rem;
     }
     
-    .card-inner {
-        min-height: 300px;
-        padding: 1.5rem 1rem;
-    }
-    
-    .number {
-        width: 55px;
-        height: 55px;
-        font-size: 1rem;
+    .item-card {
+        padding: 2rem;
     }
     
     .card-title {
-        font-size: 1.25rem;
+        font-size: 1.5rem;
+    }
+    
+    .card-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .card-icon svg {
+        width: 26px;
+        height: 26px;
     }
     
     .card-text {
-        font-size: 0.9rem;
+        font-size: 1rem;
         line-height: 1.6;
-    }
-    
-    .deco-1,
-    .deco-2,
-    .deco-3 {
-        display: none;
     }
 }
 
-/* Petit mobile */
 @media (max-width: 480px) {
-    .vision-section {
-        padding: 2rem 0.5rem;
-    }
-    
-    .container {
-        padding: 0 0.5rem;
-    }
-    
     .main-title {
-        font-size: 1.75rem;
+        font-size: 2rem;
     }
     
-    .subtitle {
-        font-size: 0.9rem;
-    }
-    
-    .card-inner {
-        min-height: 280px;
-        padding: 1.25rem 1rem;
-    }
-    
-    .number {
-        width: 50px;
-        height: 50px;
-        font-size: 0.9rem;
+    .item-card {
+        padding: 1.5rem;
     }
     
     .card-title {
-        font-size: 1.125rem;
-    }
-}
-
-/* Cartes de vision */
-.vision-card {
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-    transition: var(--transition);
-}
-
-.vision-card.animate-in {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-.vision-card[data-delay="0"].animate-in { transition-delay: 0.1s; }
-.vision-card[data-delay="1"].animate-in { transition-delay: 0.2s; }
-.vision-card[data-delay="2"].animate-in { transition-delay: 0.3s; }
-.vision-card[data-delay="3"].animate-in { transition-delay: 0.4s; }
-
-.card-inner {
-    position: relative;
-    background: linear-gradient(135deg, var(--bg-white), var(--bg-gray));
-    border: 2px solid rgba(1, 180, 213, 0.2);
-    border-radius: var(--border-radius);
-    padding: 2rem 1.5rem;
-    height: 100%;
-    min-height: 380px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    overflow: hidden;
-}
-
-.vision-card:hover .card-inner {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: var(--shadow-hover);
-    border-color: rgba(1, 180, 213, 0.4);
-}
-
-/* En-tête de carte */
-.card-header {
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-.number-badge {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 1rem;
-}
-
-.number {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 70px;
-    height: 70px;
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    color: white;
-    font-weight: 800;
-    font-size: 1.25rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 20px rgba(1, 180, 213, 0.3);
-    position: relative;
-    z-index: 2;
-    transition: var(--transition);
-}
-
-.badge-glow {
-    position: absolute;
-    inset: -4px;
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    border-radius: 20px;
-    opacity: 0.5;
-    filter: blur(8px);
-    z-index: 1;
-    transition: var(--transition);
-}
-
-.vision-card:hover .number {
-    transform: scale(1.1) rotate(5deg);
-}
-
-.vision-card:hover .badge-glow {
-    opacity: 0.8;
-    filter: blur(12px);
-}
-
-.card-title {
-    font-size: 1.375rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 0.75rem;
-    transition: var(--transition);
-}
-
-.vision-card:hover .card-title {
-    letter-spacing: 0.05em;
-}
-
-.title-underline {
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
-    margin: 0 auto;
-    border-radius: 2px;
-    transition: var(--transition);
-}
-
-.vision-card:hover .title-underline {
-    width: 80px;
-}
-
-/* Contenu de carte */
-.card-content {
-    flex: 1;
-    display: flex;
-    align-items: center;
-}
-
-.card-text {
-    color: var(--text-dark);
-    line-height: 1.7;
-    text-align: justify;
-    font-size: 0.95rem;
-    transition: var(--transition);
-}
-
-.vision-card:hover .card-text {
-    color: var(--text-dark);
-    line-height: 1.75;
-}
-
-/* Coins décoratifs */
-.card-corners {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-}
-
-.corner {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    border-color: var(--primary-color);
-    opacity: 0.4;
-    transition: var(--transition);
-}
-
-.top-right {
-    top: 12px;
-    right: 12px;
-    border-top: 2px solid;
-    border-right: 2px solid;
-    border-top-right-radius: 8px;
-}
-
-.top-left {
-    top: 12px;
-    left: 12px;
-    border-top: 2px solid;
-    border-left: 2px solid;
-    border-top-left-radius: 8px;
-}
-
-.bottom-right {
-    bottom: 12px;
-    right: 12px;
-    border-bottom: 2px solid;
-    border-right: 2px solid;
-    border-bottom-right-radius: 8px;
-}
-
-.bottom-left {
-    bottom: 12px;
-    left: 12px;
-    border-bottom: 2px solid;
-    border-left: 2px solid;
-    border-bottom-left-radius: 8px;
-}
-
-.vision-card:hover .corner {
-    opacity: 0.8;
-    width: 28px;
-    height: 28px;
-}
-
-/* Animations */
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0px) translateX(0px) rotate(0deg);
-    }
-    33% {
-        transform: translateY(-20px) translateX(10px) rotate(120deg);
-    }
-    66% {
-        transform: translateY(10px) translateX(-15px) rotate(240deg);
-    }
-}
-
-/* Réduction des animations pour les préférences utilisateur */
-@media (prefers-reduced-motion: reduce) {
-    .vision-card,
-    .header,
-    .card-inner,
-    .number,
-    .badge-glow,
-    .card-title,
-    .title-underline,
-    .card-text,
-    .corner,
-    .deco-circle,
-    .deco-square {
-        transition: none !important;
-        animation: none !important;
+        font-size: 1.375rem;
     }
     
-    .vision-card.animate-in,
-    .header.animate-in {
+    .card-text {
+        font-size: 0.95rem;
+    }
+}
+
+/* Optimisation de la lisibilité */
+.card-text {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Réduction des animations */
+@media (prefers-reduced-motion: reduce) {
+    .vision-item,
+    .header,
+    .timeline-line,
+    .connection-point,
+    .item-number,
+    .item-card,
+    .card-icon,
+    .card-title,
+    .card-text {
+        transition: none !important;
+    }
+    
+    .header.animate-in,
+    .vision-item.animate-in,
+    .timeline-line.animate-in,
+    .connection-point.animate-in {
         opacity: 1;
         transform: none;
+        height: auto;
     }
 }
 </style>

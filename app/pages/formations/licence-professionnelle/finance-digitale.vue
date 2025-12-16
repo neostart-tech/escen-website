@@ -1,565 +1,664 @@
 <template>
-  <div class="finance-digital-page">
-    <!-- En-tête avec titre principal -->
-    <header class="page-header">
-      <div class="header-content">
-        <h1 class="main-title">
-          Licence Professionnelle en <span class="highlight">Finance Digitale</span>
-        </h1>
-        <p class="subtitle">
-          Une formation innovante pour maîtriser les technologies financières de demain
-        </p>
-      </div>
-      <div class="header-decoration">
-        <svg class="wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="#e0f7fa"></path>
-          <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="#b2ebf2"></path>
-          <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#80deea"></path>
-        </svg>
-      </div>
-    </header>
-
-    <!-- Section principale -->
-    <main class="page-content">
-      <div class="content-container">
-        
-        <!-- Section 1: Présentation rapide -->
-        <section class="presentation-section">
-          <div class="presentation-card">
-            <div class="icon-container">
-              <svg class="icon" viewBox="0 0 24 24">
-                <path fill="#0288d1" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z" />
-              </svg>
+    <div class="min-h-screen bg-white">
+        <Breadcrumb title="Licence Professionnelle en Finance Digitale" subtitle="Finance Digitale"
+            description="Formation d'excellence aux métiers de la finance numérique et des fintech"
+            duration="Durée : 3 ans (6 semestres) - Système LMD" backgroundImage="/formations/financedigital.jpg"
+            :breadcrumb="[
+                { label: 'Accueil', href: '/' },
+                { label: 'Formations', href: '/formations' },
+                { label: 'Licences Professionnelles', href: '/formations/licences-professionnelles' },
+                { label: 'Finance Digitale' }
+            ]" />
+        <!-- Barre d'information rapide -->
+        <!-- <section class="py-6 bg-gradient-to-r from-[#202a51] to-[#00b3d4]">
+            <div class="container mx-auto px-4 lg:px-6 max-w-7xl">
+                <div class="flex flex-wrap items-center justify-between gap-4 text-white">
+                    <div class="flex items-center gap-6">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="font-medium">Diplôme reconnu par l'État Togolais</span>
+                        </div>
+                        <div class="hidden md:block w-px h-6 bg-white/30"></div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="font-medium">6 semestres - 180 crédits ECTS</span>
+                        </div>
+                    </div>
+                    <a href="#contact"
+                        class="bg-white text-[#202a51] hover:bg-gray-100 px-6 py-2 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 8l7.89-3.52a2 2 0 011.11 0L20 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        Contacter l'école
+                    </a>
+                </div>
             </div>
-            <div class="presentation-text">
-              <h2>Diplôme reconnu par l'État</h2>
-              <p>Cette Licence Professionnelle en Finance Digitale est un diplôme officiellement reconnu par l'État Togolais (Agrément N° 0102 / 2021/ MESR / SG / DES).</p>
+        </section> -->
+        <!-- Contenu principal -->
+        <main class="container mx-auto px-4 lg:px-6 max-w-7xl py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- Colonne de gauche - Contenu principal -->
+                <div class="lg:col-span-2 space-y-12">
+                    <!-- Section objectifs -->
+                    <section class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                        <div class="flex items-center gap-3 mb-8">
+                            <div class="p-3 rounded-xl bg-gradient-to-br from-[#00b3d4] to-[#6cc6e2]">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900">Objectifs de la Formation</h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div v-for="(objectif, index) in objectifs" :key="index"
+                                class="bg-gradient-to-br from-[#dbeff7] to-white p-6 rounded-xl border border-[#6cc6e2]/20">
+                                <div class="flex items-start gap-4">
+                                    <div class="p-3 rounded-lg bg-[#00b3d4]/10 flex-shrink-0">
+                                        <svg class="w-6 h-6 text-[#00b3d4]" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                :d="objectif.icon" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-gray-900 mb-2">{{ objectif.title }}</h3>
+                                        <p class="text-gray-600 text-sm leading-relaxed">{{ objectif.description }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Section programme -->
+                    <section class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                        <div class="flex items-center gap-3 mb-8">
+                            <div class="p-3 rounded-xl bg-gradient-to-br from-[#202a51] to-[#0056b3]">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900">Structure du Programme</h2>
+                        </div>
+                        <!-- Timeline du programme -->
+                        <div class="relative">
+                            <!-- Ligne de la timeline -->
+                            <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#00b3d4] to-[#6cc6e2]">
+                            </div>
+                            <!-- Semestres 1-4 -->
+                            <div class="relative pl-8 pb-12">
+                                <div
+                                    class="absolute left-0 top-0 w-4 h-4 rounded-full bg-[#00b3d4] transform -translate-x-1.5">
+                                </div>
+                                <div class="bg-gradient-to-r from-[#00b3d4]/5 to-transparent p-6 rounded-xl">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div>
+                                            <div
+                                                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00b3d4] text-white text-sm font-semibold mb-2">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                Semestres 1 à 4
+                                            </div>
+                                            <h3 class="text-xl font-bold text-gray-900">Tronc Commun</h3>
+                                        </div>
+                                        <div
+                                            class="px-4 py-2 bg-[#00b3d4]/10 text-[#00b3d4] rounded-lg font-medium text-sm">
+                                            100% Présentiel
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-600 mb-4">Formation intensive en présentiel pour acquérir les
+                                        fondamentaux de la finance et du numérique</p>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div v-for="cours in troncCommun" :key="cours"
+                                            class="flex items-center gap-2 text-gray-700 text-sm">
+                                            <div class="w-2 h-2 rounded-full bg-[#00b3d4]"></div>
+                                            <span>{{ cours }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Semestres 5-6 -->
+                            <div class="relative pl-8">
+                                <div
+                                    class="absolute left-0 top-0 w-4 h-4 rounded-full bg-[#202a51] transform -translate-x-1.5">
+                                </div>
+                                <div class="bg-gradient-to-r from-[#202a51]/5 to-transparent p-6 rounded-xl">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div>
+                                            <div
+                                                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#202a51] text-white text-sm font-semibold mb-2">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                                </svg>
+                                                Semestres 5 à 6
+                                            </div>
+                                            <h3 class="text-xl font-bold text-gray-900">Spécialisation</h3>
+                                        </div>
+                                        <div
+                                            class="px-4 py-2 bg-[#202a51]/10 text-[#202a51] rounded-lg font-medium text-sm">
+                                            Hybride (Présentiel & En ligne)
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-600 mb-4">Cours du soir avec une approche flexible combinant
+                                        présentiel et enseignement à distance</p>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div v-for="specialisation in specialisations" :key="specialisation"
+                                            class="flex items-center gap-2 text-gray-700 text-sm">
+                                            <div class="w-2 h-2 rounded-full bg-[#202a51]"></div>
+                                            <span>{{ specialisation }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Section carrières -->
+                    <section class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                        <div class="flex items-center gap-3 mb-8">
+                            <div class="p-3 rounded-xl bg-gradient-to-br from-[#6cc6e2] to-[#00b3d4]">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900">Perspectives de Carrière</h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div v-for="(metier, index) in metiers" :key="index"
+                                class="group bg-gradient-to-br from-white to-[#f8fcff] p-6 rounded-xl border border-gray-100 hover:border-[#00b3d4] hover:shadow-lg transition-all duration-300 cursor-pointer">
+                                <div class="flex items-start gap-4">
+                                    <div class="p-3 rounded-lg bg-gradient-to-br from-[#00b3d4] to-[#6cc6e2] group-hover:scale-110 transition-transform duration-300">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                :d="metier.icon" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-gray-900 mb-2 group-hover:text-[#00b3d4] transition-colors duration-300">{{ metier.title }}</h3>
+                                        <p class="text-gray-600 text-sm">{{ metier.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Section admission -->
+                    <section class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                        <div class="flex items-center gap-3 mb-8">
+                            <div class="p-3 rounded-xl bg-gradient-to-br from-[#0056b3] to-[#202a51]">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900">Conditions d'Admission</h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-6">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                        <span
+                                            class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#00b3d4] text-white text-sm font-bold">1</span>
+                                        Licence 1 & 2
+                                    </h3>
+                                    <div class="space-y-3 pl-10">
+                                        <div v-for="(piece, index) in piecesLicence12" :key="index"
+                                            class="flex items-center gap-3 text-gray-700">
+                                            <div
+                                                class="w-6 h-6 rounded-full bg-[#dbeff7] flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-3 h-3 text-[#00b3d4]" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M5 13l4 4L19 7" />
+                                                </svg>
+                                            </div>
+                                            <span class="text-sm">{{ piece }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-6">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                        <span
+                                            class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#202a51] text-white text-sm font-bold">2</span>
+                                        Licence 3
+                                    </h3>
+                                    <div class="space-y-3 pl-10">
+                                        <div v-for="(piece, index) in piecesLicence3" :key="index"
+                                            class="flex items-center gap-3 text-gray-700">
+                                            <div
+                                                class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
+                                                <svg class="w-3 h-3 text-[#202a51]" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M5 13l4 4L19 7" />
+                                                </svg>
+                                            </div>
+                                            <span class="text-sm">{{ piece }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8 p-6 bg-gradient-to-r from-[#dbeff7] to-[#f0f9ff] rounded-xl">
+                            <div class="flex items-center gap-4">
+                                <div class="p-3 rounded-lg bg-white">
+                                    <svg class="w-6 h-6 text-[#00b3d4]" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">Profil d'entrée</h4>
+                                    <p class="text-gray-600 text-sm">Formation ouverte aux candidats titulaires du
+                                        baccalauréat (toutes séries) ou titre équivalent</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- Colonne de droite - Informations pratiques -->
+                <div class="space-y-8">
+                    <!-- Carte de résumé -->
+                    <div class="bg-gradient-to-b from-[#202a51] to-[#0056b3] rounded-2xl p-8 text-white shadow-xl">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="p-3 rounded-xl bg-white/10">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h2 class="text-xl font-bold">Résumé de la Formation</h2>
+                        </div>
+                        <div class="space-y-6">
+                            <div v-for="(info, index) in infosResume" :key="index" class="flex items-start gap-4">
+                                <div class="p-2 rounded-lg bg-white/10 flex-shrink-0">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            :d="info.icon" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold mb-1">{{ info.title }}</h3>
+                                    <p class="text-sm opacity-90">{{ info.value }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Frais de formation -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="p-3 rounded-xl bg-gradient-to-br from-[#00b3d4] to-[#6cc6e2]">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h2 class="text-xl font-bold text-gray-900">Frais de Formation</h2>
+                        </div>
+                        <div class="space-y-4">
+                            <div v-for="(frais, index) in listeFrais" :key="index"
+                                :class="['p-4 rounded-xl border transition-all duration-300 hover:shadow-md', frais.featured ? 'border-[#00b3d4] bg-[#f0f9ff]' : 'border-gray-200']">
+                                 <div class="flex items-center justify-between mb-2">
+                                    <h3 class="font-bold text-gray-900">{{ frais.annee }}</h3>
+                                     
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600 text-sm">Droit d'inscription</span>
+                                        <span class="font-bold text-gray-900">{{ frais.inscription }}</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600 text-sm">Frais de scolarité</span>
+                                        <span class="font-bold text-[#00b3d4]">{{ frais.scolarite }}</span>
+                                    </div>
+                                    <div class="pt-3 border-t border-gray-200">
+                                        <div class="flex justify-between items-center">
+                                            <span class="font-bold text-gray-900">Total</span>
+                                            <span class="text-xl font-bold text-[#202a51]">{{ frais.total }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-[#dbeff7] rounded-xl">
+                            <p class="text-sm text-gray-700 text-center">
+                                Les frais sont payables en tranches (bimestriel, trimestriel, 5 tranches ou annuel)
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Avantages ESCEN -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="p-3 rounded-xl bg-gradient-to-br from-[#6cc6e2] to-[#dbeff7]">
+                                <svg class="w-6 h-6 text-[#202a51]" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                            </div>
+                            <h2 class="text-xl font-bold text-gray-900">Avantages ESCEN</h2>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div v-for="(avantage, index) in avantages" :key="index"
+                                class="bg-gradient-to-br from-white to-[#f8fcff] p-4 rounded-lg border border-gray-100 hover:border-[#6cc6e2] transition-all duration-300 group">
+                                <div class="flex flex-col items-center text-center">
+                                    <div
+                                        class="p-3 rounded-xl bg-gradient-to-br from-[#6cc6e2] to-[#00b3d4] mb-3 group-hover:scale-110 transition-transform duration-300">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                :d="avantage.icon" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-xs font-medium text-gray-700 group-hover:text-[#00b3d4] transition-colors duration-300">{{
+                                        avantage.title }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bouton d'action -->
+                    <button
+                        class="w-full bg-gradient-to-r from-[#00b3d4] to-[#0056b3] hover:from-[#0056b3] hover:to-[#202a51] text-white py-4 rounded-xl font-bold text-lg transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-3"
+                        @click="inscrireMaintenant">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                        S'inscrire à la formation
+                    </button>
+                </div>
             </div>
-          </div>
-          
-          <div class="presentation-card">
-            <div class="icon-container">
-              <svg class="icon" viewBox="0 0 24 24">
-                <path fill="#0288d1" d="M21,16.5C21,16.88 20.79,17.21 20.47,17.38L12.57,21.82C12.41,21.94 12.21,22 12,22C11.79,22 11.59,21.94 11.43,21.82L3.53,17.38C3.21,17.21 3,16.88 3,16.5V7.5C3,7.12 3.21,6.79 3.53,6.62L11.43,2.18C11.59,2.06 11.79,2 12,2C12.21,2 12.41,2.06 12.57,2.18L20.47,6.62C20.79,6.79 21,7.12 21,7.5V16.5Z" />
-              </svg>
+        </main>
+        <!-- Section stage -->
+        <section class="py-16 bg-gradient-to-br from-[#f0f9ff] to-[#dbeff7]">
+            <div class="container mx-auto px-4 lg:px-6 max-w-7xl">
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div class="flex-1">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00b3d4] text-white text-sm font-semibold mb-4">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
+                                Stage Professionnel
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Acquérez une expérience concrète</h2>
+                            <p class="text-gray-600 mb-6">
+                                Stage obligatoire de 2 mois minimum aux semestres 5 et 6, suivi de la rédaction et présentation d'un rapport ou projet professionnel.
+                            </p>
+                            <div class="flex items-center gap-6">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00b3d4] to-[#6cc6e2] flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-600">Durée</p>
+                                        <p class="font-bold text-gray-900">2 mois minimum</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#202a51] to-[#0056b3] flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-600">Période</p>
+                                        <p class="font-bold text-gray-900">Semestres 5 & 6</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-shrink-0">
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="presentation-text">
-              <h2>Durée et organisation</h2>
-              <p>Formation sur 6 semestres (3 ans) avec cours du jour en tronc commun (semestres 1 à 4) et cours du soir en spécialisation (semestres 5 et 6 en présentiel et en ligne).</p>
-            </div>
-          </div>
         </section>
-        
-        <!-- Section 2: Objectifs de la formation -->
-        <section class="objectives-section">
-          <h2 class="section-title">Objectifs de la formation</h2>
-          <div class="objectives-content">
-            <p class="objective-main">
-              Cette licence professionnelle forme les étudiants à l'application des solutions technologiques aux services financiers et à la gestion des projets de <strong>mobile Banking</strong>, <strong>mobile money</strong> et de <strong>fintechs</strong>.
-            </p>
-            
-            <div class="objectives-grid">
-              <div class="objective-item">
-                <svg class="bullet-icon" viewBox="0 0 24 24">
-                  <path fill="#4caf50" d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-                <span>Collaborer à l'élaboration de la stratégie de digitalisation de l'entreprise</span>
-              </div>
-              
-              <div class="objective-item">
-                <svg class="bullet-icon" viewBox="0 0 24 24">
-                  <path fill="#4caf50" d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-                <span>Participer à la mise en œuvre d'un projet de digitalisation</span>
-              </div>
-              
-              <div class="objective-item">
-                <svg class="bullet-icon" viewBox="0 0 24 24">
-                  <path fill="#4caf50" d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-                <span>Maîtriser les processus bancaires digitaux (paiements mobiles, prêts en ligne, crypto-monnaies)</span>
-              </div>
-              
-              <div class="objective-item">
-                <svg class="bullet-icon" viewBox="0 0 24 24">
-                  <path fill="#4caf50" d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
-                </svg>
-                <span>Élaborer des produits et services financiers adaptés à l'ère du numérique</span>
-              </div>
+        <!-- Contact Section -->
+        <!-- <section id="contact" class="py-16 bg-white border-t border-gray-100">
+            <div class="container mx-auto px-4 lg:px-6 max-w-7xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Intéressé par cette formation ?</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">
+                        Contactez-nous pour plus d'informations ou pour organiser une visite de notre campus à Lomé
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#00b3d4] to-[#6cc6e2] flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-gray-900 mb-2">Téléphone</h3>
+                        <p class="text-gray-600">(228) 98 01 27 27</p>
+                        <p class="text-gray-600">(228) 92 30 87 87</p>
+                    </div>
+                    <div class="text-center">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#202a51] to-[#0056b3] flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89-3.52a2 2 0 011.11 0L20 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-gray-900 mb-2">Email</h3>
+                        <p class="text-gray-600">admission@escen.university</p>
+                    </div>
+                    <div class="text-center">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#6cc6e2] to-[#dbeff7] flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-[#202a51]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-gray-900 mb-2">Campus</h3>
+                        <p class="text-gray-600">Lomé, Togo</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </section>
-        
-        <!-- Section 3: Stage et débouchés -->
-        <section class="career-section">
-          <div class="career-column">
-            <h2 class="section-title">
-              <svg class="title-icon" viewBox="0 0 24 24">
-                <path fill="#ff9800" d="M10,2H14A2,2 0 0,1 16,4V6H20A2,2 0 0,1 22,8V19A2,2 0 0,1 20,21H4C2.89,21 2,20.1 2,19V8C2,6.89 2.89,6 4,6H8V4C8,2.89 8.89,2 10,2M14,6V4H10V6H14Z" />
-              </svg>
-              Stage professionnel
-            </h2>
-            <div class="career-card">
-              <p>Stage obligatoire d'une durée de <strong>2 mois minimum</strong> aux semestres 5 et 6, suivi de la rédaction et présentation d'un rapport ou projet professionnel.</p>
-            </div>
-          </div>
-          
-          <div class="career-column">
-            <h2 class="section-title">
-              <svg class="title-icon" viewBox="0 0 24 24">
-                <path fill="#ff9800" d="M21,13H3V11H21V13M21,6H3V4H21V6M21,20H3V18H21V20Z" />
-              </svg>
-              Perspectives de carrière
-            </h2>
-            <div class="career-card">
-              <ul class="career-list">
-                <li>Chargé de projet en finance digitale</li>
-                <li>Chef projet banque digitale</li>
-                <li>Chef produit bancaire</li>
-                <li>Consultant en finance digitale</li>
-                <li>Chef service mobile money</li>
-              </ul>
-              <p class="career-note">+ 3 autres métiers dans le secteur de la finance digitale</p>
-            </div>
-          </div>
-        </section>
-        
-        <!-- Section 4: Informations pratiques -->
-        <section class="practical-info">
-          <h2 class="section-title">Informations pratiques</h2>
-          
-          <div class="info-cards">
-            <div class="info-card">
-              <h3>
-                <svg class="info-icon" viewBox="0 0 24 24">
-                  <path fill="#9c27b0" d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M17.13,17C15.92,18.85 14.11,20.24 12,20.92C9.89,20.24 8.08,18.85 6.87,17C6.53,16.5 6.24,16 6,15.47C6,13.82 8.71,12.47 12,12.47C15.29,12.47 18,13.79 18,15.47C17.76,16 17.47,16.5 17.13,17Z" />
-                </svg>
-                Profils d'entrée
-              </h3>
-              <p>Ouvert aux candidats titulaires du <strong>baccalauréat</strong> (toute série) ou tout titre équivalent.</p>
-            </div>
-            
-            <div class="info-card">
-              <h3>
-                <svg class="info-icon" viewBox="0 0 24 24">
-                  <path fill="#9c27b0" d="M3,6H21V18H3V6M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M7,8A1,1 0 0,1 8,9A1,1 0 0,1 7,10A1,1 0 0,1 6,9A1,1 0 0,1 7,8M17,8A1,1 0 0,1 18,9A1,1 0 0,1 17,10A1,1 0 0,1 16,9A1,1 0 0,1 17,8Z" />
-                </svg>
-                Campus
-              </h3>
-              <p><strong>Lomé - Togo</strong><br>Tél: (228) 98 01 27 27 / 92 30 87 87</p>
-            </div>
-            
-            <div class="info-card">
-              <h3>
-                <svg class="info-icon" viewBox="0 0 24 24">
-                  <path fill="#9c27b0" d="M20,6C20.58,6 21.05,6.2 21.42,6.59C21.8,7 22,7.45 22,8V19C22,19.55 21.8,20 21.42,20.41C21.05,20.8 20.58,21 20,21H4C3.42,21 2.95,20.8 2.58,20.41C2.2,20 2,19.55 2,19V8C2,7.45 2.2,7 2.58,6.59C2.95,6.2 3.42,6 4,6H8V4C8,3.42 8.2,2.95 8.58,2.58C8.95,2.2 9.42,2 10,2H14C14.58,2 15.05,2.2 15.42,2.58C15.8,2.95 16,3.42 16,4V6H20M4,8V19H20V8H4M14,6V4H10V6H14Z" />
-                </svg>
-                Frais de scolarité
-              </h3>
-              <p>De <strong>480 000 à 650 000 FCFA</strong> par an selon le niveau, avec des options de paiement en plusieurs tranches.</p>
-            </div>
-          </div>
-        </section>
-        
-        <!-- Section 5: Contact -->
-        <section class="contact-section">
-          <div class="contact-card">
-            <h2>Pour plus d'informations</h2>
-            <div class="contact-info">
-              <div class="contact-item">
-                <svg class="contact-icon" viewBox="0 0 24 24">
-                  <path fill="#fff" d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" />
-                </svg>
-                <span>admission@escen.university</span>
-              </div>
-              <div class="contact-item">
-                <svg class="contact-icon" viewBox="0 0 24 24">
-                  <path fill="#fff" d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z" />
-                </svg>
-                <span>(228) 98 01 27 27 / 92 30 87 87</span>
-              </div>
-              <div class="contact-item">
-                <svg class="contact-icon" viewBox="0 0 24 24">
-                  <path fill="#fff" d="M12,2A10,10 0 0,1 22,12C22,16.42 19.88,20.37 16.89,22.89C15.5,23.5 13.5,23 12,21.5C10.5,23 8.5,23.5 7.11,22.89C4.12,20.37 2,16.42 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12C4,15.5 5.61,18.5 8.11,20.38C9.28,19.38 10.14,18.06 10.14,16.5C10.14,13.92 12.75,12.34 15.26,13C16.21,12.86 17,12.18 17,11.26C17,10.33 16.21,9.65 15.26,9.5C12.75,8.86 10.14,10.08 10.14,7.5C10.14,5.94 9.28,4.62 8.11,3.62C5.61,5.5 4,8.5 4,12A8,8 0 0,0 12,4Z" />
-                </svg>
-                <span>www.escen.university</span>
-              </div>
-            </div>
-            <a href="#" class="contact-button">Demander une brochure</a>
-          </div>
-        </section>
-      </div>
-    </main>
-  </div>
+        </section> -->
+    </div>
 </template>
-
-<script>
-export default {
-  name: 'FinanceDigitalPage',
-  data() {
-    return {
-      // Données si nécessaire
+<script setup>
+import { ref } from 'vue'
+import Breadcrumb from '~/components/Breadcrumb.vue'
+// Données pour les objectifs
+const objectifs = [
+    {
+        icon: "M13 10V3L4 14h7v7l9-11h-7z",
+        title: "Applications technologiques",
+        description: "Maîtrise des solutions technologiques appliquées aux services financiers"
+    },
+    {
+        icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2",
+        title: "Gestion de projets",
+        description: "Management de projets de mobile banking, mobile money et fintechs"
+    },
+    {
+        icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1",
+        title: "Processus bancaires",
+        description: "Expertise en paiements mobiles, plateformes de prêts en ligne et crypto-monnaies"
+    },
+    {
+        icon: "M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z",
+        title: "Innovation financière",
+        description: "Conception de produits financiers adaptés à l'ère numérique"
     }
-  }
+]
+// Données pour le tronc commun
+const troncCommun = [
+    "Fondamentaux de la finance",
+    "Économie numérique",
+    "Droit des affaires",
+    "Comptabilité générale",
+    "Mathématiques financières",
+    "Technologies bancaires",
+    "Management digital",
+    "Communication professionnelle"
+]
+// Données pour les spécialisations
+const specialisations = [
+    "Fintech et innovation",
+    "Mobile banking",
+    "Paiements numériques",
+    "Crypto-monnaies",
+    "Gestion des risques digitaux",
+    "Analyse financière digitale"
+]
+// Données pour les métiers
+const metiers = [
+    {
+        icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+        title: "Chargé de projet finance digitale",
+        description: "Gestion des projets de transformation numérique bancaire"
+    },
+    {
+        icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
+        title: "Chef projet banque digitale",
+        description: "Direction des projets d'innovation bancaire"
+    },
+    {
+        icon: "M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4",
+        title: "Chef produit bancaire",
+        description: "Développement de produits financiers innovants"
+    },
+    {
+        icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
+        title: "Chargé de développement digital",
+        description: "Stratégie de digitalisation des services financiers"
+    },
+    {
+        icon: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
+        title: "Chef projet fintech",
+        description: "Innovation et développement de solutions fintech"
+    },
+    {
+        icon: "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z",
+        title: "Consultant finance digitale",
+        description: "Conseil en transformation digitale bancaire"
+    }
+]
+// Données pour les pièces à fournir
+const piecesLicence12 = [
+    "2 photos passeport",
+    "Copie de la carte d'identité ou passeport",
+    "Copie légalisée de l'attestation du bac",
+    "Copie légalisée du relevé de bac"
+]
+const piecesLicence3 = [
+    "2 photos passeport",
+    "Copie de la carte d'identité ou passeport",
+    "Copie légalisée de l'attestation du bac et du BTS",
+    "Copie légalisée des relevés du bac + 2 et du BTS"
+]
+// Données pour le résumé
+const infosResume = [
+    {
+        icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
+        title: "Type de formation",
+        value: "Licence Professionnelle"
+    },
+    {
+        icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+        title: "Domaine",
+        value: "Sciences Économiques et de Gestion"
+    },
+    {
+        icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
+        title: "Durée",
+        value: "3 ans (6 semestres)"
+    },
+    {
+        icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
+        title: "Modalités",
+        value: "Présentiel & En ligne"
+    }
+]
+// Données pour les frais
+const listeFrais = [
+    {
+        annee: "Licence 1ère année",
+        inscription: "50 000 FCFA",
+        scolarite: "480 000 FCFA",
+        total: "530 000 FCFA", 
+        featured: true
+    },
+    {
+        annee: "Licence 2ème année",
+        inscription: "50 000 FCFA",
+        scolarite: "550 000 FCFA",
+        total: "600 000 FCFA",
+        featured: true
+    },
+    {
+        annee: "Licence 3ème année",
+        inscription: "50 000 FCFA",
+        scolarite: "650 000 FCFA",
+        total: "700 000 FCFA",
+        featured: true
+    }
+]
+// Données pour les avantages
+const avantages = [
+    {
+        icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
+        title: "Tissu pour uniforme"
+    },
+    {
+        icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+        title: "Assurance santé"
+    },
+    {
+        icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
+        title: "Bibliothèque numérique"
+    },
+    {
+        icon: "M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2",
+        title: "Carte d'étudiant"
+    },
+    {
+        icon: "M13 10V3L4 14h7v7l9-11h-7z",
+        title: "Réduction loisirs"
+    },
+    {
+        icon: "M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4",
+        title: "Réduction transport avec Gozem"
+    }
+]
+// Fonctions
+const inscrireMaintenant = () => {
+    console.log("Redirection vers le formulaire d'inscription")
 }
+
 </script>
-
 <style scoped>
-.finance-digital-page {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #333;
-  background-color: #f9f9f9;
-  min-height: 100vh;
-}
-
-/* En-tête */
-.page-header {
-  background: linear-gradient(135deg, #0288d1 0%, #02669d 100%);
-  color: white;
-  padding: 3rem 2rem 5rem;
-  position: relative;
-  overflow: hidden;
-  border-radius: 0 0 20px 20px;
-  margin-bottom: 2rem;
-}
-
-.header-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.main-title {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-}
-
-.highlight {
-  color: #ffeb3b;
-  font-weight: 800;
-}
-
-.subtitle {
-  font-size: 1.2rem;
-  opacity: 0.9;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.header-decoration {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 120px;
-}
-
-.wave {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* Contenu principal */
-.page-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem 4rem;
-}
-
-.content-container {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-/* Section présentation */
-.presentation-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-}
-
-.presentation-card {
-  background: white;
-  border-radius: 15px;
-  padding: 2rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
-  flex: 1;
-  min-width: 300px;
-  max-width: 500px;
-  transition: transform 0.3s ease;
-}
-
-.presentation-card:hover {
-  transform: translateY(-5px);
-}
-
-.icon-container {
-  background-color: #e3f2fd;
-  border-radius: 50%;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.icon {
-  width: 40px;
-  height: 40px;
-}
-
-.presentation-text h2 {
-  color: #0288d1;
-  margin-bottom: 0.8rem;
-  font-size: 1.4rem;
-}
-
-.presentation-text p {
-  line-height: 1.6;
-  color: #555;
-}
-
-/* Section objectifs */
-.objectives-section {
-  background: white;
-  border-radius: 15px;
-  padding: 2.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-}
-
-.section-title {
-  font-size: 1.8rem;
-  color: #0288d1;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.title-icon {
-  width: 28px;
-  height: 28px;
-}
-
-.objective-main {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  margin-bottom: 2rem;
-  padding: 1rem;
-  background-color: #f1f8e9;
-  border-radius: 10px;
-  border-left: 4px solid #4caf50;
-}
-
-.objectives-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.2rem;
-}
-
-.objective-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-.bullet-icon {
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-  margin-top: 0.2rem;
-}
-
-.objective-item span {
-  line-height: 1.5;
-}
-
-/* Section carrière */
-.career-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.career-column {
-  display: flex;
-  flex-direction: column;
-}
-
-.career-card {
-  background: white;
-  border-radius: 15px;
-  padding: 2rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  flex-grow: 1;
-}
-
-.career-card p {
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-.career-list {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.career-list li {
-  padding: 0.5rem 0;
-  border-bottom: 1px dashed #e0e0e0;
-  display: flex;
-  align-items: center;
-}
-
-.career-list li:before {
-  content: "•";
-  color: #ff9800;
-  font-size: 1.5rem;
-  margin-right: 0.8rem;
-}
-
-.career-note {
-  font-style: italic;
-  color: #666;
-  margin-top: 1rem;
-  font-size: 0.9rem;
-}
-
-/* Section informations pratiques */
-.practical-info {
-  background: white;
-  border-radius: 15px;
-  padding: 2.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-}
-
-.info-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-.info-card {
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 1.5rem;
-  transition: all 0.3s ease;
-}
-
-.info-card:hover {
-  border-color: #9c27b0;
-  box-shadow: 0 5px 10px rgba(156, 39, 176, 0.1);
-}
-
-.info-card h3 {
-  color: #9c27b0;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.info-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.info-card p {
-  line-height: 1.6;
-  color: #555;
-}
-
-/* Section contact */
-.contact-section {
-  margin-top: 1rem;
-}
-
-.contact-card {
-  background: linear-gradient(135deg, #0288d1 0%, #02669d 100%);
-  border-radius: 15px;
-  padding: 3rem;
-  color: white;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(2, 136, 209, 0.3);
-}
-
-.contact-card h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-}
-
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
-  align-items: center;
-}
-
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-size: 1.1rem;
-}
-
-.contact-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.contact-button {
-  background-color: #ff9800;
-  color: white;
-  border: none;
-  padding: 1rem 2.5rem;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.contact-button:hover {
-  background-color: #f57c00;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .main-title {
-    font-size: 2rem;
-  }
-  
-  .page-content {
-    padding: 0 1rem 3rem;
-  }
-  
-  .presentation-card, .career-column, .info-card {
-    min-width: 100%;
-  }
-  
-  .contact-info {
-    align-items: flex-start;
-  }
-  
-  .contact-card {
-    padding: 2rem;
-  }
-  
-  .objectives-grid {
-    grid-template-columns: 1fr;
-  }
-}
+/* Styles spécifiques si besoin */
 </style>

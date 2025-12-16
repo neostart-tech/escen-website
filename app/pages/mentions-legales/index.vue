@@ -6,7 +6,7 @@
             :breadcrumb="[
                 { label: 'Accueil', href: '/' },
                 { label: 'Mentions Légales' }
-            ]" backgroundImage="/valeurs/bg.jpg" />
+            ]" backgroundImage="/valeurs/bg.jpg" /> 
 
         <!-- Section principale -->
         <section class="py-16 md:py-20">

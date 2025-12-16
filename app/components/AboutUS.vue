@@ -26,7 +26,7 @@
                 
                 <p class="text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium px-4">
                     Leader de l'enseignement supérieur numérique en Afrique francophone, 
-                    ESCEN forme les talents qui transforment l'économie digitale.
+                    ESCEN forme les talents qui transforment l'économie digitale. 
                 </p>
             </div>
 
@@ -36,13 +36,13 @@
                 <div class="relative order-2 lg:order-1">
                     <div class="aspect-[4/3] relative overflow-hidden rounded-lg shadow-lg">
                         <img 
-                            src="/temoignage/Emeraude_Avoce.png" 
+                            src="/temoignage/apropos.jpg" 
                             alt="Campus ESCEN - Excellence Académique"
                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                         />
                         <!-- Overlay gradient subtil -->
                         <div class="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
-                    </div>
+                    </div> 
                     
                     <!-- Badge repositionné pour mobile -->
                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 lg:-bottom-6 lg:-left-6 bg-white rounded-lg shadow-xl p-4 md:p-5 border border-gray-100">
@@ -71,7 +71,7 @@
                             Former et accompagner une nouvelle génération d'étudiants, tout en perfectionnant
                             l'expertise des cadres d'entreprise francophones dans les domaines stratégiques de
                             l'Économie Numérique, de l'Informatique, de l'Intelligence Artificielle et du Génie
-                            Logiciel.
+                            Logiciel. 
                         </p>
                         
                         <!-- Les deux éléments TOUJOURS sur la même ligne -->
