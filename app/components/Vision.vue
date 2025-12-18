@@ -204,6 +204,7 @@ onUnmounted(() => {
 /* Ligne de timeline verticale */
 .timeline-line {
     position: absolute;
+    top: 340px;
     left: 50%;
     transform: translateX(-50%);
     width: 3px;

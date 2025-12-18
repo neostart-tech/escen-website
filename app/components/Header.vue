@@ -30,10 +30,52 @@
               </svg>
               <span class="whitespace-nowrap">Lun-Ven: 8h-18h</span>
             </div>
-            <div class="hidden md:flex items-center gap-2">
+
+            <div class="hidden md:flex items-center gap-2 relative">
               <span class="text-gray-400">|</span>
-              <NuxtLink to="https://escen.neostart.tech/espace-etudiant" target="_blank" class="hover:text-[#01b4d5] transition-colors text-xs whitespace-nowrap">Intranet</NuxtLink>
+              <button
+              @click="toggleIntranet"
+              class="flex items-center gap-1 text-xs whitespace-nowrap hover:text-[#01b4d5] transition-colors">
+              Intranet
+              <svg
+              class="w-3 h-3 transition-transform"
+              :class="isIntranetOpen ? 'rotate-180' : ''"
+              fill="currentColor"
+              viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z"/>
+              </svg>
+              </button>
+              <div
+              v-show="isIntranetOpen"
+              class="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border z-50">
+              <NuxtLink
+                to="https://escen.neostart.tech/espace-etudiant"
+                target="_blank"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#01b4d5]"
+                @click="isIntranetOpen = false">
+                Étudiant
+                </NuxtLink>
+
+                <NuxtLink
+                to="https://escen.neostart.tech/espace-enseignant"
+                target="_blank"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#01b4d5]"
+                @click="isIntranetOpen = false">
+                Enseignant
+              </NuxtLink>
+
+              <NuxtLink
+              to="https://escen.neostart.tech/espace-admin"
+              target="_blank"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#01b4d5]"
+              @click="isIntranetOpen = false"
+              >
+                Administrateur
+              </NuxtLink>
             </div>
+          </div>
+
+
           </div>
         </div>
       </div>
@@ -92,18 +134,17 @@
                 </NuxtLink>
               </template>
               
-              <!-- Bouton CTA réduit -->
-              <NuxtLink 
-                to="https://escen.neostart.tech/candidatures/faire-mon-depot" 
-                class="bg-gradient-to-r from-[#01b4d5] to-[#0199b8] text-white px-3 py-2 rounded-lg font-semibold hover:shadow-md transition-all duration-300 shadow-sm flex items-center space-x-1 text-sm group" 
-                style="color: white !important;"
-                target="_blank"
-              >
-                <svg class="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                <span class="whitespace-nowrap">S'inscrire</span>
-              </NuxtLink>
+              <NuxtLink
+  to="/inscription"
+  class="bg-gradient-to-r from-[#01b4d5] to-[#0199b8] text-white px-3 py-2 rounded-lg font-semibold hover:shadow-md transition-all duration-300 shadow-sm flex items-center space-x-1 text-sm group"
+>
+  <svg class="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+  </svg>
+  <span class="whitespace-nowrap">S'inscrire</span>
+</NuxtLink>
+
             </div>
 
             <!-- Menu mobile -->
@@ -266,6 +307,11 @@
 const isMobileMenuOpen = ref(false)
 const openSubmenus = ref({})
 
+const isIntranetOpen = ref(false)
+
+const toggleIntranet = () => {
+  isIntranetOpen.value = !isIntranetOpen.value
+}
 
 
 // Navigation items

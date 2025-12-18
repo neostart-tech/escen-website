@@ -1,6 +1,5 @@
 <template>
     <div class="min-h-screen bg-gray-50">
-        <!-- Breadcrumb Hero Section -->
         <Breadcrumb title="Blog ESCEN" subtitle="Actualités & Insights"
             description="Découvrez les dernières tendances du numérique et insights d'experts" :breadcrumb="[
                 { label: 'Accueil', href: '/' },
