@@ -49,24 +49,22 @@
               v-show="isIntranetOpen"
               class="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border z-50">
               <NuxtLink
-                to="https://escen.neostart.tech/espace-etudiant"
-                target="_blank"
+                  
+                  to="/connexion"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#01b4d5]"
                 @click="isIntranetOpen = false">
                 Étudiant
                 </NuxtLink>
 
                 <NuxtLink
-                to="https://escen.neostart.tech/espace-enseignant"
-                target="_blank"
+                to="/connexion"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#01b4d5]"
                 @click="isIntranetOpen = false">
                 Enseignant
               </NuxtLink>
 
               <NuxtLink
-              to="https://escen.neostart.tech/espace-admin"
-              target="_blank"
+              to="/connexion"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#01b4d5]"
               @click="isIntranetOpen = false"
               >
@@ -147,7 +145,6 @@
 
             </div>
 
-            <!-- Menu mobile -->
             <div class="lg:hidden">
               <button 
                 @click="isMobileMenuOpen = !isMobileMenuOpen"
@@ -176,10 +173,8 @@
       </nav>
     </header>
 
-    <!-- Espace réservé réduit -->
     <div class="h-[72px] md:h-[84px] lg:h-[92px]"></div>
 
-    <!-- Menu Mobile Sidebar -->
     <div 
       v-show="isMobileMenuOpen"
       class="lg:hidden fixed top-0 right-0 h-full w-72 bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out"
