@@ -1,7 +1,8 @@
 <template>
     <footer class="bg-gray-900 text-white">
         <!-- Section principale -->
-        <div class="container mx-auto px-18 py-12 ">
+        <div class="w-full px-6 lg:px-16 py-12">
+
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
 
                 <!-- Colonne 1: Logo et description -->

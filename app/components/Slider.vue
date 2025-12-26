@@ -254,7 +254,7 @@ const slides = [
     },
     secondaryButton: {
       text: 'Candidater',
-      link: '/admission'
+      link: '/inscription'
     }
   }
 ]

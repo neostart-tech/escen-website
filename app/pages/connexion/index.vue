@@ -26,7 +26,7 @@
 
                   Accédez à votre<br>
                   <span class="bg-gradient-to-r from-[#00b3d4] to-[#6cc6e2] bg-clip-text text-transparent">
-                    espace étudiant
+                    espace utilisateur
                   </span>
                 </h1> 
                      <!--<p class="text-gray-600 text-sm md:text-base">
@@ -166,11 +166,11 @@
               <!-- Hero Image -->
               <div class="flex-1 flex items-center items-start justify-start mb-8">
                 <div class="w-full max-w-sm">
-                  <img 
-                    src="https://escen.neostart.tech/officiel-site/assets/images/authentication/Login-rafiki-yellow-simple.png" 
+                  <!-- <img 
+                    src="" 
                     alt="Étudiant ESCEN"
                     class="w-full h-auto object-contain"
-                  />
+                  /> -->
                 </div>
               </div>
 

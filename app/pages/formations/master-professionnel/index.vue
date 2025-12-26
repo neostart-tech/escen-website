@@ -204,11 +204,13 @@
                 <p class="text-xl lg:text-2xl mb-8 opacity-90">
                     Rejoignez l'ESCEN et bénéficiez d'une formation d'excellence aux métiers du numérique
                 </p>
-                <button
-                    class="bg-white text-[#01b4d5] hover:bg-gray-100 px-12 py-5 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl transform"
-                    @click="inscrireMaintenant">
-                    S'inscrire maintenant
-                </button>
+                <NuxtLink
+                to="/inscription"
+                class="inline-block bg-white text-[#01b4d5] hover:bg-gray-100 px-12 py-5 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl transform hover:shadow-2xl"
+                >
+                S'inscrire maintenant
+                </NuxtLink>
+
             </div>
         </section>
     </div>

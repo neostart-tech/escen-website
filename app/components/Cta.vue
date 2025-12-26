@@ -10,7 +10,7 @@
             </p>
 
             <a 
-                href="/candidature" 
+                href="/inscription" 
                 class="bg-white text-[#01b4d5] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 transform inline-flex items-center justify-center gap-2 animate-bounce-soft min-w-[160px] mx-auto"
             >
                 <span>Candidater</span>

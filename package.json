@@ -19,6 +19,7 @@
     "@nuxt/ui": "^4.2.1",
     "@unhead/vue": "^2.0.19",
     "better-sqlite3": "^12.4.6",
+    "countries-list": "^3.2.2",
     "eslint": "^9.39.1",
     "lucide-vue-next": "^0.555.0",
     "nuxt": "^4.2.1",

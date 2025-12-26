@@ -18,6 +18,4 @@
 </template>
 
 <script setup>
-// Ce composant n'a pas besoin de props ou de state
-// Il affiche simplement le loading
 </script>
