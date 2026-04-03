@@ -1,265 +1,231 @@
 <template>
-  <section class="relative h-[60vh] min-h-[525px] overflow-hidden">
-    <!-- Slides Container -->
-    <div class="relative h-full w-full">
-      <div v-for="(slide, index) in slides" :key="index" :class="[
-        'absolute inset-0 w-full h-full transition-all duration-700 ease-in-out transform',
-        currentSlide === index ? 'opacity-100 translate-x-0' :
-          currentSlide > index ? 'opacity-0 -translate-x-full' : 'opacity-0 translate-x-full'
-      ]">
-        <!-- Desktop Version -->
-        <div class="hidden lg:flex relative h-full">
-          <!-- Colonne texte à gauche avec dégradé coloré et bordure diagonale -->
-          <div class="w-1/2 relative bg-gradient-to-br from-[#202a50] via-[#019fbf] to-[#01b4d5]">
-            <!-- Effet de bordure diagonale -->
-            <div
-              class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#01b4d5] to-transparent clip-path-diagonal-right z-20">
-            </div>
+  <section class="relative h-[85vh] min-h-[650px] overflow-hidden bg-gradient-to-b from-[#0a0e1a] to-[#141b2b]">
+    <!-- ===== FOND STATIQUE ÉLÉGANT ===== -->
+    <div class="absolute inset-0 opacity-30">
+      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, #01b4d5 1px, transparent 0); background-size: 50px 50px;"></div>
+      <div class="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-[#019fbf]/10 to-transparent"></div>
+      <div class="absolute bottom-0 right-0 w-full h-64 bg-gradient-to-t from-[#202a50]/20 to-transparent"></div>
+    </div>
 
-            <!-- Overlay texturé pour le texte -->
-            <div class="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent"></div>
+    <!-- ===== SVG THÉMATIQUES UNIVERSITÉ FLOTTANTS ===== -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      
+      <!-- Diplôme / Parchemin -->
+      <div class="absolute animate-float-university" style="top: 15%; left: 5%; animation-delay: 0s;">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#01b4d5]/30 hover:text-[#01b4d5]/50 transition-colors duration-1000">
+          <path d="M4 4H20V20H4V4Z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 8H16V12H8V8Z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 16H16" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 16H9" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
 
-            <!-- Contenu du slide - DÉCALÉ VERS LA DROITE AVEC PADDING LEFT AUGMENTÉ -->
-            <div class="relative h-full flex items-center z-10">
-              <div class="pl-[100px] lg:pl-[120px] xl:pl-[100px] pr-12 lg:pr-16 py-8 w-full">
-                <div class="max-w-md space-y-4">
-                  <!-- Badge -->
-                  <div v-if="slide.badge"
-                    class="inline-block bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold animate-fade-in-up shadow-lg border border-white/30">
-                    {{ slide.badge }}
-                  </div>
+      <!-- Mortier / Toque universitaire -->
+      <div class="absolute animate-float-university" style="top: 25%; right: 8%; animation-delay: 1s;">
+        <svg width="70" height="70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#019fbf]/30 hover:text-[#019fbf]/50 transition-colors duration-1000">
+          <path d="M4 10L12 5L20 10L12 15L4 10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 12.5V16.5C8 18.5 12 20 12 20C12 20 16 18.5 16 16.5V12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M20 10V15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
 
-                  <!-- Titre principal -->
-                  <h1
-                    class="text-3xl md:text-4xl lg:text-4xl font-black text-white leading-tight animate-fade-in-up tracking-tight">
-                    {{ slide.title }}
-                  </h1>
+      <!-- Livre ouvert -->
+      <div class="absolute animate-float-university" style="bottom: 20%; left: 10%; animation-delay: 2s;">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#01b4d5]/30 hover:text-[#01b4d5]/50 transition-colors duration-1000">
+          <path d="M4 5H9C10.5 5 12 6.5 12 8V19C12 19 9 17 4 19V5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M20 5H15C13.5 5 12 6.5 12 8V19C12 19 15 17 20 19V5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 8V19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
 
-                  <!-- Sous-titre -->
-                  <p
-                    class="text-lg md:text-xl lg:text-xl text-white/90 leading-relaxed animate-fade-in-up delay-200 font-bold">
-                    {{ slide.subtitle }}
-                  </p>
+      <!-- Microscope (science) -->
+      <div class="absolute animate-float-university" style="top: 60%; right: 15%; animation-delay: 3s;">
+        <svg width="65" height="65" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#202a50]/40 hover:text-[#202a50]/60 transition-colors duration-1000">
+          <circle cx="12" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M12 11V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M8 16H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M10 20L12 16L14 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
 
-                  <!-- Description -->
-                  <p v-if="slide.description"
-                    class="text-base md:text-lg text-gray-100 max-w-sm leading-7 animate-fade-in-up delay-400 font-medium">
-                    {{ slide.description }}
-                  </p>
+      <!-- Globe / International -->
+      <div class="absolute animate-float-university" style="bottom: 30%; right: 20%; animation-delay: 4s;">
+        <svg width="55" height="55" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#01b4d5]/30 hover:text-[#01b4d5]/50 transition-colors duration-1000">
+          <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M4 12H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M12 4C14 6 15 9 15 12C15 15 14 18 12 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M12 4C10 6 9 9 9 12C9 15 10 18 12 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
 
-                  <!-- Boutons d'action -->
-                  <div class="flex flex-row flex-wrap gap-3 animate-fade-in-up delay-600 pt-3">
-                    <NuxtLink v-if="slide.primaryButton" :to="slide.primaryButton.link"
-                      class="bg-white text-gray-900 hover:bg-gray-100 px-5 py-3 rounded-lg font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-lg border-2 border-white whitespace-nowrap flex items-center justify-center gap-2 min-w-[130px]">
-                      <span class="text-sm">{{ slide.primaryButton.text }}</span>
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </NuxtLink>
+      <!-- Crayon / Écriture -->
+      <div class="absolute animate-float-university" style="top: 40%; left: 15%; animation-delay: 5s;">
+        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#019fbf]/30 hover:text-[#019fbf]/50 transition-colors duration-1000">
+          <path d="M16 4L20 8L8 20H4V16L16 4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 6L18 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
 
-                    <NuxtLink v-if="slide.secondaryButton" :to="slide.secondaryButton.link"
-                      class="bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900 px-5 py-3 rounded-lg font-bold text-sm transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap flex items-center justify-center gap-2 min-w-[130px]">
-                      <span class="text-sm">{{ slide.primaryButton.text === 'Formations' ? 'Contact' :
-                        slide.secondaryButton.text }}</span>
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </NuxtLink>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <!-- Équerre / Géométrie -->
+      <div class="absolute animate-float-university" style="bottom: 15%; left: 20%; animation-delay: 6s;">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#202a50]/40 hover:text-[#202a50]/60 transition-colors duration-1000">
+          <path d="M6 18L18 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 15L15 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 12L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6 6L6 18L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
 
-          <!-- Colonne image à droite avec overlay complet -->
-          <div class="w-1/2 relative">
-            <!-- Effet de bordure diagonale -->
-            <div
-              class="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#01b4d5] to-transparent clip-path-diagonal-left z-20">
-            </div>
+      <!-- Molécule / Science -->
+      <div class="absolute animate-float-university" style="top: 75%; left: 5%; animation-delay: 7s;">
+        <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#01b4d5]/30 hover:text-[#01b4d5]/50 transition-colors duration-1000">
+          <circle cx="12" cy="6" r="2" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="6" cy="16" r="2" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="18" cy="16" r="2" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M12 8L8 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M12 8L16 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M8 16H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
 
-            <!-- Image de fond avec overlay complet -->
-            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              :style="`background-image: url('${slide.image}')`">
-              <!-- Overlay complet pour remplir les vides -->
-              <div
-                class="absolute inset-0 bg-gradient-to-br from-[#202a50] via-[#019fbf] to-[#01b4d5] mix-blend-overlay">
-              </div>
-              <div class="absolute inset-0 bg-[#202a50]/80"></div>
-              <div class="absolute inset-0 bg-gradient-to-l from-[#01b4d5]/30 to-transparent"></div>
-            </div>
-          </div>
-        </div>
+      <!-- Bâtiment universitaire -->
+      <div class="absolute animate-float-university" style="top: 10%; right: 25%; animation-delay: 8s;">
+        <svg width="75" height="75" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#019fbf]/30 hover:text-[#019fbf]/50 transition-colors duration-1000">
+          <path d="M4 20H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M6 20V10L12 5L18 10V20" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M10 20V15H14V20" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <rect x="9" y="8" width="6" height="2" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </div>
 
-        <!-- Mobile Version (inchangée) -->
-        <div class="lg:hidden relative h-full">
-          <!-- Image en background avec overlay pour mobile -->
-          <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            :style="`background-image: url('${slide.image}')`">
-            <!-- Overlay coloré pour mobile -->
-            <div class="absolute inset-0 bg-gradient-to-b from-[#202a50] via-[#019fbf]/90 to-[#01b4d5]/80"></div>
-            <div class="absolute inset-0 bg-black/40"></div>
-          </div>
+      <!-- Horloge / Temps -->
+      <div class="absolute animate-float-university" style="bottom: 40%; right: 5%; animation-delay: 9s;">
+        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#202a50]/40 hover:text-[#202a50]/60 transition-colors duration-1000">
+          <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M12 8V12L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
 
-          <!-- Contenu superposé sur l'image pour mobile -->
-          <div class="relative h-full flex items-center justify-center z-10">
-            <div class="px-4 py-6 w-full max-w-sm mx-auto text-center">
-              <div class="space-y-3">
-                <!-- Badge -->
-                <div v-if="slide.badge"
-                  class="inline-block bg-white/20 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs font-bold animate-fade-in-up shadow-lg border border-white/30">
-                  {{ slide.badge }}
-                </div>
+      <!-- Étoile / Excellence -->
+      <div class="absolute animate-float-university" style="top: 80%; right: 30%; animation-delay: 10s;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#01b4d5]/30 hover:text-[#01b4d5]/50 transition-colors duration-1000">
+          <path d="M12 2L15 9H22L16 14L19 21L12 17L5 21L8 14L2 9H9L12 2Z" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
 
-                <!-- Titre principal -->
-                <h1 class="text-xl md:text-2xl font-black text-white leading-tight animate-fade-in-up tracking-tight">
-                  {{ slide.title }}
-                </h1>
+    <!-- ===== CONTENEUR PRINCIPAL ===== -->
+    <div class="relative z-20 h-full flex items-center">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto lg:mx-0 lg:ml-8 xl:ml-16">
+          <!-- Slides -->
+          <div v-for="(slide, index) in slides" :key="index" 
+               class="transition-opacity duration-700"
+               :class="currentSlide === index ? 'block' : 'hidden'">
+            
+            <!-- Titre -->
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-center lg:text-left mb-4">
+              <span class="block overflow-hidden">
+                <span class="inline-block animate-fade-in"
+                      :style="{ animationDelay: '0.1s' }">
+                  <span class="text-white">
+                    {{ slide.title.split(' ')[0] }}
+                  </span>
+                </span>
+              </span>
+              <span class="block overflow-hidden">
+                <span class="inline-block animate-fade-in text-[#01b4d5] font-semibold"
+                      :style="{ animationDelay: '0.3s' }">
+                  {{ slide.title.split(' ').slice(1).join(' ') }}
+                </span>
+              </span>
+            </h1>
 
-                <!-- Sous-titre -->
-                <p class="text-base md:text-lg text-white/90 leading-relaxed animate-fade-in-up delay-200 font-bold">
-                  {{ slide.subtitle }}
-                </p>
+            <!-- Sous-titre -->
+            <p class="text-base sm:text-lg lg:text-xl text-[#01b4d5]/70 text-center lg:text-left mb-3 animate-fade-in"
+               :style="{ animationDelay: '0.5s' }">
+              {{ slide.subtitle }}
+            </p>
 
-                <!-- Description -->
-                <p v-if="slide.description"
-                  class="text-sm md:text-base text-gray-100 leading-6 animate-fade-in-up delay-400 font-medium">
-                  {{ slide.description }}
-                </p>
+            <!-- Description -->
+            <p class="text-sm sm:text-base text-gray-400 text-center lg:text-left max-w-2xl mx-auto lg:mx-0 mb-8 animate-fade-in"
+               :style="{ animationDelay: '0.7s' }">
+              {{ slide.description }}
+            </p>
 
-                <!-- Boutons d'action CÔTE À CÔTE pour mobile -->
-                <div class="flex flex-row gap-2 animate-fade-in-up delay-600 pt-3 justify-center">
-                  <NuxtLink v-if="slide.primaryButton" :to="slide.primaryButton.link"
-                    class="bg-white text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-lg font-bold text-xs transition-all duration-300 transform hover:scale-105 shadow-lg border-2 border-white whitespace-nowrap flex items-center justify-center gap-1 flex-1 min-w-[100px] max-w-[120px]">
-                    <span class="text-xs">{{ slide.primaryButton.text }}</span>
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </NuxtLink>
+            <!-- Boutons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <NuxtLink :to="slide.primaryButton.link"
+                        class="px-6 py-3 bg-[#019fbf] hover:bg-[#01b4d5] text-white font-medium rounded-sm transition-all duration-300 text-sm sm:text-base inline-flex items-center justify-center gap-2 group">
+                {{ slide.primaryButton.text }}
+                <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </NuxtLink>
 
-                  <NuxtLink v-if="slide.secondaryButton" :to="slide.secondaryButton.link"
-                    class="bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900 px-3 py-2 rounded-lg font-bold text-xs transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap flex items-center justify-center gap-1 flex-1 min-w-[100px] max-w-[120px]">
-                    <span class="text-xs">{{ slide.primaryButton.text === 'Formations' ? 'Contact' :
-                      slide.secondaryButton.text }}</span>
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </NuxtLink>
-                </div>
-              </div>
+              <NuxtLink :to="slide.secondaryButton.link"
+                        class="px-6 py-3 border border-white/20 hover:border-[#01b4d5]/50 text-white/90 hover:text-white font-medium rounded-sm transition-all duration-300 text-sm sm:text-base inline-flex items-center justify-center gap-2 group">
+                {{ slide.secondaryButton.text }}
+                <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </NuxtLink>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Contrôles de navigation -->
-    <!-- Flèches -->
+    <!-- ===== NAVIGATION (UNIQUEMENT LES FLÈCHES) ===== -->
     <button @click="prevSlide"
-      class="absolute left-3 lg:left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 lg:p-3 rounded-full transition-all duration-300 z-30 shadow-2xl backdrop-blur-sm border border-white/20 hover:scale-110"
-      aria-label="Slide précédent">
-      <svg class="w-4 h-4 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            class="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 text-white/50 hover:text-white transition-colors duration-300 z-30">
+      <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
 
     <button @click="nextSlide"
-      class="absolute right-3 lg:right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 lg:p-3 rounded-full transition-all duration-300 z-30 shadow-2xl backdrop-blur-sm border border-white/20 hover:scale-110"
-      aria-label="Slide suivant">
-      <svg class="w-4 h-4 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            class="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 text-white/50 hover:text-white transition-colors duration-300 z-30">
+      <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
       </svg>
     </button>
 
-    <!-- Indicateurs de slide -->
-    <div class="absolute bottom-4 lg:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
-      <button v-for="(slide, index) in slides" :key="index" @click="goToSlide(index)" :class="[
-        'w-2 h-2 lg:w-2 lg:h-2 rounded-full transition-all duration-300 shadow-lg border border-white backdrop-blur-sm',
-        currentSlide === index ? 'bg-white scale-125' : 'bg-transparent hover:bg-white/50'
-      ]" :aria-label="`Aller au slide ${index + 1}`"></button>
-    </div>
-
-    <!-- Défilement automatique -->
-    <div class="absolute bottom-4 lg:bottom-6 right-3 lg:right-4 flex items-center space-x-2 text-white z-30">
-      <span class="text-xs font-medium backdrop-blur-sm bg-black/30 px-2 py-1 rounded-full">
-        {{ currentSlide + 1 }}/{{ slides.length }}
-      </span>
-      <button @click="toggleAutoplay"
-        class="bg-white/20 hover:bg-white/40 p-2 rounded-full transition-all duration-300 shadow-2xl backdrop-blur-sm border border-white/20 hover:scale-110"
-        :aria-label="autoplay ? 'Arrêter le défilement automatique' : 'Démarrer le défilement automatique'">
-        <svg v-if="autoplay" class="w-3 h-3 lg:w-4 lg:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <svg v-else class="w-3 h-3 lg:w-4 lg:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-        </svg>
-      </button>
-    </div>
+    <!-- INDICATEURS SUPPRIMÉS - PLUS RIEN N'APPARAÎT EN BAS -->
   </section>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-// État du slider
 const currentSlide = ref(0)
 const autoplay = ref(true)
 let autoplayInterval
 
-// Tableau des slides avec différentes images
 const slides = [
   {
-    image: '/valeurs/bg.jpg',
-    badge: 'Excellence Académique',
     title: 'Formez-vous aux Métiers du Digital',
     subtitle: 'Devenez un expert en commerce et économie numérique',
     description: 'L\'ESCEN vous prépare aux carrières d\'avenir avec des formations innovantes et adaptées aux besoins du marché.',
-    primaryButton: {
-      text: 'Formations',
-      link: '/formations'
-    },
-    secondaryButton: {
-      text: 'Contact',
-      link: '/contact'
-    }
+    primaryButton: { text: 'Découvrir nos formations', link: '/formations' },
+    secondaryButton: { text: 'Nous contacter', link: '/contact' }
   },
   {
-    image: '/valeurs/bg.jpg',
-    badge: 'Innovation Pédagogique',
     title: 'Une Pédagogie Tournée vers l\'Avenir',
     subtitle: 'Apprenez avec les méthodes les plus modernes',
     description: 'Notre approche pédagogique unique combine théorie et pratique pour une insertion professionnelle réussie.',
-    primaryButton: {
-      text: 'Contact',
-      link: '/contact'
-    },
-    secondaryButton: {
-      text: 'Contact',
-      link: '/contact'
-    }
+    primaryButton: { text: 'Notre pédagogie', link: '/pedagogie' },
+    secondaryButton: { text: 'Candidater', link: '/inscription' }
   },
   {
-    image: '/valeurs/bg.jpg',
-    badge: 'Carrière Internationale',
     title: 'Ouvrez-vous sur le Monde',
     subtitle: 'Des opportunités à l\'international',
     description: 'Étudiez à l\'étranger et développez votre réseau professionnel international avec nos partenariats mondiaux.',
-    primaryButton: {
-      text: 'Partenariats',
-      link: '/international'
-    },
-    secondaryButton: {
-      text: 'Candidater',
-      link: '/inscription'
-    }
+    primaryButton: { text: 'Programmes internationaux', link: '/international' },
+    secondaryButton: { text: 'En savoir plus', link: '/contact' }
   }
 ]
 
-// Navigation entre slides
 const nextSlide = () => {
   currentSlide.value = (currentSlide.value + 1) % slides.length
 }
@@ -272,91 +238,94 @@ const goToSlide = (index) => {
   currentSlide.value = index
 }
 
-// Défilement automatique
-const startAutoplay = () => {
+onMounted(() => {
   autoplayInterval = setInterval(() => {
     if (autoplay.value) {
       nextSlide()
     }
-  }, 5000)
-}
-
-const toggleAutoplay = () => {
-  autoplay.value = !autoplay.value
-  if (autoplay.value && !autoplayInterval) {
-    startAutoplay()
-  }
-}
-
-// Gestion du cycle de vie
-onMounted(() => {
-  startAutoplay()
+  }, 6000)
 })
 
 onUnmounted(() => {
-  if (autoplayInterval) {
-    clearInterval(autoplayInterval)
-  }
+  clearInterval(autoplayInterval)
 })
 </script>
 
 <style scoped>
-/* Animations personnalisées */
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
+/* Animations pour les SVG universitaires */
+@keyframes float-university {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(15px, -15px) rotate(5deg);
+  }
+  50% {
+    transform: translate(0, -25px) rotate(0deg);
+  }
+  75% {
+    transform: translate(-15px, -10px) rotate(-5deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
 }
 
-.delay-200 {
-  animation-delay: 0.2s;
+.animate-float-university {
+  animation: float-university 18s ease-in-out infinite;
+  filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.2));
 }
 
-.delay-400 {
-  animation-delay: 0.4s;
-}
-
-.delay-600 {
-  animation-delay: 0.6s;
-}
-
-@keyframes fadeInUp {
+@keyframes fade-in {
   from {
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Effets de bordure diagonale */
-.clip-path-diagonal-right {
-  clip-path: polygon(0 0, 100% 0, 0 100%, 0% 100%);
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
 }
 
-.clip-path-diagonal-left {
-  clip-path: polygon(100% 0, 100% 100%, 0 100%, 100% 0);
+/* Effet de brillance au survol des SVG */
+.animate-float-university:hover {
+  animation-play-state: paused;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 10px rgba(1, 180, 213, 0.5));
+  z-index: 40;
 }
 
-/* Ajustements mobiles supplémentaires */
-@media (max-width: 640px) {
-  .h-\[60vh\] {
-    height: 55vh;
+/* Ajustements responsifs */
+@media (max-width: 768px) {
+  .animate-float-university svg {
+    width: 40px;
+    height: 40px;
   }
+}
 
-  .min-h-\[525px\] {
-    min-height: 400px;
+@media (max-width: 640px) {
+  .h-\[85vh\] {
+    height: 90vh;
+    min-height: 600px;
+  }
+  
+  .animate-float-university {
+    opacity: 0.6;
+  }
+  
+  .animate-float-university svg {
+    width: 30px;
+    height: 30px;
   }
 }
 
 @media (max-width: 480px) {
-  .h-\[60vh\] {
-    height: 50vh;
-  }
-
-  .min-h-\[525px\] {
-    min-height: 350px;
+  .h-\[85vh\] {
+    min-height: 550px;
   }
 }
 </style>

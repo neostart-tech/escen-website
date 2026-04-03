@@ -1,132 +1,203 @@
 <template>
     <section id="vision" ref="visionSection" class="vision-section">
-        <!-- Ligne verticale de connexion -->
-        <div class="timeline-line" :class="{ 'animate-in': isSectionVisible }"></div>
-        
-        <!-- Points de connexion sur la ligne -->
-        <div class="connection-points">
-            <div class="connection-point" :class="{ 'animate-in': isSectionVisible }" style="top: 20%"></div>
-            <div class="connection-point" :class="{ 'animate-in': isSectionVisible }" style="top: 40%"></div>
-            <div class="connection-point" :class="{ 'animate-in': isSectionVisible }" style="top: 60%"></div>
-            <div class="connection-point" :class="{ 'animate-in': isSectionVisible }" style="top: 80%"></div>
+        <!-- ===== FOND BLANC ÉLÉGANT AVEC ANIMATIONS SUBTILES ===== -->
+        <div class="elegant-background">
+            <!-- Motif académique (lignes fines) -->
+            <div class="academic-pattern"></div>
+            
+            <!-- Cercles concentriques très légers -->
+            <div class="circles-container">
+                <div class="circle circle-1"></div>
+                <div class="circle circle-2"></div>
+                <div class="circle circle-3"></div>
+            </div>
+
+            <!-- Traits de lumière horizontaux -->
+            <div class="light-lines">
+                <div class="light-line" v-for="i in 5" :key="'light-'+i" :style="{ top: (i * 15) + '%' }"></div>
+            </div>
+
+            <!-- Particules fines -->
+            <div class="fine-particles">
+                <div v-for="i in 25" :key="'part-'+i" class="fine-particle" :style="{
+                    top: Math.random() * 100 + '%',
+                    left: Math.random() * 100 + '%',
+                    animationDelay: Math.random() * 5 + 's'
+                }"></div>
+            </div>
+        </div>
+
+        <!-- ===== ÉLÉMENTS DÉCORATIFS MINIMALISTES ===== -->
+        <div class="minimal-ornaments">
+            <svg class="academic-line left" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0,0 L100,100" stroke="rgba(1,180,213,0.1)" stroke-width="1"/>
+            </svg>
+            <svg class="academic-line right" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M100,0 L0,100" stroke="rgba(1,180,213,0.1)" stroke-width="1"/>
+            </svg>
         </div>
 
         <div class="container">
-            <!-- En-tête -->
-            <div class="header" :class="{ 'animate-in': isSectionVisible }">
-                <div class="header-content">
-                    <span class="section-label">Notre Vision</span>
-                    <h2 class="main-title">
-                        Les <span class="highlight">4 Piliers</span> Fondamentaux
-                    </h2>
-                    <p class="section-description">
-                        Une approche structurée autour de principes essentiels pour façonner 
-                        l'avenir de l'économie numérique
+            <!-- ===== EN-TÊTE ACADÉMIQUE ===== -->
+            <div class="header" :class="{ 'revealed': isSectionVisible }">
+                <!-- Badge institutionnel -->
+                <div class="institution-badge">
+                    <span class="badge-dot"></span>
+                    <span class="badge-text">ESCEN • VISION PÉDAGOGIQUE</span>
+                    <span class="badge-dot"></span>
+                </div>
+
+                <!-- Titre élégant -->
+                <h2 class="main-title">
+                    <span class="title-word">Notre</span>
+                    <span class="title-word accent">vision</span>
+                    <span class="title-word">pour</span>
+                    <span class="title-word">l'excellence</span>
+                </h2>
+
+                <!-- Sous-titre -->
+                <div class="subtitle-wrapper">
+                    <p class="subtitle">
+                        Quatre piliers fondamentaux qui structurent notre approche pédagogique
+                        et guident notre mission de formation d'excellence.
                     </p>
                 </div>
             </div>
 
-            <!-- Disposition verticale créative -->
-            <div class="vision-timeline mx-14 md:mx-16">
-                <!-- Vision 1 - Gauche -->
-                <div class="vision-item item-1" :class="{ 'animate-in': isSectionVisible }">
-                    <div class="item-content">
-                        <div class="item-number">01</div>
-                        <div class="item-card">
+            <!-- ===== GRILLE DES VALEURS / PILIERS AVEC EFFET DE RETOURNEMENT ===== -->
+            <div class="values-grid">
+                <!-- Carte 1 - Former -->
+                <div class="flip-card" :class="{ 'revealed': isSectionVisible }" style="transition-delay: 0.1s">
+                    <div class="flip-card-inner">
+                        <!-- Face avant (titre) -->
+                        <div class="flip-card-front">
                             <div class="card-header">
-                                <h3 class="card-title">FORMER</h3>
-                                <div class="card-icon">
-                                    <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M12 14l9-5-9-5-9 5 9 5z" stroke="currentColor" stroke-width="2"/>
-                                        <path d="M12 14v6l9-5M12 20l-9-5" stroke="currentColor" stroke-width="2"/>
+                                <span class="card-number">01</span>
+                                <div class="card-icon-wrapper">
+                                    <svg class="card-icon" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="1.2"/>
+                                        <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.2"/>
                                     </svg>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <p class="card-text">
-                                    Former des étudiants hautement qualifiés, aptes à intégrer immédiatement
-                                    le marché de l'emploi ou à créer leur propre start-up innovante dans
-                                    l'écosystème numérique mondial avec des compétences pratiques et théoriques solides.
-                                </p>
-                            </div>
+                            <h3 class="card-title">FORMER</h3>
+                            <div class="flip-hint">Survolez pour découvrir</div>
+                        </div>
+                        
+                        <!-- Face arrière (description) -->
+                        <div class="flip-card-back">
+                            <p class="card-description">
+                                Développer des compétences d'excellence chez nos étudiants, en phase avec 
+                                les besoins du marché et les évolutions technologiques.
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Vision 2 - Droite -->
-                <div class="vision-item item-2" :class="{ 'animate-in': isSectionVisible }">
-                    <div class="item-content">
-                        <div class="item-number">02</div>
-                        <div class="item-card">
+                <!-- Carte 2 - Innover -->
+                <div class="flip-card" :class="{ 'revealed': isSectionVisible }" style="transition-delay: 0.2s">
+                    <div class="flip-card-inner">
+                        <!-- Face avant (titre) -->
+                        <div class="flip-card-front">
                             <div class="card-header">
-                                <h3 class="card-title">CONNECTER</h3>
-                                <div class="card-icon">
-                                    <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M8 12h8M12 16V8" stroke="currentColor" stroke-width="2"/>
-                                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                <span class="card-number">02</span>
+                                <div class="card-icon-wrapper">
+                                    <svg class="card-icon" viewBox="0 0 24 24" fill="none">
+                                        <path d="M9 3v2M15 3v2M5 7h14v12H5V7z" stroke="currentColor" stroke-width="1.2"/>
+                                        <circle cx="12" cy="13" r="2" stroke="currentColor" stroke-width="1.2"/>
                                     </svg>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <p class="card-text">
-                                    Connecter étroitement la formation universitaire avec les réalités dynamiques
-                                    du marché de l'emploi et l'évolution constante de l'économie numérique moderne,
-                                    créant ainsi un pont essentiel entre théorie académique et pratique professionnelle.
-                                </p>
-                            </div>
+                            <h3 class="card-title">INNOVER</h3>
+                            <div class="flip-hint">Survolez pour découvrir</div>
+                        </div>
+                        
+                        <!-- Face arrière (description) -->
+                        <div class="flip-card-back">
+                            <p class="card-description">
+                                Intégrer les dernières innovations pédagogiques et technologiques pour
+                                offrir une expérience d'apprentissage unique et stimulante.
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Vision 3 - Gauche -->
-                <div class="vision-item item-3" :class="{ 'animate-in': isSectionVisible }">
-                    <div class="item-content">
-                        <div class="item-number">03</div>
-                        <div class="item-card">
+                <!-- Carte 3 - Connecter -->
+                <div class="flip-card" :class="{ 'revealed': isSectionVisible }" style="transition-delay: 0.3s">
+                    <div class="flip-card-inner">
+                        <!-- Face avant (titre) -->
+                        <div class="flip-card-front">
                             <div class="card-header">
-                                <h3 class="card-title">CONTRIBUER</h3>
-                                <div class="card-icon">
-                                    <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"/>
-                                        <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
-                                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="2"/>
+                                <span class="card-number">03</span>
+                                <div class="card-icon-wrapper">
+                                    <svg class="card-icon" viewBox="0 0 24 24" fill="none">
+                                        <path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="1.2"/>
+                                        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.2"/>
                                     </svg>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <p class="card-text">
-                                    Contribuer activement au développement de l'écosystème économique et numérique
-                                    grâce à l'émergence d'une nouvelle génération de spécialistes, d'experts et
-                                    d'entrepreneurs formés aux technologies les plus avancées du secteur digital.
-                                </p>
-                            </div>
+                            <h3 class="card-title">CONNECTER</h3>
+                            <div class="flip-hint">Survolez pour découvrir</div>
+                        </div>
+                        
+                        <!-- Face arrière (description) -->
+                        <div class="flip-card-back">
+                            <p class="card-description">
+                                Tisser des liens forts entre nos étudiants et le monde professionnel,
+                                en Afrique et à l'international, pour favoriser leur insertion.
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Vision 4 - Droite -->
-                <div class="vision-item item-4" :class="{ 'animate-in': isSectionVisible }">
-                    <div class="item-content">
-                        <div class="item-number">04</div>
-                        <div class="item-card">
+                <!-- Carte 4 - Rayonner -->
+                <div class="flip-card" :class="{ 'revealed': isSectionVisible }" style="transition-delay: 0.4s">
+                    <div class="flip-card-inner">
+                        <!-- Face avant (titre) -->
+                        <div class="flip-card-front">
                             <div class="card-header">
-                                <h3 class="card-title">PLATEFORME DE RÉFÉRENCE</h3>
-                                <div class="card-icon">
-                                    <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z" stroke="currentColor" stroke-width="2"/>
-                                        <path d="M12 7v6l3 3" stroke="currentColor" stroke-width="2"/>
+                                <span class="card-number">04</span>
+                                <div class="card-icon-wrapper">
+                                    <svg class="card-icon" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 2l3 6h6l-5 4 2 6-6-3-6 3 2-6-5-4h6l3-6z" stroke="currentColor" stroke-width="1.2"/>
                                     </svg>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <p class="card-text">
-                                    Faire d'ESCEN une plateforme d'excellence et de référence internationale
-                                    où se forment et s'épanouissent les futurs champions et leaders de
-                                    l'Économie Numérique en Afrique et dans le monde entier.
-                                </p>
-                            </div>
+                            <h3 class="card-title">RAYONNER</h3>
+                            <div class="flip-hint">Survolez pour découvrir</div>
+                        </div>
+                        
+                        <!-- Face arrière (description) -->
+                        <div class="flip-card-back">
+                            <p class="card-description">
+                                Devenir une référence de l'enseignement supérieur numérique en Afrique,
+                                reconnue pour la qualité de ses formations et de ses diplômés.
+                            </p>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- ===== STATISTIQUES ÉLÉGANTES ===== -->
+            <div class="stats-container" :class="{ 'revealed': isSectionVisible }">
+                <div class="stat-block">
+                    <span class="stat-number" ref="studentStat">0</span>
+                    <span class="stat-label">Étudiants formés</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-block">
+                    <span class="stat-number" ref="graduateStat">0</span>
+                    <span class="stat-label">Diplômés</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-block">
+                    <span class="stat-number" ref="partnerStat">0</span>
+                    <span class="stat-label">Partenaires</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-block">
+                    <span class="stat-number" ref="successStat">0</span>
+                    <span class="stat-label">Insertion professionnelle</span>
                 </div>
             </div>
         </div>
@@ -139,7 +210,29 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const visionSection = ref(null)
 const isSectionVisible = ref(false)
 
+// Références pour les compteurs
+const studentStat = ref(null)
+const graduateStat = ref(null)
+const partnerStat = ref(null)
+const successStat = ref(null)
+
 const observer = ref(null)
+
+// Animation des compteurs
+const animateCounter = (element, target, suffix = '') => {
+    if (!element) return
+    let current = 0
+    const increment = target / 50
+    const timer = setInterval(() => {
+        current += increment
+        if (current >= target) {
+            element.textContent = target + suffix
+            clearInterval(timer)
+        } else {
+            element.textContent = Math.floor(current) + suffix
+        }
+    }, 30)
+}
 
 onMounted(() => {
     observer.value = new IntersectionObserver(
@@ -147,12 +240,18 @@ onMounted(() => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !isSectionVisible.value) {
                     isSectionVisible.value = true
+                    
+                    // Déclencher les compteurs avec des chiffres réalistes
+                    animateCounter(studentStat.value, 520, '+')
+                    animateCounter(graduateStat.value, 410, '+')
+                    animateCounter(partnerStat.value, 84, '+')
+                    animateCounter(successStat.value, 76, '%')
                 }
             })
         },
         {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.2,
+            rootMargin: '0px'
         }
     )
 
@@ -169,355 +268,447 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Variables */
+/* ===== VARIABLES ÉLÉGANTES ===== */
 .vision-section {
     --primary: #01b4d5;
-    --primary-dark: #0194b0;
+    --primary-light: rgba(1, 180, 213, 0.1);
+    --primary-soft: rgba(1, 180, 213, 0.05);
     --secondary: #202a50;
+    --gray-50: #f9fafb;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-400: #94a3b8;
+    --gray-500: #64748b;
+    --gray-600: #475569;
+    --gray-700: #334155;
+    --gray-800: #1e293b;
+    --gray-900: #0f172a;
     --light: #ffffff;
-    --light-gray: #f8fafc;
-    --dark: #1e293b;
-    --text: #334155;
-    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     --shadow-hover: 0 25px 50px -12px rgba(1, 180, 213, 0.15);
     --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-flip: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Section principale */
 .vision-section {
     position: relative;
-    padding: 5rem 1.5rem;
-    background: linear-gradient(135deg, var(--light) 0%, var(--light-gray) 100%);
     min-height: 100vh;
+    padding: 6rem 2rem;
+    background: var(--light);
+    overflow: hidden;
     display: flex;
     align-items: center;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
     width: 100%;
     position: relative;
-    z-index: 2;
+    z-index: 20;
 }
 
-/* Ligne de timeline verticale */
-.timeline-line {
-    position: absolute;
-    top: 340px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 3px;
-    height: 0;
-    background: linear-gradient(to bottom, var(--primary), transparent);
-    z-index: 1;
-    transition: height 1.5s ease-out;
-}
-
-.timeline-line.animate-in {
-    height: 80%;
-}
-
-/* Points de connexion */
-.connection-points {
+/* ===== FOND BLANC ÉLÉGANT AVEC ANIMATIONS ===== */
+.elegant-background {
     position: absolute;
     inset: 0;
     z-index: 1;
 }
 
-.connection-point {
+/* Motif académique (lignes très fines) */
+.academic-pattern {
     position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    width: 16px;
-    height: 16px;
+    inset: 0;
+    background-image: 
+        linear-gradient(var(--gray-200) 1px, transparent 1px),
+        linear-gradient(90deg, var(--gray-200) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.2;
+    animation: patternMove 30s linear infinite;
+}
+
+@keyframes patternMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+}
+
+/* Cercles concentriques */
+.circles-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle {
+    position: absolute;
+    border: 1px solid var(--primary-light);
+    border-radius: 50%;
+    animation: circlePulse 8s ease-in-out infinite;
+}
+
+.circle-1 {
+    width: 300px;
+    height: 300px;
+    animation-delay: 0s;
+}
+
+.circle-2 {
+    width: 500px;
+    height: 500px;
+    animation-delay: -2s;
+    opacity: 0.3;
+}
+
+.circle-3 {
+    width: 700px;
+    height: 700px;
+    animation-delay: -4s;
+    opacity: 0.2;
+}
+
+@keyframes circlePulse {
+    0%, 100% { transform: scale(1); opacity: 0.1; }
+    50% { transform: scale(1.05); opacity: 0.2; }
+}
+
+/* Lignes de lumière */
+.light-lines {
+    position: absolute;
+    inset: 0;
+}
+
+.light-line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+    animation: lightMove 6s ease-in-out infinite;
+}
+
+@keyframes lightMove {
+    0%, 100% { opacity: 0.1; transform: scaleX(0.8); }
+    50% { opacity: 0.3; transform: scaleX(1); }
+}
+
+/* Particules fines */
+.fine-particles {
+    position: absolute;
+    inset: 0;
+}
+
+.fine-particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
     background: var(--primary);
     border-radius: 50%;
-    border: 4px solid var(--light);
-    box-shadow: 0 0 0 4px rgba(1, 180, 213, 0.3);
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.1;
+    animation: particleDrift 8s ease-in-out infinite;
 }
 
-.connection-point.animate-in {
-    transform: translate(-50%, -50%) scale(1);
+@keyframes particleDrift {
+    0%, 100% { transform: translate(0, 0); opacity: 0.1; }
+    50% { transform: translate(30px, -30px); opacity: 0.2; }
 }
 
-.connection-point:nth-child(1) { transition-delay: 0.3s; }
-.connection-point:nth-child(2) { transition-delay: 0.6s; }
-.connection-point:nth-child(3) { transition-delay: 0.9s; }
-.connection-point:nth-child(4) { transition-delay: 1.2s; }
+/* Ornements minimalistes */
+.minimal-ornaments {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
 
-/* En-tête */
+.academic-line {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.academic-line.left {
+    left: 0;
+    top: 0;
+}
+
+.academic-line.right {
+    right: 0;
+    bottom: 0;
+    transform: rotate(180deg);
+}
+
+/* ===== HEADER ÉLÉGANT ===== */
 .header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
     opacity: 0;
     transform: translateY(30px);
     transition: var(--transition);
+    transition-delay: 0.1s;
 }
 
-.header.animate-in {
+.header.revealed {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 0.2s;
 }
 
-.section-label {
-    display: inline-block;
-    padding: 0.75rem 2rem;
-    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-    color: white;
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
+.institution-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.badge-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+.badge-text {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    color: var(--gray-500);
     text-transform: uppercase;
-    border-radius: 50px;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 10px 20px rgba(1, 180, 213, 0.2);
 }
 
 .main-title {
-    font-size: 3rem;
-    font-weight: 800;
-    color: var(--dark);
-    line-height: 1.2;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
-.highlight {
+.title-word {
+    display: inline-block;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--gray-900);
+    margin: 0 0.25rem;
+}
+
+.title-word.accent {
+    font-weight: 500;
     color: var(--primary);
-    position: relative;
 }
 
-.highlight::after {
-    content: '';
-    position: absolute;
-    bottom: 4px;
-    left: 0;
-    width: 100%;
-    height: 8px;
-    background: rgba(1, 180, 213, 0.2);
-    border-radius: 4px;
-    z-index: -1;
-}
-
-.section-description {
-    font-size: 1.125rem;
-    color: var(--text);
+.subtitle-wrapper {
     max-width: 600px;
     margin: 0 auto;
-    line-height: 1.6;
 }
 
-/* Timeline verticale */
-.vision-timeline {
-    position: relative;
-    z-index: 2;
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--gray-600);
+    line-height: 1.7;
+    font-weight: 300;
 }
 
-/* Items de vision */
-.vision-item {
-    display: flex;
-    margin-bottom: 4rem;
+/* ===== GRILLE DES VALEURS AVEC EFFET DE RETOURNEMENT ===== */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 5rem;
+}
+
+.flip-card {
+    background: transparent;
+    width: 100%;
+    height: 320px;
+    perspective: 2000px;
     opacity: 0;
-    transform: translateX(-50px);
-    transition: var(--transition);
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.vision-item.animate-in {
+.flip-card.revealed {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
 }
 
-.item-1 { transition-delay: 0.4s; }
-.item-2 { transition-delay: 0.5s; }
-.item-3 { transition-delay: 0.6s; }
-.item-4 { transition-delay: 0.7s; }
-
-/* Items pairs (droite) */
-.item-2,
-.item-4 {
-    flex-direction: row-reverse;
-    transform: translateX(50px);
-}
-
-.item-2.animate-in,
-.item-4.animate-in {
-    transform: translateX(0);
-}
-
-.item-content {
-    width: 45%;
+.flip-card-inner {
     position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
 }
 
-/* Numéro */
-.item-number {
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Face avant et arrière */
+.flip-card-front, .flip-card-back {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 6rem;
-    font-weight: 900;
-    color: rgba(1, 180, 213, 0.1);
-    line-height: 1;
-    z-index: 0;
-    transition: var(--transition);
-}
-
-.item-1 .item-number,
-.item-3 .item-number {
-    right: -120px;
-}
-
-.item-2 .item-number,
-.item-4 .item-number {
-    left: -120px;
-}
-
-.vision-item:hover .item-number {
-    color: rgba(1, 180, 213, 0.15);
-    transform: translateY(-50%) scale(1.05);
-}
-
-/* Carte */
-.item-card {
-    position: relative;
-    background: var(--light);
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
     border-radius: 20px;
-    padding: 2.5rem;
-    box-shadow: var(--shadow);
-    border: 2px solid transparent;
-    z-index: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-200);
     transition: var(--transition);
 }
 
-.vision-item:hover .item-card {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-hover);
-    border-color: rgba(1, 180, 213, 0.3);
+/* Face avant (titre) */
+.flip-card-front {
+    background: var(--light);
 }
 
-.card-header {
+.flip-card-front .card-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 1.5rem;
 }
 
-.card-title {
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: var(--dark);
-    margin: 0;
-    line-height: 1.2;
-    transition: var(--transition);
+.flip-card-front .card-number {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--gray-400);
+    letter-spacing: 0.1em;
 }
 
-.vision-item:hover .card-title {
-    color: var(--primary);
-}
-
-.card-icon {
-    width: 60px;
-    height: 60px;
-    background: rgba(1, 180, 213, 0.1);
-    border-radius: 16px;
+.flip-card-front .card-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    background: var(--primary-soft);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
-    margin-left: 1rem;
     transition: var(--transition);
 }
 
-.card-icon svg {
-    width: 32px;
-    height: 32px;
+.flip-card:hover .flip-card-front .card-icon-wrapper {
+    background: var(--primary-light);
+}
+
+.flip-card-front .card-icon {
+    width: 24px;
+    height: 24px;
     color: var(--primary);
+}
+
+.flip-card-front .card-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+.flip-hint {
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    margin-top: auto;
+    padding-bottom: 0.5rem;
+    opacity: 0.7;
     transition: var(--transition);
 }
 
-.vision-item:hover .card-icon {
-    background: var(--primary);
-    transform: rotate(10deg);
-}
-
-.vision-item:hover .card-icon svg {
-    color: var(--light);
-}
-
-.card-body {
-    position: relative;
-    z-index: 1;
-}
-
-.card-text {
-    color: var(--text);
-    line-height: 1.7;
-    font-size: 1.05rem;
-    margin: 0;
-    text-align: justify;
-    transition: var(--transition);
-}
-
-.vision-item:hover .card-text {
-    color: var(--dark);
-}
-
-/* Effet de bordure dégradée au survol */
-.item-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    padding: 2px;
-    background: linear-gradient(135deg, var(--primary), transparent);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: var(--transition);
-}
-
-.vision-item:hover .item-card::before {
+.flip-card:hover .flip-hint {
     opacity: 1;
+    color: var(--primary);
 }
 
-/* Responsive Design */
+/* Face arrière (description) */
+.flip-card-back {
+    background: var(--light);
+    transform: rotateY(180deg);
+    align-items: center;
+    justify-content: center;
+}
+
+.flip-card-back .card-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--gray-700);
+    text-align: center;
+}
+
+/* ===== STATISTIQUES ===== */
+.stats-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transition);
+    transition-delay: 0.5s;
+}
+
+.stats-container.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stat-block {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--gray-300);
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 992px) {
-    .vision-item {
-        width: 100%;
-        margin-bottom: 3rem;
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
-    
-    .item-content {
-        width: 100%;
+
+    .title-word {
+        font-size: 3rem;
     }
-    
-    .item-number {
+
+    .stats-container {
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    .stat-divider {
         display: none;
     }
     
-    .timeline-line,
-    .connection-points {
-        display: none;
+    .flip-card {
+        height: 280px;
     }
     
-    .vision-item,
-    .item-2.animate-in,
-    .item-4.animate-in {
-        transform: translateX(0) !important;
-    }
-    
-    .card-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .card-icon {
-        margin-left: 0;
-        margin-top: 1rem;
+    .flip-card-front .card-title {
+        font-size: 1.75rem;
     }
 }
 
@@ -525,95 +716,57 @@ onUnmounted(() => {
     .vision-section {
         padding: 4rem 1rem;
     }
-    
-    .header {
-        margin-bottom: 3rem;
-    }
-    
-    .main-title {
+
+    .title-word {
         font-size: 2.5rem;
+        display: block;
+        margin: 0.25rem 0;
     }
-    
-    .section-label {
-        padding: 0.5rem 1.5rem;
-        font-size: 0.8rem;
-    }
-    
-    .section-description {
+
+    .subtitle {
         font-size: 1rem;
     }
     
-    .item-card {
-        padding: 2rem;
+    .flip-card {
+        height: 260px;
     }
     
-    .card-title {
+    .flip-card-front .card-title {
         font-size: 1.5rem;
     }
     
-    .card-icon {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .card-icon svg {
-        width: 26px;
-        height: 26px;
-    }
-    
-    .card-text {
-        font-size: 1rem;
-        line-height: 1.6;
-    }
-}
-
-@media (max-width: 480px) {
-    .main-title {
-        font-size: 2rem;
-    }
-    
-    .item-card {
-        padding: 1.5rem;
-    }
-    
-    .card-title {
-        font-size: 1.375rem;
-    }
-    
-    .card-text {
+    .flip-card-back .card-description {
         font-size: 0.95rem;
     }
 }
 
-/* Optimisation de la lisibilité */
-.card-text {
-    hyphens: auto;
-    -webkit-hyphens: auto;
-    word-break: break-word;
-    overflow-wrap: break-word;
+@media (max-width: 480px) {
+    .title-word {
+        font-size: 2rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .flip-card {
+        height: 240px;
+    }
+    
+    .flip-card-front .card-title {
+        font-size: 1.25rem;
+    }
 }
 
-/* Réduction des animations */
+/* Réduction d'animations */
 @media (prefers-reduced-motion: reduce) {
-    .vision-item,
-    .header,
-    .timeline-line,
-    .connection-point,
-    .item-number,
-    .item-card,
-    .card-icon,
-    .card-title,
-    .card-text {
+    * {
+        animation: none !important;
         transition: none !important;
     }
     
-    .header.animate-in,
-    .vision-item.animate-in,
-    .timeline-line.animate-in,
-    .connection-point.animate-in {
-        opacity: 1;
+    .flip-card:hover .flip-card-inner {
         transform: none;
-        height: auto;
     }
 }
 </style>

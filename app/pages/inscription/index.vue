@@ -1,7 +1,6 @@
 <template>
   <div class="h-screen w-screen bg-gradient-to-br from-[#dbeff7] to-white overflow-hidden">
     <!-- Main Container -->
-
     <div class="h-full w-full flex">
       <div class="w-full h-full bg-white flex flex-col">
         <div class="grid grid-cols-1 lg:grid-cols-2 h-full">
@@ -475,52 +474,35 @@
                   <!-- STEP 4: Documents Upload & Validation -->
                   <div v-if="currentStep === 4" class="space-y-8">
                    
-                    <!-- Documents List -->
+                    <!-- Documents List based on Level -->
                     <div class="bg-[#dbeff7]/30 p-4 rounded-xl mb-6">
-                      <h4 class="text-sm font-semibold text-[#202a51] mb-3">Documents requis :</h4>
+                      <h4 class="text-sm font-semibold text-[#202a51] mb-3">
+                        Documents requis pour {{ levelTitle.split(':')[0] }} :
+                      </h4>
                       <ul class="text-xs text-gray-700 space-y-1">
-                        <li class="flex items-center">
+                        <li v-for="doc in getRequiredDocuments" :key="doc.key"
+                            class="flex items-center">
                           <svg class="w-4 h-4 text-[#00b3d4] mr-2" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                           </svg>
-                          Copie du relevé des notes du dernier diplôme
-                        </li>
-                        <li class="flex items-center">
-                          <svg class="w-4 h-4 text-[#00b3d4] mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                          </svg>
-                          Lettre de motivation
-                        </li>
-                        <li class="flex items-center">
-                          <svg class="w-4 h-4 text-[#00b3d4] mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                          </svg>
-                          Photo passeport
-                        </li>
-                        <li class="flex items-center">
-                          <svg class="w-4 h-4 text-[#00b3d4] mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                          </svg>
-                          Copie de la pièce d'identité
-                        </li>
-                        <li class="flex items-center">
-                          <svg class="w-4 h-4 text-[#00b3d4] mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                          </svg>
-                          Copie du diplôme le plus élevé
+                          {{ doc.label }} {{ doc.multiple ? `(max ${doc.maxFiles || 5} fichiers)` : '' }}
                         </li>
                       </ul>
                     </div>
+                    
                     <!-- File Uploads -->
                     <div class="space-y-4">
-                      <div v-for="(doc, index) in documentTypes" :key="index">
+                      <div v-for="doc in getRequiredDocuments" :key="doc.key">
                         <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                          {{ index + 1 }}. {{ doc.label }}
+                          {{ doc.index }}. {{ doc.label }}
+                          <span v-if="doc.multiple" class="text-xs text-gray-500 font-normal">
+                            ({{ form.documents[doc.key].length }}/{{ doc.maxFiles || 5 }} fichiers)
+                          </span>
                         </label>
                         <div
                           class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center transition-all duration-300 hover:border-[#00b3d4] cursor-pointer"
                           :class="{
-                            'border-green-500 bg-green-50': form.documents[doc.key],
+                            'border-green-500 bg-green-50': form.documents[doc.key].length > 0,
                             'border-[#00b3d4]': isDraggingOver === doc.key
                           }"
                           @click="triggerFileInput(doc.key)"
@@ -528,34 +510,60 @@
                           @dragleave.prevent="handleDragLeave(doc.key)"
                           @drop.prevent="handleDrop(doc.key, $event)"
                         >
-                          <div v-if="!form.documents[doc.key]">
+                          <div v-if="form.documents[doc.key].length === 0">
                             <svg class="w-8 h-8 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                             </svg>
                             <p class="text-gray-600 text-sm mb-2">
                               Cliquez pour télécharger ou glissez-déposez
                             </p>
-                            <p class="text-xs text-gray-500">{{ doc.accepted }}</p>
+                            <p class="text-xs text-gray-500">
+                              {{ doc.accepted }} {{ doc.multiple ? '(Plusieurs fichiers autorisés)' : '' }}
+                            </p>
                             <input :id="`fileInput-${doc.key}`" type="file"
                                    @change="handleFileUpload(doc.key, $event)"
                                    :accept="doc.accept"
+                                   :multiple="doc.multiple"
                                    class="hidden">
                           </div>
-                          <div v-else class="text-green-600">
-                            <svg class="w-8 h-8 mx-auto mb-3" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                            </svg>
-                            <p class="font-medium text-sm">Document téléchargé !</p>
-                            <p class="text-xs text-gray-600 mt-1">{{ form.documents[doc.key].name }}</p>
-                            <button type="button"
-                                    @click.stop="removeFile(doc.key)"
-                                    class="mt-3 text-red-500 hover:text-red-700 text-xs">
-                              Supprimer
-                            </button>
+                          
+                          <!-- Affichage des fichiers téléchargés -->
+                          <div v-else>
+                            <div class="space-y-3">
+                              <div v-for="(file, index) in form.documents[doc.key]" :key="index"
+                                   class="flex items-center justify-between bg-white p-3 rounded-lg border">
+                                <div class="flex items-center space-x-3">
+                                  <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                  </svg>
+                                  <div>
+                                    <p class="text-sm font-medium text-gray-700 truncate max-w-xs">{{ file.name }}</p>
+                                    <p class="text-xs text-gray-500">{{ formatFileSize(file.size) }}</p>
+                                  </div>
+                                </div>
+                                <button type="button"
+                                        @click.stop="removeFile(doc.key, index)"
+                                        class="text-red-500 hover:text-red-700">
+                                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                  </svg>
+                                </button>
+                              </div>
+                            </div>
+                            
+                            <!-- Bouton pour ajouter plus de fichiers si multiple -->
+                            <div v-if="doc.multiple" class="mt-4">
+                              <button type="button"
+                                      @click.stop="triggerFileInput(doc.key)"
+                                      class="text-[#00b3d4] hover:text-[#202a51] text-sm font-medium">
+                                + Ajouter d'autres fichiers
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                    
                     <!-- Declaration -->
                     <div class="bg-[#dbeff7]/30 p-6 rounded-xl mt-8">
                       <h4 class="text-sm font-bold text-[#202a51] mb-3">Déclaration sur l'honneur</h4>
@@ -572,6 +580,7 @@
                         </span>
                       </label>
                     </div>
+                    
                     <!-- Navigation Buttons Step 4 -->
                     <div class="flex justify-between gap-4 pt-4">
                       <button type="button" @click="currentStep = 3"
@@ -609,17 +618,6 @@
               <div class="absolute top-0 right-0 w-64 h-64 bg-[#00b3d4] rounded-full -translate-y-32 translate-x-32"></div>
               <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#6cc6e2] rounded-full translate-y-48 -translate-x-48"></div>
             </div>
-            <!-- Content -->
-            <div class="relative z-10 h-full flex flex-col justify-center p-8 md:p-10 lg:p-12">
-              <!-- Hero Image -->
-              <div class="w-full max-w-sm mx-auto">
-                <!-- <img
-                  src="https://escen.neostart.tech/officiel-site/assets/images/authentication/Login-rafiki-yellow-simple.png"
-                  alt="Étudiant ESCEN"
-                  class="w-full h-auto object-contain"
-                /> -->
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -634,6 +632,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
       </svg>
     </button>
+    
     <!-- Help Modal -->
     <div v-if="showHelp" class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
       <div class="bg-white rounded-2xl max-w-md w-full p-6">
@@ -648,27 +647,11 @@
        
         <div class="space-y-4">
           <div class="p-4 bg-[#dbeff7]/30 rounded-xl border border-[#dbeff7]">
-            <h4 class="font-semibold text-[#202a51] mb-2">Problèmes de connexion</h4>
-            <p class="text-gray-700 text-sm">
-              Vérifiez votre email et mot de passe. Si vous avez oublié votre mot de passe, utilisez le lien "Mot de passe oublié".
-            </p>
-          </div>
-         
-          <div class="p-4 bg-[#dbeff7]/30 rounded-xl border border-[#dbeff7]">
             <h4 class="font-semibold text-[#202a51] mb-2">Support technique</h4>
             <p class="text-gray-700 text-sm">
               Contactez notre équipe support :<br>
               <a href="mailto:support@escen.university" class="text-[#00b3d4] hover:text-[#202a51] transition-colors">support@escen.university</a><br>
               <a href="tel:+22898012727" class="text-[#00b3d4] hover:text-[#202a51] transition-colors">+228 98 01 27 27</a>
-            </p>
-          </div>
-         
-          <div class="p-4 bg-[#dbeff7]/30 rounded-xl border border-[#dbeff7]">
-            <h4 class="font-semibold text-[#202a51] mb-2">Heures de support</h4>
-            <p class="text-gray-700 text-sm">
-              Lundi - Vendredi : 8h - 18h<br>
-              Samedi : 9h - 13h<br>
-              Support 24/7 pour les urgences
             </p>
           </div>
         </div>
@@ -957,13 +940,32 @@ const form = reactive({
     type: ''
   },
  
-  // Documents
+  // Documents - Modifié pour gérer plusieurs fichiers
   documents: {
-    transcript: null,
-    motivationLetter: null,
-    passportPhoto: null,
-    idDocument: null,
-    diplomaCopy: null
+    // Licence
+    bac2Transcript: [],
+    motivationLetterLicence: [],
+    passportPhotoLicence: [],
+    
+    // Master
+    motivationLetterMaster: [],
+    cvMaster: [],
+    licenceTranscript: [],
+    licenceAttestation: [],
+    passportPhotoMaster: [],
+    
+    // Executive Master
+    passportPhotoExecutive: [],
+    nationalIdExecutive: [],
+    licenceAttestationExecutive: [],
+    master1Proof: [],
+    cvExecutive: [],
+    
+    // Certificat
+    passportPhotoCertificat: [],
+    nationalIdCertificat: [],
+    lastDiplomaCopy: [],
+    cvCertificat: []
   },
  
   declaration: false
@@ -993,36 +995,152 @@ const accommodationTypes = [
   'Famille d\'accueil'
 ]
 
-const documentTypes = [
+// Documents par niveau (modifiés pour gérer plusieurs fichiers)
+const licenceDocuments = [
   {
-    key: 'transcript',
-    label: 'Relevé de notes (max 10MB)',
+    key: 'bac2Transcript',
+    label: 'Copie du relevé des notes du BAC+2',
     accept: '.pdf,.jpg,.jpeg,.png',
-    accepted: 'PDF, JPG, PNG'
+    accepted: 'PDF, JPG, PNG',
+    multiple: true,
+    maxFiles: 3
   },
   {
-    key: 'motivationLetter',
-    label: 'Lettre de motivation (max 5MB)',
+    key: 'motivationLetterLicence',
+    label: 'Lettre de motivation',
     accept: '.pdf,.doc,.docx',
-    accepted: 'PDF, DOC, DOCX'
+    accepted: 'PDF, DOC, DOCX',
+    multiple: false,
+    maxFiles: 1
   },
   {
-    key: 'passportPhoto',
-    label: 'Photo passeport (max 5MB)',
+    key: 'passportPhotoLicence',
+    label: 'Photo passeport',
     accept: '.jpg,.jpeg,.png',
-    accepted: 'JPG, JPEG, PNG'
+    accepted: 'JPG, JPEG, PNG',
+    multiple: false,
+    maxFiles: 1
+  }
+]
+
+const masterDocuments = [
+  {
+    key: 'motivationLetterMaster',
+    label: 'Lettre de motivation',
+    accept: '.pdf,.doc,.docx',
+    accepted: 'PDF, DOC, DOCX',
+    multiple: false,
+    maxFiles: 1
   },
   {
-    key: 'idDocument',
-    label: 'Pièce d\'identité (max 5MB)',
-    accept: '.pdf,.jpg,.jpeg,.png',
-    accepted: 'PDF, JPG, PNG'
+    key: 'cvMaster',
+    label: 'Curriculum vitæ',
+    accept: '.pdf,.doc,.docx',
+    accepted: 'PDF, DOC, DOCX',
+    multiple: false,
+    maxFiles: 1
   },
   {
-    key: 'diplomaCopy',
-    label: 'Copie du diplôme (max 10MB)',
+    key: 'licenceTranscript',
+    label: 'Copie du relevé de Licence',
     accept: '.pdf,.jpg,.jpeg,.png',
-    accepted: 'PDF, JPG, PNG'
+    accepted: 'PDF, JPG, PNG',
+    multiple: true,
+    maxFiles: 3
+  },
+  {
+    key: 'licenceAttestation',
+    label: 'Copie de l\'attestation de Licence',
+    accept: '.pdf,.jpg,.jpeg,.png',
+    accepted: 'PDF, JPG, PNG',
+    multiple: true,
+    maxFiles: 2
+  },
+  {
+    key: 'passportPhotoMaster',
+    label: 'Photo passeport',
+    accept: '.jpg,.jpeg,.png',
+    accepted: 'JPG, JPEG, PNG',
+    multiple: false,
+    maxFiles: 1
+  }
+]
+
+const executiveDocuments = [
+  {
+    key: 'passportPhotoExecutive',
+    label: 'Photo passeport',
+    accept: '.jpg,.jpeg,.png',
+    accepted: 'JPG, JPEG, PNG',
+    multiple: false,
+    maxFiles: 1
+  },
+  {
+    key: 'nationalIdExecutive',
+    label: 'Copie de la pièce nationale d\'identité ou du passeport',
+    accept: '.pdf,.jpg,.jpeg,.png',
+    accepted: 'PDF, JPG, PNG',
+    multiple: true,
+    maxFiles: 2
+  },
+  {
+    key: 'licenceAttestationExecutive',
+    label: 'Copie légalisée de l\'attestation de licence',
+    accept: '.pdf,.jpg,.jpeg,.png',
+    accepted: 'PDF, JPG, PNG',
+    multiple: true,
+    maxFiles: 2
+  },
+  {
+    key: 'master1Proof',
+    label: 'Preuve justificative du niveau Master 1',
+    accept: '.pdf,.jpg,.jpeg,.png',
+    accepted: 'PDF, JPG, PNG',
+    multiple: true,
+    maxFiles: 3
+  },
+  {
+    key: 'cvExecutive',
+    label: 'Curriculum vitæ',
+    accept: '.pdf,.doc,.docx',
+    accepted: 'PDF, DOC, DOCX',
+    multiple: false,
+    maxFiles: 1
+  }
+]
+
+const certificatDocuments = [
+  {
+    key: 'passportPhotoCertificat',
+    label: 'Photo passeport',
+    accept: '.jpg,.jpeg,.png',
+    accepted: 'JPG, JPEG, PNG',
+    multiple: false,
+    maxFiles: 1
+  },
+  {
+    key: 'nationalIdCertificat',
+    label: 'Copie de la pièce nationale d\'identité ou du passeport',
+    accept: '.pdf,.jpg,.jpeg,.png',
+    accepted: 'PDF, JPG, PNG',
+    multiple: true,
+    maxFiles: 2
+  },
+  {
+    key: 'lastDiplomaCopy',
+    label: 'Copie légalisée du dernier diplôme obtenu',
+    accept: '.pdf,.jpg,.jpeg,.png',
+    accepted: 'PDF, JPG, PNG',
+    multiple: true,
+    maxFiles: 3
+  },
+  {
+    key: 'cvCertificat',
+    label: 'Curriculum vitae',
+    accept: '.pdf,.doc,.docx',
+    accepted: 'PDF, DOC, DOCX',
+    multiple: false,
+    maxFiles: 1
   }
 ]
 
@@ -1070,14 +1188,52 @@ const levelTitle = computed(() => {
   return titles[form.level] || ''
 })
 
-const canSubmit = computed(() => {
-  return form.declaration &&
-         form.documents.transcript &&
-         form.documents.motivationLetter &&
-         form.documents.passportPhoto &&
-         form.documents.idDocument &&
-         form.documents.diplomaCopy
+// Documents requis selon le niveau
+const getRequiredDocuments = computed(() => {
+  let documents = []
+  
+  switch (form.level) {
+    case 'licence':
+      documents = licenceDocuments
+      break
+    case 'master':
+      documents = masterDocuments
+      break
+    case 'executive':
+      documents = executiveDocuments
+      break
+    case 'certificat':
+      documents = certificatDocuments
+      break
+  }
+  
+  // Ajouter un index pour l'affichage
+  return documents.map((doc, index) => ({
+    ...doc,
+    index: index + 1
+  }))
 })
+
+const canSubmit = computed(() => {
+  if (!form.declaration) return false
+  
+  // Vérifier tous les documents requis pour le niveau sélectionné
+  const requiredDocs = getRequiredDocuments.value
+  return requiredDocs.every(doc => {
+    // Pour les documents qui n'acceptent pas multiple, vérifier qu'il y a au moins 1 fichier
+    // Pour les documents qui acceptent multiple, vérifier qu'il y a au moins 1 fichier
+    return form.documents[doc.key].length > 0
+  })
+})
+
+// Fonction utilitaire pour formater la taille des fichiers
+const formatFileSize = (bytes) => {
+  if (bytes === 0) return '0 Bytes'
+  const k = 1024
+  const sizes = ['Bytes', 'KB', 'MB', 'GB']
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+}
 
 // Navigation functions
 const goToStep2 = () => {
@@ -1170,31 +1326,172 @@ const handleDrop = (field, event) => {
   event.preventDefault()
   isDraggingOver.value = null
  
-  const files = event.dataTransfer.files
+  const files = Array.from(event.dataTransfer.files)
   if (files && files.length > 0) {
-    handleFileUpload(field, { target: { files: [files[0]] } })
+    handleFileUpload(field, { target: { files } })
   }
 }
 
 const handleFileUpload = (field, event) => {
-  const file = event.target.files[0]
-  if (file) {
-    const maxSize = (field === 'transcript' || field === 'diplomaCopy') ? 10 * 1024 * 1024 : 5 * 1024 * 1024
-   
+  const files = Array.from(event.target.files)
+  if (!files.length) return
+
+  // Récupérer la configuration du document
+  const docConfig = getDocumentConfig(field)
+  
+  // Vérifier la limite de fichiers
+  if (docConfig.maxFiles && (form.documents[field].length + files.length) > docConfig.maxFiles) {
+    alert(`Maximum ${docConfig.maxFiles} fichier(s) autorisé(s) pour ce document`)
+    return
+  }
+
+  // Valider chaque fichier
+  const validFiles = []
+  
+  files.forEach(file => {
+    // Taille max selon le type de document
+    let maxSize = 5 * 1024 * 1024 // 5MB par défaut
+    
+    // Documents qui peuvent être plus gros
+    if (field.includes('Transcript') || field.includes('Diploma') || field.includes('Attestation')) {
+      maxSize = 10 * 1024 * 1024 // 10MB
+    }
+    
     if (file.size > maxSize) {
-      alert(`Le fichier est trop volumineux. Taille maximum : ${field === 'transcript' || field === 'diplomaCopy' ? '10MB' : '5MB'}`)
+      alert(`Le fichier "${file.name}" est trop volumineux. Taille maximum : ${maxSize === 10 * 1024 * 1024 ? '10MB' : '5MB'}`)
       return
     }
-   
-    form.documents[field] = file
+    
+    validFiles.push(file)
+  })
+
+  // Ajouter les fichiers valides
+  if (validFiles.length > 0) {
+    form.documents[field] = [...form.documents[field], ...validFiles]
   }
+  
+  // Réinitialiser l'input pour pouvoir sélectionner les mêmes fichiers
+  event.target.value = ''
 }
 
-const removeFile = (field) => {
-  form.documents[field] = null
+// Nouvelle fonction pour récupérer la configuration d'un document
+const getDocumentConfig = (field) => {
+  // Chercher dans tous les types de documents
+  const allDocs = [...licenceDocuments, ...masterDocuments, ...executiveDocuments, ...certificatDocuments]
+  return allDocs.find(doc => doc.key === field) || {}
 }
 
-// Submit form
+const removeFile = (field, index) => {
+  form.documents[field].splice(index, 1)
+}
+
+// Fonction pour préparer les données pour l'envoi
+const prepareFormData = () => {
+  const formData = new FormData()
+  
+  // Ajouter les données textuelles
+  formData.append('lastName', form.lastName)
+  formData.append('firstName', form.firstName)
+  formData.append('gender', form.gender)
+  formData.append('birthDate', form.birthDate)
+  formData.append('birthPlace', form.birthPlace)
+  formData.append('nationality', form.nationality)
+  formData.append('residenceCountry', form.residenceCountry)
+  formData.append('phone', form.phone)
+  formData.append('whatsapp', form.whatsapp)
+  formData.append('email', form.email)
+  formData.append('address', form.address)
+  
+  // Contact d'urgence
+  formData.append('emergencyContact[name]', form.emergencyContact.name)
+  formData.append('emergencyContact[relationship]', form.emergencyContact.relationship)
+  formData.append('emergencyContact[phone]', form.emergencyContact.phone)
+  formData.append('emergencyContact[email]', form.emergencyContact.email || '')
+  
+  // Formation
+  formData.append('level', form.level)
+  formData.append('program', form.program)
+  
+  // Diplôme
+  formData.append('diploma[name]', form.diploma.name)
+  formData.append('diploma[field]', form.diploma.field)
+  formData.append('diploma[year]', form.diploma.year)
+  formData.append('diploma[institution]', form.diploma.institution)
+  formData.append('experience', form.experience || '')
+  
+  // Financement
+  formData.append('financing[source]', form.financing.source)
+  formData.append('financing[otherSource]', form.financing.otherSource || '')
+  formData.append('financing[sponsorName]', form.financing.sponsorName || '')
+  formData.append('financing[sponsorPhone]', form.financing.sponsorPhone || '')
+  formData.append('financing[sponsorEmail]', form.financing.sponsorEmail || '')
+  
+  // Découverte
+  formData.append('discovery[source]', form.discovery.source)
+  formData.append('discovery[otherSource]', form.discovery.otherSource || '')
+  formData.append('discovery[referrerName]', form.discovery.referrerName || '')
+  formData.append('discovery[referrerContact]', form.discovery.referrerContact || '')
+  
+  // Hébergement
+  formData.append('accommodation[needAssistance]', form.accommodation.needAssistance)
+  formData.append('accommodation[type]', form.accommodation.type || '')
+  
+  // Déclaration
+  formData.append('declaration', form.declaration)
+  
+  // Ajouter les fichiers
+  const requiredDocs = getRequiredDocuments.value
+  requiredDocs.forEach(doc => {
+    const files = form.documents[doc.key]
+    files.forEach((file, index) => {
+      formData.append(`${doc.key}[${index}]`, file)
+    })
+  })
+  
+  return formData
+}
+
+// Fonction pour préparer les données JSON (alternative)
+const prepareJSONData = () => {
+  const data = {
+    personalInfo: {
+      lastName: form.lastName,
+      firstName: form.firstName,
+      gender: form.gender,
+      birthDate: form.birthDate,
+      birthPlace: form.birthPlace,
+      nationality: form.nationality,
+      residenceCountry: form.residenceCountry,
+      phone: form.phone,
+      whatsapp: form.whatsapp,
+      email: form.email,
+      address: form.address
+    },
+    emergencyContact: form.emergencyContact,
+    formation: {
+      level: form.level,
+      program: form.program
+    },
+    education: {
+      ...form.diploma,
+      experience: form.experience
+    },
+    financing: form.financing,
+    discovery: form.discovery,
+    accommodation: form.accommodation,
+    declaration: form.declaration,
+    // Note: Les fichiers doivent être envoyés séparément via FormData
+    documentsInfo: getRequiredDocuments.value.map(doc => ({
+      type: doc.key,
+      label: doc.label,
+      fileCount: form.documents[doc.key].length
+    }))
+  }
+  
+  return data
+}
+
+// Submit form amélioré
 const submitForm = async () => {
   if (!canSubmit.value) {
     alert('Veuillez télécharger tous les documents requis et accepter la déclaration')
@@ -1204,22 +1501,46 @@ const submitForm = async () => {
   isSubmitting.value = true
  
   try {
-    // Simulate API call
+    // Préparer les données
+    const formData = prepareFormData()
+    const jsonData = prepareJSONData()
+    
+    // Afficher les données pour le débogage
+    console.log('Données JSON:', jsonData)
+    console.log('FormData prêt à être envoyé')
+    
+    // Simuler l'envoi vers une API
     await new Promise(resolve => setTimeout(resolve, 2000))
-   
+    
+    // Exemple d'envoi réel (décommentez pour utiliser)
+    /*
+    const response = await fetch('https://votre-api.com/inscription', {
+      method: 'POST',
+      body: formData
+      // headers: { 'Accept': 'application/json' } // Pas besoin pour FormData
+    })
+    
+    if (!response.ok) {
+      throw new Error('Erreur lors de l\'envoi du formulaire')
+    }
+    
+    const result = await response.json()
+    */
+    
+    // Simulation de succès
     showNotification.value = true
-   
-    // Reset form after 3 seconds
+    
+    // Réinitialiser le formulaire après 3 secondes
     setTimeout(() => {
       resetForm()
       currentStep.value = 1
       showNotification.value = false
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }, 3000)
-   
+    
   } catch (error) {
     console.error('Error:', error)
-    alert('Une erreur est survenue. Veuillez réessayer ou nous contacter directement.')
+    alert(`Une erreur est survenue: ${error.message}`)
   } finally {
     isSubmitting.value = false
   }
@@ -1228,22 +1549,43 @@ const submitForm = async () => {
 // Reset form function
 const resetForm = () => {
   Object.keys(form).forEach(key => {
+    if (key === 'documents') return // Géré séparément
+    
     if (typeof form[key] === 'object' && form[key] !== null && !Array.isArray(form[key])) {
       Object.keys(form[key]).forEach(subKey => {
         form[key][subKey] = ''
       })
-    } else {
+    } else if (key !== 'declaration') {
       form[key] = ''
     }
   })
  
   // Reset documents
   form.documents = {
-    transcript: null,
-    motivationLetter: null,
-    passportPhoto: null,
-    idDocument: null,
-    diplomaCopy: null
+    // Licence
+    bac2Transcript: [],
+    motivationLetterLicence: [],
+    passportPhotoLicence: [],
+    
+    // Master
+    motivationLetterMaster: [],
+    cvMaster: [],
+    licenceTranscript: [],
+    licenceAttestation: [],
+    passportPhotoMaster: [],
+    
+    // Executive Master
+    passportPhotoExecutive: [],
+    nationalIdExecutive: [],
+    licenceAttestationExecutive: [],
+    master1Proof: [],
+    cvExecutive: [],
+    
+    // Certificat
+    passportPhotoCertificat: [],
+    nationalIdCertificat: [],
+    lastDiplomaCopy: [],
+    cvCertificat: []
   }
  
   form.declaration = false

@@ -1,277 +1,234 @@
 <template>
-    <section id="a-propos" class="relative overflow-hidden bg-white">
-        <!-- Background avec formes géométriques élégantes -->
-        <div class="absolute inset-0">
-            <div class="absolute top-0 right-0 w-1/3 h-1/3">
-                <div class="absolute inset-0 bg-gradient-to-br from-[#01b4d5]/5 via-transparent to-transparent"></div>
+  <section id="a-propos" class="relative overflow-hidden bg-white -mt-16 md:-mt-20 lg:-mt-24 pt-0">
+    <!-- ===== BACKGROUND SVG ANIMÉS (THÈME ÉCOLE/UNIVERSITÉ) ===== -->
+    <div class="absolute inset-0 pointer-events-none opacity-10 md:opacity-15">
+      
+      <!-- Diplômes flottants -->
+      <div class="absolute top-[15%] left-[5%] animate-float-svg" style="animation-delay: 0s;">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#01b4d5]">
+          <path d="M4 4H20V20H4V4Z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 8H16V12H8V8Z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 16H16" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      
+      <!-- Toques universitaires -->
+      <div class="absolute bottom-[20%] right-[8%] animate-float-svg" style="animation-delay: 2s;">
+        <svg width="70" height="70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#019fbf]">
+          <path d="M4 10L12 5L20 10L12 15L4 10Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 12.5V16.5C8 18.5 12 20 12 20C12 20 16 18.5 16 16.5V12.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      
+      <!-- Livres ouverts -->
+      <div class="absolute top-[40%] right-[12%] animate-float-svg" style="animation-delay: 4s;">
+        <svg width="90" height="90" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#202a50]">
+          <path d="M4 5H9C10.5 5 12 6.5 12 8V19C12 19 9 17 4 19V5Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M20 5H15C13.5 5 12 6.5 12 8V19C12 19 15 17 20 19V5Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      
+      <!-- Crayons/Stylos -->
+      <div class="absolute bottom-[30%] left-[10%] animate-float-svg" style="animation-delay: 1s;">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#01b4d5]">
+          <path d="M16 4L20 8L8 20H4V16L16 4Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      
+      <!-- Globes (international) -->
+      <div class="absolute top-[60%] left-[15%] animate-float-slow" style="animation-delay: 5s;">
+        <svg width="75" height="75" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#019fbf]">
+          <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M4 12H20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M12 4C14 6 15 9 15 12C15 15 14 18 12 20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      
+      <!-- Microscope (science) -->
+      <div class="absolute bottom-[15%] right-[20%] animate-float-svg" style="animation-delay: 3s;">
+        <svg width="65" height="65" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#202a50]">
+          <circle cx="12" cy="8" r="3" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M12 11V16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M8 16H16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      
+      <!-- Bâtiment universitaire -->
+      <div class="absolute top-[25%] right-[25%] animate-float-slow" style="animation-delay: 6s;">
+        <svg width="85" height="85" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#01b4d5]">
+          <path d="M4 20H20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M6 20V10L12 5L18 10V20" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+          <path d="M10 20V15H14V20" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      
+      <!-- Équerre (mathématiques) -->
+      <div class="absolute bottom-[40%] left-[20%] animate-float-svg" style="animation-delay: 2.5s;">
+        <svg width="55" height="55" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#019fbf]">
+          <path d="M6 18L18 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6 6L6 18L18 18" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      
+      <!-- Horloge (temps/planning) -->
+      <div class="absolute top-[70%] right-[5%] animate-float-slow" style="animation-delay: 4.5s;">
+        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#202a50]">
+          <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M12 8V12L14 14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      
+      <!-- Étoile (excellence) -->
+      <div class="absolute top-[10%] right-[40%] animate-pulse-slow-svg" style="animation-delay: 1.5s;">
+        <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#01b4d5]">
+          <path d="M12 2L15 9H22L16 14L19 21L12 17L5 21L8 14L2 9H9L12 2Z" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      
+      <!-- Molécule (sciences) -->
+      <div class="absolute bottom-[10%] left-[30%] animate-float-svg" style="animation-delay: 5.5s;">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#019fbf]">
+          <circle cx="12" cy="6" r="2" stroke="currentColor" stroke-width="1.2"/>
+          <circle cx="6" cy="16" r="2" stroke="currentColor" stroke-width="1.2"/>
+          <circle cx="18" cy="16" r="2" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M12 8L8 14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M12 8L16 14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Éléments de fond minimalistes -->
+    <div class="absolute inset-0">
+      <div class="absolute left-0 top-0 w-full h-full opacity-[0.02]">
+        <div class="w-full h-full" style="background-image: repeating-linear-gradient(90deg, #01b4d5 0px, #01b4d5 1px, transparent 1px, transparent 30px);"></div>
+      </div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
+      
+      <!-- HEADER AVEC ANIMATION -->
+      <div class="text-center mb-12 md:mb-16 lg:mb-20">
+        <!-- Indicateur de section avec animation -->
+        <div class="inline-flex items-center justify-center gap-3 mb-4 opacity-0 animate-slide-down" style="animation-delay: 0.1s; animation-fill-mode: forwards;">
+          <span class="w-8 h-px bg-[#01b4d5]/60"></span>
+          <span class="text-xs font-medium tracking-[0.3em] text-[#01b4d5] uppercase">Présentation</span>
+          <span class="w-8 h-px bg-[#01b4d5]/60"></span>
+        </div>
+        
+        <!-- Titre avec animation de lettres -->
+        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-4 overflow-hidden">
+          <span class="block">
+            <span class="inline-block opacity-0 animate-slide-up" style="animation-delay: 0.3s; animation-fill-mode: forwards;">L'excellence</span>
+            <span class="inline-block opacity-0 animate-slide-up" style="animation-delay: 0.4s; animation-fill-mode: forwards;"> du</span>
+          </span>
+          <span class="block font-semibold text-[#01b4d5] mt-1 md:mt-2">
+            <span class="inline-block opacity-0 animate-slide-up" style="animation-delay: 0.5s; animation-fill-mode: forwards;">digital</span>
+            <span class="inline-block opacity-0 animate-slide-up" style="animation-delay: 0.6s; animation-fill-mode: forwards;"> en</span>
+            <span class="inline-block opacity-0 animate-slide-up" style="animation-delay: 0.7s; animation-fill-mode: forwards;"> Afrique</span>
+          </span>
+        </h2>
+        
+        <!-- Accroche avec animation -->
+        <p class="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-4 opacity-0 animate-fade-in" style="animation-delay: 0.8s; animation-fill-mode: forwards;">
+          Depuis 2018, l'ESCEN forme les talents qui façonnent l'économie numérique 
+          francophone avec des programmes d'excellence et une vision tournée vers l'avenir.
+        </p>
+      </div>
+
+      <!-- BLOC PRINCIPAL IMAGE + TEXTE -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 mb-16 lg:mb-20">
+        
+        <!-- Colonne image avec animation -->
+        <div class="lg:col-span-7 order-2 lg:order-1 opacity-0 animate-slide-right" style="animation-delay: 0.9s; animation-fill-mode: forwards;">
+          <div class="relative">
+            <div class="relative overflow-hidden rounded-xl md:rounded-2xl bg-gray-100">
+              <img 
+                src="/temoignage/apropos.jpg" 
+                alt="Campus ESCEN - Formation digitale"
+                class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-1000 ease-out"
+                style="aspect-ratio: 4/3;"
+              />
+              <div class="absolute inset-0 bg-gradient-to-tr from-[#01b4d5]/10 via-transparent to-transparent"></div>
             </div>
-            <div class="absolute bottom-0 left-0 w-1/2 h-1/2">
-                <div class="absolute inset-0 bg-gradient-to-tr from-blue-50/20 via-transparent to-transparent"></div>
+            
+            <!-- Élément décoratif flottant avec animation -->
+            <div class="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 bg-white rounded-lg md:rounded-xl shadow-lg p-3 md:p-4 border border-gray-100 hidden sm:block animate-float-card">
+              <div class="flex items-center gap-2 md:gap-3">
+                <div class="w-8 h-8 md:w-10 md:h-10 bg-[#01b4d5]/10 rounded-full flex items-center justify-center">
+                  <svg class="w-4 h-4 md:w-5 md:h-5 text-[#01b4d5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14v6" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-xl md:text-2xl font-bold text-gray-900">+1200</div>
+                  <div class="text-[10px] md:text-xs font-medium text-gray-500 uppercase tracking-wider">Diplômés</div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
 
-         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-32">
-
-            <!-- En-tête minimaliste -->
-            <div class="text-center mb-16 md:mb-20 lg:mb-28">
-                <div class="inline-flex items-center gap-2 mb-4 md:mb-6">
-                    <div class="h-px w-6 md:w-8 bg-[#01b4d5]"></div>
-                    <span class="text-xs md:text-sm font-semibold text-[#01b4d5] tracking-wider uppercase">À PROPOS</span>
-                    <div class="h-px w-6 md:w-8 bg-[#01b4d5]"></div>
-                </div>
-                
-                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6 tracking-tight">
-                    <span class="block">Transformation Digitale</span>
-                    <span class="font-bold text-[#01b4d5]">par l'Excellence</span>
-                </h1>
-                
-                <p class="text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium px-4">
-                    Leader de l'enseignement supérieur numérique en Afrique francophone, 
-                    ESCEN forme les talents qui transforment l'économie digitale. 
-                </p>
+        <!-- Colonne texte avec animations -->
+        <div class="lg:col-span-5 order-1 lg:order-2 flex flex-col justify-center">
+          <!-- Mission -->
+          <div class="mb-6 md:mb-8 opacity-0 animate-slide-left" style="animation-delay: 1s; animation-fill-mode: forwards;">
+            <div class="flex items-center gap-3 mb-3 md:mb-4">
+              <div class="w-8 md:w-10 h-px bg-[#01b4d5]"></div>
+              <h3 class="text-base md:text-lg font-semibold text-gray-900 tracking-wide">NOTRE MISSION</h3>
             </div>
-
-            <!-- Section Image + Texte avec design élégant -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-24 items-center mx-20 md:mx-22 lg:mb-28">
-                <!-- Image avec effet sophistiqué -->
-                <div class="relative order-2 lg:order-1">
-                    <div class="aspect-[4/3] relative overflow-hidden rounded-lg shadow-lg">
-                        <img 
-                            src="/temoignage/apropos.jpg" 
-                            alt="Campus ESCEN - Excellence Académique"
-                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                        />
-                        <!-- Overlay gradient subtil -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
-                    </div> 
-                    
-                    <!-- Badge repositionné pour mobile -->
-                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 lg:-bottom-6 lg:-left-6 bg-white rounded-lg shadow-xl p-4 md:p-5 border border-gray-100">
-                        <div class="flex items-center gap-3">
-                            <div class="w-2 h-2 md:w-3 md:h-3 bg-[#01b4d5] rounded-full"></div>
-                            <div>
-                                <div class="text-xl md:text-2xl font-bold text-gray-900"></div>
-                                <div class="text-xs font-semibold text-gray-600 uppercase tracking-wider whitespace-nowrap">
-                                    École Digitale
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contenu texte élégant -->
-                <div class="order-1 lg:order-2">
-                    <!-- Section Mission -->
-                    <div class="mb-10 md:mb-12">
-                        <div class="flex items-center gap-3 md:gap-4 mb-10 md:mb-12">
-                            <div class="w-8 md:w-12 h-px bg-[#01b4d5]"></div>
-                            <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">Notre Mission</h2>
-                        </div>
-                        
-                        <p class="text-gray-700 leading-relaxed mb-6 md:mb-8 text-base text-justify md:text-lg">
-                            Former et accompagner une nouvelle génération d'étudiants, tout en perfectionnant
-                            l'expertise des cadres d'entreprise francophones dans les domaines stratégiques de
-                            l'Économie Numérique, de l'Informatique, de l'Intelligence Artificielle et du Génie
-                            Logiciel. 
-                        </p>
-                        
-                        <!-- Les deux éléments TOUJOURS sur la même ligne -->
-                        <div class="flex flex-row gap-4 md:gap-6">
-                            <!-- Expertise Internationale -->
-                            <div class="flex-1 flex items-start gap-3">
-                                <div class="flex-shrink-0 mt-1">
-                                    <div class="w-2 h-2 bg-[#01b4d5] rounded-full"></div>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-gray-900 mb-1 text-sm md:text-base">Expertise Internationale</h3>
-                                    <p class="text-gray-600 text-xs md:text-sm font-medium">Programmes alignés sur les standards mondiaux</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Innovation Pédagogique -->
-                            <div class="flex-1 flex items-start gap-3">
-                                <div class="flex-shrink-0 mt-1">
-                                    <div class="w-2 h-2 bg-[#01b4d5] rounded-full"></div>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-gray-900 mb-1 text-sm md:text-base">Innovation Pédagogique</h3>
-                                    <p class="text-gray-600 text-xs md:text-sm font-medium">Méthodes d'apprentissage avant-gardistes</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Nos Valeurs -->
-                    <div>
-                        <div class="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
-                            <div class="w-8 md:w-12 h-px bg-[#01b4d5]"></div>
-                            <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">Nos Valeurs</h2>
-                        </div>
-                        
-                        <div class="grid grid-cols-2 gap-4 md:gap-6">
-                            <div class="border-l-2 border-[#01b4d5] pl-3 md:pl-4 py-2 md:py-3">
-                                <h3 class="font-bold text-gray-900 mb-1 text-sm md:text-base">Excellence</h3>
-                                <p class="text-gray-600 text-xs md:text-sm font-medium">Recherche constante de la qualité</p>
-                            </div>
-                            <div class="border-l-2 border-[#01b4d5] pl-3 md:pl-4 py-2 md:py-3">
-                                <h3 class="font-bold text-gray-900 mb-1 text-sm md:text-base">Innovation</h3>
-                                <p class="text-gray-600 text-xs md:text-sm font-medium">Culture de l'innovation permanente</p>
-                            </div>
-                            <div class="border-l-2 border-[#01b4d5] pl-3 md:pl-4 py-2 md:py-3">
-                                <h3 class="font-bold text-gray-900 mb-1 text-sm md:text-base">Leadership</h3>
-                                <p class="text-gray-600 text-xs md:text-sm font-medium">Développement de leaders éthiques</p>
-                            </div>
-                            <div class="border-l-2 border-[#01b4d5] pl-3 md:pl-4 py-2 md:py-3">
-                                <h3 class="font-bold text-gray-900 mb-1 text-sm md:text-base">Impact</h3>
-                                <p class="text-gray-600 text-xs md:text-sm font-medium">Contribution au développement économique</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            
+            <p class="text-gray-700 leading-relaxed mb-4 text-sm md:text-base lg:text-lg">
+              <span class="font-medium text-[#01b4d5]">Former la prochaine génération</span> de leaders 
+              du numérique en Afrique francophone. Nous combinons excellence académique et 
+              innovation pédagogique.
+            </p>
+            
+            <!-- Points clés -->
+            <div class="space-y-3">
+              <div class="flex items-start gap-2 md:gap-3 transform hover:translate-x-1 transition-transform duration-300">
+                <div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#01b4d5] flex-shrink-0"></div>
+                <p class="text-gray-600 text-xs md:text-sm"><span class="font-medium text-gray-900">Expertise pointue :</span> Programmes alignés sur les standards internationaux</p>
+              </div>
+              <div class="flex items-start gap-2 md:gap-3 transform hover:translate-x-1 transition-transform duration-300">
+                <div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#01b4d5] flex-shrink-0"></div>
+                <p class="text-gray-600 text-xs md:text-sm"><span class="font-medium text-gray-900">Pédagogie active :</span> Apprentissage par projets et cas concrets</p>
+              </div>
             </div>
+          </div>
 
-            <!-- Chiffres clés - Refonte complète -->
-            <div class="mb-8 md:mb-12 lg:mb-16">
-                <div class="text-center mb-8 md:mb-12">
-                    <div class="flex items-center justify-center gap-3 md:gap-4 mb-3 md:mb-4">
-                        <div class="w-8 md:w-12 h-px bg-[#01b4d5]"></div>
-                        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">Notre Impact</h2>
-                        <div class="w-8 md:w-12 h-px bg-[#01b4d5]"></div>
-                    </div>
-                    <p class="text-gray-600 max-w-2xl mx-auto font-medium text-sm md:text-base px-4">
-                        Des indicateurs qui témoignent de notre engagement et de notre croissance
-                    </p>
-                </div>
-                
-                <!-- Nouvelle grid des statistiques - Compacte -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mx-14 md:mx-16">
-                    <!-- Année de Fondation -->
-                    <div 
-                        class="relative bg-gradient-to-b from-white to-gray-50 rounded-xl p-4 md:p-5 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 group"
-                        @mouseenter="startCounter('foundation', 2018)"
-                        @touchstart="startCounter('foundation', 2018)"
-                    >
-                        <div class="flex flex-col items-center text-center">
-                            <!-- Icône centrée en haut -->
-                            <div class="w-10 h-10 md:w-12 md:h-12 bg-[#01b4d5]/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
-                                <svg class="w-5 h-5 md:w-6 md:h-6 text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                </svg>
-                            </div>
-                            
-                            <!-- Nombre avec compteur -->
-                            <div class="mb-2">
-                                <div class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900" ref="foundationCounter">
-                                    2018
-                                </div>
-                            </div>
-                            
-                            <!-- Ligne décorative courte -->
-                            <div class="w-8 h-1 bg-gradient-to-r from-[#01b4d5] to-blue-400 rounded-full mb-2 transition-all duration-300 group-hover:w-12"></div>
-                            
-                            <!-- Label -->
-                            <div class="text-xs md:text-sm font-semibold text-gray-700 uppercase tracking-wider">
-                                Année de Fondation
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Étudiants -->
-                    <div 
-                        class="relative bg-gradient-to-b from-white to-gray-50 rounded-xl p-4 md:p-5 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 group"
-                        @mouseenter="startCounter('students', 1200)"
-                        @touchstart="startCounter('students', 1200)"
-                    >
-                        <div class="flex flex-col items-center text-center">
-                            <!-- Icône centrée en haut -->
-                            <div class="w-10 h-10 md:w-12 md:h-12 bg-[#01b4d5]/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
-                                <svg class="w-5 h-5 md:w-6 md:h-6 text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13 0a6 6 0 01-9 5.197"/>
-                                </svg>
-                            </div>
-                            
-                            <!-- Nombre avec compteur -->
-                            <div class="mb-2">
-                                <div class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900" ref="studentsCounter">
-                                    1,200<span class="text-lg md:text-xl text-[#01b4d5]">+</span>
-                                </div>
-                            </div>
-                            
-                            <!-- Ligne décorative courte -->
-                            <div class="w-8 h-1 bg-gradient-to-r from-[#01b4d5] to-blue-400 rounded-full mb-2 transition-all duration-300 group-hover:w-12"></div>
-                            
-                            <!-- Label -->
-                            <div class="text-xs md:text-sm font-semibold text-gray-700 uppercase tracking-wider">
-                                Étudiants Formés
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Insertion Professionnelle -->
-                    <div 
-                        class="relative bg-gradient-to-b from-white to-gray-50 rounded-xl p-4 md:p-5 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 group"
-                        @mouseenter="startCounter('employment', 85)"
-                        @touchstart="startCounter('employment', 85)"
-                    >
-                        <div class="flex flex-col items-center text-center">
-                            <!-- Icône centrée en haut -->
-                            <div class="w-10 h-10 md:w-12 md:h-12 bg-[#01b4d5]/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
-                                <svg class="w-5 h-5 md:w-6 md:h-6 text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                                </svg>
-                            </div>
-                            
-                            <!-- Nombre avec compteur -->
-                            <div class="mb-2">
-                                <div class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900" ref="employmentCounter">
-                                    85<span class="text-lg md:text-xl text-[#01b4d5]">%</span>
-                                </div>
-                            </div>
-                            
-                            <!-- Ligne décorative courte -->
-                            <div class="w-8 h-1 bg-gradient-to-r from-[#01b4d5] to-blue-400 rounded-full mb-2 transition-all duration-300 group-hover:w-12"></div>
-                            
-                            <!-- Label -->
-                            <div class="text-xs md:text-sm font-semibold text-gray-700 uppercase tracking-wider">
-                                Insertion Professionnelle
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Partenaires -->
-                    <div 
-                        class="relative bg-gradient-to-b from-white to-gray-50 rounded-xl p-4 md:p-5 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 group"
-                        @mouseenter="startCounter('partners', 50)"
-                        @touchstart="startCounter('partners', 50)"
-                    >
-                        <div class="flex flex-col items-center text-center">
-                            <!-- Icône centrée en haut -->
-                            <div class="w-10 h-10 md:w-12 md:h-12 bg-[#01b4d5]/10 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
-                                <svg class="w-5 h-5 md:w-6 md:h-6 text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                                </svg>
-                            </div>
-                            
-                            <!-- Nombre avec compteur -->
-                            <div class="mb-2">
-                                <div class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900" ref="partnersCounter">
-                                    50<span class="text-lg md:text-xl text-[#01b4d5]">+</span>
-                                </div>
-                            </div>
-                            
-                            <!-- Ligne décorative courte -->
-                            <div class="w-8 h-1 bg-gradient-to-r from-[#01b4d5] to-blue-400 rounded-full mb-2 transition-all duration-300 group-hover:w-12"></div>
-                            
-                            <!-- Label -->
-                            <div class="text-xs md:text-sm font-semibold text-gray-700 uppercase tracking-wider">
-                                Partenaires Entreprises
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <!-- Valeurs avec animations -->
+          <div class="opacity-0 animate-slide-left" style="animation-delay: 1.1s; animation-fill-mode: forwards;">
+            <div class="flex items-center gap-3 mb-3 md:mb-4">
+              <div class="w-8 md:w-10 h-px bg-[#01b4d5]"></div>
+              <h3 class="text-base md:text-lg font-semibold text-gray-900 tracking-wide">NOS VALEURS</h3>
             </div>
+            
+            <div class="grid grid-cols-2 gap-3 md:gap-4">
+              <div class="group">
+                <div class="text-xs md:text-sm font-bold text-gray-900 mb-1 group-hover:text-[#01b4d5] transition-colors">Excellence</div>
+                <p class="text-[10px] md:text-xs text-gray-500">Exigence et qualité</p>
+              </div>
+              <div class="group">
+                <div class="text-xs md:text-sm font-bold text-gray-900 mb-1 group-hover:text-[#01b4d5] transition-colors">Innovation</div>
+                <p class="text-[10px] md:text-xs text-gray-500">Veille et adaptation</p>
+              </div>
+              <div class="group">
+                <div class="text-xs md:text-sm font-bold text-gray-900 mb-1 group-hover:text-[#01b4d5] transition-colors">Ouverture</div>
+                <p class="text-[10px] md:text-xs text-gray-500">International et diversité</p>
+              </div>
+              <div class="group">
+                <div class="text-xs md:text-sm font-bold text-gray-900 mb-1 group-hover:text-[#01b4d5] transition-colors">Impact</div>
+                <p class="text-[10px] md:text-xs text-gray-500">Contribution économique</p>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
+
+  
+    </div>
+  </section>
 </template>
 
 <script setup>
@@ -293,15 +250,14 @@ const hasAnimated = ref({
 
 // Fonction pour animer un compteur
 const startCounter = (type, targetValue) => {
-    // Si l'animation a déjà été jouée pour ce type, on ne la rejoue pas
     if (hasAnimated.value[type]) return
     
     hasAnimated.value[type] = true
     
     let counterRef
     let suffix = ''
+    let formatNumber = false
     
-    // Déterminer quelle ref utiliser et quel suffixe
     switch(type) {
         case 'foundation':
             counterRef = foundationCounter
@@ -309,6 +265,7 @@ const startCounter = (type, targetValue) => {
         case 'students':
             counterRef = studentsCounter
             suffix = '+'
+            formatNumber = true
             break
         case 'employment':
             counterRef = employmentCounter
@@ -322,10 +279,10 @@ const startCounter = (type, targetValue) => {
     
     if (!counterRef.value) return
     
-    const duration = 1500 // 1.5 secondes (plus rapide)
+    const duration = 1500
     const startValue = 0
     const endValue = targetValue
-    const increment = endValue / (duration / 16) // 60fps
+    const increment = endValue / (duration / 16)
     let current = startValue
     let animationFrame
     
@@ -333,32 +290,30 @@ const startCounter = (type, targetValue) => {
         current += increment
         
         if (current < endValue) {
-            // Formater le nombre
             let displayValue
-            if (type === 'students' || type === 'partners') {
-                // Pour les étudiants et partenaires, on veut un format avec virgule
-                displayValue = Math.floor(current).toLocaleString()
+            
+            if (formatNumber) {
+                displayValue = Math.floor(current).toLocaleString('fr-FR')
             } else {
                 displayValue = Math.floor(current)
             }
             
-            // Mettre à jour l'affichage
             if (counterRef.value) {
-                counterRef.value.innerHTML = `${displayValue}<span class="text-lg md:text-xl text-[#01b4d5]">${suffix}</span>`
+                counterRef.value.innerHTML = `${displayValue}<span class="text-lg md:text-xl lg:text-2xl text-[#01b4d5]">${suffix}</span>`
             }
             
-            animationFrame = requestAnimationFrame(animate) 
+            animationFrame = requestAnimationFrame(animate)
         } else {
-            // Animation terminée, afficher la valeur finale
             let finalValue
-            if (type === 'students' || type === 'partners') {
-                finalValue = endValue.toLocaleString()
+            
+            if (formatNumber) {
+                finalValue = endValue.toLocaleString('fr-FR')
             } else {
                 finalValue = endValue
             }
             
             if (counterRef.value) {
-                counterRef.value.innerHTML = `${finalValue}<span class="text-lg md:text-xl text-[#01b4d5]">${suffix}</span>`
+                counterRef.value.innerHTML = `${finalValue}<span class="text-lg md:text-xl lg:text-2xl text-[#01b4d5]">${suffix}</span>`
             }
             
             if (animationFrame) {
@@ -367,11 +322,10 @@ const startCounter = (type, targetValue) => {
         }
     }
     
-    // Démarrer l'animation
     animate()
 }
 
-// Fonction pour déclencher les compteurs quand la section est visible
+// Observer pour déclencher les compteurs au scroll
 const triggerCountersOnScroll = () => {
     const section = document.getElementById('a-propos')
     if (!section) return
@@ -379,25 +333,19 @@ const triggerCountersOnScroll = () => {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Déclencher tous les compteurs quand la section est visible
                 startCounter('foundation', 2018)
                 startCounter('students', 1200)
                 startCounter('employment', 85)
                 startCounter('partners', 50)
-                
-                // Arrêter d'observer après avoir déclenché
                 observer.disconnect()
             }
         })
-    }, {
-        threshold: 0.3 // Déclenche quand 30% de la section est visible
-    })
+    }, { threshold: 0.3 })
     
     observer.observe(section)
 }
 
 onMounted(() => {
-    // Déclencher les compteurs au chargement de la page
     setTimeout(() => {
         triggerCountersOnScroll()
     }, 500)
@@ -405,227 +353,212 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Animations subtiles */
+/* Animations existantes pour les SVG */
+@keyframes float-svg {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(10px, -15px) rotate(5deg);
+  }
+  50% {
+    transform: translate(0, -25px) rotate(0deg);
+  }
+  75% {
+    transform: translate(-10px, -15px) rotate(-5deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(-15px, -15px) rotate(3deg);
+  }
+}
+
+@keyframes pulse-slow-svg {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+.animate-float-svg {
+  animation: float-svg 20s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 25s ease-in-out infinite;
+}
+
+.animate-pulse-slow-svg {
+  animation: pulse-slow-svg 4s ease-in-out infinite;
+}
+
+/* ===== NOUVELLES ANIMATIONS D'ENTRÉE TRÈS PROPRES ===== */
+
+/* Animation slide down (pour l'indicateur) */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+/* Animation slide up (pour le titre) */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+/* Animation fade in (pour le paragraphe) */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-section {
-    animation: fadeIn 0.8s ease-out;
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
 }
 
-/* Effets de hover élégants */
-.hover\:scale-105 {
-    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+/* Animation slide right (pour l'image) */
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-/* Responsive design optimisé */
+.animate-slide-right {
+  animation: slideRight 0.9s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+/* Animation slide left (pour le texte) */
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-left {
+  animation: slideLeft 0.9s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+/* Animation scale in (pour les statistiques) */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scaleIn 1s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+/* Animation flottante pour la carte diplôme */
+@keyframes floatCard {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-float-card {
+  animation: floatCard 3s ease-in-out infinite;
+}
+
+/* Transitions douces */
+.transition-all {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive */
 @media (max-width: 640px) {
-    .aspect-\[4\/3\] {
-        aspect-ratio: 4/3;
-        height: auto;
-    }
-    
-    /* Badge mobile - position fixe en bas à droite */
-    .absolute.-bottom-4.-right-4 {
-        position: absolute;
-        bottom: -1rem;
-        right: -1rem;
-        z-index: 10;
-    }
-    
-    /* Ajustement du texte pour mobile */
-    .text-3xl {
-        font-size: 1.875rem;
-        line-height: 2.25rem;
-    }
-    
-    .py-16 {
-        padding-top: 4rem;
-        padding-bottom: 4rem;
-    }
-    
-    /* Statistiques responsive */
-    .grid-cols-2 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .p-4 {
-        padding: 1rem;
-    }
-    
-    /* Ajustement des compteurs sur mobile */
-    .text-2xl {
-        font-size: 1.5rem;
-    }
-    
-    .text-lg {
-        font-size: 1rem;
-    }
-    
-    /* Les deux éléments TOUJOURS sur la même ligne même sur mobile */
-    .flex.flex-row {
-        flex-direction: row !important;
-        gap: 0.75rem;
-    }
-    
-    /* Ajustement pour très petits écrans */
-    @media (max-width: 480px) {
-        .flex.flex-row {
-            flex-direction: column !important;
-            gap: 1rem;
-        }
-    }
+  .text-3xl {
+    font-size: 1.875rem;
+  }
+  
+  .grid-cols-2 {
+    gap: 0.75rem;
+  }
 }
 
-@media (max-width: 768px) {
-    /* Sur mobile et tablette, le badge reste en bas à droite */
-    .lg\:-left-6 {
-        right: -1.5rem !important;
-        left: auto !important;
-    }
-    
-    .gap-12 {
-        gap: 3rem;
-    }
-    
-    .mb-20 {
-        margin-bottom: 5rem;
-    }
-    
-    /* Ajustement des deux éléments sur tablette */
-    @media (min-width: 640px) and (max-width: 768px) {
-        .flex.flex-row {
-            gap: 1rem;
-        }
-    }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-    /* Tablette - badge centré en bas */
-    .absolute.-bottom-6.-right-6 {
-        position: absolute;
-        bottom: -1.5rem;
-        right: -1.5rem;
-    }
-    
-    /* Statistiques tablette */
-    .grid-cols-4 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    /* Ajustement des deux éléments sur tablette */
-    .flex.flex-row {
-        gap: 1.5rem;
-    }
-}
-
-@media (min-width: 1024px) {
-    /* Desktop - badge en bas à gauche */
-    .lg\:-bottom-6.lg\:-left-6 {
-        position: absolute;
-        bottom: -1.5rem;
-        left: -1.5rem;
-        right: auto;
-    }
-    
-    .lg\:grid-cols-2 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    /* Statistiques desktop */
-    .md\:grid-cols-4 {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    
-    /* Ajustement des deux éléments sur desktop */
-    .flex.flex-row {
-        gap: 2rem;
-    }
-}
-
-/* Correction pour les écrans très petits */
-@media (max-width: 375px) {
-    .absolute.-bottom-4.-right-4 {
-        bottom: -0.5rem;
-        right: -0.5rem;
-    }
-    
-    .p-4 {
-        padding: 0.75rem;
-    }
-    
-    .text-xl {
-        font-size: 1.25rem;
-    }
-    
-    .text-xs {
-        font-size: 0.625rem;
-    }
-    
-    /* Sur très petits écrans, passer en colonne */
-    .flex.flex-row {
-        flex-direction: column !important;
-        gap: 0.75rem;
-    }
-}
-
-/* Assurer que le badge ne dépasse pas sur mobile */
 @media (max-width: 480px) {
-    .rounded-lg {
-        border-radius: 0.5rem;
-    }
-    
-    .shadow-xl {
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Statistiques sur très petit mobile */
-    .p-4 {
-        padding: 0.75rem;
-    }
-    
-    .text-2xl {
-        font-size: 1.25rem;
-    }
+  .grid-cols-1.sm\:grid-cols-2 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .text-4xl {
+    font-size: 2rem;
+  }
 }
 
-/* Animation du compteur */
-@keyframes countUp {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Animation d'entrée globale de la section */
+section {
+  animation: fadeInUp 0.8s ease-out;
 }
 
-.counter-animation {
-    animation: countUp 0.5s ease-out forwards;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Styles pour les statistiques au touch sur mobile */
-@media (hover: none) and (pointer: coarse) {
-    .group:active {
-        transform: scale(0.98);
-        transition: transform 0.2s ease;
-    }
-    
-    .group:active .group-hover\:scale-110 {
-        transform: scale(1.05);
-    }
-    
-    .group:active .transition-all {
-        transition: all 0.2s ease;
-    }
+/* Effet de parallaxe subtil sur l'image */
+.hover\:scale-105 {
+  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>

@@ -21,10 +21,16 @@
     "better-sqlite3": "^12.4.6",
     "countries-list": "^3.2.2",
     "eslint": "^9.39.1",
+    "flag-icons": "^7.5.0",
+    "intl-tel-input": "^25.15.0",
     "lucide-vue-next": "^0.555.0",
     "nuxt": "^4.2.1",
+    "sweetalert": "^2.1.2",
+    "toastr": "^2.1.4",
     "typescript": "^5.9.3",
+    "v-phone-input": "^5.1.4",
     "vue": "^3.5.25",
-    "vue-router": "^4.6.3"
+    "vue-router": "^4.6.3",
+    "vue-tel-input": "^9.6.0"
   }
 }
