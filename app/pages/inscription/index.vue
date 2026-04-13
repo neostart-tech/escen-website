@@ -1,690 +1,699 @@
 <template>
-  <div class="h-screen w-screen bg-gradient-to-br from-[#dbeff7] to-white overflow-hidden">
-    <!-- Main Container -->
-    <div class="h-full w-full flex">
-      <div class="w-full h-full bg-white flex flex-col">
-        <div class="grid grid-cols-1 lg:grid-cols-2 h-full">
-         
-          <!-- Left Side - Inscription Form (Scrollable) -->
-          <div class="flex flex-col overflow-y-auto">
-            <div class="p-8 md:p-10 lg:p-12 min-h-full">
-              <div class="max-w-2xl mx-auto w-full">
+  <div class="min-h-screen bg-[#f4f8fb] flex flex-col">
 
-                
-                <!-- Logo + Indicateur d'étape sur la même ligne -->
-                  <div class="mb-6 flex items-center justify-between">
-                    <!-- Logo -->
-                    <NuxtLink to="/" class="flex items-center space-x-3">
-                      <img
-                        src="https://www.escen.university/wa_res/icons/LOGO_ESCEN_(1).png"
-                        alt="ESCEN Logo"
-                        class="h-16 w-auto"
-                      />
-                    </NuxtLink>
+    <!-- ===== HEADER ===== -->
+    <header class="bg-white border-b border-gray-100 sticky top-0 z-30 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <NuxtLink to="/" class="flex items-center">
+          <img src="/logo/LOGO_ESCEN.png" alt="ESCEN" class="h-10 w-auto">
+        </NuxtLink>
+        <NuxtLink to="/"
+          class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#01b4d5]/10 hover:bg-[#01b4d5] text-[#01b4d5] hover:text-white font-semibold text-sm transition-all duration-200 group">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          <span class="hidden sm:inline">Retour à l'accueil</span>
+          <span class="sm:hidden">Accueil</span>
+        </NuxtLink>
+      </div>
+    </header>
 
-                    <!-- Indicateur d'étape -->
-                    <div class="text-sm md:text-lg font-bold text-[#202a51]">
-                      Étape {{ currentStep }} sur 4
+    <!-- ===== BODY ===== -->
+    <div class="flex-1 flex flex-col lg:flex-row max-w-7xl mx-auto w-full">
+
+      <!-- ===== FORM SIDE ===== -->
+      <div ref="formContainer" class="flex-1 overflow-y-auto lg:max-h-[calc(100vh-64px)]">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 py-8">
+
+          <!-- Progress Stepper -->
+          <div class="mb-8">
+            <div class="flex items-center justify-between relative">
+              <!-- Line background -->
+              <div class="absolute top-5 left-0 right-0 h-0.5 bg-gray-200 z-0"></div>
+              <!-- Line progress -->
+              <div class="absolute top-5 left-0 h-0.5 bg-[#01b4d5] z-0 transition-all duration-500"
+                   :style="{ width: `${((currentStep - 1) / 3) * 100}%` }"></div>
+
+              <button v-for="step in steps" :key="step.n"
+                      @click="currentStep = step.n; scrollFormToTop()"
+                      class="relative z-10 flex flex-col items-center gap-1.5 group cursor-pointer">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 border-2"
+                     :class="currentStep > step.n
+                       ? 'bg-[#01b4d5] border-[#01b4d5] text-white'
+                       : currentStep === step.n
+                         ? 'bg-white border-[#01b4d5] text-[#01b4d5] shadow-md shadow-[#01b4d5]/20'
+                         : 'bg-white border-gray-200 text-gray-400 group-hover:border-[#01b4d5]/50 group-hover:text-[#01b4d5]/60'">
+                  <svg v-if="currentStep > step.n" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span v-else>{{ step.n }}</span>
+                </div>
+                <span class="text-xs font-medium hidden sm:block transition-colors duration-200"
+                      :class="currentStep === step.n ? 'text-[#01b4d5]' : currentStep > step.n ? 'text-[#01b4d5]' : 'text-gray-400'">
+                  {{ step.label }}
+                </span>
+              </button>
+            </div>
+            <!-- Mobile step label -->
+            <p class="sm:hidden text-center mt-3 text-sm font-semibold text-[#202a50]">
+              {{ steps[currentStep - 1].label }}
+            </p>
+          </div>
+
+          <!-- Form Card -->
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+
+            <!-- Card Header -->
+            <div class="px-6 py-5 border-b border-gray-100 flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-[#01b4d5]/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-[#01b4d5]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" :d="steps[currentStep - 1].icon"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-base font-bold text-[#202a50]">{{ steps[currentStep - 1].title }}</h2>
+                <p class="text-xs text-gray-400">{{ steps[currentStep - 1].subtitle }}</p>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-6 space-y-5">
+
+              <!-- ======= ÉTAPE 1 ======= -->
+              <form v-if="currentStep === 1" @submit.prevent="goToStep2" novalidate class="space-y-5">
+
+                <!-- Identité -->
+                <div class="space-y-4">
+                  <h3 class="text-xs font-bold tracking-widest text-[#01b4d5] uppercase">Identité</h3>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="field-label">Nom <span class="text-red-400">*</span></label>
+                      <input type="text" v-model="form.lastName" class="field-input" placeholder="DUPONT">
+                    </div>
+                    <div>
+                      <label class="field-label">Prénoms <span class="text-red-400">*</span></label>
+                      <input type="text" v-model="form.firstName" class="field-input" placeholder="Jean Marie">
                     </div>
                   </div>
 
+                  <!-- Sexe pills -->
+                  <div>
+                    <label class="field-label">Sexe <span class="text-red-400">*</span></label>
+                    <div class="flex gap-3 mt-1">
+                      <button type="button" @click="form.gender = 'Masculin'"
+                              class="flex-1 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all duration-200"
+                              :class="form.gender === 'Masculin' ? 'border-[#01b4d5] bg-[#01b4d5]/8 text-[#01b4d5]' : 'border-gray-200 text-gray-500 hover:border-[#01b4d5]/40'">
+                        ♂ Masculin
+                      </button>
+                      <button type="button" @click="form.gender = 'Féminin'"
+                              class="flex-1 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all duration-200"
+                              :class="form.gender === 'Féminin' ? 'border-[#01b4d5] bg-[#01b4d5]/8 text-[#01b4d5]' : 'border-gray-200 text-gray-500 hover:border-[#01b4d5]/40'">
+                        ♀ Féminin
+                      </button>
+                    </div>
+                  </div>
 
-                <div class="mb-4">
-                  <h1 class="text-2xl md:text-3xl font-bold text-[#202a51] mb-3 leading-snug">
-                    FORMULAIRE D'INSCRIPTION<br>
-                  </h1>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="field-label">Date de naissance <span class="text-red-400">*</span></label>
+                      <input type="date" v-model="form.birthDate" class="field-input">
+                    </div>
+                    <div>
+                      <label class="field-label">Lieu de naissance <span class="text-red-400">*</span></label>
+                      <input type="text" v-model="form.birthPlace" class="field-input" placeholder="Lomé">
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="field-label">Nationalité <span class="text-red-400">*</span></label>
+                      <select v-model="form.nationality" class="field-input">
+                        <option value="">Sélectionner</option>
+                        <option v-for="country in countries" :key="country.code" :value="country.name">{{ country.name }}</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label class="field-label">Pays de résidence <span class="text-red-400">*</span></label>
+                      <select v-model="form.residenceCountry" class="field-input">
+                        <option value="">Sélectionner</option>
+                        <option v-for="country in countries" :key="country.code" :value="country.name">{{ country.name }}</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
 
-                <!-- Form Container -->
-                <div class="space-y-8 pb-8">
-                  <!-- STEP 1: Personal Information -->
-                  <form v-if="currentStep === 1" @submit.prevent="goToStep2" class="space-y-8">
-                    <!-- Section 1: Personal Information -->
-                    <div class="space-y-6">
-                     
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                            Nom (comme sur votre pièce d'identité) *
-                          </label>
-                          <input type="text" v-model="form.lastName" required
-                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                        </div>
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                            Prénoms (comme sur votre pièce d'identité) *
-                          </label>
-                          <input type="text" v-model="form.firstName" required
-                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                        </div>
-                      </div>
-                      <div>
-                        <label class="block text-[#202a51] font-semibold mb-2 text-sm">Sexe *</label>
-                        <div class="flex space-x-6">
-                          <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="radio" v-model="form.gender" value="Masculin" required
-                                   class="text-[#00b3d4] focus:ring-[#00b3d4] h-5 w-5">
-                            <span class="text-gray-700 text-sm">Masculin</span>
-                          </label>
-                          <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="radio" v-model="form.gender" value="Féminin" required
-                                   class="text-[#00b3d4] focus:ring-[#00b3d4] h-5 w-5">
-                            <span class="text-gray-700 text-sm">Féminin</span>
-                          </label>
-                        </div>
-                      </div>
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                            Date de naissance *
-                          </label>
-                          <input type="date" v-model="form.birthDate" required
-                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                        </div>
-                       
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                            Lieu de naissance *
-                          </label>
-                          <input type="text" v-model="form.birthPlace" required
-                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                        </div>
-                      </div>
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">Nationalité *</label>
-                          <select v-model="form.nationality" required
-                                  class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                            <option value="">Sélectionnez votre nationalité</option>
-                            <option v-for="country in countries" :key="country.code"
-                                    :value="country.name">
-                              {{ country.name }}
-                            </option>
-                          </select>
-                        </div>
-                       
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">Pays de résidence *</label>
-                          <select v-model="form.residenceCountry" required
-                                  class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                            <option value="">Sélectionnez votre pays de résidence</option>
-                            <option v-for="country in countries" :key="country.code"
-                                    :value="country.name">
-                              {{ country.name }}
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                      <!-- Contact Information -->
-                      <h3 class="text-lg font-bold text-[#202a51] border-b-2 border-[#dbeff7] pb-2 mt-8">
-                        Informations de contact
-                      </h3>
-                     
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                            Téléphone principal *
-                          </label>
-                          <input type="tel" v-model="form.phone" required
-                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50"
-                                 placeholder="+228 98 01 27 27">
-                        </div>
-                       
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                            WhatsApp *
-                          </label>
-                          <input type="tel" v-model="form.whatsapp" required
-                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50"
-                                 placeholder="+228 98 01 27 27">
-                        </div>
-                      </div>
-                      <div>
-                        <label class="block text-[#202a51] font-semibold mb-2 text-sm">Adresse email *</label>
-                        <input type="email" v-model="form.email" required
-                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50"
-                               placeholder="exemple@email.com">
-                      </div>
-                      <div>
-                        <label class="block text-[#202a51] font-semibold mb-2 text-sm">Adresse postale *</label>
-                        <textarea v-model="form.address" required
-                                  class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50"
-                                  rows="2"
-                                  placeholder="Votre adresse complète"></textarea>
-                      </div>
-                      <!-- Emergency Contact -->
-                      <h3 class="text-lg font-bold text-[#202a51] border-b-2 border-[#dbeff7] pb-2">
-                        Personne à contacter en cas d'urgence
-                      </h3>
-                     
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">Nom complet *</label>
-                          <input type="text" v-model="form.emergencyContact.name" required
-                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                        </div>
-                       
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">Lien de parenté *</label>
-                          <select v-model="form.emergencyContact.relationship" required
-                                  class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                            <option value="">Sélectionnez</option>
-                            <option value="Parent">Parent</option>
-                            <option value="Conjoint(e)">Conjoint(e)</option>
-                            <option value="Frère/Soeur">Frère/Soeur</option>
-                            <option value="Autre">Autre</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">Téléphone *</label>
-                          <input type="tel" v-model="form.emergencyContact.phone" required
-                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                        </div>
-                       
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">Email</label>
-                          <input type="email" v-model="form.emergencyContact.email"
-                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                        </div>
-                      </div>
+                <div class="border-t border-gray-100 pt-5 space-y-4">
+                  <h3 class="text-xs font-bold tracking-widest text-[#01b4d5] uppercase">Contact</h3>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="field-label">Téléphone <span class="text-red-400">*</span></label>
+                      <input type="tel" v-model="form.phone" class="field-input" placeholder="+228 90 00 00 00">
                     </div>
-                    <!-- Navigation Button Step 1 -->
-                    <button type="submit"
-                            class="w-full bg-gradient-to-r from-[#00b3d4] to-[#6cc6e2] hover:from-[#202a51] hover:to-[#00b3d4] text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl">
-                      Continuer vers l'étape suivante →
+                    <div>
+                      <label class="field-label">WhatsApp <span class="text-red-400">*</span></label>
+                      <input type="tel" v-model="form.whatsapp" class="field-input" placeholder="+228 90 00 00 00">
+                    </div>
+                  </div>
+                  <div>
+                    <label class="field-label">Adresse email <span class="text-red-400">*</span></label>
+                    <input type="email" v-model="form.email" class="field-input" placeholder="vous@email.com">
+                  </div>
+                  <div>
+                    <label class="field-label">Adresse postale <span class="text-red-400">*</span></label>
+                    <textarea v-model="form.address" class="field-input" rows="2" placeholder="Rue, quartier, ville…"></textarea>
+                  </div>
+                </div>
+
+                <div class="border-t border-gray-100 pt-5 space-y-4">
+                  <h3 class="text-xs font-bold tracking-widest text-[#01b4d5] uppercase">Personne à contacter en cas d'urgence</h3>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="field-label">Nom complet <span class="text-red-400">*</span></label>
+                      <input type="text" v-model="form.emergencyContact.name" class="field-input">
+                    </div>
+                    <div>
+                      <label class="field-label">Lien de parenté <span class="text-red-400">*</span></label>
+                      <select v-model="form.emergencyContact.relationship" class="field-input">
+                        <option value="">Sélectionner</option>
+                        <option value="Parent">Parent</option>
+                        <option value="Conjoint(e)">Conjoint(e)</option>
+                        <option value="Frère/Soeur">Frère / Sœur</option>
+                        <option value="Autre">Autre</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="field-label">Téléphone <span class="text-red-400">*</span></label>
+                      <input type="tel" v-model="form.emergencyContact.phone" class="field-input">
+                    </div>
+                    <div>
+                      <label class="field-label">Email</label>
+                      <input type="email" v-model="form.emergencyContact.email" class="field-input">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-2">
+                  <button type="submit" class="btn-primary w-full">
+                    Continuer
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                  </button>
+                </div>
+              </form>
+
+              <!-- ======= ÉTAPE 2 ======= -->
+              <form v-if="currentStep === 2" @submit.prevent="goToStep3" novalidate class="space-y-5">
+
+                <!-- Niveau -->
+                <div class="space-y-3">
+                  <h3 class="text-xs font-bold tracking-widest text-[#01b4d5] uppercase">Niveau de formation <span class="text-red-400">*</span></h3>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <label v-for="lvl in [
+                      { val: 'licence', label: 'Licence Professionnelle', badge: 'BAC+3' },
+                      { val: 'master', label: 'Master Professionnel', badge: 'BAC+5' },
+                      { val: 'executive', label: 'Executive Master', badge: 'Pro' },
+                      { val: 'certificat', label: 'Certificat', badge: 'Court' }
+                    ]" :key="lvl.val"
+                      class="relative flex items-start gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all duration-200"
+                      :class="form.level === lvl.val ? 'border-[#01b4d5] bg-[#01b4d5]/5' : 'border-gray-200 hover:border-[#01b4d5]/40'">
+                      <input type="radio" v-model="form.level" :value="lvl.val" @change="updatePrograms" class="hidden">
+                      <div class="w-4 h-4 rounded-full border-2 mt-0.5 flex-shrink-0 flex items-center justify-center transition-all"
+                           :class="form.level === lvl.val ? 'border-[#01b4d5]' : 'border-gray-300'">
+                        <div v-if="form.level === lvl.val" class="w-2 h-2 rounded-full bg-[#01b4d5]"></div>
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <p class="text-sm font-semibold text-[#202a50] leading-tight">{{ lvl.label }}</p>
+                        <span class="inline-block mt-1 px-2 py-0.5 bg-[#01b4d5]/10 text-[#01b4d5] text-xs font-bold rounded-full">{{ lvl.badge }}</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Programme -->
+                <div v-if="form.level" class="space-y-2">
+                  <h3 class="text-xs font-bold tracking-widest text-[#01b4d5] uppercase">Programme <span class="text-red-400">*</span></h3>
+                  <div class="space-y-2">
+                    <label v-for="program in filteredPrograms" :key="program"
+                           class="flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all duration-200"
+                           :class="form.program === program ? 'border-[#01b4d5] bg-[#01b4d5]/5' : 'border-gray-100 hover:border-[#01b4d5]/30'">
+                      <input type="radio" v-model="form.program" :value="program" class="hidden">
+                      <div class="w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center transition-all"
+                           :class="form.program === program ? 'border-[#01b4d5]' : 'border-gray-300'">
+                        <div v-if="form.program === program" class="w-2 h-2 rounded-full bg-[#01b4d5]"></div>
+                      </div>
+                      <span class="text-sm font-medium text-gray-700">{{ program }}</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Parcours académique -->
+                <div class="border-t border-gray-100 pt-5 space-y-4">
+                  <h3 class="text-xs font-bold tracking-widest text-[#01b4d5] uppercase">Parcours académique</h3>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="field-label">Dernier diplôme <span class="text-red-400">*</span></label>
+                      <input type="text" v-model="form.diploma.name" class="field-input" placeholder="BAC+2, Licence…">
+                    </div>
+                    <div>
+                      <label class="field-label">Filière / Spécialité <span class="text-red-400">*</span></label>
+                      <input type="text" v-model="form.diploma.field" class="field-input" placeholder="Informatique, Commerce…">
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="field-label">Année d'obtention <span class="text-red-400">*</span></label>
+                      <input type="text" v-model="form.diploma.year" class="field-input" placeholder="2023">
+                    </div>
+                    <div>
+                      <label class="field-label">Établissement <span class="text-red-400">*</span></label>
+                      <input type="text" v-model="form.diploma.institution" class="field-input" placeholder="Université de…">
+                    </div>
+                  </div>
+                  <div>
+                    <label class="field-label">Expérience professionnelle</label>
+                    <select v-model="form.experience" class="field-input">
+                      <option value="">Sélectionner</option>
+                      <option value="0-1">Moins d'1 an</option>
+                      <option value="1-3">1 à 3 ans</option>
+                      <option value="3-5">3 à 5 ans</option>
+                      <option value="5+">Plus de 5 ans</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Financement -->
+                <div class="border-t border-gray-100 pt-5 space-y-3">
+                  <h3 class="text-xs font-bold tracking-widest text-[#01b4d5] uppercase">Financement <span class="text-red-400">*</span></h3>
+                  <div class="flex flex-wrap gap-2">
+                    <button v-for="src in ['Vous-même', 'Parent/tuteur', 'Employeur', 'Bourse', 'Autre']" :key="src"
+                            type="button" @click="form.financing.source = src"
+                            class="px-4 py-2 rounded-xl border-2 text-sm font-medium transition-all duration-200"
+                            :class="form.financing.source === src ? 'border-[#01b4d5] bg-[#01b4d5]/8 text-[#01b4d5]' : 'border-gray-200 text-gray-500 hover:border-[#01b4d5]/40'">
+                      {{ src }}
                     </button>
-                  </form>
-                  <!-- STEP 2: Formation Choice -->
-                  <form v-if="currentStep === 2" @submit.prevent="goToStep3" class="space-y-8">
-                   
-                    <!-- Level Selection -->
-                    <div>
-                      <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                        Choisissez votre niveau de formation *
-                      </label>
-                     
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <label class="flex items-center space-x-3 cursor-pointer border rounded-xl p-4 hover:border-[#00b3d4] transition-all duration-200"
-                               :class="{ 'border-[#00b3d4] bg-[#dbeff7]/30': form.level === 'licence' }">
-                          <input type="radio" v-model="form.level" value="licence"
-                                 class="text-[#00b3d4] focus:ring-[#00b3d4] h-5 w-5"
-                                 @change="updatePrograms">
-                          <div>
-                            <span class="font-medium text-gray-700 text-sm">Licence Professionnelle</span>
-                            <p class="text-xs text-gray-500 mt-1">Diplôme de niveau BAC+3</p>
-                          </div>
-                        </label>
-                       
-                        <label class="flex items-center space-x-3 cursor-pointer border rounded-xl p-4 hover:border-[#00b3d4] transition-all duration-200"
-                               :class="{ 'border-[#00b3d4] bg-[#dbeff7]/30': form.level === 'master' }">
-                          <input type="radio" v-model="form.level" value="master"
-                                 class="text-[#00b3d4] focus:ring-[#00b3d4] h-5 w-5"
-                                 @change="updatePrograms">
-                          <div>
-                            <span class="font-medium text-gray-700 text-sm">Master Professionnel</span>
-                            <p class="text-xs text-gray-500 mt-1">Diplôme de niveau BAC+5</p>
-                          </div>
-                        </label>
-                       
-                        <label class="flex items-center space-x-3 cursor-pointer border rounded-xl p-4 hover:border-[#00b3d4] transition-all duration-200"
-                               :class="{ 'border-[#00b3d4] bg-[#dbeff7]/30': form.level === 'executive' }">
-                          <input type="radio" v-model="form.level" value="executive"
-                                 class="text-[#00b3d4] focus:ring-[#00b3d4] h-5 w-5"
-                                 @change="updatePrograms">
-                          <div>
-                            <span class="font-medium text-gray-700 text-sm">Executive Master</span>
-                            <p class="text-xs text-gray-500 mt-1">Formation continue pour professionnels</p>
-                          </div>
-                        </label>
-                       
-                        <label class="flex items-center space-x-3 cursor-pointer border rounded-xl p-4 hover:border-[#00b3d4] transition-all duration-200"
-                               :class="{ 'border-[#00b3d4] bg-[#dbeff7]/30': form.level === 'certificat' }">
-                          <input type="radio" v-model="form.level" value="certificat"
-                                 class="text-[#00b3d4] focus:ring-[#00b3d4] h-5 w-5"
-                                 @change="updatePrograms">
-                          <div>
-                            <span class="font-medium text-gray-700 text-sm">Certificat</span>
-                            <p class="text-xs text-gray-500 mt-1">Formation courte et spécialisée</p>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
-                    <!-- Program Selection -->
-                    <div v-if="form.level">
-                      <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                        {{ levelTitle }} *
-                      </label>
-                     
-                      <div class="space-y-2">
-                        <label v-for="program in filteredPrograms" :key="program"
-                               class="flex items-center space-x-3 cursor-pointer p-3 hover:bg-[#dbeff7]/30 rounded-xl transition-all duration-200">
-                          <input type="radio" v-model="form.program" :value="program"
-                                 class="text-[#00b3d4] focus:ring-[#00b3d4] h-5 w-5">
-                          <span class="text-gray-700 text-sm">{{ program }}</span>
-                        </label>
-                      </div>
-                    </div>
-                    <!-- Education Background -->
-                    <div class="space-y-4">
-                      <h3 class="text-lg font-bold text-[#202a51] border-b-2 border-[#dbeff7] pb-2">
-                        Parcours académique
-                      </h3>
-                     
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                            Dernier diplôme obtenu *
-                          </label>
-                          <input type="text" v-model="form.diploma.name" required
-                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50"
-                                 placeholder="BAC +2, Licence, etc.">
-                        </div>
-                       
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                            Filière/Spécialité *
-                          </label>
-                          <input type="text" v-model="form.diploma.field" required
-                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50"
-                                 placeholder="Informatique, Commerce, etc.">
-                        </div>
-                      </div>
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                            Année d'obtention *
-                          </label>
-                          <input type="text" v-model="form.diploma.year" required
-                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50"
-                                 placeholder="2023">
-                        </div>
-                       
-                        <div>
-                          <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                            Établissement *
-                          </label>
-                          <input type="text" v-model="form.diploma.institution" required
-                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50"
-                                 placeholder="Nom de l'école/université">
-                        </div>
+                  </div>
+                  <div v-if="form.financing.source === 'Autre'">
+                    <label class="field-label">Précisez <span class="text-red-400">*</span></label>
+                    <input type="text" v-model="form.financing.otherSource" class="field-input">
+                  </div>
+                  <div v-if="form.financing.source && form.financing.source !== 'Vous-même'" class="bg-gray-50 rounded-xl p-4 space-y-3">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Coordonnées du sponsor</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      <div>
+                        <label class="field-label">Nom</label>
+                        <input type="text" v-model="form.financing.sponsorName" class="field-input">
                       </div>
                       <div>
-                        <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                          Expérience professionnelle (années)
-                        </label>
-                        <select v-model="form.experience"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                          <option value="">Sélectionnez</option>
-                          <option value="0-1">0-1 an</option>
-                          <option value="1-3">1-3 ans</option>
-                          <option value="3-5">3-5 ans</option>
-                          <option value="5+">Plus de 5 ans</option>
-                        </select>
+                        <label class="field-label">Téléphone</label>
+                        <input type="tel" v-model="form.financing.sponsorPhone" class="field-input">
                       </div>
-                    </div>
-                    <!-- Financial Information -->
-                    <div class="space-y-4">
-                      <h3 class="text-lg font-bold text-[#202a51] border-b-2 border-[#dbeff7] pb-2">
-                        Informations financières
-                      </h3>
-                     
                       <div>
-                        <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                          Qui prend en charge vos frais de scolarité ? *
-                        </label>
-                        <div class="space-y-2">
-                          <label v-for="source in ['Vous-même', 'Parent/tuteur', 'Employeur', 'Bourse', 'Autre']" :key="source"
-                                 class="flex items-center space-x-2 cursor-pointer">
-                            <input type="radio" v-model="form.financing.source" :value="source" required
-                                   class="text-[#00b3d4] focus:ring-[#00b3d4] h-4 w-4">
-                            <span class="text-gray-700 text-sm">{{ source }}</span>
-                          </label>
-                        </div>
-                      </div>
-                      <div v-if="form.financing.source === 'Autre'">
-                        <label class="block text-[#202a51] font-semibold mb-2 text-sm">Précisez *</label>
-                        <input type="text" v-model="form.financing.otherSource" required
-                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                      </div>
-                      <div v-if="form.financing.source !== 'Vous-même'" class="space-y-4">
-                        <p class="text-gray-700 text-sm font-semibold">
-                          Veuillez préciser les coordonnées du sponsor
-                        </p>
-                       
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          <div>
-                            <label class="block text-gray-700 text-sm mb-2">Nom</label>
-                            <input type="text" v-model="form.financing.sponsorName"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                          </div>
-                         
-                          <div>
-                            <label class="block text-gray-700 text-sm mb-2">Téléphone</label>
-                            <input type="tel" v-model="form.financing.sponsorPhone"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                          </div>
-                         
-                          <div>
-                            <label class="block text-gray-700 text-sm mb-2">Email</label>
-                            <input type="email" v-model="form.financing.sponsorEmail"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                          </div>
-                        </div>
+                        <label class="field-label">Email</label>
+                        <input type="email" v-model="form.financing.sponsorEmail" class="field-input">
                       </div>
                     </div>
-                    <!-- Navigation Buttons Step 2 -->
-                    <div class="flex justify-between gap-4 pt-4">
-                      <button type="button" @click="currentStep = 1"
-                              class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3.5 px-6 rounded-xl transition-all duration-300">
-                        ← Retour
-                      </button>
-                     
-                      <button type="submit"
-                              class="flex-1 bg-gradient-to-r from-[#00b3d4] to-[#6cc6e2] hover:from-[#202a51] hover:to-[#00b3d4] text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl">
-                        Continuer →
-                      </button>
-                    </div>
-                  </form>
-                  <!-- STEP 3: Additional Information -->
-                  <form v-if="currentStep === 3" @submit.prevent="goToStep4" class="space-y-8">
-                   
-                    <!-- Discovery Information -->
-                    <div>
-                      <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                        Comment avez-vous connu ESCEN ? *
-                      </label>
-                     
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <label v-for="source in discoverySources" :key="source"
-                               class="flex items-center space-x-2 cursor-pointer">
-                          <input type="radio" v-model="form.discovery.source" :value="source" required
-                                 class="text-[#00b3d4] focus:ring-[#00b3d4] h-4 w-4">
-                          <span class="text-gray-700 text-sm">{{ source }}</span>
-                        </label>
+                  </div>
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                  <button type="button" @click="currentStep = 1; scrollFormToTop()" class="btn-secondary flex-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                    Retour
+                  </button>
+                  <button type="submit" class="btn-primary flex-[2]">
+                    Continuer
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                  </button>
+                </div>
+              </form>
+
+              <!-- ======= ÉTAPE 3 ======= -->
+              <form v-if="currentStep === 3" @submit.prevent="goToStep4" novalidate class="space-y-5">
+
+                <!-- Découverte -->
+                <div class="space-y-3">
+                  <h3 class="text-xs font-bold tracking-widest text-[#01b4d5] uppercase">Comment avez-vous connu ESCEN ? <span class="text-red-400">*</span></h3>
+                  <div class="flex flex-wrap gap-2">
+                    <button v-for="src in discoverySources" :key="src"
+                            type="button" @click="form.discovery.source = src"
+                            class="px-4 py-2 rounded-xl border-2 text-sm font-medium transition-all duration-200"
+                            :class="form.discovery.source === src ? 'border-[#01b4d5] bg-[#01b4d5]/8 text-[#01b4d5]' : 'border-gray-200 text-gray-500 hover:border-[#01b4d5]/40'">
+                      {{ src }}
+                    </button>
+                  </div>
+                  <div v-if="form.discovery.source === 'Autre'">
+                    <label class="field-label">Précisez <span class="text-red-400">*</span></label>
+                    <input type="text" v-model="form.discovery.otherSource" class="field-input">
+                  </div>
+                  <div v-if="form.discovery.source === 'Recommandation'" class="bg-gray-50 rounded-xl p-4 space-y-3">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Personne qui vous a recommandé</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label class="field-label">Nom</label>
+                        <input type="text" v-model="form.discovery.referrerName" class="field-input">
                       </div>
-                      <div v-if="form.discovery.source === 'Autre'" class="mt-4">
-                        <label class="block text-[#202a51] font-semibold mb-2 text-sm">Précisez *</label>
-                        <input type="text" v-model="form.discovery.otherSource" required
-                               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                      </div>
-                      <div v-if="form.discovery.source === 'Recommandation'" class="mt-4 space-y-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div>
-                            <label class="block text-gray-700 text-sm mb-2">Nom de la personne</label>
-                            <input type="text" v-model="form.discovery.referrerName"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                          </div>
-                         
-                          <div>
-                            <label class="block text-gray-700 text-sm mb-2">Contact de la personne</label>
-                            <input type="text" v-model="form.discovery.referrerContact"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#00b3d4] focus:border-transparent transition-all duration-300 bg-gray-50">
-                          </div>
-                        </div>
+                      <div>
+                        <label class="field-label">Contact</label>
+                        <input type="text" v-model="form.discovery.referrerContact" class="field-input">
                       </div>
                     </div>
-                    <!-- Accommodation -->
-                    <div>
-                      <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                        Auriez-vous besoin d'assistance pour votre hébergement ? *
-                      </label>
-                     
-                      <div class="flex space-x-6 mt-2">
-                        <label class="flex items-center space-x-2 cursor-pointer">
-                          <input type="radio" v-model="form.accommodation.needAssistance" value="Oui" required
-                                 class="text-[#00b3d4] focus:ring-[#00b3d4] h-5 w-5">
-                          <span class="text-gray-700 text-sm">Oui</span>
-                        </label>
-                        <label class="flex items-center space-x-2 cursor-pointer">
-                          <input type="radio" v-model="form.accommodation.needAssistance" value="Non" required
-                                 class="text-[#00b3d4] focus:ring-[#00b3d4] h-5 w-5">
-                          <span class="text-gray-700 text-sm">Non</span>
-                        </label>
-                      </div>
-                      <div v-if="form.accommodation.needAssistance === 'Oui'" class="mt-4">
-                        <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                          Type d'hébergement préféré
-                        </label>
-                       
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          <label v-for="type in accommodationTypes" :key="type"
-                                 class="flex items-center space-x-2 cursor-pointer">
-                            <input type="radio" v-model="form.accommodation.type" :value="type"
-                                   class="text-[#00b3d4] focus:ring-[#00b3d4] h-4 w-4">
-                            <span class="text-gray-700 text-sm">{{ type }}</span>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Navigation Buttons Step 3 -->
-                    <div class="flex justify-between gap-4 pt-4">
-                      <button type="button" @click="currentStep = 2"
-                              class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3.5 px-6 rounded-xl transition-all duration-300">
-                        ← Retour
-                      </button>
-                     
-                      <button type="submit"
-                              class="flex-1 bg-gradient-to-r from-[#00b3d4] to-[#6cc6e2] hover:from-[#202a51] hover:to-[#00b3d4] text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl">
-                        Continuer →
-                      </button>
-                    </div>
-                  </form>
-                  <!-- STEP 4: Documents Upload & Validation -->
-                  <div v-if="currentStep === 4" class="space-y-8">
-                   
-                    <!-- Documents List based on Level -->
-                    <div class="bg-[#dbeff7]/30 p-4 rounded-xl mb-6">
-                      <h4 class="text-sm font-semibold text-[#202a51] mb-3">
-                        Documents requis pour {{ levelTitle.split(':')[0] }} :
-                      </h4>
-                      <ul class="text-xs text-gray-700 space-y-1">
-                        <li v-for="doc in getRequiredDocuments" :key="doc.key"
-                            class="flex items-center">
-                          <svg class="w-4 h-4 text-[#00b3d4] mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                          </svg>
-                          {{ doc.label }} {{ doc.multiple ? `(max ${doc.maxFiles || 5} fichiers)` : '' }}
-                        </li>
-                      </ul>
-                    </div>
-                    
-                    <!-- File Uploads -->
-                    <div class="space-y-4">
-                      <div v-for="doc in getRequiredDocuments" :key="doc.key">
-                        <label class="block text-[#202a51] font-semibold mb-2 text-sm">
-                          {{ doc.index }}. {{ doc.label }}
-                          <span v-if="doc.multiple" class="text-xs text-gray-500 font-normal">
-                            ({{ form.documents[doc.key].length }}/{{ doc.maxFiles || 5 }} fichiers)
-                          </span>
-                        </label>
-                        <div
-                          class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center transition-all duration-300 hover:border-[#00b3d4] cursor-pointer"
-                          :class="{
-                            'border-green-500 bg-green-50': form.documents[doc.key].length > 0,
-                            'border-[#00b3d4]': isDraggingOver === doc.key
-                          }"
-                          @click="triggerFileInput(doc.key)"
-                          @dragover.prevent="handleDragOver(doc.key)"
-                          @dragleave.prevent="handleDragLeave(doc.key)"
-                          @drop.prevent="handleDrop(doc.key, $event)"
-                        >
-                          <div v-if="form.documents[doc.key].length === 0">
-                            <svg class="w-8 h-8 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-                            </svg>
-                            <p class="text-gray-600 text-sm mb-2">
-                              Cliquez pour télécharger ou glissez-déposez
-                            </p>
-                            <p class="text-xs text-gray-500">
-                              {{ doc.accepted }} {{ doc.multiple ? '(Plusieurs fichiers autorisés)' : '' }}
-                            </p>
-                            <input :id="`fileInput-${doc.key}`" type="file"
-                                   @change="handleFileUpload(doc.key, $event)"
-                                   :accept="doc.accept"
-                                   :multiple="doc.multiple"
-                                   class="hidden">
-                          </div>
-                          
-                          <!-- Affichage des fichiers téléchargés -->
-                          <div v-else>
-                            <div class="space-y-3">
-                              <div v-for="(file, index) in form.documents[doc.key]" :key="index"
-                                   class="flex items-center justify-between bg-white p-3 rounded-lg border">
-                                <div class="flex items-center space-x-3">
-                                  <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                                  </svg>
-                                  <div>
-                                    <p class="text-sm font-medium text-gray-700 truncate max-w-xs">{{ file.name }}</p>
-                                    <p class="text-xs text-gray-500">{{ formatFileSize(file.size) }}</p>
-                                  </div>
-                                </div>
-                                <button type="button"
-                                        @click.stop="removeFile(doc.key, index)"
-                                        class="text-red-500 hover:text-red-700">
-                                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                  </svg>
-                                </button>
-                              </div>
-                            </div>
-                            
-                            <!-- Bouton pour ajouter plus de fichiers si multiple -->
-                            <div v-if="doc.multiple" class="mt-4">
-                              <button type="button"
-                                      @click.stop="triggerFileInput(doc.key)"
-                                      class="text-[#00b3d4] hover:text-[#202a51] text-sm font-medium">
-                                + Ajouter d'autres fichiers
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <!-- Declaration -->
-                    <div class="bg-[#dbeff7]/30 p-6 rounded-xl mt-8">
-                      <h4 class="text-sm font-bold text-[#202a51] mb-3">Déclaration sur l'honneur</h4>
-                      <p class="text-gray-700 text-sm mb-4">
-                        Je déclare que les renseignements fournis sont complets et conformes.
-                        Je comprends que ces informations serviront à l'étude de ma candidature.
-                      </p>
-                     
-                      <label class="flex items-start space-x-3 cursor-pointer">
-                        <input type="checkbox" v-model="form.declaration" required
-                               class="text-[#00b3d4] focus:ring-[#00b3d4] h-5 w-5 mt-0.5">
-                        <span class="text-gray-700 text-sm">
-                          Je certifie sur l'honneur l'exactitude des informations fournies et accepte les conditions *
-                        </span>
-                      </label>
-                    </div>
-                    
-                    <!-- Navigation Buttons Step 4 -->
-                    <div class="flex justify-between gap-4 pt-4">
-                      <button type="button" @click="currentStep = 3"
-                              class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3.5 px-6 rounded-xl transition-all duration-300">
-                        ← Retour
-                      </button>
-                     
-                      <button type="button"
-                              @click="submitForm"
-                              :disabled="!canSubmit || isSubmitting"
-                              :class="[
-                                'flex-1 font-semibold py-3.5 px-6 rounded-xl transition-all duration-300',
-                                canSubmit && !isSubmitting
-                                  ? 'bg-gradient-to-r from-[#00b3d4] to-[#6cc6e2] hover:from-[#202a51] hover:to-[#00b3d4] text-white transform hover:scale-[1.02] shadow-lg hover:shadow-xl'
-                                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                              ]">
-                        <div class="flex items-center justify-center">
-                          <svg v-if="isSubmitting" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                          </svg>
-                          <span>{{ isSubmitting ? 'Envoi en cours...' : 'Valider l\'inscription' }}</span>
-                        </div>
+                  </div>
+                </div>
+
+                <!-- Hébergement -->
+                <div class="border-t border-gray-100 pt-5 space-y-3">
+                  <h3 class="text-xs font-bold tracking-widest text-[#01b4d5] uppercase">Hébergement <span class="text-red-400">*</span></h3>
+                  <p class="text-sm text-gray-500">Auriez-vous besoin d'assistance pour votre hébergement ?</p>
+                  <div class="flex gap-3">
+                    <button type="button" @click="form.accommodation.needAssistance = 'Oui'"
+                            class="flex-1 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all duration-200"
+                            :class="form.accommodation.needAssistance === 'Oui' ? 'border-[#01b4d5] bg-[#01b4d5]/8 text-[#01b4d5]' : 'border-gray-200 text-gray-500 hover:border-[#01b4d5]/40'">
+                      Oui
+                    </button>
+                    <button type="button" @click="form.accommodation.needAssistance = 'Non'"
+                            class="flex-1 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all duration-200"
+                            :class="form.accommodation.needAssistance === 'Non' ? 'border-[#01b4d5] bg-[#01b4d5]/8 text-[#01b4d5]' : 'border-gray-200 text-gray-500 hover:border-[#01b4d5]/40'">
+                      Non
+                    </button>
+                  </div>
+                  <div v-if="form.accommodation.needAssistance === 'Oui'" class="space-y-2">
+                    <label class="field-label">Type d'hébergement souhaité</label>
+                    <div class="flex flex-wrap gap-2">
+                      <button v-for="type in accommodationTypes" :key="type"
+                              type="button" @click="form.accommodation.type = type"
+                              class="px-4 py-2 rounded-xl border-2 text-sm font-medium transition-all duration-200"
+                              :class="form.accommodation.type === type ? 'border-[#01b4d5] bg-[#01b4d5]/8 text-[#01b4d5]' : 'border-gray-200 text-gray-500 hover:border-[#01b4d5]/40'">
+                        {{ type }}
                       </button>
                     </div>
                   </div>
                 </div>
+
+                <div class="flex gap-3 pt-2">
+                  <button type="button" @click="currentStep = 2; scrollFormToTop()" class="btn-secondary flex-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                    Retour
+                  </button>
+                  <button type="submit" class="btn-primary flex-[2]">
+                    Continuer
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                  </button>
+                </div>
+              </form>
+
+              <!-- ======= ÉTAPE 4 ======= -->
+              <div v-if="currentStep === 4" class="space-y-5">
+
+                <!-- Récap niveau choisi -->
+                <div v-if="form.level" class="flex items-center gap-3 p-3 bg-[#01b4d5]/8 rounded-xl border border-[#01b4d5]/20">
+                  <svg class="w-5 h-5 text-[#01b4d5] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  <p class="text-sm font-medium text-[#202a50]">
+                    Documents pour <span class="text-[#01b4d5]">{{ levelTitle.replace(' :', '') }}</span>
+                    <span v-if="form.program"> — {{ form.program }}</span>
+                  </p>
+                </div>
+                <div v-else class="flex items-center gap-3 p-3 bg-amber-50 rounded-xl border border-amber-200">
+                  <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  <p class="text-sm text-amber-700">Aucun niveau sélectionné — revenez à l'étape 2.</p>
+                </div>
+
+                <!-- Uploads -->
+                <div class="space-y-4">
+                  <h3 class="text-xs font-bold tracking-widest text-[#01b4d5] uppercase">Documents requis</h3>
+                  <div v-for="doc in getRequiredDocuments" :key="doc.key" class="space-y-1.5">
+                    <div class="flex items-center justify-between">
+                      <label class="field-label mb-0">
+                        {{ doc.index }}. {{ doc.label }}
+                        <span v-if="doc.multiple" class="ml-1 text-xs text-gray-400 font-normal">({{ form.documents[doc.key].length }}/{{ doc.maxFiles || 5 }})</span>
+                      </label>
+                      <span v-if="form.documents[doc.key].length > 0"
+                            class="text-xs font-semibold text-emerald-600 flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        Ajouté
+                      </span>
+                    </div>
+
+                    <div class="border-2 border-dashed rounded-xl p-4 text-center cursor-pointer transition-all duration-200"
+                         :class="{
+                           'border-emerald-400 bg-emerald-50': form.documents[doc.key].length > 0,
+                           'border-[#01b4d5] bg-[#01b4d5]/5': isDraggingOver === doc.key,
+                           'border-gray-200 hover:border-[#01b4d5]/50 hover:bg-gray-50': form.documents[doc.key].length === 0 && isDraggingOver !== doc.key
+                         }"
+                         @click="triggerFileInput(doc.key)"
+                         @dragover.prevent="handleDragOver(doc.key)"
+                         @dragleave.prevent="handleDragLeave(doc.key)"
+                         @drop.prevent="handleDrop(doc.key, $event)">
+
+                      <input :id="`fileInput-${doc.key}`" type="file"
+                             @change="handleFileUpload(doc.key, $event)"
+                             :accept="doc.accept" :multiple="doc.multiple" class="hidden">
+
+                      <div v-if="form.documents[doc.key].length === 0" class="py-2">
+                        <svg class="w-7 h-7 text-gray-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                        </svg>
+                        <p class="text-sm text-gray-400">Cliquer ou glisser-déposer</p>
+                        <p class="text-xs text-gray-300 mt-0.5">{{ doc.accepted }}</p>
+                      </div>
+
+                      <div v-else class="space-y-2 text-left">
+                        <div v-for="(file, idx) in form.documents[doc.key]" :key="idx"
+                             class="flex items-center justify-between bg-white rounded-lg px-3 py-2 border border-gray-100">
+                          <div class="flex items-center gap-2 min-w-0">
+                            <svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            <div class="min-w-0">
+                              <p class="text-xs font-medium text-gray-700 truncate">{{ file.name }}</p>
+                              <p class="text-xs text-gray-400">{{ formatFileSize(file.size) }}</p>
+                            </div>
+                          </div>
+                          <button type="button" @click.stop="removeFile(doc.key, idx)"
+                                  class="ml-2 p-1 rounded-lg hover:bg-red-50 text-gray-300 hover:text-red-500 transition-colors flex-shrink-0">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                          </button>
+                        </div>
+                        <button v-if="doc.multiple" type="button" @click.stop="triggerFileInput(doc.key)"
+                                class="text-xs font-medium text-[#01b4d5] hover:text-[#202a50] transition-colors">
+                          + Ajouter un autre fichier
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Déclaration -->
+                <div class="border-t border-gray-100 pt-5">
+                  <label class="flex items-start gap-3 cursor-pointer group">
+                    <div class="mt-0.5 w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-all duration-200"
+                         :class="form.declaration ? 'bg-[#01b4d5] border-[#01b4d5]' : 'border-gray-300 group-hover:border-[#01b4d5]/50'">
+                      <svg v-if="form.declaration" class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                      </svg>
+                    </div>
+                    <input type="checkbox" v-model="form.declaration" class="hidden">
+                    <span class="text-sm text-gray-600 leading-relaxed">
+                      Je certifie sur l'honneur l'exactitude des informations fournies et j'accepte les
+                      <span class="text-[#01b4d5] font-medium">conditions d'inscription</span>. <span class="text-red-400">*</span>
+                    </span>
+                  </label>
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                  <button type="button" @click="currentStep = 3; scrollFormToTop()" class="btn-secondary flex-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                    Retour
+                  </button>
+                  <button type="button" @click="submitForm"
+                          class="flex-[2] flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-semibold text-sm transition-all duration-300"
+                          :class="canSubmit && !isSubmitting
+                            ? 'bg-[#202a50] hover:bg-[#01b4d5] text-white shadow-lg shadow-[#202a50]/20 hover:shadow-[#01b4d5]/30'
+                            : 'bg-gray-100 text-gray-400 cursor-not-allowed'">
+                    <svg v-if="isSubmitting" class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                    </svg>
+                    <svg v-else class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    {{ isSubmitting ? 'Envoi en cours…' : 'Valider l\'inscription' }}
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- Bas de page form -->
+          <p class="text-center text-xs text-gray-400 mt-6 pb-8">
+            Besoin d'aide ?
+            <a href="tel:+22898012727" class="text-[#01b4d5] hover:underline">+228 98 01 27 27</a>
+            ·
+            <a href="mailto:hello@escen.university" class="text-[#01b4d5] hover:underline">hello@escen.university</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- ===== PANNEAU DROIT (desktop) ===== -->
+      <div class="hidden lg:flex flex-col w-[380px] xl:w-[420px] flex-shrink-0 bg-gradient-to-br from-[#0d1b3e] via-[#1a2d5a] to-[#0d1b3e] sticky top-16 h-[calc(100vh-32px)] overflow-hidden">
+        <!-- Déco -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+          <div class="absolute -right-20 w-64 h-64 bg-[#01b4d5]/10 rounded-full blur-3xl"></div>
+          <div class="absolute bottom-0 left-0 w-80 h-80 bg-[#01b4d5]/5 rounded-full blur-3xl"></div>
+          <div class="absolute top-1/2 right-8 w-1 h-24 bg-[#01b4d5]/20 rounded-full"></div>
+        </div>
+
+        <div class="relative z-10 flex flex-col h-full px-8 py-10">
+          <!-- Logo + Titre -->
+          <div class="mb-5">
+            <img src="/logo/LOGO_ESCEN.png" alt="ESCEN" class="h-12 w-auto brightness-0 invert mb-6">
+            <h2 class="text-2xl font-bold text-white leading-snug">
+              Rejoignez l'excellence numérique
+            </h2>
+            <p class="text-sm text-gray-400 leading-relaxed">
+              Formez-vous aux métiers de demain avec des experts du secteur digital.
+            </p>
+          </div>
+
+          <!-- Avantages -->
+          <div class="space-y-4 flex-1">
+            <div v-for="item in sidebarItems" :key="item.title"
+                 class="flex items-start gap-3 p-4 rounded-2xl bg-white/5 border border-white/8 hover:bg-white/8 transition-colors duration-200">
+              <div class="w-10 h-10 rounded-xl bg-[#01b4d5]/15 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-[#01b4d5]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" :d="item.icon"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-white mb-0.5">{{ item.title }}</p>
+                <p class="text-xs text-gray-400 leading-relaxed">{{ item.desc }}</p>
               </div>
             </div>
           </div>
-          <!-- Right Side - Hero Image & Info (Fixed) -->
-          <div class="hidden lg:flex flex-col relative bg-gradient-to-br from-[#202a51] to-[#374c9c] overflow-hidden">
-            <!-- Background Pattern -->
-            <div class="absolute inset-0 opacity-10">
-              <div class="absolute top-0 right-0 w-64 h-64 bg-[#00b3d4] rounded-full -translate-y-32 translate-x-32"></div>
-              <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#6cc6e2] rounded-full translate-y-48 -translate-x-48"></div>
+
+          <!-- Stats -->
+          <div class="mt-8 grid grid-cols-3 gap-3">
+            <div v-for="stat in sidebarStats" :key="stat.label" class="text-center">
+              <p class="text-xl font-bold text-[#01b4d5]">{{ stat.value }}</p>
+              <p class="text-xs text-gray-400 mt-0.5">{{ stat.label }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-   
-    <!-- Help Button -->
-    <button
-      @click="showHelp = true"
-      class="fixed bottom-6 right-6 bg-gradient-to-r from-[#00b3d4] to-[#6cc6e2] hover:from-[#202a51] hover:to-[#00b3d4] text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 z-40"
-    >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-      </svg>
-    </button>
-    
-    <!-- Help Modal -->
-    <div v-if="showHelp" class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div class="bg-white rounded-2xl max-w-md w-full p-6">
-        <div class="flex justify-between items-center mb-6">
-          <h3 class="text-xl font-bold text-[#202a51]">Besoin d'aide ?</h3>
-          <button @click="showHelp = false" class="text-gray-400 hover:text-gray-600 transition-colors">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-          </button>
-        </div>
-       
-        <div class="space-y-4">
-          <div class="p-4 bg-[#dbeff7]/30 rounded-xl border border-[#dbeff7]">
-            <h4 class="font-semibold text-[#202a51] mb-2">Support technique</h4>
-            <p class="text-gray-700 text-sm">
-              Contactez notre équipe support :<br>
-              <a href="mailto:support@escen.university" class="text-[#00b3d4] hover:text-[#202a51] transition-colors">support@escen.university</a><br>
-              <a href="tel:+22898012727" class="text-[#00b3d4] hover:text-[#202a51] transition-colors">+228 98 01 27 27</a>
-            </p>
+
+    <!-- ===== MODALE AIDE ===== -->
+    <transition enter-active-class="transition duration-200 ease-out" enter-from-class="opacity-0 scale-95" enter-to-class="opacity-100 scale-100"
+                leave-active-class="transition duration-150 ease-in" leave-from-class="opacity-100 scale-100" leave-to-class="opacity-0 scale-95">
+      <div v-if="showHelp" class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="font-bold text-[#202a50]">Besoin d'aide ?</h3>
+            <button @click="showHelp = false" class="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors">
+              <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
           </div>
-        </div>
-       
-        <div class="mt-6 flex justify-end">
-          <button
-            @click="showHelp = false"
-            class="bg-gradient-to-r from-[#00b3d4] to-[#6cc6e2] hover:from-[#202a51] hover:to-[#00b3d4] text-white px-6 py-2.5 rounded-xl transition-all duration-300 font-semibold"
-          >
-            Fermer
-          </button>
+          <div class="space-y-3 text-sm text-gray-600">
+            <a href="mailto:hello@escen.university" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors">
+              <div class="w-8 h-8 bg-[#01b4d5]/10 rounded-lg flex items-center justify-center">
+                <svg class="w-4 h-4 text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </div>
+              hello@escen.university
+            </a>
+            <a href="tel:+22898012727" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors">
+              <div class="w-8 h-8 bg-[#01b4d5]/10 rounded-lg flex items-center justify-center">
+                <svg class="w-4 h-4 text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
+              </div>
+              +228 98 01 27 27
+            </a>
+          </div>
+          <button @click="showHelp = false" class="mt-5 w-full btn-primary">Fermer</button>
         </div>
       </div>
-    </div>
-   
-    <!-- Success Notification -->
-    <div
-      v-if="showNotification"
-      class="fixed top-6 right-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-xl shadow-lg flex items-center space-x-3 animate-slide-in z-50"
-    >
-      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+    </transition>
+
+    <!-- ===== TOAST SUCCÈS ===== -->
+    <transition enter-active-class="transition duration-300 ease-out" enter-from-class="opacity-0 translate-y-4" enter-to-class="opacity-100 translate-y-0"
+                leave-active-class="transition duration-200 ease-in" leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 translate-y-4">
+      <div v-if="showNotification"
+           class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#202a50] text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 z-50 min-w-[300px]">
+        <div class="w-8 h-8 bg-emerald-500 rounded-xl flex items-center justify-center flex-shrink-0">
+          <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+        <div>
+          <p class="font-semibold text-sm">Inscription envoyée !</p>
+          <p class="text-xs text-gray-400">Vous recevrez un email de confirmation.</p>
+        </div>
+      </div>
+    </transition>
+
+    <!-- Bouton aide flottant -->
+    <button @click="showHelp = true"
+            class="fixed bottom-6 right-6 w-11 h-11 rounded-full bg-[#202a50] hover:bg-[#01b4d5] text-white flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 z-40">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
       </svg>
-      <span class="font-medium text-sm">Inscription réussie ! Vous recevrez un email de confirmation.</span>
-    </div>
+    </button>
+
   </div>
 </template>
 
 <script setup>
 import { ref, reactive, computed } from 'vue'
+import swal from 'sweetalert'
 
 // Current step
 const currentStep = ref(1)
+const formContainer = ref(null)
+
+const steps = [
+  { n: 1, label: 'Informations', title: 'Informations personnelles', subtitle: 'Identité, contact et personne d\'urgence', icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
+  { n: 2, label: 'Formation', title: 'Choix de formation', subtitle: 'Niveau, programme et parcours académique', icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253' },
+  { n: 3, label: 'Profil', title: 'Informations complémentaires', subtitle: 'Découverte et hébergement', icon: 'M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
+  { n: 4, label: 'Documents', title: 'Documents & Validation', subtitle: 'Téléchargement des pièces requises', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
+]
+
+const sidebarItems = [
+  { icon: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z', title: 'Diplôme reconnu', desc: 'Diplômes accrédités et reconnus à l\'échelle nationale et internationale.' },
+  { icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z', title: 'Insertion professionnelle', desc: 'Réseau de partenaires et accompagnement à l\'emploi dès la 1ère année.' },
+  { icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z', title: 'Formateurs experts', desc: 'Corps enseignant composé de praticiens issus du secteur professionnel.' },
+]
+
+const sidebarStats = [
+  { value: '500+', label: 'Étudiants' },
+  { value: '95%', label: 'Insertion' },
+  { value: '4', label: 'Filières' },
+]
+
+const scrollFormToTop = () => {
+  if (formContainer.value) {
+    formContainer.value.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+}
 
 // Liste complète des pays
 const countries = [
@@ -1237,65 +1246,18 @@ const formatFileSize = (bytes) => {
 
 // Navigation functions
 const goToStep2 = () => {
-  const requiredFields = [
-    'lastName', 'firstName', 'gender', 'birthDate', 'birthPlace',
-    'nationality', 'residenceCountry', 'phone', 'whatsapp', 'email', 'address'
-  ]
- 
-  for (const field of requiredFields) {
-    if (!form[field]) {
-      alert(`Veuillez remplir le champ ${field}`)
-      return
-    }
-  }
- 
-  if (!form.emergencyContact.name || !form.emergencyContact.relationship || !form.emergencyContact.phone) {
-    alert('Veuillez remplir toutes les informations concernant la personne à contacter en cas d\'urgence')
-    return
-  }
- 
   currentStep.value = 2
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  scrollFormToTop()
 }
 
 const goToStep3 = () => {
-  if (!form.level) {
-    alert('Veuillez sélectionner votre niveau/grade')
-    return
-  }
- 
-  if (!form.program) {
-    alert('Veuillez sélectionner votre programme')
-    return
-  }
- 
-  if (!form.diploma.name || !form.diploma.field || !form.diploma.year || !form.diploma.institution) {
-    alert('Veuillez remplir toutes les informations concernant votre dernier diplôme')
-    return
-  }
- 
-  if (!form.financing.source) {
-    alert('Veuillez indiquer qui prend en charge vos frais de scolarité')
-    return
-  }
- 
   currentStep.value = 3
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  scrollFormToTop()
 }
 
 const goToStep4 = () => {
-  if (!form.discovery.source) {
-    alert('Veuillez indiquer comment vous avez connu ESCEN')
-    return
-  }
- 
-  if (!form.accommodation.needAssistance) {
-    alert('Veuillez indiquer si vous avez besoin d\'assistance pour l\'hébergement')
-    return
-  }
- 
   currentStep.value = 4
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  scrollFormToTop()
 }
 
 // Update programs when level changes
@@ -1341,7 +1303,7 @@ const handleFileUpload = (field, event) => {
   
   // Vérifier la limite de fichiers
   if (docConfig.maxFiles && (form.documents[field].length + files.length) > docConfig.maxFiles) {
-    alert(`Maximum ${docConfig.maxFiles} fichier(s) autorisé(s) pour ce document`)
+    swal({ title: 'Trop de fichiers', text: `Maximum ${docConfig.maxFiles} fichier(s) autorisé(s) pour ce document.`, icon: 'error', button: 'OK' })
     return
   }
 
@@ -1358,7 +1320,7 @@ const handleFileUpload = (field, event) => {
     }
     
     if (file.size > maxSize) {
-      alert(`Le fichier "${file.name}" est trop volumineux. Taille maximum : ${maxSize === 10 * 1024 * 1024 ? '10MB' : '5MB'}`)
+      swal({ title: 'Fichier trop volumineux', text: `"${file.name}" dépasse la limite autorisée (${maxSize === 10 * 1024 * 1024 ? '10MB' : '5MB'}).`, icon: 'error', button: 'OK' })
       return
     }
     
@@ -1492,9 +1454,58 @@ const prepareJSONData = () => {
 }
 
 // Submit form amélioré
-const submitForm = async () => {
+const validateAllSteps = () => {
+  // Étape 1
+  const step1Fields = ['lastName', 'firstName', 'gender', 'birthDate', 'birthPlace', 'nationality', 'residenceCountry', 'phone', 'whatsapp', 'email', 'address']
+  const step1Invalid = step1Fields.some(f => !form[f])
+  const emergencyInvalid = !form.emergencyContact.name || !form.emergencyContact.relationship || !form.emergencyContact.phone
+  if (step1Invalid || emergencyInvalid) {
+    currentStep.value = 1
+    scrollFormToTop()
+    return { title: 'Étape 1 incomplète', text: 'Veuillez compléter toutes les informations personnelles.' }
+  }
+
+  // Étape 2
+  if (!form.level || !form.program) {
+    currentStep.value = 2
+    scrollFormToTop()
+    return { title: 'Étape 2 incomplète', text: 'Veuillez sélectionner votre niveau et programme.' }
+  }
+  if (!form.diploma.name || !form.diploma.field || !form.diploma.year || !form.diploma.institution) {
+    currentStep.value = 2
+    scrollFormToTop()
+    return { title: 'Étape 2 incomplète', text: 'Veuillez remplir les informations de votre dernier diplôme.' }
+  }
+  if (!form.financing.source) {
+    currentStep.value = 2
+    scrollFormToTop()
+    return { title: 'Étape 2 incomplète', text: 'Veuillez indiquer la source de financement.' }
+  }
+
+  // Étape 3
+  if (!form.discovery.source) {
+    currentStep.value = 3
+    scrollFormToTop()
+    return { title: 'Étape 3 incomplète', text: 'Veuillez indiquer comment vous avez connu ESCEN.' }
+  }
+  if (!form.accommodation.needAssistance) {
+    currentStep.value = 3
+    scrollFormToTop()
+    return { title: 'Étape 3 incomplète', text: 'Veuillez renseigner votre besoin d\'hébergement.' }
+  }
+
+  // Étape 4
   if (!canSubmit.value) {
-    alert('Veuillez télécharger tous les documents requis et accepter la déclaration')
+    return { title: 'Étape 4 incomplète', text: 'Veuillez télécharger tous les documents requis et accepter la déclaration.' }
+  }
+
+  return null
+}
+
+const submitForm = async () => {
+  const error = validateAllSteps()
+  if (error) {
+    swal({ title: error.title, text: error.text, icon: 'warning', button: 'Corriger' })
     return
   }
  
@@ -1535,12 +1546,12 @@ const submitForm = async () => {
       resetForm()
       currentStep.value = 1
       showNotification.value = false
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      scrollFormToTop()
     }, 3000)
     
   } catch (error) {
     console.error('Error:', error)
-    alert(`Une erreur est survenue: ${error.message}`)
+    swal({ title: 'Erreur', text: `Une erreur est survenue : ${error.message}`, icon: 'error', button: 'Fermer' })
   } finally {
     isSubmitting.value = false
   }
@@ -1598,46 +1609,70 @@ definePageMeta({
 </script>
 
 <style scoped>
-/* Custom animations */
-@keyframes slide-in {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-.animate-slide-in {
-  animation: slide-in 0.3s ease-out;
-}
-/* Smooth transitions */
-.transition-all {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
-}
-/* Custom scrollbar for left side */
-.overflow-y-auto::-webkit-scrollbar {
-  width: 6px;
-}
-.overflow-y-auto::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-.overflow-y-auto::-webkit-scrollbar-thumb {
-  background: #00b3d4;
-  border-radius: 3px;
-}
-.overflow-y-auto::-webkit-scrollbar-thumb:hover {
-  background: #009cba;
-}
-/* Ensure the right side doesn't scroll */
-.overflow-hidden {
-  overflow: hidden;
+.field-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 0.375rem;
 }
 
-.h-full {
-  height: 100%;
+.field-input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  background-color: #f9fafb;
+  color: #1f2937;
+  transition: all 0.2s;
 }
+.field-input:focus {
+  outline: none;
+  border-color: #01b4d5;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(1, 180, 213, 0.15);
+}
+.field-input::placeholder { color: #d1d5db; }
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  background-color: #01b4d5;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  box-shadow: 0 4px 14px rgba(1, 180, 213, 0.25);
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover { background-color: #019fbf; box-shadow: 0 6px 20px rgba(1, 180, 213, 0.3); }
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  background-color: #f3f4f6;
+  color: #4b5563;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+.btn-secondary:hover { background-color: #e5e7eb; }
+.btn-secondary:active { transform: scale(0.98); }
+
+.overflow-y-auto::-webkit-scrollbar { width: 5px; }
+.overflow-y-auto::-webkit-scrollbar-track { background: transparent; }
+.overflow-y-auto::-webkit-scrollbar-thumb { background: #01b4d5; border-radius: 10px; }
 </style>

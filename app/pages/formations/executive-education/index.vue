@@ -134,14 +134,14 @@
 
                             <!-- Boutons avec couleurs dynamiques -->
                             <div class="flex flex-col sm:flex-row gap-4">
-                                <a :href="formation.brochure" target="_blank" rel="noopener noreferrer"
+                                <button type="button" @click="openBrochureModal(formation.brochure)"
                                     :class="getPrimaryButtonClasses(index)">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                     </svg>
                                     Télécharger la brochure
-                                </a>
+                                </button>
                                 <button :class="getSecondaryButtonClasses(index)" @click="voirDetails(formation.id)">
                                     En savoir plus
                                 </button>
@@ -213,6 +213,9 @@
 
             </div>
         </section>
+
+        <!-- Modal Brochure -->
+        <BrochureModal :isOpen="isModalOpen" @close="isModalOpen = false" @submit="handleBrochureSubmit" />
     </div>
 </template>
 
@@ -221,10 +224,31 @@ import { useRouter } from 'vue-router'
 const router = useRouter()    
 import { ref, computed, watch } from 'vue'
 import Breadcrumb from '~/components/Breadcrumb.vue'
+import BrochureModal from '~/components/BrochureModal.vue'
+
 // États réactifs
 const searchQuery = ref('')
 const currentPage = ref(1)
 const itemsPerPage = ref(4)
+const isModalOpen = ref(false)
+const selectedBrochureUrl = ref('')
+
+const openBrochureModal = (url) => {
+    selectedBrochureUrl.value = url
+    isModalOpen.value = true
+}
+
+const handleBrochureSubmit = (formData) => {
+    console.log("Formulaire modal validé :", formData)
+    const link = document.createElement('a')
+    link.href = selectedBrochureUrl.value
+    link.target = '_blank'
+    link.setAttribute('download', '')
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    isModalOpen.value = false
+}
 
 // Tableau des formations
 const formations = [

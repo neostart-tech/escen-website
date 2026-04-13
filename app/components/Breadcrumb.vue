@@ -47,7 +47,10 @@
           <div class="w-12 h-px bg-gradient-to-l from-transparent to-[#01b4d5]"></div>
         </div>
 
-        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 tracking-tight">
+        <h1 
+          class="text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 tracking-tight"
+          :class="{ 'animate-title-reveal': animateTitle }"
+        >
           {{ title }}
         </h1>
 
@@ -81,9 +84,31 @@ defineProps({
   description: { type: String, default: '' },
   duration: { type: String, default: null }, // optionnel
   backgroundImage: { type: String, default: '/valeurs/bg.jpg' },
+  animateTitle: { type: Boolean, default: false }, // Optionnel: effet waouh sur le titre
   breadcrumb: {
     type: Array,
     default: () => [],
   },
 })
 </script>
+
+<style scoped>
+@keyframes title-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    letter-spacing: -4px;
+    filter: blur(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    letter-spacing: normal; /* Ou ajuster si besoin */
+    filter: blur(0);
+  }
+}
+
+.animate-title-reveal {
+  animation: title-reveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+</style>
