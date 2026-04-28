@@ -4,7 +4,7 @@
         <Breadcrumb :title="article.title" :subtitle="getCategoryName(article.category)"
             :description="article.excerpt" :breadcrumb="[
                 { label: 'Accueil', href: '/' },
-                { label: 'Blog', href: '/blog' },
+                { label: 'Blog', href: '/blogs' },
                 { label: article.title }
             ]" :backgroundImage="article.image" overlay />
 
@@ -636,11 +636,11 @@ const replyToComment = (commentId) => {
 }
 
 const goToArticle = (id) => {
-    router.push(`/article/${id}`)
+    router.push(`/blogs/${id}`)
 }
 
 const filterByCategory = (categoryId) => {
-    router.push(`/blog?category=${categoryId}`)
+    router.push(`/blogs?category=${categoryId}`)
 }
 
 const subscribeNewsletter = () => {

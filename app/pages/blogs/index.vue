@@ -154,7 +154,7 @@
                                 class="text-xs text-gray-500 bg-gray-100 px-2 lg:px-3 py-1 rounded-full border border-gray-200">
                                 {{ article.date }}
                             </span>
-                            <button
+                            <NuxtLink :to="`/blogs/${article.id}`"
                                 class="flex items-center gap-1 lg:gap-2 text-[#01b4d5] font-semibold text-xs lg:text-sm hover:gap-2 lg:hover:gap-3 transition-all duration-300 group/btn border border-[#01b4d5] rounded-lg px-3 py-1 hover:bg-[#01b4d5] hover:text-white">
                                 Lire
                                 <svg class="w-3 h-3 lg:w-4 lg:h-4 transform group-hover/btn:translate-x-1 transition-transform duration-300"
@@ -162,7 +162,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 5l7 7-7 7" />
                                 </svg>
-                            </button>
+                            </NuxtLink>
                         </div>
                     </div>
                 </article>
