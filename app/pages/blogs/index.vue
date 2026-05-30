@@ -6,73 +6,89 @@
                 { label: 'Blog' }
             ]" backgroundImage="/valeurs/bg.jpg" />
 
-        <!-- Header avec Contrôles -->
-        <header class="bg-white shadow-sm">
-            <div class="container mx-auto px-4 sm:px-6 py-6 lg:py-8">
-                <!-- Barre de Contrôles - Layout horizontal -->
-                <div class="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between bg-white rounded-xl lg:rounded-2xl p-4 lg:p-6 shadow-sm">
-                    <!-- Zone de Recherche - Gauche -->
-                    <div class="w-full lg:w-auto lg:flex-1 lg:max-w-md">
-                        <div class="relative">
-                            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 lg:w-5 lg:h-5 text-gray-400" 
-                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        <!-- Contrôles et Filtres -->
+        <div class="container mx-auto px-4 sm:px-6 py-6 lg:py-8">
+            <div class="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-4 sm:p-6 mb-8 flex flex-col gap-5">
+                
+                <!-- Ligne supérieure : Recherche et Filtre Type -->
+                <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+                    <!-- Recherche -->
+                    <div class="w-full md:w-1/2 lg:w-1/3 relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <svg class="w-5 h-5 text-gray-400 group-focus-within:text-[#01b4d5] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
-                            <input 
-                                type="text" 
-                                v-model="searchQuery" 
-                                placeholder="Rechercher un article..."
-                                class="w-full pl-10 lg:pl-12 pr-4 py-2 lg:py-3 bg-white border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#01b4d5] focus:border-transparent transition-all duration-300 text-sm lg:text-base"
-                            >
                         </div>
+                        <input 
+                            type="text" 
+                            v-model="searchQuery" 
+                            placeholder="Rechercher un article ou événement..."
+                            class="w-full pl-11 pr-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#01b4d5]/20 focus:border-[#01b4d5] focus:bg-white transition-all duration-300"
+                        >
                     </div>
 
-                    <!-- Filtres et Sélecteur - Droite -->
-                    <div class="flex flex-col sm:flex-row gap-3 lg:gap-4 items-stretch sm:items-center w-full lg:w-auto">
-                        <!-- Filtre Catégories -->
-                        <select 
-                            v-model="activeCategory"
-                            class="w-full sm:w-48 px-3 lg:px-4 py-2 lg:py-3 bg-white border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#01b4d5] focus:border-transparent transition-all duration-300 text-sm lg:text-base"
+                    <!-- Filtre Type (Pills) -->
+                    <div class="flex bg-gray-50 p-1.5 rounded-xl w-full md:w-auto border border-gray-200 shadow-sm">
+                        <button 
+                            @click="filterType = 'all'; currentPage = 1" 
+                            class="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300 flex-1 sm:flex-none whitespace-nowrap"
+                            :class="filterType === 'all' ? 'bg-white text-[#01b4d5] shadow-sm border border-gray-100' : 'text-gray-500 hover:text-gray-900 border border-transparent'"
                         >
-                            <option value="all">Toutes les catégories</option>
-                            <option value="digital">Transformation Digital</option>
-                            <option value="innovation">Innovation</option>
-                            <option value="education">Éducation</option>
-                            <option value="career">Carrière</option>
-                            <option value="event">Événements</option>
-                        </select>
+                            Tout
+                        </button>
+                        <button 
+                            @click="filterType = 'blog'; currentPage = 1" 
+                            class="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300 flex-1 sm:flex-none whitespace-nowrap"
+                            :class="filterType === 'blog' ? 'bg-white text-[#01b4d5] shadow-sm border border-gray-100' : 'text-gray-500 hover:text-gray-900 border border-transparent'"
+                        >
+                            Articles
+                        </button>
+                        <button 
+                            @click="filterType = 'event'; currentPage = 1" 
+                            class="px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300 flex-1 sm:flex-none whitespace-nowrap"
+                            :class="filterType === 'event' ? 'bg-white text-[#01b4d5] shadow-sm border border-gray-100' : 'text-gray-500 hover:text-gray-900 border border-transparent'"
+                        >
+                            Événements
+                        </button>
+                    </div>
+                </div>
 
-                        <!-- Sélecteur d'articles par page -->
-                        <div class="flex items-center justify-between sm:justify-start gap-3 w-full sm:w-auto">
-                            <span class="text-xs lg:text-sm text-gray-600 whitespace-nowrap">Articles/page :</span>
+                <div class="w-full h-px bg-gray-100 hidden md:block"></div>
+
+                <!-- Ligne inférieure : Stats et Pagination -->
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <!-- Badge Stats -->
+                    <div class="px-4 py-2 bg-blue-50/50 text-[#01b4d5] rounded-xl font-semibold text-sm border border-blue-100 shadow-sm w-full md:w-auto text-center md:text-left">
+                        {{ filteredArticles.length }} résultat{{ filteredArticles.length > 1 ? 's' : '' }}
+                    </div>
+
+                    <!-- Sélecteur d'affichage -->
+                    <div class="flex items-center justify-center md:justify-end gap-3 w-full md:w-auto">
+                        <span class="text-sm text-gray-500 font-medium hidden sm:block">Affichage :</span>
+                        <div class="relative w-full sm:w-auto">
                             <select 
                                 v-model="articlesPerPage" 
                                 @change="currentPage = 1"
-                                class="w-20 px-3 lg:px-4 py-2 lg:py-3 bg-white border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#01b4d5] focus:border-transparent transition-all duration-300 text-sm lg:text-base"
+                                class="appearance-none w-full sm:w-auto pl-4 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-gray-700 font-medium focus:outline-none focus:ring-2 focus:ring-[#01b4d5]/20 focus:border-[#01b4d5] cursor-pointer hover:bg-gray-50 transition-all duration-300 shadow-sm"
                             >
-                                <option :value="4">4</option>
-                                <option :value="8">8</option>
-                                <option :value="12">12</option>
-                                <option :value="16">16</option>
+                                <option :value="4">4 par page</option>
+                                <option :value="8">8 par page</option>
+                                <option :value="12">12 par page</option>
+                                <option :value="16">16 par page</option>
                             </select>
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Stats -->
-                <div class="flex justify-center mt-4 lg:mt-6">
-                    <div class="bg-gray-100 rounded-full px-4 lg:px-6 py-1 lg:py-2">
-                        <span class="text-xs lg:text-sm text-gray-600">
-                            {{ filteredArticles.length }} article{{ filteredArticles.length > 1 ? 's' : '' }} trouvé{{ filteredArticles.length > 1 ? 's' : '' }}
-                        </span>
-                    </div>
-                </div>
             </div>
-        </header>
+        </div>
 
         <!-- Contenu Principal -->
-        <main class="container mx-auto px-4 sm:px-6 py-6 lg:py-12">
+        <main class="container mx-auto px-4 sm:px-6 pb-12 lg:pb-20">
             <!-- Grille d'Articles -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
                 <article v-for="(article, index) in displayedArticles" :key="article.id"
@@ -89,14 +105,6 @@
                         
                         <!-- Overlay gradient -->
                         <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        
-                        <!-- Badge Catégorie -->
-                        <div class="absolute top-3 left-3 lg:top-4 lg:left-4">
-                            <span
-                                class="px-2 lg:px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-[#01b4d5] capitalize shadow-sm border border-white/20">
-                                {{ getCategoryName(article.category) }}
-                            </span>
-                        </div>
 
                         <!-- Badge Featured -->
                         <div v-if="article.featured" class="absolute top-3 right-3 lg:top-4 lg:right-4">
@@ -107,6 +115,17 @@
                                         d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                 </svg>
                                 <span class="hidden sm:inline">Featured</span>
+                            </span>
+                        </div>
+
+                        <!-- Badge Evénement -->
+                        <div v-if="article.is_event" class="absolute top-3 left-3 lg:top-4 lg:left-4">
+                            <span
+                                class="px-2 lg:px-3 py-1 bg-[#01b4d5] text-white text-xs font-semibold rounded-full shadow-lg flex items-center gap-1 border border-[#0095b3]">
+                                <svg class="w-3 h-3 lg:w-4 lg:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                <span class="hidden sm:inline">Événement</span>
                             </span>
                         </div>
                     </div>
@@ -149,13 +168,13 @@
                         </p>
 
                         <!-- Date et Actions -->
-                        <div class="flex items-center justify-between pt-3 lg:pt-4 border-t border-gray-100">
+                        <div class="flex flex-wrap items-center justify-between gap-3 pt-3 lg:pt-4 border-t border-gray-100 mt-auto">
                             <span
-                                class="text-xs text-gray-500 bg-gray-100 px-2 lg:px-3 py-1 rounded-full border border-gray-200">
-                                {{ article.date }}
+                                class="text-xs text-gray-500 bg-gray-100 px-2 lg:px-3 py-1.5 rounded-full border border-gray-200">
+                                {{ article.is_event && article.start_date ? 'Du ' + article.start_date + (article.end_date ? ' au ' + article.end_date : '') : article.date }}
                             </span>
-                            <NuxtLink :to="`/blogs/${article.id}`"
-                                class="flex items-center gap-1 lg:gap-2 text-[#01b4d5] font-semibold text-xs lg:text-sm hover:gap-2 lg:hover:gap-3 transition-all duration-300 group/btn border border-[#01b4d5] rounded-lg px-3 py-1 hover:bg-[#01b4d5] hover:text-white">
+                            <NuxtLink :to="`/blogs/${article.slug}`"
+                                class="flex-shrink-0 flex items-center gap-1 lg:gap-2 text-[#01b4d5] font-semibold text-xs lg:text-sm hover:gap-2 lg:hover:gap-3 transition-all duration-300 group/btn border border-[#01b4d5] rounded-lg px-3 py-1.5 hover:bg-[#01b4d5] hover:text-white">
                                 Lire
                                 <svg class="w-3 h-3 lg:w-4 lg:h-4 transform group-hover/btn:translate-x-1 transition-transform duration-300"
                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -234,156 +253,27 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useBlogStore } from '~/stores/blog'
 
 // State
-const activeCategory = ref('all')
 const searchQuery = ref('')
+const filterType = ref('all') // 'all', 'blog', 'event'
 const articlesPerPage = ref(4)
 const currentPage = ref(1)
 
-// Données des articles avec images
-const articles = ref([
-    {
-        id: 1,
-        title: "Rencontre avec le Ministre de l'Enseignement Supérieur et de la Recherche",
-        excerpt: "La délégation d'ESCEN reçue par le Ministre Kanka-Malik Natchaba pour discuter de l'avenir de l'enseignement supérieur numérique.",
-        category: "event",
-        author: "Dr. Sophie Martin",
-        date: "15 Nov 2024",
-        readTime: "5 min",
-        featured: true,
-        image: "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 2,
-        title: "Les compétences digitales indispensables en 2024",
-        excerpt: "Analyse des compétences techniques et soft skills qui feront la différence sur le marché de l'emploi numérique cette année.",
-        category: "career",
-        author: "Pierre Dubois",
-        date: "12 Nov 2024",
-        readTime: "4 min",
-        featured: false,
-        image: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 3,
-        title: "Blockchain : applications au-delà des cryptomonnaies",
-        excerpt: "Découverte des use cases concrets de la blockchain dans la supply chain, la santé et l'éducation supérieure.",
-        category: "innovation",
-        author: "Marie Laurent",
-        date: "8 Nov 2024",
-        readTime: "6 min",
-        featured: true,
-        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 4,
-        title: "Révolution immersive : Métavers et éducation",
-        excerpt: "Comment les technologies immersives transforment fondamentalement les méthodes d'apprentissage et préparent les étudiants.",
-        category: "education",
-        author: "Thomas Leroy",
-        date: "5 Nov 2024",
-        readTime: "7 min",
-        featured: false,
-        image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 5,
-        title: "L'IA dans le marketing digital : tendances 2024",
-        excerpt: "Comment l'intelligence artificielle révolutionne les stratégies marketing et améliore l'expérience client.",
-        category: "digital",
-        author: "Alexandre Bernard",
-        date: "3 Nov 2024",
-        readTime: "6 min",
-        featured: false,
-        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 6,
-        title: "Cybersécurité : protéger son entreprise en 2024",
-        excerpt: "Les meilleures pratiques et outils pour sécuriser vos données et systèmes contre les cybermenaces.",
-        category: "digital",
-        author: "Claire Moreau",
-        date: "1 Nov 2024",
-        readTime: "8 min",
-        featured: false,
-        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 7,
-        title: "Web3 : l'avenir d'internet",
-        excerpt: "Comprendre les concepts fondamentaux du Web3 et ses implications pour les entreprises et les individus.",
-        category: "innovation",
-        author: "Julien Petit",
-        date: "29 Oct 2024",
-        readTime: "7 min",
-        featured: false,
-        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 8,
-        title: "Soft skills : la clé du succès en entreprise",
-        excerpt: "Pourquoi les compétences humaines sont devenues aussi importantes que les compétences techniques.",
-        category: "career",
-        author: "Émilie Rousseau",
-        date: "26 Oct 2024",
-        readTime: "5 min",
-        featured: false,
-        image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 9,
-        title: "L'adaptive learning personnalise l'éducation",
-        excerpt: "Comment les algorithmes d'apprentissage adaptatif révolutionnent l'enseignement supérieur.",
-        category: "education",
-        author: "Marc Lefebvre",
-        date: "24 Oct 2024",
-        readTime: "6 min",
-        featured: false,
-        image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 10,
-        title: "SEO 2024 : les nouvelles règles de Google",
-        excerpt: "Mise à jour sur les dernières mises à jour des algorithmes et les meilleures pratiques SEO.",
-        category: "digital",
-        author: "Nicolas Durand",
-        date: "22 Oct 2024",
-        readTime: "7 min",
-        featured: true,
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 11,
-        title: "L'innovation frugale en entreprise",
-        excerpt: "Comment innover avec des ressources limitées et créer plus de valeur avec moins.",
-        category: "innovation",
-        author: "Sarah Cohen",
-        date: "20 Oct 2024",
-        readTime: "5 min",
-        featured: false,
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: 12,
-        title: "La transformation digitale des PME",
-        excerpt: "Guide pratique pour les petites et moyennes entreprises pour réussir leur transformation numérique.",
-        category: "digital",
-        author: "Paul Martin",
-        date: "18 Oct 2024",
-        readTime: "8 min",
-        featured: false,
-        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    }
-])
+const blogStore = useBlogStore()
+
+const articles = computed(() => blogStore.articles)
 
 // Computed
 const filteredArticles = computed(() => {
     let filtered = articles.value
 
-    // Filtre par catégorie
-    if (activeCategory.value !== 'all') {
-        filtered = filtered.filter(article => article.category === activeCategory.value)
+    // Filtre par type
+    if (filterType.value === 'blog') {
+        filtered = filtered.filter(article => !article.is_event)
+    } else if (filterType.value === 'event') {
+        filtered = filtered.filter(article => article.is_event)
     }
 
     // Filtre par recherche
@@ -392,8 +282,7 @@ const filteredArticles = computed(() => {
         filtered = filtered.filter(article =>
             article.title.toLowerCase().includes(query) ||
             article.excerpt.toLowerCase().includes(query) ||
-            article.author.toLowerCase().includes(query) ||
-            article.category.toLowerCase().includes(query)
+            article.author.toLowerCase().includes(query)
         )
     }
 
@@ -442,16 +331,6 @@ const showEllipsis = computed(() => {
 })
 
 // Methods
-const getCategoryName = (categoryId) => {
-    const categories = {
-        'digital': 'Digital',
-        'innovation': 'Innovation',
-        'education': 'Éducation',
-        'career': 'Carrière',
-        'event': 'Événement'
-    }
-    return categories[categoryId] || categoryId
-}
 
 // Responsive articles per page
 const updateArticlesPerPage = () => {
@@ -475,7 +354,8 @@ const handleResize = () => {
 }
 
 // Lifecycle
-onMounted(() => {
+onMounted(async () => {
+    await blogStore.fetchArticles()
     updateArticlesPerPage()
     window.addEventListener('resize', handleResize)
 })

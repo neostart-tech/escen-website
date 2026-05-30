@@ -1,119 +1,146 @@
 <template>
-  <section ref="sectionEl" id="galerie-preview" class="relative py-20 lg:py-28 overflow-hidden bg-white">
+  <section ref="sectionEl" id="galerie-preview" class="relative overflow-hidden bg-white py-24 lg:py-32">
     
-    <!-- Éléments décoratifs géométriques -->
-    <div class="absolute top-8 left-8 w-24 h-24 border border-[#01b4d5]/10 rounded-full animate-pulse-slow pointer-events-none"></div>
-    <div class="absolute bottom-12 right-8 w-16 h-16 border border-[#202a50]/5 rounded-lg rotate-45 animate-float-medium pointer-events-none"></div>
+    <!-- Premium background elements -->
+    <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#01b4d5]/5 rounded-full blur-[120px] mix-blend-multiply pointer-events-none"></div>
+    <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#202a50]/5 rounded-full blur-[100px] mix-blend-multiply pointer-events-none"></div>
 
-    <div class="container mx-auto px-4 lg:px-8 max-w-6xl relative z-10">
-      <!-- En-tête -->
-      <div class="text-center mb-14 lg:mb-18 reveal" :class="{ 'is-visible': isVisible }">
+
+
+    <!-- Header Container -->
+    <div class="container mx-auto px-4 lg:px-8 max-w-7xl relative z-10">
+      <div class="text-center mb-14 reveal" :class="{ 'is-visible': isVisible }">
         <div class="inline-flex items-center gap-4 mb-5">
           <div class="w-8 h-px bg-gradient-to-r from-transparent to-[#01b4d5]"></div>
-          <span class="text-[#01b4d5] font-semibold text-xs tracking-widest uppercase">Immersion</span>
+          <span class="text-[#01b4d5] font-bold text-xs tracking-[0.2em] uppercase">Immersion Totale</span>
           <div class="w-8 h-px bg-gradient-to-l from-transparent to-[#01b4d5]"></div>
         </div>
-
         <h2 class="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#202a50] mb-4 tracking-tight">
-          Notre <span class="text-[#01b4d5]">Galerie</span>
+          Vivez l'expérience <br class="md:hidden" />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#01b4d5] to-[#202a50]">en images</span>
         </h2>
-
-        <p class="text-base lg:text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
-          Revivez les meilleurs moments de la vie étudiante, de nos événements et de nos cérémonies au travers de notre galerie en images.
+        <p class="text-base lg:text-lg text-gray-500 max-w-xl mx-auto leading-relaxed">
+          Revivez les meilleurs moments de la vie étudiante, de nos événements et de nos cérémonies au travers de notre galerie interactive.
         </p>
       </div>
+    </div>
 
-      <!-- Grille des albums -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+    <!-- Content Container -->
+    <div class="container mx-auto px-4 lg:px-8 max-w-7xl relative z-10">
+      <!-- Premium Bento Grid -->
+      <template v-if="albums && albums.length > 0">
+        <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 lg:gap-6 h-auto md:h-[400px] lg:h-[450px]">
         <div v-for="(album, index) in albums" :key="album.id"
-             class="reveal"
-             :class="['reveal-delay-' + (index + 1), { 'is-visible': isVisible }]">
-          
-          <NuxtLink :to="`/galerie/${album.id}`" class="block h-full cursor-pointer">
-            <div class="group h-full relative bg-gray-50 rounded-2xl p-4 border border-gray-100
-                        hover:bg-white hover:border-[#01b4d5]/30 transition-all duration-500 hover:-translate-y-2
-                        hover:shadow-xl hover:shadow-[#01b4d5]/10 flex flex-col">
+             class="reveal h-64 md:h-full"
+             :class="[
+               'reveal-delay-' + (index + 1), 
+               { 'is-visible': isVisible },
+               index === 0 ? 'md:col-span-2 md:row-span-2' : 
+               index === 1 ? 'md:col-span-2 md:row-span-1' : 
+               'md:col-span-1 md:row-span-1'
+             ]">
+             
+          <NuxtLink :to="`/galerie/${album.slug}`" class="group relative block w-full h-full rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500">
+            
+            <!-- Image with smooth scale on hover -->
+            <img :src="album.cover || '/valeurs/bg.jpg'" 
+                 :alt="album.title"
+                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" />
+            
+            <!-- Dynamic Gradient Overlays -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-[#202a50]/90 opacity-80 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#01b4d5]/80 via-transparent to-transparent opacity-0 group-hover:opacity-40 transition-opacity duration-500 mix-blend-overlay"></div>
+            
+            <!-- Content Container -->
+            <div class="absolute inset-0 p-6 lg:p-8 flex flex-col">
               
-              <!-- Image de couverture -->
-              <div class="relative w-full h-48 md:h-52 rounded-xl overflow-hidden mb-5">
-                <img :src="album.coverImage" 
-                     :alt="album.title"
-                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                <div class="absolute inset-0 bg-[#202a50]/10 group-hover:bg-transparent transition-colors duration-300"></div>
+              <!-- Glassmorphism Badge -->
+              <div class="self-end inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-wide shadow-sm transform group-hover:-translate-y-1 transition-transform duration-500">
+                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>{{ album.photoCount }}</span>
+              </div>
+              
+              <!-- Bottom Title & Action -->
+              <div class="mt-auto transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                <h3 :class="[
+                  'font-bold text-white mb-2 leading-tight drop-shadow-lg',
+                  index === 0 ? 'text-2xl lg:text-4xl' : 
+                  index === 1 ? 'text-xl lg:text-3xl' : 
+                  'text-lg lg:text-2xl'
+                ]">
+                  {{ album.title }}
+                </h3>
                 
-                <!-- Badge photo count -->
-                <div class="absolute top-3 right-3 px-2.5 py-1 bg-white/90 backdrop-blur-sm rounded text-[#202a50] text-[10px] font-bold tracking-wider uppercase flex items-center gap-1 shadow-sm opacity-90 group-hover:opacity-100">
-                  <svg class="w-3 h-3 text-[#01b4d5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                <div class="flex items-center gap-2 text-[#01b4d5] font-semibold opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+                  <span class="text-sm tracking-widest uppercase">Découvrir l'album</span>
+                  <svg class="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                  {{ album.photoCount }}
                 </div>
               </div>
 
-              <!-- Contenu texte -->
-              <div class="flex-grow flex flex-col justify-center items-center">
-                <!-- Titre -->
-                <h3 class="text-base lg:text-lg font-bold text-[#202a50] text-center mb-3 group-hover:text-[#01b4d5] transition-colors duration-300 line-clamp-2 leading-tight">
-                  {{ album.title }}
-                </h3>
-
-                <!-- Petit trait décoratif pour souligner l'interaction -->
-                <div class="w-8 h-0.5 bg-gray-200 rounded-full group-hover:bg-[#01b4d5] transition-colors duration-400 mt-auto"></div>
-              </div>
             </div>
           </NuxtLink>
         </div>
-      </div>
+        </div>
+        
+        <!-- Button to explore full gallery (visible on all screens now that header is centered) -->
+        <div class="mt-12 flex justify-center px-4 reveal" :class="['reveal-delay-4', { 'is-visible': isVisible }]">
+          <NuxtLink to="/galerie" class="inline-flex justify-center items-center gap-3 px-8 py-4 w-full md:w-auto bg-[#202a50] text-white rounded-2xl font-semibold shadow-xl hover:bg-[#01b4d5] active:scale-95 transition-all duration-300 group">
+            Explorer toute la galerie
+            <svg class="w-5 h-5 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </NuxtLink>
+        </div>
+      </template>
 
-      <!-- Séparateur bas / Bouton action -->
-      <div class="text-center mt-14 lg:mt-18 reveal" :class="['reveal-delay-4', { 'is-visible': isVisible }]">
-        <NuxtLink to="/galerie" class="inline-flex items-center gap-3 px-8 py-4 bg-[#202a50] hover:bg-[#01b4d5] text-white rounded-xl font-semibold transition-all duration-300 shadow-lg hover:-translate-y-1 group">
-          Explorer la galerie complète
-          <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </NuxtLink>
-      </div>
+      <!-- Empty State -->
+      <template v-else-if="!galleryStore.loading">
+        <div class="w-full bg-white border-y border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-12 lg:p-20 text-center relative overflow-hidden reveal" :class="{ 'is-visible': isVisible }">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#01b4d5]/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+          <div class="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-[#202a50]/10 to-transparent rounded-full blur-2xl translate-y-1/2 -translate-x-1/2"></div>
+          
+          <div class="relative z-10 flex flex-col items-center justify-center">
+            <div class="w-24 h-24 mb-8 bg-gray-50 rounded-full flex items-center justify-center border border-gray-100 shadow-sm">
+              <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="text-2xl lg:text-3xl font-bold text-[#202a50] mb-4">De nouvelles images arrivent bientôt</h3>
+            <p class="text-gray-500 max-w-md mx-auto text-lg">
+              Notre galerie est en cours de préparation. Revenez très prochainement pour revivre en images les moments forts de notre école.
+            </p>
+          </div>
+        </div>
+      </template>
+
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useGalleryStore } from '~/stores/gallery'
 
 const sectionEl = ref(null)
 const isVisible = ref(false)
 
-const albums = [
-    {
-        id: "1",
-        title: "Cérémonie de remise des diplômes",
-        coverImage: "/album/alb1.jpg",
-        photoCount: 3
-    },
-    {
-        id: "2",
-        title: "Hackathon de la rentrée",
-        coverImage: "/album/alb2.jpg",
-        photoCount: 2
-    },
-    {
-        id: "3",
-        title: "Séminaire d'intégration",
-        coverImage: "/album/alb3.jpg",
-        photoCount: 3
-    },
-    {
-        id: "4",
-        title: "Conférence Tech",
-        coverImage: "/album/alb4.jpg",
-        photoCount: 6
-    }
-]
+const galleryStore = useGalleryStore()
+const albums = computed(() => {
+  // Optionnel: On ne prend que les 4 premiers albums pour la preview
+  return galleryStore.albums.slice(0, 4)
+})
 
 let observer
 
-onMounted(() => {
+onMounted(async () => {
+  if(galleryStore.albums.length === 0) {
+    await galleryStore.fetchAlbums()
+  }
+
   observer = new IntersectionObserver(
     (entries) => {
       entries.forEach(entry => {
@@ -131,33 +158,5 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.animate-pulse-slow {
-  animation: pulseSlow 5s ease-in-out infinite;
-}
-
-.animate-float-medium {
-  animation: floatMedium 12s ease-in-out infinite;
-}
-
-@keyframes pulseSlow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.05); }
-}
-
-@keyframes floatMedium {
-  0%, 100% { transform: translateY(0px) rotate(45deg); }
-  50% { transform: translateY(-12px) rotate(45deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-pulse-slow,
-  .animate-float-medium { animation: none; }
-}
-
-.line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
+/* Any required additional styles - most are handled by Tailwind */
 </style>

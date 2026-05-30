@@ -60,7 +60,7 @@
               <!-- Droite : Intranet + Réseaux sociaux -->
               <div class="flex items-center gap-3">
                 <!-- Intranet -->
-                <NuxtLink to="/connexion"
+                <a href="https://escendemo.neostart.tech/" target="_blank" rel="noopener noreferrer"
                   class="group flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 hover:border-white/35 transition-all duration-300 text-xs font-medium text-white">
                   <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
@@ -69,7 +69,7 @@
                   <svg class="w-3 h-3 text-white/50 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                   </svg>
-                </NuxtLink>
+                </a>
 
                 <!-- Séparateur -->
                 <div class="w-px h-4 bg-white/15"></div>
@@ -590,7 +590,7 @@ const mobileLinks = [
   },
   {
     label: 'Intranet',
-    path: '/connexion',
+    path: 'https://escendemo.neostart.tech/',
     icon: 'M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z'
   },
 ]

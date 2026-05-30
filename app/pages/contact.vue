@@ -173,57 +173,32 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">
-                                            Prénom *
+                                            Nom complet *
                                         </label>
-                                        <input type="text" v-model="form.firstName" required
+                                        <input type="text" v-model="form.nom" required
                                             class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#01b4d5] focus:border-transparent transition-all duration-300"
-                                            placeholder="Votre prénom">
+                                            placeholder="Votre nom complet">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">
-                                            Nom *
+                                            Téléphone *
                                         </label>
-                                        <input type="text" v-model="form.lastName" required
+                                        <input type="tel" v-model="form.tel" required
                                             class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#01b4d5] focus:border-transparent transition-all duration-300"
-                                            placeholder="Votre nom">
+                                            placeholder="+228 90 00 00 00">
                                     </div>
                                 </div>
 
                                 <!-- Ligne 2 -->
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                                            Email *
-                                        </label>
-                                        <input type="email" v-model="form.email" required
-                                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#01b4d5] focus:border-transparent transition-all duration-300"
-                                            placeholder="votre@email.com">
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                                            Téléphone
-                                        </label>
-                                        <input type="tel" v-model="form.phone"
-                                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#01b4d5] focus:border-transparent transition-all duration-300"
-                                            placeholder="+33 1 23 45 67 89">
-                                    </div>
-                                </div>
-
-                                <!-- Sujet -->
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">
-                                        Sujet *
+                                        Email *
                                     </label>
-                                    <select v-model="form.subject" required
-                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#01b4d5] focus:border-transparent transition-all duration-300">
-                                        <option value="" disabled selected>Sélectionnez un sujet</option>
-                                        <option value="information">Demande d'information</option>
-                                        <option value="admission">Admission</option>
-                                        <option value="partenariat">Partenariat</option>
-                                        <option value="entreprise">Formation entreprise</option>
-                                        <option value="autre">Autre</option>
-                                    </select>
+                                    <input type="email" v-model="form.email" required
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#01b4d5] focus:border-transparent transition-all duration-300"
+                                        placeholder="votre@email.com">
                                 </div>
+
 
                                 <!-- Message -->
                                 <div>
@@ -288,14 +263,14 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
+import toastr from 'toastr'
+import 'toastr/build/toastr.min.css'
 
 // State du formulaire
 const form = reactive({
-    firstName: '',
-    lastName: '',
+    nom: '',
     email: '',
-    phone: '',
-    subject: '',
+    tel: '',
     message: ''
 })
 
@@ -305,17 +280,35 @@ const loading = ref(false)
 const submitForm = async () => {
     loading.value = true
 
-    // Simulation d'envoi
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    try {
+        const { default: axios } = await import('axios');
+        const config = useRuntimeConfig();
+        const baseURL = config.public.apiBase || 'http://localhost:8000/api';
+        
+        // Formatter les données pour le backend
+        const payload = {
+            nom: form.nom.trim(),
+            email: form.email.trim(),
+            tel: form.tel.trim(),
+            message: form.message.trim()
+        };
 
-    console.log('Formulaire envoyé:', form)
-
-    // Réinitialisation
-    Object.keys(form).forEach(key => {
-        form[key] = ''
-    })
-
-    loading.value = false
-    alert('Votre message a été envoyé avec succès ! Nous vous recontacterons rapidement.')
+        const response = await axios.post(`${baseURL}/public/contact`, payload);
+        
+        if (response.data.success) {
+            // Réinitialisation
+            Object.keys(form).forEach(key => {
+                form[key] = ''
+            })
+            toastr.success('Votre message a été envoyé avec succès ! Nous vous recontacterons rapidement.')
+        } else {
+            toastr.error('Une erreur est survenue lors de l\'envoi du message.');
+        }
+    } catch (error) {
+        console.error('Erreur lors de l\'envoi:', error);
+        toastr.error('Erreur: Impossible de joindre le serveur. Veuillez vérifier vos informations.');
+    } finally {
+        loading.value = false
+    }
 }
 </script>

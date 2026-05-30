@@ -64,12 +64,12 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
                 <article v-for="(album, index) in displayedAlbums" :key="album.id"
                     class="group bg-white rounded-xl lg:rounded-2xl shadow-sm hover:shadow-lg lg:hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 lg:hover:-translate-y-2 overflow-hidden border border-gray-200">
-                    <NuxtLink :to="`/galerie/${album.id}`" class="block h-full cursor-pointer">
+                    <NuxtLink :to="`/galerie/${album.slug}`" class="block h-full cursor-pointer">
                         <!-- Image Container -->
                         <div class="relative h-48 sm:h-52 lg:h-56 overflow-hidden bg-gray-100">
                             <!-- Image principale -->
                             <img 
-                                :src="album.coverImage" 
+                                :src="album.cover || '/valeurs/bg.jpg'" 
                                 :alt="album.title"
                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 loading="lazy"
@@ -158,38 +158,20 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import Breadcrumb from '~/components/Breadcrumb.vue'
 
+import { useGalleryStore } from '~/stores/gallery'
+
 // State
 const searchQuery = ref('')
 const itemsPerPage = ref(8)
 const currentPage = ref(1)
 
-// Données des albums (ex: alb1 from public/album)
-const albums = ref([
-    {
-        id: "1",
-        title: "Cérémonie de remise des diplômes",
-        coverImage: "/album/alb1.jpg",
-        photoCount: 3
-    },
-    {
-        id: "2",
-        title: "Hackathon de la rentrée",
-        coverImage: "/album/alb2.jpg",
-        photoCount: 2
-    },
-    {
-        id: "3",
-        title: "Séminaire d'intégration",
-        coverImage: "/album/alb3.jpg",
-        photoCount: 3
-    },
-    {
-        id: "4",
-        title: "Conférence Tech",
-        coverImage: "/album/alb4.jpg",
-        photoCount: 6
-    }
-])
+const galleryStore = useGalleryStore()
+
+onMounted(async () => {
+    await galleryStore.fetchAlbums()
+})
+
+const albums = computed(() => galleryStore.albums)
 
 // Computed
 const filteredAlbums = computed(() => {

@@ -23,8 +23,12 @@
           <input v-model="form.phone" type="tel" required class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:border-[#01b4d5] focus:ring-2 focus:ring-[#01b4d5]/20" placeholder="Votre numéro" />
         </div>
         <div class="pt-4">
-          <button type="submit" class="w-full bg-[#01b4d5] hover:bg-[#0056b3] text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300">
-            Confirmer et télécharger
+          <button type="submit" :disabled="isSubmitting" class="w-full bg-[#01b4d5] hover:bg-[#0056b3] text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 disabled:opacity-70 flex justify-center items-center">
+            <svg v-if="isSubmitting" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span v-else>Confirmer et télécharger</span>
           </button>
         </div>
       </form>
@@ -33,7 +37,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, onMounted } from 'vue'
+import { useNuxtApp } from '#app'
 
 const props = defineProps({
   isOpen: Boolean
@@ -47,11 +52,52 @@ const form = ref({
   phone: ''
 })
 
-const submitForm = () => {
-  emit('submit', { ...form.value })
-  // Optionally reset
-  form.value.name = ''
-  form.value.email = ''
-  form.value.phone = ''
+const isSubmitting = ref(false)
+
+// Vérifier si le prospect a déjà téléchargé une brochure
+watch(() => props.isOpen, (newVal) => {
+  if (newVal) {
+    // Si la modale s'ouvre, on vérifie le localStorage
+    const savedProspect = localStorage.getItem('escen_prospect_registered')
+    if (savedProspect) {
+      // Directement émettre l'événement pour télécharger et empêcher l'affichage
+      emit('submit', JSON.parse(savedProspect))
+      emit('close')
+    }
+  }
+})
+
+const submitForm = async () => {
+  isSubmitting.value = true
+  try {
+    const { $axios } = useNuxtApp()
+    
+    // Appel API pour sauvegarder les informations de contact (Prospects)
+    await $axios.post('/public/prospects', {
+      nom: form.value.name,
+      email: form.value.email,
+      tel: form.value.phone,
+      formation_visee: 'Non spécifié', // Peut être dynamique plus tard
+      origine: 'Brochure Web'
+    })
+
+    // Sauvegarder dans le localStorage pour les prochains téléchargements
+    localStorage.setItem('escen_prospect_registered', JSON.stringify({
+      name: form.value.name,
+      email: form.value.email,
+      phone: form.value.phone
+    }))
+  } catch(e) {
+    console.error("Erreur lors de l'envoi des informations de contact:", e)
+    // On continue quand même pour ne pas bloquer le téléchargement
+  } finally {
+    isSubmitting.value = false
+    emit('submit', { ...form.value })
+    
+    // Réinitialisation optionnelle
+    form.value.name = ''
+    form.value.email = ''
+    form.value.phone = ''
+  }
 }
 </script>

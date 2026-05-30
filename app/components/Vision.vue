@@ -16,7 +16,7 @@
       <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#01b4d5]/20 to-transparent"></div>
     </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 lg:pt-32 pb-16 lg:pb-20">
 
       <!-- ===== EN-TÊTE ===== -->
       <div class="text-center mb-20 reveal" :class="{ 'is-visible': isVisible }">
@@ -96,37 +96,50 @@
         </div>
       </div>
 
-      <!-- ===== STATISTIQUES ===== -->
-      <div class="reveal reveal-delay-5" :class="{ 'is-visible': isVisible }">
-        <div class="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-gray-100
-                    border border-gray-100 rounded-2xl overflow-hidden shadow-sm">
-          <div
-            v-for="(stat, i) in stats"
-            :key="i"
-            class="group bg-white hover:bg-gray-50 transition-colors duration-300 px-8 py-8 text-center cursor-default"
-          >
-            <!-- Chiffre animé -->
-            <div class="text-4xl lg:text-5xl font-black text-[#01b4d5] mb-1.5 tabular-nums leading-none"
-                 :ref="el => statRefs[i] = el">
-              0
+    </div>
+
+    <!-- ===== STATISTIQUES ===== -->
+    <div class="reveal reveal-delay-5 relative z-10 w-full" :class="{ 'is-visible': isVisible }">
+      <div class="bg-[#202a50] py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x lg:divide-white/20">
+            <div
+              v-for="(stat, i) in stats"
+              :key="i"
+              class="flex items-center justify-center lg:justify-start gap-5 lg:px-8 group"
+            >
+              <!-- Icône -->
+              <div class="flex-shrink-0 text-[#01b4d5] group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" :d="stat.icon"/>
+                </svg>
+              </div>
+
+              <!-- Textes -->
+              <div class="flex flex-col text-left">
+                <!-- Chiffre animé -->
+                <div class="text-4xl lg:text-5xl font-bold text-white mb-1 tabular-nums leading-none">
+                  <span :ref="el => statRefs[i] = el">0</span>
+                </div>
+                <!-- Label -->
+                <div class="text-sm lg:text-base text-gray-300">
+                  {{ stat.label }}
+                </div>
+              </div>
             </div>
-            <!-- Label -->
-            <div class="text-xs text-gray-400 font-semibold uppercase tracking-widest group-hover:text-gray-500 transition-colors duration-300">
-              {{ stat.label }}
-            </div>
-            <!-- Barre décorative -->
-            <div class="mt-4 h-0.5 w-6 mx-auto bg-gray-100 group-hover:bg-[#01b4d5] group-hover:w-10
-                        transition-all duration-500 rounded-full"></div>
           </div>
         </div>
       </div>
-
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { useConfigurationStore } from '~/stores/configuration'
+
+const configStore = useConfigurationStore()
+await useAsyncData('configurations', () => configStore.fetchConfigurations())
 
 const visionSection = ref(null)
 const isVisible = ref(false)
@@ -163,12 +176,12 @@ const piliers = [
   }
 ]
 
-const stats = [
-  { target: 520, suffix: '+', label: 'Étudiants formés' },
-  { target: 410, suffix: '+', label: 'Diplômés' },
-  { target: 84,  suffix: '+', label: 'Partenaires' },
-  { target: 76,  suffix: '%', label: 'Insertion pro.' }
-]
+const stats = computed(() => [
+  { target: parseInt(configStore.getParamValue('stat_etudiants_formes')) || 520, suffix: '+', label: 'Étudiants formés', icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z' },
+  { target: parseInt(configStore.getParamValue('stat_diplomes')) || 410, suffix: '+', label: 'Diplômés', icon: 'M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z' },
+  { target: parseInt(configStore.getParamValue('stat_partenaires')) || 84,  suffix: '+', label: 'Partenaires', icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
+  { target: parseInt(configStore.getParamValue('stat_insertion_pro')) || 76,  suffix: '%', label: 'Insertion pro.', icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6' }
+])
 
 const animateCounter = (el, target, suffix) => {
   if (!el) return
@@ -192,7 +205,7 @@ onMounted(() => {
         if (entry.isIntersecting && !isVisible.value) {
           isVisible.value = true
           setTimeout(() => {
-            stats.forEach((stat, i) => {
+            stats.value.forEach((stat, i) => {
               animateCounter(statRefs.value[i], stat.target, stat.suffix)
             })
           }, 600)
