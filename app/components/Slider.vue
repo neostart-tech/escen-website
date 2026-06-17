@@ -1,5 +1,5 @@
 <template>
-  <section class="relative h-[88vh] min-h-[650px] overflow-hidden bg-gradient-to-b from-[#0a0e1a] to-[#141b2b]">
+  <section class="relative h-[88vh] min-h-[480px] md:min-h-[650px] overflow-hidden bg-gradient-to-b from-[#0a0e1a] to-[#141b2b]">
     <!-- ===== FOND STATIQUE ÉLÉGANT ===== -->
     <div class="absolute inset-0 opacity-30">
       <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, #01b4d5 1px, transparent 0); background-size: 50px 50px;"></div>
@@ -85,7 +85,7 @@
               </div>
 
               <!-- Titre -->
-              <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-center lg:text-left mb-5">
+              <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-center lg:text-left mb-4 lg:mb-5">
                 <span class="block text-white">
                   {{ slides[currentSlide].title.split(' ').slice(0, 2).join(' ') }}
                 </span>

@@ -1,3 +1,5 @@
+import Aura from '@primevue/themes/aura';
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -6,6 +8,24 @@ export default defineNuxtConfig({
   srcDir: 'app',
   nitro: {
     preset: "static",
+  },
+  
+  app: {
+    head: {
+      title: "ESCEN - École Supérieure de Commerce et d'Économie Numérique",
+      htmlAttrs: {
+        lang: "fr",
+      },
+      meta: [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        {
+          name: "description",
+          content: "L'ESCEN forme les leaders de demain aux enjeux du commerce et de l'économie numérique.",
+        },
+      ],
+      link: [{ rel: "icon", type: "image/png", href: "/logo/LOGO_ESCEN.png" }],
+    },
   },
 
   css: ["./main/index.css", "intl-tel-input/build/css/intlTelInput.css"],
@@ -19,8 +39,25 @@ export default defineNuxtConfig({
     "@nuxt/scripts",
     "@nuxt/test-utils",
     "@nuxt/ui",
-    "@pinia/nuxt"
+    "@pinia/nuxt",
+    "@primevue/nuxt-module"
   ],
+
+  colorMode: {
+    preference: 'light',
+    fallback: 'light'
+  },
+
+  primevue: {
+    options: {
+      theme: {
+        preset: Aura,
+        options: {
+          darkModeSelector: false || 'none',
+        }
+      }
+    }
+  },
 
   vite: {
     server: {

@@ -16,17 +16,17 @@
       <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#01b4d5]/20 to-transparent"></div>
     </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 lg:pt-32 pb-16 lg:pb-20">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 lg:pt-32 pb-12 lg:pb-20">
 
       <!-- ===== EN-TÊTE ===== -->
-      <div class="text-center mb-20 reveal" :class="{ 'is-visible': isVisible }">
+      <div class="text-center mb-12 lg:mb-20 reveal" :class="{ 'is-visible': isVisible }">
         <div class="inline-flex items-center gap-3 mb-6">
           <div class="w-8 h-px bg-gradient-to-r from-transparent to-[#01b4d5]"></div>
           <span class="text-[#01b4d5] text-xs font-bold tracking-[0.3em] uppercase">Vision pédagogique</span>
           <div class="w-8 h-px bg-gradient-to-l from-transparent to-[#01b4d5]"></div>
         </div>
 
-        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-light text-[#202a50] mb-6 leading-tight">
+        <h2 class="text-3xl sm:text-5xl lg:text-6xl font-light text-[#202a50] mb-6 leading-tight">
           Notre vision pour
           <span class="font-bold text-[#01b4d5]"> l'excellence</span>
         </h2>
@@ -38,7 +38,7 @@
       </div>
 
       <!-- ===== GRILLE DES 4 PILIERS ===== -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12 lg:mb-20">
         <div
           v-for="(pilier, index) in piliers"
           :key="pilier.id"
@@ -99,30 +99,42 @@
     </div>
 
     <!-- ===== STATISTIQUES ===== -->
-    <div class="reveal reveal-delay-5 relative z-10 w-full" :class="{ 'is-visible': isVisible }">
-      <div class="bg-[#202a50] py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x lg:divide-white/20">
+    <div class="reveal reveal-delay-5 relative w-full" :class="{ 'is-visible': isVisible }">
+      <div class="bg-[#202a50] py-10 lg:py-16 relative overflow-hidden">
+        
+        <!-- Pattern & Glows -->
+        <div class="absolute inset-0 pointer-events-none">
+          <!-- Dot pattern -->
+          <div class="absolute inset-0 opacity-[0.08]"
+               style="background-image: radial-gradient(#01b4d5 1.5px, transparent 1.5px); background-size: 24px 24px;"></div>
+          <!-- Lueur gauche -->
+          <div class="absolute top-0 -left-32 w-80 h-full bg-[#01b4d5]/15 blur-[80px]"></div>
+          <!-- Lueur droite -->
+          <div class="absolute top-0 -right-32 w-80 h-full bg-[#01b4d5]/15 blur-[80px]"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-4 lg:gap-0 lg:divide-x lg:divide-white/20">
             <div
               v-for="(stat, i) in stats"
               :key="i"
-              class="flex items-center justify-center lg:justify-start gap-5 lg:px-8 group"
+              class="flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-3 lg:gap-5 lg:px-8 group"
             >
               <!-- Icône -->
               <div class="flex-shrink-0 text-[#01b4d5] group-hover:scale-110 transition-transform duration-300">
-                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <svg class="w-10 h-10 lg:w-12 lg:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" :d="stat.icon"/>
                 </svg>
               </div>
 
               <!-- Textes -->
-              <div class="flex flex-col text-left">
+              <div class="flex flex-col text-center lg:text-left">
                 <!-- Chiffre animé -->
-                <div class="text-4xl lg:text-5xl font-bold text-white mb-1 tabular-nums leading-none">
+                <div class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-1 tabular-nums leading-none">
                   <span :ref="el => statRefs[i] = el">0</span>
                 </div>
                 <!-- Label -->
-                <div class="text-sm lg:text-base text-gray-300">
+                <div class="text-xs sm:text-sm lg:text-base text-gray-300">
                   {{ stat.label }}
                 </div>
               </div>

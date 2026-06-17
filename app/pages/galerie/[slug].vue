@@ -7,7 +7,7 @@
       :title="album.title"
       subtitle="Album Photo"
       :description="`${album.photoCount} photographie${album.photoCount > 1 ? 's' : ''} · ${album.subtitle}`"
-      :backgroundImage="album.cover || '/valeurs/bg.jpg'"
+      :backgroundImage="getFileUrl(album.cover_url || album.cover) || '/valeurs/bg.jpg'"
       :animateTitle="showContent"
       :breadcrumb="[
         { label: 'Accueil', href: '/' },
@@ -139,7 +139,7 @@
             }"
           >
             <div
-              v-for="(photo, index) in album.photos" :key="index"
+              v-for="(photoUrl, index) in parsedPhotos" :key="index"
               class="group relative overflow-hidden rounded-2xl cursor-pointer bg-[#c8d3e8] border border-black/5 shadow-sm hover:shadow-xl transition-all duration-500"
               :class="gridCols === 4 ? 'aspect-[3/4]' : gridCols === 2 ? 'aspect-[4/3]' : 'aspect-[3/4]'"
               :style="{ animationDelay: `${(index + 1) * 60}ms` }"
@@ -147,7 +147,7 @@
             >
               <!-- Image -->
               <img
-                :src="photo"
+                :src="photoUrl"
                 :alt="`Photo ${index + 1} de ${album.title}`"
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 loading="lazy"
@@ -213,7 +213,7 @@
             <!-- Image de fond -->
             <div class="relative h-64 sm:h-72 lg:h-80">
               <img
-                :src="a.cover || '/valeurs/bg.jpg'"
+                :src="getFileUrl(a.cover_url || a.cover) || '/valeurs/bg.jpg'"
                 :alt="a.title"
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
@@ -311,7 +311,7 @@
 
             <Transition name="lb-img" mode="out-in">
               <img :key="currentPhoto"
-                :src="album.photos[currentPhoto - 1]"
+                :src="parsedPhotos[currentPhoto - 1]"
                 :alt="`Photo ${currentPhoto} de ${album.title}`"
                 class="max-w-full max-h-[78vh] object-contain select-none rounded-sm"
                 style="box-shadow: 0 0 0 1px rgba(1,180,213,0.12), 0 0 0 6px rgba(1,180,213,0.04), 0 40px 80px rgba(0,0,0,0.7)"
@@ -344,8 +344,26 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import Breadcrumb from '~/components/Breadcrumb.vue'
+import config from '~~/config'
 
 import { useGalleryStore } from '~/stores/gallery'
+
+const getFileUrl = (path) => {
+  if (!path || typeof path !== 'string' || path === 'null' || path === 'undefined') return null;
+  
+  const baseUrl = config.app_local ? config.app_dev_storage_url : config.app_prod_storage_url;
+  
+  if (path === `${baseUrl}/storage` || path === `${baseUrl}/storage/`) return null;
+
+  if (path.startsWith('http')) return path;
+
+  let cleanPath = path.replace(/^\/+/, '').trim();
+  if (!cleanPath || cleanPath === 'storage' || cleanPath === 'storage/') return null;
+  if (cleanPath.startsWith('storage/')) {
+    return `${baseUrl}/${cleanPath}`;
+  }
+  return `${baseUrl}/storage/${cleanPath}`;
+};
 
 const route   = useRoute()
 const albumSlug = route.params.slug
@@ -361,6 +379,27 @@ onMounted(async () => {
 const album = computed(() => galleryStore.currentAlbum)
 const otherAlbums = computed(() => galleryStore.otherAlbums)
 const albums = computed(() => galleryStore.albums) // Just in case for the tabs (but usually we might need fetchAlbums)
+
+const parsedPhotos = computed(() => {
+  if (!album.value || !album.value.photos) return [];
+  let photos = album.value.photos;
+  
+  if (typeof photos === 'string') {
+    try { photos = JSON.parse(photos); } 
+    catch(e) { return []; }
+  }
+  
+  if (!Array.isArray(photos)) return [];
+  
+  return photos.map(p => {
+    let url = null;
+    if (typeof p === 'string') url = p;
+    else if (p && typeof p === 'object') {
+      url = p.file_url || p.url || p.path || p.file || p.cover_url || p.cover;
+    }
+    return getFileUrl(url) || '/valeurs/bg.jpg';
+  });
+});
 
 // On peut aussi trigger fetchAlbums pour les tabs si galleryStore.albums est vide
 onMounted(async () => {
@@ -380,8 +419,8 @@ const currentPhoto = ref(1)
 
 function openLightbox(i) { currentPhoto.value = i; lightboxOpen.value = true; document.body.style.overflow = 'hidden' }
 function closeLightbox()  { lightboxOpen.value = false; document.body.style.overflow = '' }
-function lbPrev() { currentPhoto.value = currentPhoto.value > 1 ? currentPhoto.value - 1 : (album.value?.photoCount ?? 1) }
-function lbNext() { currentPhoto.value = currentPhoto.value < (album.value?.photoCount ?? 1) ? currentPhoto.value + 1 : 1 }
+function lbPrev() { currentPhoto.value = currentPhoto.value > 1 ? currentPhoto.value - 1 : (parsedPhotos.value.length || 1) }
+function lbNext() { currentPhoto.value = currentPhoto.value < parsedPhotos.value.length ? currentPhoto.value + 1 : 1 }
 
 function handleKey(e) {
   if (!lightboxOpen.value) return

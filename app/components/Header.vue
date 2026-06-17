@@ -1,13 +1,13 @@
 <template>
   <div>
     <!-- Header avec design ultra-moderne et effet de profondeur -->
-    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 transform" :class="[
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" :class="[
       scrolled
-        ? 'bg-white shadow-lg md:-translate-y-11'
-        : 'bg-transparent shadow-none md:translate-y-0'
+        ? 'bg-white shadow-lg'
+        : 'bg-transparent shadow-none'
     ]">
       <!-- Barre supérieure — cachée sur mobile, visible sur md+ -->
-      <div class="hidden md:block">
+      <div class="hidden md:block transition-all duration-300 overflow-hidden origin-top" :class="scrolled ? 'h-0 opacity-0' : 'h-11 opacity-100'">
         <!-- Fond -->
         <div class="relative bg-gradient-to-r from-[#0a1a3f] via-[#1e2f5e] to-[#2a3a6e]">
           <!-- Lueur subtile -->
@@ -19,17 +19,17 @@
           </div>
 
           <!-- Contenu en une seule ligne -->
-          <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="flex items-center justify-between h-11">
               <!-- Gauche : Contact info -->
               <div class="flex items-center gap-5">
                 <!-- Email -->
                 <a href="mailto:hello@escen.university"
-                  class="group flex items-center gap-2 text-white/85 hover:text-white transition-all duration-300">
-                  <svg class="w-3.5 h-3.5 text-[#01b4d5] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  class="group flex items-center gap-2 text-white hover:text-white transition-all duration-300">
+                  <svg class="w-4 h-4 text-[#01b4d5] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                   </svg>
-                  <span class="text-xs font-light tracking-wide">hello@escen.university</span>
+                  <span class="text-sm font-medium text-white">hello@escen.university</span>
                 </a>
 
                 <!-- Séparateur -->
@@ -37,11 +37,11 @@
 
                 <!-- Téléphone -->
                 <a href="tel:+22898012727"
-                  class="group flex items-center gap-2 text-white/85 hover:text-white transition-all duration-300">
-                  <svg class="w-3.5 h-3.5 text-[#01b4d5] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  class="group flex items-center gap-2 text-white hover:text-white transition-all duration-300">
+                  <svg class="w-4 h-4 text-[#01b4d5] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
                   </svg>
-                  <span class="text-xs font-light tracking-wide">+228 98 01 27 27</span>
+                  <span class="text-sm font-medium text-white">+228 98 01 27 27</span>
                 </a>
 
                 <!-- Séparateur -->
@@ -49,46 +49,29 @@
 
                 <!-- Horaires -->
                 <div class="hidden lg:flex items-center gap-2">
-                  <svg class="w-3.5 h-3.5 text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
                     <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
                   </svg>
-                  <span class="text-xs text-white/70">Lun – Ven : 8h–18h</span>
+                  <span class="text-sm font-medium text-white">Lun – Ven : 7h30 à 17h30</span>
                 </div>
               </div>
 
-              <!-- Droite : Intranet + Réseaux sociaux -->
+              <!-- Droite : Espace étudiant + Réseaux sociaux -->
               <div class="flex items-center gap-3">
-                <!-- Intranet -->
+                <!-- Espace étudiant -->
                 <a href="https://escendemo.neostart.tech/" target="_blank" rel="noopener noreferrer"
-                  class="group flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 hover:border-white/35 transition-all duration-300 text-xs font-medium text-white">
-                  <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  class="group flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 hover:border-white/35 transition-all duration-300 text-sm font-medium text-white">
+                  <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                   </svg>
-                  Intranet
-                  <svg class="w-3 h-3 text-white/50 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  Espace étudiant
+                  <svg class="w-3.5 h-3.5 text-white/50 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                   </svg>
                 </a>
 
-                <!-- Séparateur -->
-                <div class="w-px h-4 bg-white/15"></div>
 
-                <!-- Réseaux sociaux -->
-                <div class="flex items-center gap-1.5">
-                  <a href="#" aria-label="Facebook"
-                    class="w-7 h-7 rounded-full border border-white/20 hover:border-[#01b4d5] flex items-center justify-center hover:bg-[#01b4d5]/10 transition-all duration-300 group">
-                    <svg class="w-3.5 h-3.5 text-white/70 group-hover:text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
-                    </svg>
-                  </a>
-                  <a href="#" aria-label="LinkedIn"
-                    class="w-7 h-7 rounded-full border border-white/20 hover:border-[#01b4d5] flex items-center justify-center hover:bg-[#01b4d5]/10 transition-all duration-300 group">
-                    <svg class="w-3.5 h-3.5 text-white/70 group-hover:text-[#01b4d5]" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                    </svg>
-                  </a>
-                </div>
               </div>
             </div>
           </div>
@@ -96,10 +79,10 @@
       </div>
 
       <!-- Navigation principale -->
-      <nav class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div class="flex items-center justify-between">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="flex items-center justify-between w-full">
           <!-- Logo -->
-          <NuxtLink to="/" class="group relative">
+          <NuxtLink to="/" class="group relative -ml-2 lg:-ml-4">
             <div class="relative transition-all duration-500 group-hover:scale-105">
               <img src="/logo/LOGO_ESCEN.png" alt="ESCEN"
                 class="relative h-12 sm:h-14 md:h-16 lg:h-20 w-auto object-contain">
@@ -107,15 +90,17 @@
           </NuxtLink>
 
           <!-- Navigation Desktop avec indicateurs actifs élégants -->
-          <div class="hidden lg:flex items-center gap-2">
+          <div class="hidden lg:flex items-center justify-center flex-1 px-4 xl:px-8 gap-1 xl:gap-2">
             <!-- Accueil avec indicateur élégant -->
             <NuxtLink to="/" class="relative px-4 py-2.5 font-medium rounded-xl transition-all duration-300 group"
               :class="$route.path === '/' ? 'text-[#01b4d5]' : 'text-[#202a50] hover:text-[#01b4d5]'">
-              <span class="relative z-10">Accueil</span>
-              <!-- Cercle décoratif pour l'état actif -->
-              <span v-if="$route.path === '/'" class="absolute -top-1 -right-1 w-2 h-2">
-                <span class="absolute inset-0 rounded-full bg-[#01b4d5] animate-ping opacity-75"></span>
-                <span class="absolute inset-0 rounded-full bg-[#01b4d5]"></span>
+              <span class="relative z-10">
+                Accueil
+                <!-- Cercle décoratif pour l'état actif -->
+                <span v-if="$route.path === '/'" class="absolute -top-1 -right-3 w-2 h-2">
+                  <span class="absolute inset-0 rounded-full bg-[#01b4d5] animate-ping opacity-75"></span>
+                  <span class="absolute inset-0 rounded-full bg-[#01b4d5]"></span>
+                </span>
               </span>
               <!-- Fine ligne en bas -->
               <span
@@ -129,16 +114,18 @@
               <button
                 class="relative px-4 py-2.5 font-medium rounded-xl transition-all duration-300 flex items-center gap-1 group"
                 :class="$route.path.startsWith('/formations') ? 'text-[#01b4d5]' : 'text-[#202a50] hover:text-[#01b4d5]'">
-                <span>Formations</span>
+                <span class="relative z-10">
+                  Formations
+                  <!-- Indicateur élégant -->
+                  <span v-if="$route.path.startsWith('/formations')" class="absolute -top-1 -right-3 w-2 h-2">
+                    <span class="absolute inset-0 rounded-full bg-[#01b4d5] animate-ping opacity-75"></span>
+                    <span class="absolute inset-0 rounded-full bg-[#01b4d5]"></span>
+                  </span>
+                </span>
                 <svg class="w-4 h-4 transition-transform duration-500"
                   :class="showFormationsDropdown ? 'rotate-180' : ''" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M7 10l5 5 5-5z" />
                 </svg>
-                <!-- Indicateur élégant -->
-                <span v-if="$route.path.startsWith('/formations')" class="absolute -top-1 -right-1 w-2 h-2">
-                  <span class="absolute inset-0 rounded-full bg-[#01b4d5] animate-ping opacity-75"></span>
-                  <span class="absolute inset-0 rounded-full bg-[#01b4d5]"></span>
-                </span>
               </button>
 
               <!-- Dropdown Formations -->
@@ -287,11 +274,13 @@
             <!-- Blogs -->
             <NuxtLink to="/blogs" class="relative px-4 py-2.5 font-medium rounded-xl transition-all duration-300 group"
               :class="$route.path === '/blogs' || $route.path.startsWith('/blogs/') ? 'text-[#01b4d5]' : 'text-[#202a50] hover:text-[#01b4d5]'">
-              <span class="relative z-10">Blogs</span>
-              <span v-if="$route.path === '/blogs' || $route.path.startsWith('/blogs/')"
-                class="absolute -top-1 -right-1 w-2 h-2">
-                <span class="absolute inset-0 rounded-full bg-[#01b4d5] animate-ping opacity-75"></span>
-                <span class="absolute inset-0 rounded-full bg-[#01b4d5]"></span>
+              <span class="relative z-10">
+                Blogs
+                <span v-if="$route.path === '/blogs' || $route.path.startsWith('/blogs/')"
+                  class="absolute -top-1 -right-3 w-2 h-2">
+                  <span class="absolute inset-0 rounded-full bg-[#01b4d5] animate-ping opacity-75"></span>
+                  <span class="absolute inset-0 rounded-full bg-[#01b4d5]"></span>
+                </span>
               </span>
               <span
                 class="absolute -bottom-1 left-2 right-2 h-[2px] rounded-full bg-gradient-to-r from-[#01b4d5] to-[#0095b0] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
@@ -301,11 +290,13 @@
             <!-- Galerie -->
             <NuxtLink to="/galerie" class="relative px-4 py-2.5 font-medium rounded-xl transition-all duration-300 group"
               :class="$route.path === '/galerie' || $route.path.startsWith('/galerie/') ? 'text-[#01b4d5]' : 'text-[#202a50] hover:text-[#01b4d5]'">
-              <span class="relative z-10">Galerie</span>
-              <span v-if="$route.path === '/galerie' || $route.path.startsWith('/galerie/')"
-                class="absolute -top-1 -right-1 w-2 h-2">
-                <span class="absolute inset-0 rounded-full bg-[#01b4d5] animate-ping opacity-75"></span>
-                <span class="absolute inset-0 rounded-full bg-[#01b4d5]"></span>
+              <span class="relative z-10">
+                Galerie
+                <span v-if="$route.path === '/galerie' || $route.path.startsWith('/galerie/')"
+                  class="absolute -top-1 -right-3 w-2 h-2">
+                  <span class="absolute inset-0 rounded-full bg-[#01b4d5] animate-ping opacity-75"></span>
+                  <span class="absolute inset-0 rounded-full bg-[#01b4d5]"></span>
+                </span>
               </span>
               <span
                 class="absolute -bottom-1 left-2 right-2 h-[2px] rounded-full bg-gradient-to-r from-[#01b4d5] to-[#0095b0] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
@@ -316,19 +307,25 @@
             <NuxtLink to="/contact"
               class="relative px-4 py-2.5 font-medium rounded-xl transition-all duration-300 group"
               :class="$route.path === '/contact' ? 'text-[#01b4d5]' : 'text-[#202a50] hover:text-[#01b4d5]'">
-              <span class="relative z-10">Nous contacter</span>
-              <span v-if="$route.path === '/contact'" class="absolute -top-1 -right-1 w-2 h-2">
-                <span class="absolute inset-0 rounded-full bg-[#01b4d5] animate-ping opacity-75"></span>
-                <span class="absolute inset-0 rounded-full bg-[#01b4d5]"></span>
+              <span class="relative z-10">
+                Nous contacter
+                <span v-if="$route.path === '/contact'" class="absolute -top-1 -right-3 w-2 h-2">
+                  <span class="absolute inset-0 rounded-full bg-[#01b4d5] animate-ping opacity-75"></span>
+                  <span class="absolute inset-0 rounded-full bg-[#01b4d5]"></span>
+                </span>
               </span>
               <span
                 class="absolute -bottom-1 left-2 right-2 h-[2px] rounded-full bg-gradient-to-r from-[#01b4d5] to-[#0095b0] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
                 :class="{ 'scale-x-100': $route.path === '/contact' }"></span>
             </NuxtLink>
 
+          </div>
+
+          <!-- Section Droite (CTA + Mobile Toggle) -->
+          <div class="flex items-center gap-4">
             <!-- Bouton CTA -->
             <NuxtLink to="/inscription"
-              class="ml-4 group relative px-6 py-2.5 overflow-hidden rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+              class="hidden lg:flex group relative px-6 py-2.5 overflow-hidden rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
               <span class="absolute inset-0 bg-gradient-to-r from-[#01b4d5] to-[#0095b0]"></span>
               <span
                 class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
@@ -341,31 +338,26 @@
                 <span>Inscription</span>
               </span>
             </NuxtLink>
-          </div>
 
-          <!-- Bouton Menu Mobile -->
-          <button @click="isMobileMenuOpen = !isMobileMenuOpen"
-            class="lg:hidden relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-[#01b4d5]/10 to-[#0095b0]/10 hover:from-[#01b4d5]/20 hover:to-[#0095b0]/20 transition-all duration-300 group">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-3 sm:w-5 sm:h-4">
-              <span class="absolute w-4 sm:w-5 h-0.5 bg-[#202a50] rounded-full transition-all duration-300"
-                :class="isMobileMenuOpen ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-0'"></span>
-              <span
-                class="absolute w-4 sm:w-5 h-0.5 bg-[#202a50] rounded-full transition-all duration-300 top-1/2 -translate-y-1/2"
-                :class="isMobileMenuOpen ? 'opacity-0' : 'opacity-100'"></span>
-              <span class="absolute w-4 sm:w-5 h-0.5 bg-[#202a50] rounded-full transition-all duration-300"
-                :class="isMobileMenuOpen ? 'top-1/2 -translate-y-1/2 -rotate-45' : 'bottom-0'"></span>
-            </div>
-          </button>
+            <!-- Bouton Menu Mobile -->
+            <button @click="isMobileMenuOpen = !isMobileMenuOpen"
+              class="lg:hidden flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-[#01b4d5]/10 to-[#0095b0]/10 hover:from-[#01b4d5]/20 hover:to-[#0095b0]/20 transition-all duration-300 group focus:outline-none">
+              <div class="w-5 h-[16px] flex flex-col justify-between items-center relative">
+                <span class="block w-5 h-[2px] bg-[#202a50] rounded-full transition-all duration-300 origin-center"
+                  :class="isMobileMenuOpen ? 'translate-y-[7px] rotate-45' : ''"></span>
+                <span class="block w-5 h-[2px] bg-[#202a50] rounded-full transition-all duration-300 origin-center"
+                  :class="isMobileMenuOpen ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'"></span>
+                <span class="block w-5 h-[2px] bg-[#202a50] rounded-full transition-all duration-300 origin-center"
+                  :class="isMobileMenuOpen ? '-translate-y-[7px] -rotate-45' : ''"></span>
+              </div>
+            </button>
+          </div>
         </div>
       </nav>
     </header>
 
     <!-- Espace réservé pour le header (top bar + nav) -->
-    <div class="transition-all duration-500"
-         :class="scrolled
-           ? 'h-14 sm:h-16'
-           : 'h-14 sm:h-16 md:h-[calc(44px+4.5rem)]'">
-    </div>
+    <div class="h-14 sm:h-16 md:h-[calc(44px+4.5rem)]"></div>
 
     <!-- Menu Mobile -->
     <transition
@@ -526,7 +518,7 @@
                 <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
               </svg>
             </div>
-            <span class="text-sm">Lun – Ven : 8h – 18h</span>
+            <span class="text-sm">Lun – Ven : 7h30 à 17h30</span>
           </div>
         </div>
 
@@ -589,7 +581,7 @@ const mobileLinks = [
     icon: 'M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75'
   },
   {
-    label: 'Intranet',
+    label: 'Espace étudiant',
     path: 'https://escendemo.neostart.tech/',
     icon: 'M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z'
   },
@@ -617,7 +609,7 @@ onUnmounted(() => {
 })
 
 const handleScroll = () => {
-  scrolled.value = window.scrollY > 20
+  scrolled.value = window.scrollY > 44
 }
 
 // Fermer les menus au changement de route

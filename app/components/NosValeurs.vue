@@ -1,5 +1,5 @@
 <template>
-  <section ref="sectionEl" id="valeurs" class="relative py-20 lg:py-28 overflow-hidden">
+  <section ref="sectionEl" id="valeurs" class="relative py-12 lg:py-28 overflow-hidden">
     <!-- Background image avec overlay -->
     <div class="absolute inset-0">
       <img
@@ -16,7 +16,7 @@
 
     <div class="container mx-auto px-4 lg:px-8 max-w-6xl relative z-10">
       <!-- En-tête -->
-      <div class="text-center mb-14 lg:mb-18 reveal" :class="{ 'is-visible': isVisible }">
+      <div class="text-center mb-10 lg:mb-18 reveal" :class="{ 'is-visible': isVisible }">
         <div class="inline-flex items-center gap-4 mb-5">
           <div class="w-8 h-px bg-gradient-to-r from-transparent to-white/40"></div>
           <span class="text-white/70 font-semibold text-xs tracking-widest uppercase">Notre ADN</span>
@@ -33,7 +33,7 @@
       </div>
 
       <!-- Grille des valeurs -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         <div v-for="(valeur, index) in valeurs" :key="valeur.title"
              class="reveal"
              :class="['reveal-delay-' + (index + 1), { 'is-visible': isVisible }]">
@@ -71,7 +71,7 @@
       </div>
 
       <!-- Séparateur bas -->
-      <div class="text-center mt-14 reveal reveal-delay-4" :class="{ 'is-visible': isVisible }">
+      <div class="text-center mt-10 lg:mt-14 reveal reveal-delay-4" :class="{ 'is-visible': isVisible }">
         <div class="inline-flex items-center gap-4 text-white/40">
           <div class="w-16 h-px bg-gradient-to-r from-transparent to-white/30"></div>
           <span class="text-xs font-medium tracking-wide">L'excellence au service du numérique</span>
@@ -100,7 +100,7 @@ const valeurs = [
     description: 'Nous repoussons les limites grâce à des méthodologies innovantes et des filières adaptées aux enjeux technologiques contemporains.'
   },
   {
-    title: 'Leadership',
+    title: 'Profesionnalisme et Leadership',
     iconPath: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z',
     description: 'Nous formons des leaders capables d\'impacter leur environnement et de créer les entreprises de demain.'
   }

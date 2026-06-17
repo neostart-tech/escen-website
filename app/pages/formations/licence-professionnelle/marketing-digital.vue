@@ -170,41 +170,19 @@
               <h2 class="text-2xl font-bold text-gray-900">Conditions d'Admission</h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div class="space-y-6">
-                <div>
-                  <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#00b3d4] text-white text-sm font-bold">1</span>
-                    Licence 1 & 2
-                  </h3>
-                  <div class="space-y-3 pl-10">
-                    <div v-for="(piece, index) in piecesLicence12" :key="index" class="flex items-center gap-3 text-gray-700">
-                      <div class="w-6 h-6 rounded-full bg-[#dbeff7] flex items-center justify-center flex-shrink-0">
-                        <svg class="w-3 h-3 text-[#00b3d4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                        </svg>
-                      </div>
-                      <span class="text-sm">{{ piece }}</span>
-                    </div>
-                  </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div v-for="(items, niveau) in piecesAFournir" :key="niveau" class="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:border-[#00b3d4] transition-colors">
+                <div class="bg-gradient-to-r from-[#00b3d4] to-[#6cc6e2] px-4 py-3">
+                  <h3 class="text-white font-bold text-center uppercase">{{ niveau }}</h3>
                 </div>
-              </div>
-              
-              <div class="space-y-6">
-                <div>
-                  <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#202a51] text-white text-sm font-bold">2</span>
-                    Licence 3
-                  </h3>
-                  <div class="space-y-3 pl-10">
-                    <div v-for="(piece, index) in piecesLicence3" :key="index" class="flex items-center gap-3 text-gray-700">
-                      <div class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
-                        <svg class="w-3 h-3 text-[#202a51]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                        </svg>
-                      </div>
-                      <span class="text-sm">{{ piece }}</span>
+                <div class="p-5 space-y-4">
+                  <div v-for="(piece, index) in items" :key="index" class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-full bg-[#00b3d4]/20 text-[#00b3d4] flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                      </svg>
                     </div>
+                    <span class="text-gray-700 text-sm leading-tight">{{ piece }}</span>
                   </div>
                 </div>
               </div>
@@ -523,19 +501,26 @@ const metiers = [
 ]
 
 // Données pour les pièces à fournir
-const piecesLicence12 = [
-  "2 photos passeport",
-  "Copie de la carte d'identité ou passeport",
-  "Copie légalisée de l'attestation du bac",
-  "Copie légalisée du relevé de bac"
-]
-
-const piecesLicence3 = [
-  "2 photos passeport",
-  "Copie de la carte d'identité ou passeport",
-  "Copie légalisée de l'attestation du bac et du BTS",
-  "Copie légalisée des relevés du bac + 2 et du BTS"
-]
+const piecesAFournir = {
+  "LICENCE 1": [
+    "Deux (02) photos passeport",
+    "Une (01) copie de la carte nationale d'identité ou du passeport",
+    "Une (01) copie de l'attestation du BAC",
+    "Une (01) copie du relevé de notes du BAC"
+  ],
+  "LICENCE 2": [
+    "Deux (02) photos passeport",
+    "Une (01) copie de la carte nationale d'identité ou du passeport",
+    "Une (01) copie de l'attestation du BAC et du relevé de notes du BAC",
+    "Une (01) copie légalisée du relevé du BAC+1"
+  ],
+  "LICENCE 3": [
+    "Deux (02) photos passeport",
+    "Une (01) copie de la carte nationale d'identité ou du passeport",
+    "Une (01) copie de l'attestation du BAC et du BTS",
+    "Une (01) copie des relevés légalisés du BAC+ 2 et du BTS"
+  ]
+}
 
 // Données pour le résumé
 const infosResume = [

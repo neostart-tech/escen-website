@@ -1,5 +1,6 @@
+
 <template>
-  <section id="origins" ref="sectionEl" class="relative py-20 lg:py-24 bg-white overflow-hidden">
+  <section id="origins" ref="sectionEl" class="relative py-12 lg:py-24 bg-white overflow-hidden">
     <!-- Décorations subtiles -->
     <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#01b4d5]/20 to-transparent"></div>
     <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#01b4d5]/20 to-transparent"></div>
@@ -57,9 +58,6 @@
                   @error="(e) => handleImageError(e, country.name)"
                 >
               </div>
-              <span class="text-sm font-medium text-gray-600 mt-3 group-hover:text-[#01b4d5] transition-colors duration-300 whitespace-nowrap">
-                {{ country.name }}
-              </span>
             </div>
           </div>
         </div>

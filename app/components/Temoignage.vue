@@ -1,41 +1,43 @@
 <template>
-  <section id="testimonials" class="relative py-24 lg:py-32 bg-[#f8fafc] overflow-hidden">
+  <section id="testimonials" class="relative py-16 lg:py-32 bg-[#f8fafc] overflow-hidden">
     <!-- Déco de fond -->
     <div class="absolute inset-0 pointer-events-none">
       <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-br from-[#01b4d5]/5 to-transparent rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3"></div>
       <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-[#202a50]/5 to-transparent rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3"></div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-20 xl:px-24 relative z-10 mb-16 text-center">
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-20 xl:px-24 relative z-10 mb-10 lg:mb-16 text-center">
       <div class="inline-flex items-center gap-3 mb-6">
         <div class="w-8 h-px bg-gradient-to-r from-transparent to-[#01b4d5]"></div>
         <span class="text-[#01b4d5] text-xs font-bold tracking-[0.3em] uppercase">Expériences</span>
         <div class="w-8 h-px bg-gradient-to-l from-transparent to-[#01b4d5]"></div>
       </div>
 
-      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-light text-[#202a50] mb-6 leading-tight">
+      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-light text-[#202a50] mb-6 leading-tight">
         Ils parlent de
         <span class="font-bold text-[#01b4d5]"> leur réussite.</span>
       </h2>
     </div>
 
-    <!-- Piste de défilement horizontal -->
-    <div 
-      ref="scrollContainer" 
-      class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-16 pt-4 px-6 sm:px-10 lg:px-20 xl:px-24 space-x-6 lg:space-x-8"
-      style="scroll-behavior: smooth;"
+    <!-- Conteneur strict pour n'afficher qu'un nombre exact de cartes et cacher totalement le reste -->
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-20 xl:px-24 overflow-hidden">
+      <!-- Piste de défilement horizontal sans padding interne -->
+      <div 
+        ref="scrollContainer" 
+        class="flex items-stretch overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-20 pt-10"
+        style="scroll-behavior: smooth;"
       @mouseenter="pauseAutoScroll"
       @mouseleave="startAutoScroll"
       @touchstart="pauseAutoScroll"
       @touchend="startAutoScroll"
     >
-      <div 
-        v-for="(t, index) in testimonials" 
-        :key="index"
-        class="snap-center shrink-0 w-[85vw] sm:w-[320px] lg:w-[380px] relative group cursor-grab active:cursor-grabbing"
-      >
+        <div 
+          v-for="(t, index) in duplicatedTestimonials" 
+          :key="index"
+          class="snap-start shrink-0 w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-21.33px)] flex relative group cursor-grab active:cursor-grabbing mr-4 lg:mr-8"
+        >
         <!-- Card -->
-        <div class="h-full bg-white/80 backdrop-blur-xl rounded-[2rem] p-6 lg:p-8 border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(1,180,213,0.1)] transition-all duration-500 transform group-hover:-translate-y-2 flex flex-col justify-between">
+        <div class="w-full h-full bg-white/80 backdrop-blur-xl rounded-[2rem] p-6 lg:p-8 border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(1,180,213,0.1)] transition-all duration-500 transform group-hover:-translate-y-2 flex flex-col justify-between">
           
           <div>
             <!-- Stars & Quote Icon -->
@@ -54,21 +56,20 @@
 
           <!-- User Info -->
           <div class="flex items-center gap-4 mt-auto pt-5 border-t border-gray-100">
-            <div class="relative w-14 h-14 rounded-full overflow-hidden shadow-md">
+            <div class="relative w-14 h-14 rounded-full overflow-hidden shadow-md shrink-0">
               <img :src="t.photo" :alt="t.name" class="w-full h-full object-cover" @error="handleImageError" />
               <div class="absolute inset-0 bg-[#202a50]/10 mix-blend-overlay"></div>
             </div>
             <div>
-              <h4 class="font-bold text-[#202a50] text-base">{{ t.name }}</h4>
-              <p class="text-xs font-medium text-[#01b4d5]">{{ t.role }}</p>
+              <h4 class="font-bold text-[#202a50] text-base leading-tight">{{ t.name }}</h4>
+              <p class="text-xs font-medium text-[#01b4d5] mt-1">{{ t.role }}</p>
               <p class="text-[11px] text-gray-400 mt-0.5">{{ t.type }} <span v-if="t.country">• {{ t.country }}</span></p>
             </div>
           </div>
 
         </div>
       </div>
-      
-
+      </div>
     </div>
   </section>
 </template>
@@ -136,6 +137,9 @@ const testimonials = [
   }
 ]
 
+// Duplication massive pour un défilement "continu" sans retour arrière visible rapide
+const duplicatedTestimonials = Array(15).fill(testimonials).flat()
+
 const scrollLeft = () => {
   if (scrollContainer.value) {
     const cardWidth = scrollContainer.value.children[0].offsetWidth
@@ -167,14 +171,15 @@ const startAutoScroll = () => {
       const container = scrollContainer.value
       const cardWidth = container.children[0].offsetWidth
       
-      // Retour au début si on est à la fin
-      if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
+      // On scroll d'environ 70% de la carte, le snap CSS s'occupe de l'alignement parfait !
+      // Cela évite le bug des marges qui se décalent au fur et à mesure.
+      if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 50) {
         container.scrollTo({ left: 0, behavior: 'smooth' })
       } else {
-        container.scrollBy({ left: cardWidth + 32, behavior: 'smooth' })
+        container.scrollBy({ left: cardWidth * 0.75, behavior: 'smooth' })
       }
     }
-  }, 4000)
+  }, 3500)
 }
 
 const pauseAutoScroll = () => {

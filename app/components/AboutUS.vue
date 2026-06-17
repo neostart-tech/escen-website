@@ -1,5 +1,5 @@
 <template>
-  <section id="a-propos" class="relative overflow-hidden bg-white py-20 lg:py-32">
+  <section id="a-propos" class="relative overflow-hidden bg-white py-12 lg:py-32">
     <!-- ===== UNIQUE BACKGROUND DECORATIONS (GRADUATION CAPS, ETC.) ===== -->
     <div class="absolute inset-0 pointer-events-none opacity-50 transition-opacity duration-1000">
 
@@ -102,11 +102,11 @@
           <!-- Descriptive Text -->
           <div class="space-y-6 text-lg text-gray-600 leading-relaxed max-w-2xl">
             <p>
-              Depuis <span class="text-[#202a50] font-semibold">2018</span>, l'ESCEN s'est imposée comme le pionnier de
-              l'excellence académique digitale en Afrique francophone.
+              Depuis <span class="text-[#202a50] font-semibold">2020</span>, l'ESCEN s'est imposée comme le pionnier de
+              l'excellence académique digitale en Afrique francophone sub-saharienne.
             </p>
             <p class="text-base text-gray-500 italic">
-              "Nous ne suivons pas les tendances, nous forgeons les outils qui les rendront possibles."
+              "Nous ne suivons pas les tendances, nous formons les leaders qui les rendront possibles."
             </p>
           </div>
 
@@ -146,13 +146,13 @@
           <!-- Main Image with Border Radius and Shadow -->
           <div
             class="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl shadow-[#202a50]/20 transform rotate-2 hover:rotate-0 transition-transform duration-700">
-            <img src="/temoignage/a-propos.jpg" alt="Campus ESCEN"
+            <img src="/images/about.jpeg" alt="Campus ESCEN"
               class="w-full h-full object-cover scale-110 hover:scale-100 transition-transform duration-[2s]" />
             <!-- Overlay Gradient -->
             <div class="absolute inset-0 bg-gradient-to-t from-[#202a50]/40 to-transparent"></div>
           </div>
 
-          <!-- Badge compact "Depuis 2018" -->
+          <!-- Badge compact "Depuis 2020" -->
           <div class="absolute -bottom-5 -left-4 lg:-left-10 z-20 animate-float">
             <div class="bg-white rounded-2xl shadow-xl border border-gray-100 px-5 py-4 flex items-center gap-3">
               <div class="w-10 h-10 rounded-xl bg-[#01b4d5]/10 flex items-center justify-center flex-shrink-0">
@@ -161,8 +161,9 @@
                 </svg>
               </div>
               <div>
-                <div class="text-xl font-black text-[#01b4d5] leading-none">2018</div>
                 <div class="text-[10px] font-semibold text-gray-400 tracking-widest uppercase mt-0.5">Fondée en</div>
+
+                <div class="text-xl font-black text-[#01b4d5] leading-none">2020</div>
               </div>
             </div>
           </div>

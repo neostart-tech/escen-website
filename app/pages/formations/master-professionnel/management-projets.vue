@@ -4,7 +4,7 @@
       title="Master Professionnel en Management de Projets Numériques"
       subtitle="Management de Projets Numériques"
       description="Formation d'excellence aux métiers du management et de la gestion de projets dans l'environnement numérique"
-      duration="Durée : 2 ans (4 semestres)"
+      duration="Durée : 18 mois, 100% en ligne"
       backgroundImage="/formations/management-projets.jpg"
       :breadcrumb="[
         { label: 'Accueil', href: '/' },
@@ -51,7 +51,7 @@
                 </div>
                 <div>
                   <h3 class="font-semibold text-gray-700 text-sm mb-1">Durée</h3>
-                  <p class="text-gray-900 font-medium">4 semestres (2 ans)</p>
+                  <p class="text-gray-900 font-medium">18 mois</p>
                 </div>
                 <div>
                   <h3 class="font-semibold text-gray-700 text-sm mb-1">Agrément</h3>
@@ -99,10 +99,10 @@
                   </div>
                   <div>
                     <h3 class="font-bold text-gray-900">Format flexible</h3>
-                    <p class="text-gray-600 text-sm">Cours du soir en ligne</p>
+                    <p class="text-gray-600 text-sm">100% en ligne</p>
                   </div>
                 </div>
-                <p class="text-gray-700">Formation 100% en ligne conçue pour les professionnels qui souhaitent développer leurs compétences en management de projets numériques</p>
+                <p class="text-gray-700">Cours dispensés en ligne avec des classes virtuelles, études de cas et projets réels.</p>
               </div>
               
               <div class="bg-gradient-to-r from-[#dbeff7] to-[#f0f9ff] p-6 rounded-xl">
@@ -115,10 +115,10 @@
                   </div>
                   <div>
                     <h3 class="font-bold text-gray-900">Rythme de formation</h3>
-                    <p class="text-gray-600 text-sm">3 sessions de cours par semaine</p>
+                    <p class="text-gray-600 text-sm">Lundi, Mercredi, Vendredi</p>
                   </div>
                 </div>
-                <p class="text-gray-700">Un programme intensif permettant d'acquérir des compétences pratiques en gestion de projets tout en conservant son activité professionnelle</p>
+                <p class="text-gray-700">De 18h30 à 21h GMT. Un programme intensif permettant d'acquérir des compétences pratiques tout en conservant son activité professionnelle.</p>
               </div>
             </div>
           </section>
@@ -139,7 +139,7 @@
               <h3 class="text-lg font-bold text-gray-900 mb-4">Objectif de la formation</h3>
               <div class="p-6 bg-gradient-to-r from-[#dbeff7] to-[#f0f9ff] rounded-xl">
                 <p class="text-gray-800 text-lg font-medium">
-                  Le programme du Master en Management de Projets Numériques forme des professionnels capables de maîtriser les techniques avancées et les stratégies en matière de management de projets numériques.
+                  Concevoir et piloter des projets numériques, gérer l'innovation digitale, développer une double compétence managériale et technique, et préparer les certifications CAPM® et PMP®.
                 </p>
               </div>
             </div>
@@ -211,7 +211,9 @@
               </h3>
               <div class="p-6 bg-gradient-to-r from-[#dbeff7] to-[#f0f9ff] rounded-xl">
                 <p class="text-gray-800 font-medium">
-                  Formation ouverte aux candidats titulaires du baccalauréat toute série confondue ou tout titre équivalent.
+                  Cadres, managers, chefs de projets IT/digital, consultants, responsables métiers, entrepreneurs.
+                  <br><br>
+                  <span class="font-bold">Condition :</span> Titulaire d'une Licence (BAC+3) ou équivalent.
                 </p>
               </div>
             </div>
@@ -301,11 +303,17 @@
             </div>
             
             <div class="mt-6 p-4 bg-[#dbeff7] rounded-xl">
-              <p class="text-sm text-gray-700 text-center">
-                Les frais de scolarité sont payables en tranches (bimestriel, trimestriel, 5 tranches ou annuel)
-              </p>
-              <p class="text-xs text-gray-500 text-center mt-2">
-                Cf. Service scolarité pour plus de détails
+              <p class="text-sm text-gray-800 font-semibold text-center mb-2">Options de Certification :</p>
+              <div class="flex justify-between items-center text-sm mb-1">
+                <span class="text-gray-600">CAPM®</span>
+                <span class="font-bold text-gray-900">+ 150 000 FCFA</span>
+              </div>
+              <div class="flex justify-between items-center text-sm mb-3">
+                <span class="text-gray-600">PMP®</span>
+                <span class="font-bold text-gray-900">+ 350 000 FCFA</span>
+              </div>
+              <p class="text-xs text-gray-500 text-center pt-2 border-t border-[#00b3d4]/20">
+                Les frais de scolarité sont payables en tranches (bimestriel, trimestriel, 5 tranches ou annuel). Cf. Service scolarité pour plus de détails.
               </p>
             </div>
           </div>
@@ -503,52 +511,52 @@ import Breadcrumb from '~/components/Breadcrumb.vue'
 
 // Compétences attendues
 const competences = [
-  "Gérer efficacement des projets de nature et de taille diverses depuis leur conception jusqu'à leur achèvement",
-  "Maîtriser les outils de gestion de projets numériques",
-  "Animer et motiver une équipe projet dans un environnement numérique",
-  "Contribuer à la transformation digitale d'une organisation par le management de projets"
+  "Veille et analyse des usages numériques",
+  "Coordination des partenaires et animation de processus d'innovation",
+  "Planification, gestion des risques, management d'équipes projet",
+  "Élaboration de stratégies digitales et pilotage du changement"
 ]
 
 // Données pour les métiers
 const metiers = [
   {
     icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
-    title: "Directeur de programmes",
-    description: "Supervision de plusieurs projets stratégiques au sein d'une organisation"
-  },
-  {
-    icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2",
-    title: "Chef de projet digital",
+    title: "Chef de projets digitaux",
     description: "Pilotage de projets digitaux de la conception à la livraison"
-  },
-  {
-    icon: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10",
-    title: "Chef de produit",
-    description: "Gestion du cycle de vie des produits numériques et développement stratégique"
-  },
-  {
-    icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
-    title: "Manager",
-    description: "Management d'équipes et supervision des activités dans un environnement numérique"
-  },
-  {
-    icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z",
-    title: "Consultant en management de projets",
-    description: "Conseil et accompagnement des entreprises dans la gestion de leurs projets numériques"
   },
   {
     icon: "M13 10V3L4 14h7v7l9-11h-7z",
     title: "Consultant en transformation digitale",
-    description: "Accompagnement des organisations dans leur transformation numérique par les projets"
+    description: "Accompagnement des organisations dans leur transformation numérique"
+  },
+  {
+    icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2",
+    title: "Manager de projets / PMO",
+    description: "Gestion stratégique des portefeuilles de projets"
+  },
+  {
+    icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
+    title: "Responsable innovation",
+    description: "Pilotage et intégration des innovations technologiques"
+  },
+  {
+    icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z",
+    title: "Consultant IT/Digital",
+    description: "Conseil et expertise en systèmes d'information et digitalisation"
+  },
+  {
+    icon: "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4",
+    title: "Entrepreneur numérique",
+    description: "Création et gestion de startups technologiques innovantes"
   }
 ]
 
 // Pièces à fournir
 const piecesAFournir = [
-  "Deux (02) photos passeports",
-  "1 Curriculum vitae à jour",
-  "Une (01) copie de la pièce nationale d'identité ou du passeport",
-  "Une (01) copie légalisée du dernier diplôme universitaire"
+  "2 photos d'identité",
+  "Copie de la pièce nationale d'identité ou passeport",
+  "Copie légalisée du diplôme de licence ou équivalent",
+  "CV à jour"
 ]
 
 // Données pour le résumé
@@ -566,12 +574,12 @@ const infosResume = [
   {
     icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
     title: "Durée",
-    value: "2 ans (4 semestres)"
+    value: "18 mois"
   },
   {
     icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z",
     title: "Modalités",
-    value: "Cours du soir en ligne"
+    value: "100% en ligne (Lun, Mer, Ven)"
   }
 ]
 

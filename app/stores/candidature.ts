@@ -14,7 +14,10 @@ export const useCandidatureStore = defineStore('candidature', {
         const { $axios } = useNuxtApp()
         
         const response = await $axios.post('/public/candidature/soumettre', formData, {
-          headers: { 'Content-Type': 'multipart/form-data' }
+          headers: { 
+            'Content-Type': 'multipart/form-data',
+            'Accept': 'application/json'
+          }
         });
         
         return response.data

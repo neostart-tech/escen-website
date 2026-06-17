@@ -170,41 +170,19 @@
               <h2 class="text-2xl font-bold text-gray-900">Conditions d'Admission</h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div class="space-y-6">
-                <div>
-                  <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#00b3d4] text-white text-sm font-bold">1</span>
-                    Licence 1 & 2
-                  </h3>
-                  <div class="space-y-3 pl-10">
-                    <div v-for="(piece, index) in piecesLicence12" :key="index" class="flex items-center gap-3 text-gray-700">
-                      <div class="w-6 h-6 rounded-full bg-[#dbeff7] flex items-center justify-center flex-shrink-0">
-                        <svg class="w-3 h-3 text-[#00b3d4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                        </svg>
-                      </div>
-                      <span class="text-sm">{{ piece }}</span>
-                    </div>
-                  </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div v-for="(items, niveau) in piecesAFournir" :key="niveau" class="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:border-[#00b3d4] transition-colors">
+                <div class="bg-gradient-to-r from-[#00b3d4] to-[#6cc6e2] px-4 py-3">
+                  <h3 class="text-white font-bold text-center uppercase">{{ niveau }}</h3>
                 </div>
-              </div>
-              
-              <div class="space-y-6">
-                <div>
-                  <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#202a51] text-white text-sm font-bold">2</span>
-                    Licence 3
-                  </h3>
-                  <div class="space-y-3 pl-10">
-                    <div v-for="(piece, index) in piecesLicence3" :key="index" class="flex items-center gap-3 text-gray-700">
-                      <div class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
-                        <svg class="w-3 h-3 text-[#202a51]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                        </svg>
-                      </div>
-                      <span class="text-sm">{{ piece }}</span>
+                <div class="p-5 space-y-4">
+                  <div v-for="(piece, index) in items" :key="index" class="flex items-start gap-3">
+                    <div class="w-5 h-5 rounded-full bg-[#00b3d4]/20 text-[#00b3d4] flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                      </svg>
                     </div>
+                    <span class="text-gray-700 text-sm leading-tight">{{ piece }}</span>
                   </div>
                 </div>
               </div>
@@ -519,19 +497,26 @@ const metiers = [
 ]
 
 // Données pour les pièces à fournir
-const piecesLicence12 = [
-  "2 photos passeport",
-  "Copie de la carte d'identité ou passeport",
-  "Copie légalisée de l'attestation du bac",
-  "Copie légalisée du relevé de bac"
-]
-
-const piecesLicence3 = [
-  "2 photos passeport",
-  "Copie de la carte d'identité ou passeport",
-  "Copie légalisée de l'attestation du bac et du BTS",
-  "Copie légalisée des relevés du bac + 2 et du BTS"
-]
+const piecesAFournir = {
+  "LICENCE 1": [
+    "Deux (02) photos passeport",
+    "Une (01) copie de la carte nationale d'identité ou du passeport",
+    "Une (01) copie de l'attestation du BAC",
+    "Une (01) copie du relevé de notes du BAC"
+  ],
+  "LICENCE 2": [
+    "Deux (02) photos passeport",
+    "Une (01) copie de la carte nationale d'identité ou du passeport",
+    "Une (01) copie de l'attestation du BAC et du relevé de notes du BAC",
+    "Une (01) copie légalisée du relevé du BAC+1"
+  ],
+  "LICENCE 3": [
+    "Deux (02) photos passeport",
+    "Une (01) copie de la carte nationale d'identité ou du passeport",
+    "Une (01) copie de l'attestation du BAC et du BTS",
+    "Une (01) copie des relevés légalisés du BAC+ 2 et du BTS"
+  ]
+}
 
 // Données pour le résumé
 const infosResume = [
@@ -588,22 +573,22 @@ const avantages = [
     icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
     title: "Tissu pour uniforme"
   },
-  {
-    icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
-    title: "Assurance santé"
-  },
-  {
-    icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
-    title: "Bibliothèque numérique"
-  },
+  // {
+  //   icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+  //   title: "Assurance santé"
+  // },
+  // {
+  //   icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
+  //   title: "Bibliothèque numérique"
+  // },
   {
     icon: "M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2",
     title: "Carte d'étudiant"
   },
-  {
-    icon: "M13 10V3L4 14h7v7l9-11h-7z",
-    title: "Réduction loisirs"
-  },
+  // {
+  //   icon: "M13 10V3L4 14h7v7l9-11h-7z",
+  //   title: "Réduction loisirs"
+  // },
   {
     icon: "M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4",
     title: "Réduction transport avec Gozem"

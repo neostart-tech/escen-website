@@ -16,12 +16,12 @@
 
     <div class="container mx-auto px-4 lg:px-6 max-w-7xl relative z-10">
       <!-- Breadcrumb -->
-      <nav v-if="breadcrumb?.length" class="flex items-center justify-center space-x-2 text-sm text-white/80 mb-6">
+      <nav v-if="breadcrumb?.length" class="flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm text-white/80 mb-6 text-center">
         <template v-for="(item, index) in breadcrumb" :key="index">
           <NuxtLink
             v-if="item.href"
             :to="item.href"
-            class="hover:text-white transition-colors duration-200 flex items-center gap-1"
+            class="hover:text-white transition-colors duration-200 flex items-center gap-1 whitespace-nowrap"
           >
             <span v-if="index === 0">
               <!-- Icône maison -->
@@ -33,7 +33,7 @@
             </span>
             {{ item.label }}
           </NuxtLink>
-          <span v-else class="text-white font-medium flex items-center gap-1">
+          <span v-else class="text-white font-medium flex items-center gap-1 break-words">
             <span v-if="index === 0">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path
@@ -43,22 +43,22 @@
             </span>
             {{ item.label }}
           </span>
-          <span v-if="index < breadcrumb.length - 1" class="text-white/50">/</span>
+          <span v-if="index < breadcrumb.length - 1" class="text-white/50 px-1">/</span>
         </template>
       </nav>
 
       <!-- Contenu -->
       <div class="text-center text-white">
-        <div class="inline-flex items-center gap-4 mb-6">
-          <div class="w-12 h-px bg-gradient-to-r from-transparent to-[#01b4d5]"></div>
-          <span class="text-[#01b4d5] font-semibold text-sm tracking-widest uppercase">
+        <div class="flex items-center justify-center gap-2 sm:gap-4 mb-4 sm:mb-6">
+          <div class="hidden sm:block w-8 sm:w-12 h-px bg-gradient-to-r from-transparent to-[#01b4d5]"></div>
+          <span class="text-[#01b4d5] font-semibold text-xs sm:text-sm tracking-widest uppercase text-center">
             {{ subtitle }}
           </span>
-          <div class="w-12 h-px bg-gradient-to-l from-transparent to-[#01b4d5]"></div>
+          <div class="hidden sm:block w-8 sm:w-12 h-px bg-gradient-to-l from-transparent to-[#01b4d5]"></div>
         </div>
 
         <h1 
-          class="text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 tracking-tight"
+          class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 tracking-tight break-words"
           :class="{ 'animate-title-reveal': animateTitle }"
         >
           {{ title }}

@@ -330,30 +330,24 @@
               </div>
               <h2 class="text-2xl font-bold text-gray-900 mb-4">Pièces à Fournir</h2>
               
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div v-for="(piece, index) in piecesAFournir" :key="index" 
-                     class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
-                  <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#00b3d4] to-[#6cc6e2] flex items-center justify-center flex-shrink-0">
-                    <span class="text-white font-bold text-sm">{{ index + 1 }}</span>
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div v-for="(items, niveau) in piecesAFournir" :key="niveau" class="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:border-[#00b3d4] transition-colors">
+                  <div class="bg-gradient-to-r from-[#00b3d4] to-[#6cc6e2] px-4 py-3">
+                    <h3 class="text-white font-bold text-center uppercase">{{ niveau }}</h3>
                   </div>
-                  <span class="text-gray-700">{{ piece }}</span>
+                  <div class="p-5 space-y-4">
+                    <div v-for="(piece, index) in items" :key="index" class="flex items-start gap-3">
+                      <div class="w-5 h-5 rounded-full bg-[#00b3d4]/20 text-[#00b3d4] flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                        </svg>
+                      </div>
+                      <span class="text-gray-700 text-sm leading-tight">{{ piece }}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              <div class="mt-8 p-6 bg-gradient-to-r from-[#dbeff7] to-[#f0f9ff] rounded-xl">
-                <div class="flex items-center gap-4">
-                  <div class="p-3 rounded-lg bg-white">
-                    <svg class="w-6 h-6 text-[#00b3d4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89-3.52a2 2 0 011.11 0L20 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 class="font-bold text-gray-900 mb-1">Envoi des Documents</h4>
-                    <p class="text-gray-600 text-sm">Envoyez votre dossier complet à :</p>
-                    <p class="text-[#00b3d4] font-semibold">admission@escen.university</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -478,11 +472,26 @@ const perspectivesCarriere = [
 ]
 
 // Pièces à fournir basées sur le PDF
-const piecesAFournir = [
-  "Deux (02) photos passeport",
-  "Curriculum vitae à jour",
-  "Copie de la pièce d'identité nationale ou passeport"
-]
+const piecesAFournir = {
+  "LICENCE 1": [
+    "Deux (02) photos passeport",
+    "Une (01) copie de la carte nationale d'identité ou du passeport",
+    "Une (01) copie de l'attestation du BAC",
+    "Une (01) copie du relevé de notes du BAC"
+  ],
+  "LICENCE 2": [
+    "Deux (02) photos passeport",
+    "Une (01) copie de la carte nationale d'identité ou du passeport",
+    "Une (01) copie de l'attestation du BAC et du relevé de notes du BAC",
+    "Une (01) copie légalisée du relevé du BAC+1"
+  ],
+  "LICENCE 3": [
+    "Deux (02) photos passeport",
+    "Une (01) copie de la carte nationale d'identité ou du passeport",
+    "Une (01) copie de l'attestation du BAC et du BTS",
+    "Une (01) copie des relevés légalisés du BAC+ 2 et du BTS"
+  ]
+}
 
 // Fonctions
 const postulerMaintenant = () => {

@@ -11,10 +11,10 @@
 
         <!-- Barre de recherche et filtres améliorée -->
         <section class="py-8 bg-white border-b border-gray-100">
-            <div class="container mx-auto px-20 lg:px-22 max-w-7xl">
+            <div class="container mx-auto px-4 md:px-8 lg:px-22 max-w-7xl">
                 <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
                     <!-- Barre de recherche stylisée -->
-                    <div class="relative flex-1 max-w-xl w-full">
+                    <div class="relative flex-1 w-full max-w-xl">
                         <div class="relative">
                             <input v-model="searchQuery" type="text" placeholder="Rechercher une formation..."
                                 class="w-full pl-12 pr-10 py-3 rounded-xl border border-gray-200 focus:border-[#01b4d5] focus:ring-2 focus:ring-[#01b4d5]/20 transition-all duration-300 bg-white shadow-sm text-gray-700 placeholder-gray-400">
@@ -33,28 +33,28 @@
                         </div>
                     </div>
 
-                    <!-- Informations et sélecteur sur la même ligne -->
-                    <div class="flex items-center gap-4 text-sm">
+                    <!-- Informations et sélecteur -->
+                    <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm">
                         <!-- Compteur de résultats -->
-                        <div class="text-gray-600 whitespace-nowrap">
+                        <div class="text-gray-600">
                             <span class="font-medium text-gray-900">{{ filteredFormations.length }}</span>
-                            formation(s) trouvée(s)
+                            formation(s)
                         </div>
 
                         <!-- Séparateur visuel -->
-                        <div class="w-px h-6 bg-gray-300"></div>
+                        <div class="hidden sm:block w-px h-6 bg-gray-300"></div>
 
                         <!-- Sélecteur d'éléments par page -->
                         <div class="flex items-center gap-2">
-                            <span class="text-gray-600 whitespace-nowrap">Afficher</span>
+                            <span class="text-gray-600 hidden sm:inline">Afficher</span>
                             <select v-model="itemsPerPage"
-                                class="px-3 py-2 rounded-lg border border-gray-200 focus:border-[#01b4d5] focus:ring-2 focus:ring-[#01b4d5]/20 bg-white text-gray-700 text-sm">
+                                class="px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg border border-gray-200 focus:border-[#01b4d5] focus:ring-2 focus:ring-[#01b4d5]/20 bg-white text-gray-700 text-sm">
                                 <option value="2">2</option>
                                 <option value="4">4</option>
                                 <option value="6">6</option>
                                 <option value="8">8</option>
                             </select>
-                            <span class="text-gray-600 whitespace-nowrap">par page</span>
+                            <span class="text-gray-600">/ page</span>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
 
         <!-- Formations Section -->
         <section class="py-12 lg:py-20 bg-white">
-            <div class="container mx-auto px-20 lg:px-22 max-w-7xl">
+            <div class="container mx-auto px-4 md:px-8 lg:px-22 max-w-7xl">
                 <!-- Message si aucune formation trouvée -->
                 <div v-if="filteredFormations.length === 0" class="text-center py-16">
                     <svg class="w-24 h-24 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor"
@@ -99,7 +99,7 @@
                                 </div>
                                 <!-- Icône positionnée différemment selon l'index -->
                                 <div :class="getIconPosition(index)">
-                                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor"
+                                    <svg class="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             :d="formation.icon" />
@@ -391,10 +391,10 @@ const getFormationOrder = (index) => {
 
 const getIconPosition = (index) => {
     const globalIndex = (currentPage.value - 1) * itemsPerPage.value + index
-    const baseClasses = 'absolute w-24 h-24 rounded-2xl flex items-center justify-center shadow-2xl'
+    const baseClasses = 'absolute w-16 h-16 md:w-24 md:h-24 rounded-xl md:rounded-2xl flex items-center justify-center shadow-2xl'
     return globalIndex % 2 === 0
-        ? `${baseClasses} -bottom-6 -right-6 bg-[#01b4d5]`
-        : `${baseClasses} -bottom-6 -left-6 bg-[#0056b3]`
+        ? `${baseClasses} -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-[#01b4d5]`
+        : `${baseClasses} -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-[#0056b3]`
 }
 
 const getContentPosition = (index) => {

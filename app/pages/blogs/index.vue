@@ -253,6 +253,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import Breadcrumb from '~/components/Breadcrumb.vue'
 import { useBlogStore } from '~/stores/blog'
 
 // State

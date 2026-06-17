@@ -1,5 +1,5 @@
 <template>
-  <section ref="sectionEl" id="galerie-preview" class="relative overflow-hidden bg-white py-24 lg:py-32">
+  <section ref="sectionEl" id="galerie-preview" class="relative overflow-hidden bg-white py-16 lg:py-32">
     
     <!-- Premium background elements -->
     <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#01b4d5]/5 rounded-full blur-[120px] mix-blend-multiply pointer-events-none"></div>
@@ -43,7 +43,7 @@
           <NuxtLink :to="`/galerie/${album.slug}`" class="group relative block w-full h-full rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500">
             
             <!-- Image with smooth scale on hover -->
-            <img :src="album.cover || '/valeurs/bg.jpg'" 
+            <img :src="getFileUrl(album.cover_url || album.cover) || '/valeurs/bg.jpg'" 
                  :alt="album.title"
                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" />
             
@@ -124,6 +124,24 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useGalleryStore } from '~/stores/gallery'
+import config from '~~/config'
+
+const getFileUrl = (path) => {
+  if (!path || typeof path !== 'string' || path === 'null' || path === 'undefined') return null;
+  
+  const baseUrl = config.app_local ? config.app_dev_storage_url : config.app_prod_storage_url;
+  
+  if (path === `${baseUrl}/storage` || path === `${baseUrl}/storage/`) return null;
+
+  if (path.startsWith('http')) return path;
+  
+  let cleanPath = path.replace(/^\/+/, '').trim();
+  if (!cleanPath || cleanPath === 'storage' || cleanPath === 'storage/') return null;
+  if (cleanPath.startsWith('storage/')) {
+    return `${baseUrl}/${cleanPath}`;
+  }
+  return `${baseUrl}/storage/${cleanPath}`;
+};
 
 const sectionEl = ref(null)
 const isVisible = ref(false)

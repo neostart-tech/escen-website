@@ -69,7 +69,7 @@
                         <div class="relative h-48 sm:h-52 lg:h-56 overflow-hidden bg-gray-100">
                             <!-- Image principale -->
                             <img 
-                                :src="album.cover || '/valeurs/bg.jpg'" 
+                                :src="getFileUrl(album.cover_url || album.cover) || '/valeurs/bg.jpg'" 
                                 :alt="album.title"
                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 loading="lazy"
@@ -157,8 +157,26 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import Breadcrumb from '~/components/Breadcrumb.vue'
+import config from '~~/config'
 
 import { useGalleryStore } from '~/stores/gallery'
+
+const getFileUrl = (path) => {
+  if (!path || typeof path !== 'string' || path === 'null' || path === 'undefined') return null;
+  
+  const baseUrl = config.app_local ? config.app_dev_storage_url : config.app_prod_storage_url;
+  
+  if (path === `${baseUrl}/storage` || path === `${baseUrl}/storage/`) return null;
+
+  if (path.startsWith('http')) return path;
+
+  let cleanPath = path.replace(/^\/+/, '').trim();
+  if (!cleanPath || cleanPath === 'storage' || cleanPath === 'storage/') return null;
+  if (cleanPath.startsWith('storage/')) {
+    return `${baseUrl}/${cleanPath}`;
+  }
+  return `${baseUrl}/storage/${cleanPath}`;
+};
 
 // State
 const searchQuery = ref('')
