@@ -400,36 +400,8 @@ import { ref } from 'vue'
 
 // Gestion des préférences cookies
 const openCookieSettings = () => {
-    // Ici, vous pouvez intégrer votre solution de gestion des cookies
-    // Par exemple, ouvrir un modal avec les préférences
-    alert('Outil de gestion des cookies - Cette fonctionnalité serait normalement intégrée avec une solution comme Cookiebot, OneTrust, etc.')
-    
-    // Pour une implémentation réelle, vous pourriez :
-    // 1. Ouvrir un modal avec les préférences
-    // 2. Intégrer un script tiers (Cookiebot, OneTrust)
-    // 3. Gérer les préférences via localStorage
-}
-
-// Fonction pour refuser tous les cookies non essentiels
-const rejectAllCookies = () => {
-    localStorage.setItem('cookie_preferences', JSON.stringify({
-        essential: true,
-        analytics: false,
-        functional: false,
-        marketing: false
-    }))
-    alert('Tous les cookies non essentiels ont été refusés.')
-}
-
-// Fonction pour accepter tous les cookies
-const acceptAllCookies = () => {
-    localStorage.setItem('cookie_preferences', JSON.stringify({
-        essential: true,
-        analytics: true,
-        functional: true,
-        marketing: true
-    }))
-    alert('Tous les cookies ont été acceptés.')
+    // Déclenche l'événement pour réafficher la bannière de cookies située dans le layout
+    window.dispatchEvent(new Event('open-cookie-banner'))
 }
 </script>
 

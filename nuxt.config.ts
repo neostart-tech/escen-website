@@ -10,6 +10,14 @@ export default defineNuxtConfig({
     preset: "static",
   },
   
+  runtimeConfig: {
+    public: {
+      metaPixelId: process.env.META_PIXEL_ID || '',
+      googleAnalyticsId: process.env.GOOGLE_ANALYTICS_ID || '',
+      linkedInPixelId: process.env.LINKEDIN_PIXEL_ID || ''
+    }
+  },
+  
   app: {
     head: {
       title: "ESCEN - École Supérieure de Commerce et d'Économie Numérique",
@@ -40,8 +48,14 @@ export default defineNuxtConfig({
     "@nuxt/test-utils",
     "@nuxt/ui",
     "@pinia/nuxt",
-    "@primevue/nuxt-module"
+    "@primevue/nuxt-module",
+    "@nuxtjs/sitemap"
   ],
+
+  site: {
+    url: 'https://escen.neostart.tech',
+    name: 'ESCEN'
+  },
 
   colorMode: {
     preference: 'light',

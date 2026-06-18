@@ -124,17 +124,17 @@
                             </p>
 
                             <!-- Points clés -->
-                            <div class="space-y-4 mb-8">
+                            <!-- <div class="space-y-4 mb-8">
                                 <div v-for="point in formation.pointsCles" :key="point"
                                     class="flex items-center gap-3 text-gray-700">
                                     <div :class="getPointClasses(index)"></div>
                                     <span>{{ point }}</span>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!-- Boutons avec couleurs dynamiques -->
                             <div class="flex flex-col sm:flex-row gap-4">
-                                <button type="button" @click="openBrochureModal(formation.brochure)"
+                                <button type="button" @click="openBrochureModal(formation.brochure, formation.titre)"
                                     :class="getPrimaryButtonClasses(index)">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -215,7 +215,7 @@
         </section>
 
         <!-- Modal Brochure -->
-        <BrochureModal :isOpen="isModalOpen" @close="isModalOpen = false" @submit="handleBrochureSubmit" />
+        <BrochureModal :isOpen="isModalOpen" :brochureName="selectedBrochureTitle" @close="isModalOpen = false" @submit="handleBrochureSubmit" />
     </div>
 </template>
 
@@ -232,9 +232,11 @@ const currentPage = ref(1)
 const itemsPerPage = ref(4)
 const isModalOpen = ref(false)
 const selectedBrochureUrl = ref('')
+const selectedBrochureTitle = ref('')
 
-const openBrochureModal = (url) => {
+const openBrochureModal = (url, title) => {
     selectedBrochureUrl.value = url
+    selectedBrochureTitle.value = title
     isModalOpen.value = true
 }
 
@@ -257,7 +259,7 @@ const formations = [
         id: 2,
         type: "Executive Master",
         titre: "Finance Digitale",
-        description: "Conçu pour les cadres et dirigeants, cet Executive Master permet de maîtriser les enjeux stratégiques de la transformation numérique financière. Face à l'émergence des fintechs, de la blockchain et de l'IA, le programme développe votre leadership et votre capacité à piloter l'innovation. Grâce à une pédagogie flexible et des cas concrets, vous apprendrez à concevoir de nouveaux modèles d'affaires, gérer les risques et accélérer votre évolution de carrière.",
+        description: "Conçu pour les professionnels ambitieux, ce cursus de haut niveau permet de maîtriser les enjeux stratégiques de la transformation numérique financière. Face à l'émergence des fintechs, de la blockchain et de l'IA, le programme développe votre capacité à piloter l'innovation. Grâce à une pédagogie flexible et des cas concrets, vous apprendrez à concevoir de nouveaux modèles d'affaires, gérer les risques et accélérer votre évolution de carrière.",
         image: "/formations/financedigital2.jpg",
         icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1",
        
@@ -268,8 +270,8 @@ const formations = [
         id: 3,
         type: "Executive Master",
         titre: "Management de Projets et Transformation Digitale",
-        description: "Conçu pour les cadres et dirigeants, cet Executive Master développe votre leadership pour piloter la transformation digitale et gérer des projets stratégiques à fort impact. Avec une pédagogie flexible, vous apprenez à aligner vos projets sur la stratégie de l'entreprise et à conduire le changement. En partenariat avec le PMI, ce programme accélérateur de carrière intègre également la préparation aux certifications internationales CAPM® et PMP®.",
-        image: "/formations/financedigital2.jpg",
+        description: "Pensé pour développer votre leadership, ce programme vous donne les clés pour piloter la transformation digitale et gérer des projets stratégiques à fort impact. Avec une pédagogie flexible, vous apprenez à aligner vos projets sur la stratégie de l'entreprise et à conduire le changement. En partenariat avec le PMI, ce cursus accélérateur de carrière intègre également la préparation aux certifications internationales CAPM® et PMP®.",
+        image: "/formations/8V9B4530.jpg",
         icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1",
        
         brochure: "/pdf/Programme_Executive_Master_MP&TD.pdf",

@@ -146,7 +146,7 @@
                   <img
                     :src="formation.image"
                     :alt="formation.titre"
-                    class="w-full h-[400px] object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    class="w-full h-[400px] object-cover object-top transform group-hover:scale-105 transition-transform duration-700"
                     @error="handleImageError"
                   />
                   <div
@@ -190,7 +190,7 @@
               </p>
 
               <!-- Points clés -->
-              <div class="space-y-4 mb-8">
+              <!-- <div class="space-y-4 mb-8">
                 <div
                   v-for="point in formation.pointsCles"
                   :key="point"
@@ -199,13 +199,13 @@
                   <div :class="getPointClasses(index)"></div>
                   <span>{{ point }}</span>
                 </div>
-              </div>
+              </div> -->
 
               <!-- Boutons avec couleurs dynamiques - MODIFIÉS -->
               <div class="flex flex-col sm:flex-row gap-4">
                 <button
                   type="button"
-                  @click="openBrochureModal(formation.brochure)"
+                  @click="openBrochureModal(formation.brochure, formation.titre)"
                   :class="getPrimaryButtonClasses(index)"
                 >
                   <svg
@@ -337,6 +337,7 @@
     <!-- Modal Brochure -->
     <BrochureModal
       :isOpen="isModalOpen"
+      :brochureName="selectedBrochureTitle"
       @close="isModalOpen = false"
       @submit="handleBrochureSubmit"
     />
@@ -357,9 +358,11 @@ const currentPage = ref(1);
 const itemsPerPage = ref(4);
 const isModalOpen = ref(false);
 const selectedBrochureUrl = ref("");
+const selectedBrochureTitle = ref("");
 
-const openBrochureModal = (url) => {
+const openBrochureModal = (url, title) => {
   selectedBrochureUrl.value = url;
+  selectedBrochureTitle.value = title;
   isModalOpen.value = true;
 };
 
@@ -399,7 +402,7 @@ const formations = [
     titre: "Finance Digitale",
     description:
       "Ce Master forme des experts capables de concevoir et piloter des solutions financières innovantes. Il allie les fondamentaux de la finance moderne aux technologies émergentes (blockchain, IA, fintech, mobile money). Vous développerez une double compétence pour accompagner la transformation numérique des services financiers, optimiser la gestion des risques et favoriser l'inclusion financière.",
-    image: "/formations/financedigital2.jpg",
+    image: "/formations/8V9B4336.jpg",
     icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1",
     pointsCles: [
       "Fintech et services financiers innovants",

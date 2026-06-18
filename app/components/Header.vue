@@ -80,17 +80,17 @@
 
       <!-- Navigation principale -->
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div class="flex items-center justify-between w-full">
+        <div class="flex items-center justify-between w-full relative">
           <!-- Logo -->
-          <NuxtLink to="/" class="group relative -ml-2 lg:-ml-4">
+          <NuxtLink to="/" class="group relative -ml-2 lg:-ml-4 py-2 z-10">
             <div class="relative transition-all duration-500 group-hover:scale-105">
-              <img src="/logo/LOGO_ESCEN.png" alt="ESCEN"
-                class="relative h-12 sm:h-14 md:h-16 lg:h-20 w-auto object-contain">
+              <img src="/logo/Logo_ESCEN_trans.png" alt="ESCEN"
+                class="relative h-16 sm:h-20 md:h-20 lg:h-24 w-auto object-contain">
             </div>
           </NuxtLink>
 
           <!-- Navigation Desktop avec indicateurs actifs élégants -->
-          <div class="hidden lg:flex items-center justify-center flex-1 px-4 xl:px-8 gap-1 xl:gap-2">
+          <div class="hidden lg:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-max gap-1 xl:gap-2 z-10">
             <!-- Accueil avec indicateur élégant -->
             <NuxtLink to="/" class="relative px-4 py-2.5 font-medium rounded-xl transition-all duration-300 group"
               :class="$route.path === '/' ? 'text-[#01b4d5]' : 'text-[#202a50] hover:text-[#01b4d5]'">
@@ -239,7 +239,7 @@
                         </NuxtLink>
 
                         <!-- Certificats -->
-                        <NuxtLink to="/formations/certificats"
+                        <!-- <NuxtLink to="/formations/certificats"
                           class="flex items-center gap-4 p-3 rounded-xl transition-all duration-300 group/item border border-transparent hover:border-[#01b4d5]/20 hover:shadow-lg relative"
                           :class="$route.path === '/formations/certificats' ? 'bg-gradient-to-r from-[#01b4d5]/5 to-transparent border-[#01b4d5]/20' : 'hover:bg-gradient-to-r hover:from-[#01b4d5]/5 hover:to-transparent'">
                           <div
@@ -263,7 +263,7 @@
                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                           </svg>
-                        </NuxtLink>
+                        </NuxtLink> -->
                       </div>
                     </div>
                   </div>
@@ -322,7 +322,7 @@
           </div>
 
           <!-- Section Droite (CTA + Mobile Toggle) -->
-          <div class="flex items-center gap-4">
+          <div class="flex items-center gap-4 relative z-10">
             <!-- Bouton CTA -->
             <NuxtLink to="/inscription"
               class="hidden lg:flex group relative px-6 py-2.5 overflow-hidden rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
@@ -356,8 +356,8 @@
       </nav>
     </header>
 
-    <!-- Espace réservé pour le header (top bar + nav) -->
-    <div class="h-14 sm:h-16 md:h-[calc(44px+4.5rem)]"></div>
+    <!-- Espace réservé pour le header (top bar + nav) afin d'éviter que le hero ne coupe le logo -->
+    <div class="h-20 sm:h-24 md:h-[calc(44px+6rem)] lg:h-[calc(44px+7rem)]"></div>
 
     <!-- Menu Mobile -->
     <transition
@@ -379,7 +379,7 @@
 
           <div class="relative z-10 flex items-center justify-between">
             <NuxtLink to="/" @click="isMobileMenuOpen = false">
-              <img src="/logo/LOGO_ESCEN.png" alt="ESCEN" class="h-9 w-auto brightness-0 invert">
+              <img src="/logo/Logo_ESCEN_trans.png" alt="ESCEN" class="h-20 w-auto brightness-0 invert">
             </NuxtLink>
             <button @click="isMobileMenuOpen = false"
                     class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center transition-all duration-200 group">
@@ -591,7 +591,7 @@ const mobileFormationLinks = [
   { label: 'Licence Professionnelle', path: '/formations/licence-professionnelle' },
   { label: 'Master Professionnel', path: '/formations/master-professionnel' },
   { label: 'Executive Education', path: '/formations/executive-education' },
-  { label: 'Certificats', path: '/formations/certificats' },
+  // { label: 'Certificats', path: '/formations/certificats' },
 ]
 
 const isActive = (path) => {

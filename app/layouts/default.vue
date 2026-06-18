@@ -6,6 +6,8 @@
         </main>
         <Footer />
 
+        <CookieBanner />
+
         <!-- Bouton retour en haut -->
         <transition
             enter-active-class="transition duration-300 ease-out"

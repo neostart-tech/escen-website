@@ -10,8 +10,9 @@
           <div class="space-y-6">
             <!-- Logo (ajustement de la marge) -->
             <NuxtLink to="/" class="inline-block">
-              <div class="py-4 inline-block">
-                <img src="/logo/LOGOWEB_ESCEN_BLANC.png" alt="ESCEN" class="h-20 sm:h-50 w-auto object-contain object-left">
+              <div class="pb-4 inline-block -mt-6">
+                <!-- Logo unique (Mobile & PC) avec marges négatives pour compenser l'espace vide -->
+                <img src="/logo/ESECN_LOGO.png" alt="ESCEN" class="h-40 sm:h-48 lg:h-56 w-auto object-contain object-left -ml-8 -my-8">
               </div>
             </NuxtLink>
 

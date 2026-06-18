@@ -92,7 +92,7 @@
                             <div class="relative group">
                                 <div class="relative rounded-3xl overflow-hidden shadow-2xl">
                                     <img :src="formation.image" :alt="formation.titre"
-                                        class="w-full h-[400px] object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                        class="w-full h-[400px] object-cover object-top transform group-hover:scale-105 transition-transform duration-700"
                                         @error="handleImageError">
                                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent">
                                     </div>
@@ -124,18 +124,18 @@
                             </p>
 
                             <!-- Points clés -->
-                            <div class="space-y-4 mb-8">
+                            <!-- <div class="space-y-4 mb-8">
                                 <div v-for="point in formation.pointsCles" :key="point"
                                     class="flex items-center gap-3 text-gray-700">
                                     <div :class="getPointClasses(index)"></div>
                                     <span>{{ point }}</span>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!-- Boutons avec couleurs dynamiques -->
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <button type="button" :class="getPrimaryButtonClasses(index)"
-                                    @click="openBrochureModal(formation.brochure)">
+                                    @click="openBrochureModal(formation.brochure, formation.titre)">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -213,7 +213,7 @@
         </section>
 
         <!-- Modal Brochure -->
-        <BrochureModal :isOpen="isModalOpen" @close="isModalOpen = false" @submit="handleBrochureSubmit" />
+        <BrochureModal :isOpen="isModalOpen" :brochureName="selectedBrochureTitle" @close="isModalOpen = false" @submit="handleBrochureSubmit" />
     </div>
 </template>
 
@@ -228,9 +228,11 @@ const currentPage = ref(1)
 const itemsPerPage = ref(4)
 const isModalOpen = ref(false)
 const selectedBrochureUrl = ref('')
+const selectedBrochureTitle = ref('')
 
-const openBrochureModal = (url) => {
+const openBrochureModal = (url, title) => {
     selectedBrochureUrl.value = url
+    selectedBrochureTitle.value = title
     isModalOpen.value = true
 }
 

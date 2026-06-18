@@ -91,7 +91,7 @@
                             <div class="relative group">
                                 <div class="relative rounded-3xl overflow-hidden shadow-2xl">
                                     <img :src="formation.image" :alt="formation.titre"
-                                        class="w-full h-[400px] object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                        class="w-full h-[400px] object-cover object-top transform group-hover:scale-105 transition-transform duration-700"
                                         @error="handleImageError">
                                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent">
                                     </div>
@@ -123,16 +123,16 @@
                             </p>
 
                             <!-- Points clés -->
-                            <div class="space-y-4 mb-8">
+                            <!-- <div class="space-y-4 mb-8">
                                 <div v-for="point in formation.pointsCles" :key="point"
                                     class="flex items-center gap-3 text-gray-700">
                                     <div :class="getPointClasses(index)"></div>
                                     <span>{{ point }}</span>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="flex flex-col sm:flex-row gap-4">
-                                <button type="button" @click="openBrochureModal(formation.brochure)"
+                                <button type="button" @click="openBrochureModal(formation.brochure, formation.titre)"
                                     :class="getPrimaryButtonClasses(index)">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -213,7 +213,7 @@
         </section>
 
         <!-- Modal Brochure -->
-        <BrochureModal :isOpen="isModalOpen" @close="isModalOpen = false" @submit="handleBrochureSubmit" />
+        <BrochureModal :isOpen="isModalOpen" :brochureName="selectedBrochureTitle" @close="isModalOpen = false" @submit="handleBrochureSubmit" />
     </div>
 </template>
 
@@ -231,9 +231,11 @@ const currentPage = ref(1)
 const itemsPerPage = ref(4)
 const isModalOpen = ref(false)
 const selectedBrochureUrl = ref('')
+const selectedBrochureTitle = ref('')
 
-const openBrochureModal = (url) => {
+const openBrochureModal = (url, title) => {
     selectedBrochureUrl.value = url
+    selectedBrochureTitle.value = title
     isModalOpen.value = true
 }
 
@@ -299,8 +301,8 @@ const formations = [
     {
         id: 4,
         type: "Licence Professionnelle",
-        titre: "Intelligence Artificielle & Génie Logiciel",
-        description: "La licence professionnelle en Intelligence Artificielle forme des spécialistes capables de concevoir, développer et déployer des solutions intelligentes dans divers secteurs.",
+        titre: "Intelligence Artificielle et e-commerce",
+        description: "La licence professionnelle en Intelligence Artificielle et e-commerce forme des spécialistes capables de concevoir, développer et déployer des solutions intelligentes dans divers secteurs.",
         image: "/formations/intelligenceartificielle.jpg",
         icon: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
         pointsCles: [

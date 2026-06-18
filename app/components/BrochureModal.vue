@@ -20,7 +20,9 @@
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Numéro de téléphone</label>
-          <input v-model="form.phone" type="tel" required class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:border-[#01b4d5] focus:ring-2 focus:ring-[#01b4d5]/20" placeholder="Votre numéro" />
+          <div class="w-full">
+             <input ref="phoneInput" v-model="form.phone" type="tel" required class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:border-[#01b4d5] focus:ring-2 focus:ring-[#01b4d5]/20" placeholder="Votre numéro" />
+          </div>
         </div>
         <div class="pt-4">
           <button type="submit" :disabled="isSubmitting" class="w-full bg-[#01b4d5] hover:bg-[#0056b3] text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 disabled:opacity-70 flex justify-center items-center">
@@ -41,7 +43,8 @@ import { ref, watch, onMounted } from 'vue'
 import { useNuxtApp } from '#app'
 
 const props = defineProps({
-  isOpen: Boolean
+  isOpen: Boolean,
+  brochureName: String
 })
 
 const emit = defineEmits(['close', 'submit'])
@@ -54,10 +57,39 @@ const form = ref({
 
 const isSubmitting = ref(false)
 
+const phoneInput = ref(null)
+let itiTel = null
+
+const getCountryCode = () => {
+    return fetch("https://api.country.is/")
+        .then(res => res.json())
+        .then(data => data.country ? data.country.toLowerCase() : 'tg')
+        .catch(() => 'tg');
+};
+
+const initIti = async () => {
+    const { $intlTelInput } = useNuxtApp()
+    if (phoneInput.value && $intlTelInput && !itiTel) {
+        itiTel = $intlTelInput(phoneInput.value, {
+            initialCountry: "auto",
+            geoIpLookup: function(callback) {
+                getCountryCode().then(code => callback(code));
+            },
+            separateDialCode: true,
+            useFullscreenPopup: false,
+            dropdownContainer: document.body,
+            utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@25.15.0/build/js/utils.js'
+        });
+        if (form.value.phone) itiTel.setNumber(form.value.phone);
+    }
+}
+
 // Vérifier si le prospect a déjà téléchargé une brochure
 watch(() => props.isOpen, (newVal) => {
   if (newVal) {
-    // Si la modale s'ouvre, on vérifie le localStorage
+    // Si la modale s'ouvre, on initialise l'input tel
+    setTimeout(() => initIti(), 100);
+    // on vérifie le localStorage
     const savedProspect = localStorage.getItem('escen_prospect_registered')
     if (savedProspect) {
       // Directement émettre l'événement pour télécharger et empêcher l'affichage
@@ -68,6 +100,15 @@ watch(() => props.isOpen, (newVal) => {
 })
 
 const submitForm = async () => {
+  if (itiTel) {
+    const num = itiTel.getNumber();
+    if (num) form.value.phone = num;
+    else {
+      const cd = itiTel.getSelectedCountryData();
+      form.value.phone = (cd ? '+' + cd.dialCode : '') + ' ' + phoneInput.value.value;
+    }
+  }
+
   isSubmitting.value = true
   try {
     const { $axios } = useNuxtApp()
@@ -77,8 +118,8 @@ const submitForm = async () => {
       nom: form.value.name,
       email: form.value.email,
       tel: form.value.phone,
-      formation_visee: 'Non spécifié', // Peut être dynamique plus tard
-      origine: 'Brochure Web'
+      formation_visee: props.brochureName || 'Brochure Web',
+      origine: 'Téléchargement Brochure'
     })
 
     // Sauvegarder dans le localStorage pour les prochains téléchargements

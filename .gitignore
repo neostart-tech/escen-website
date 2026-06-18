@@ -24,4 +24,3 @@ logs
 .env.*
 !.env.example
 dist.zip 
-dist.zip 

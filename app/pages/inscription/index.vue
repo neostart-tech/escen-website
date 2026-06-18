@@ -9,7 +9,7 @@
 
       <div class="relative z-10">
         <NuxtLink to="/">
-          <img src="/logo/LOGOWEB_ESCEN_BLANC.png" alt="ESCEN" class="h-40 w-auto mb-24 filter brightness-0 invert opacity-90 hover:opacity-100 transition-opacity">
+          <img src="/logo/ESECN_LOGO.png" alt="ESCEN" class="h-40 w-auto mb-16 object-contain object-left -ml-8 -mt-8 opacity-90 hover:opacity-100 transition-opacity">
         </NuxtLink>
 
         <h1 class="text-4xl lg:text-5xl font-serif font-light leading-tight mb-6">
@@ -29,7 +29,7 @@
       <!-- Top Navigation -->
       <div class="absolute top-0 left-0 w-full p-6 lg:px-12 lg:py-8 flex justify-between items-center z-50 bg-[#FAFAFA]/90 backdrop-blur-md">
         <NuxtLink to="/" class="lg:hidden">
-          <img src="/logo/LOGO_ESCEN.png" alt="ESCEN" class="h-8 w-auto">
+          <img src="/logo/ESECN_LOGO.png" alt="ESCEN" class="h-24 w-auto object-contain object-left -ml-4 -my-8">
         </NuxtLink>
         <div class="hidden lg:block"></div> <!-- Spacer -->
         <NuxtLink to="/" class="text-sm font-medium text-gray-500 hover:text-[#01b4d5] transition-colors flex items-center gap-2">
