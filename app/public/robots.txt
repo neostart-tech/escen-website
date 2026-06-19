@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://escen.neostart.tech/sitemap.xml
+Sitemap: https://www.escen.university/sitemap.xml

@@ -312,7 +312,7 @@
                         </div>
                     </div>
                     <!-- Avantages ESCEN -->
-                    <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <!-- <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
                         <div class="flex items-center gap-3 mb-6">
                             <div class="p-3 rounded-xl bg-gradient-to-br from-[#6cc6e2] to-[#dbeff7]">
                                 <svg class="w-6 h-6 text-[#202a51]" fill="none" stroke="currentColor"
@@ -340,7 +340,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                  <NuxtLink
                     to="/inscription"
                     class="w-full bg-gradient-to-r from-[#00b3d4] to-[#0056b3] hover:from-[#0056b3] hover:to-[#202a51] text-white py-4 rounded-xl font-bold text-lg transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-3"

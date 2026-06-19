@@ -47,7 +47,7 @@
               <div class="space-y-4">
                 <div>
                   <h3 class="font-semibold text-gray-700 text-sm mb-1">Spécialité</h3>
-                  <p class="text-gray-900 font-medium">Management de Projets Numériques</p>
+                  <p class="text-gray-900 font-medium">Management de Projets & Transformation Digitale</p>
                 </div>
                 <div>
                   <h3 class="font-semibold text-gray-700 text-sm mb-1">Durée</h3>
@@ -319,7 +319,7 @@
           </div>
 
           <!-- Avantages ESCEN -->
-          <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+          <!-- <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
             <div class="flex items-center gap-3 mb-6">
               <div class="p-3 rounded-xl bg-gradient-to-br from-[#6cc6e2] to-[#dbeff7]">
                 <svg class="w-6 h-6 text-[#202a51]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -343,7 +343,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <!-- Contact -->
           <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">

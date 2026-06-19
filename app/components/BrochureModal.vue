@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/50 backdrop-blur-sm">
+  <div v-if="isOpen && isReadyToShow" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/50 backdrop-blur-sm">
     <div class="bg-white rounded-2xl w-full max-w-md overflow-hidden shadow-2xl transition-all" @click.stop>
       <div class="flex justify-between items-center p-6 border-b border-gray-100">
         <h3 class="text-xl font-bold text-gray-900">Télécharger la brochure</h3>
@@ -11,8 +11,8 @@
       </div>
       <form @submit.prevent="submitForm" class="p-6 space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Nom complet</label>
-          <input v-model="form.name" type="text" required class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:border-[#01b4d5] focus:ring-2 focus:ring-[#01b4d5]/20" placeholder="Votre nom complet" />
+          <label class="block text-sm font-medium text-gray-700 mb-1">Nom et prénoms</label>
+          <input v-model="form.name" type="text" required class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:border-[#01b4d5] focus:ring-2 focus:ring-[#01b4d5]/20" placeholder="Votre nom et prénoms" />
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
@@ -56,6 +56,7 @@ const form = ref({
 })
 
 const isSubmitting = ref(false)
+const isReadyToShow = ref(false)
 
 const phoneInput = ref(null)
 let itiTel = null
@@ -85,17 +86,38 @@ const initIti = async () => {
 }
 
 // Vérifier si le prospect a déjà téléchargé une brochure
-watch(() => props.isOpen, (newVal) => {
+watch(() => props.isOpen, async (newVal) => {
   if (newVal) {
-    // Si la modale s'ouvre, on initialise l'input tel
-    setTimeout(() => initIti(), 100);
     // on vérifie le localStorage
     const savedProspect = localStorage.getItem('escen_prospect_registered')
     if (savedProspect) {
+      isReadyToShow.value = false // On n'affiche jamais la modale
+      const prospectData = JSON.parse(savedProspect)
+      
+      // Envoi en arrière-plan pour mettre à jour les formations téléchargées
+      try {
+        const { $axios } = useNuxtApp()
+        await $axios.post('/public/prospects', {
+          nom: prospectData.name,
+          email: prospectData.email,
+          tel: prospectData.phone,
+          formation_visee: props.brochureName || 'Brochure Web',
+          origine: 'Téléchargement Brochure'
+        })
+      } catch (e) {
+        console.error("Erreur lors de la mise à jour des formations:", e)
+      }
+
       // Directement émettre l'événement pour télécharger et empêcher l'affichage
-      emit('submit', JSON.parse(savedProspect))
+      emit('submit', prospectData)
       emit('close')
+    } else {
+      isReadyToShow.value = true // On affiche la modale
+      // Si la modale s'ouvre, on initialise l'input tel
+      setTimeout(() => initIti(), 100);
     }
+  } else {
+    isReadyToShow.value = false
   }
 })
 

@@ -53,8 +53,8 @@ export default defineNuxtConfig({
   ],
 
   site: {
-    url: 'https://escen.neostart.tech',
-    name: 'ESCEN'
+    url: 'https://www.escen.university',
+    name: 'ESCEN University'
   },
 
   colorMode: {

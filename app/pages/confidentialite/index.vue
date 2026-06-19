@@ -18,7 +18,7 @@
                             Politique de Confidentialité
                         </h1>
                         <p class="text-gray-600 text-lg">
-                            Dernière mise à jour : 1er Janvier 2024
+                            Dernière mise à jour : 1er Janvier 2026
                         </p>
                     </div>
 
@@ -554,7 +554,7 @@
                                             </div>
                                             <div>
                                                 <p class="font-medium text-gray-700">Par email</p>
-                                                <a href="mailto:donnees-personnelles@escen.university" class="text-[#01b4d5] hover:underline text-sm">donnees-personnelles@escen.university</a>
+                                                <a href="mailto:hello@escen.university" class="text-[#01b4d5] hover:underline text-sm">hello@escen.university</a>
                                             </div>
                                         </div>
                                         
@@ -606,7 +606,7 @@
                                                 <strong>Contact du DPO :</strong>
                                             </p>
                                             <p class="text-gray-600">
-                                                 <a href="mailto:dpo@escen.university" class="text-[#01b4d5] hover:underline">dpo@escen.university</a>
+                                                 <a href="mailto:hello@escen.university" class="text-[#01b4d5] hover:underline">hello@escen.university</a>
                                             </p>
                                             <p class="text-gray-600">
                                                  <a href="tel:+22898012727" class="text-[#01b4d5] hover:underline">+228 98 01 27 27</a> (poste DPO)
@@ -676,7 +676,7 @@
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <p class="text-gray-700">
-                                            <strong>Date de dernière mise à jour :</strong> 1er Janvier 2024
+                                            <strong>Date de dernière mise à jour :</strong> 1er Janvier 2026
                                         </p>
                                         <p class="text-gray-600 text-sm mt-1">
                                             Version 1.0

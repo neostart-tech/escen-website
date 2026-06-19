@@ -347,7 +347,7 @@
                 </div>
               </div>
               
-              <div class="mt-8 p-6 bg-gradient-to-r from-[#dbeff7] to-[#f0f9ff] rounded-xl">
+              <!-- <div class="mt-8 p-6 bg-gradient-to-r from-[#dbeff7] to-[#f0f9ff] rounded-xl">
                 <div class="flex items-center gap-4">
                   <div class="p-3 rounded-lg bg-white">
                     <svg class="w-6 h-6 text-[#00b3d4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -360,7 +360,7 @@
                     <p class="text-[#00b3d4] font-semibold">admission@escen.university</p>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

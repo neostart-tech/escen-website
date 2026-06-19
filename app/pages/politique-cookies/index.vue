@@ -18,7 +18,7 @@
                             Politique d'Utilisation des Cookies
                         </h1>
                         <p class="text-gray-600 text-lg">
-                            Dernière mise à jour : 1er Janvier 2024
+                            Dernière mise à jour : 1er Janvier 2026
                         </p>
                     </div>
 

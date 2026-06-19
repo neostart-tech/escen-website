@@ -18,7 +18,7 @@
                             Conditions Générales d'Utilisation
                         </h1>
                         <p class="text-gray-600 text-lg">
-                            Dernière mise à jour : 1er Janvier 2024
+                            Dernière mise à jour : 1er Janvier 2026
                         </p>
                     </div>
 
@@ -359,7 +359,7 @@
                         <!-- Signature -->
                         <div class="mt-12 pt-8 border-t border-gray-200">
                             <p class="text-gray-600 text-center italic">
-                                Fait à Lomé, le 1er Janvier 2024
+                                Fait à Lomé, le 1er Janvier 2026
                             </p>
                             <p class="text-gray-800 font-semibold text-center mt-4">
                                 Pour ESCEN University

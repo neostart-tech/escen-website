@@ -31,7 +31,7 @@
             <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span>
           </div>
           <div class="flex-1 min-w-0">
-            <p class="text-[15px] font-bold text-[#1A2238] truncate">Jordan ASSIBI</p>
+            <p class="text-[15px] font-bold text-[#1A2238] truncate">--</p>
             <p class="text-[11px] font-bold uppercase tracking-wider text-gray-500 truncate mt-0.5">Candidat</p>
           </div>
         </div>

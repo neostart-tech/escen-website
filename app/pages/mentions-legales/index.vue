@@ -90,7 +90,7 @@
                                             </div>
                                             <div>
                                                 <p class="font-medium text-gray-700">Directeur de la publication :</p>
-                                                <p class="text-gray-600">M. [Nom du Directeur], Directeur Général</p>
+                                                <p class="text-gray-600">Directeur Général</p>
                                             </div>
                                         </div>
                                     </div>
@@ -240,7 +240,7 @@
                                 
                                 <div class="border border-gray-200 rounded-xl p-6">
                                     <p class="text-gray-700 mb-4">
-                                        <strong>Par email :</strong> <a href="mailto:donnees-personnelles@escen.university" class="text-[#01b4d5] hover:underline">donnees-personnelles@escen.university</a>
+                                        <strong>Par email :</strong> <a href="mailto:hello@escen.university" class="text-[#01b4d5] hover:underline">hello@escen.university</a>
                                     </p>
                                     <p class="text-gray-700">
                                         <strong>Par courrier :</strong> ESCEN University - Service Données Personnelles, Hountigomé, Rue en face Eglise Notre Dame du Liban, à 5 mn de l'aéroport de Lomé, Togo
@@ -341,7 +341,7 @@
                                 
                                 <div class="bg-gray-50 p-4 rounded-lg">
                                     <p class="text-gray-700 text-sm">
-                                        <strong>Note :</strong> Si vous souhaitez créer un lien vers notre site, veuillez nous contacter préalablement à l'adresse suivante : <a href="mailto:communication@escen.university" class="text-[#01b4d5] hover:underline">communication@escen.university</a>
+                                        <strong>Note :</strong> Si vous souhaitez créer un lien vers notre site, veuillez nous contacter préalablement à l'adresse suivante : <a href="mailto:hello@escen.university" class="text-[#01b4d5] hover:underline">hello@escen.university</a>
                                     </p>
                                 </div>
                             </div>
@@ -364,7 +364,7 @@
                                         Pour toute question relative aux présentes mentions légales, vous pouvez nous contacter :
                                     </p>
                                     <div class="space-y-2 text-gray-700">
-                                        <p><a href="mailto:juridique@escen.university" class="text-[#01b4d5] hover:underline">juridique@escen.university</a></p>
+                                        <p><a href="mailto:hello@escen.university" class="text-[#01b4d5] hover:underline">hello@escen.university</a></p>
                                         <p> <a href="tel:+22898012727" class="text-[#01b4d5] hover:underline">+228 98 01 27 27</a></p>
                                         <p>Hountigomé, Rue en face Eglise Notre Dame du Liban, à 5 mn de l'aéroport de Lomé, Togo</p>
                                     </div>
@@ -380,7 +380,7 @@
                                     ESCEN University se réserve le droit de modifier et de mettre à jour, sans préavis, les présentes mentions légales et l'ensemble des éléments et produits présentés sur le site. Toutes les modifications s'imposent aux utilisateurs qui doivent consulter régulièrement les présentes mentions légales.
                                 </p>
                                 <p class="text-gray-700 mt-2">
-                                    <strong>Date de dernière mise à jour :</strong> 1er Janvier 2024
+                                    <strong>Date de dernière mise à jour :</strong> 1er Janvier 2026
                                 </p>
                             </div>
                         </div>

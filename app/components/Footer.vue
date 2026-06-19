@@ -23,7 +23,7 @@
               </h2> -->
               <p class="text-gray-300 text-sm leading-relaxed">
                 L'ESCEN forme les leaders de demain aux enjeux de l'économie numérique.
-                Une école d'excellence tournée vers le digital,l'innovation et l'employabilité.
+                Une école d'excellence tournée vers le digital , l'innovation et l'employabilité.
               </p>
             </div>
           </div>
@@ -213,7 +213,7 @@ const formations = [
   { name: 'Licence Professionnelle', href: '/formations/licence-professionnelle' },
   { name: 'Master Professionnel',    href: '/formations/master-professionnel' },
   { name: 'Executive Education',     href: '/formations/executive-education' },
-  { name: 'Certificats',             href: '/formations/certificats' },
+  // { name: 'Certificats',             href: '/formations/certificats' },
 ]
 
 const legalLinks = [
