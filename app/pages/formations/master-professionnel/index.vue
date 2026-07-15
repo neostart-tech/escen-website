@@ -421,22 +421,22 @@ const handleBrochureSubmit = (formData) => {
 
 // Tableau des formations MIS À JOUR
 const formations = [
-  {
-    id: 1,
-    type: "Master professionel",
-    titre: "Marketing Digital",
-    description:
-      "Le programme du Master en Marketing digital forme des professionnels capables de maîtriser les techniques avancées de marketing numérique ainsi que les stratégies de développement d'une entreprise via les canaux digitaux.",
-    image: "/formations/marketingdigital2.jpg",
-    icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
-    pointsCles: [
-      "Stratégies digitales et réseaux sociaux",
-      "E-commerce et marketplace management",
-      "Analytics et performance marketing",
-    ],
-    brochure: "/pdf/Fiche_Master_MD.pdf",
-    detailsUrl: "/formations/master-professionnel/marketing-digital",
-  },
+  // {
+  //   id: 1,
+  //   type: "Master professionel",
+  //   titre: "Marketing Digital",
+  //   description:
+  //     "Le programme du Master en Marketing digital forme des professionnels capables de maîtriser les techniques avancées de marketing numérique ainsi que les stratégies de développement d'une entreprise via les canaux digitaux.",
+  //   image: "/formations/marketingdigital2.jpg",
+  //   icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
+  //   pointsCles: [
+  //     "Stratégies digitales et réseaux sociaux",
+  //     "E-commerce et marketplace management",
+  //     "Analytics et performance marketing",
+  //   ],
+  //   brochure: "/pdf/Fiche_Master_MD.pdf",
+  //   detailsUrl: "/formations/master-professionnel/marketing-digital",
+  // },
   {
     id: 2,
     type: "Master professionel",

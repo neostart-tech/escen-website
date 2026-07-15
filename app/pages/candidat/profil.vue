@@ -181,10 +181,18 @@
           </span>
           Parcours Scolaire
         </h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-5">
-          <div class="md:col-span-2">
-            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Série / Type de diplôme</label>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-5">
+          <div>
+            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Type de diplôme</label>
+            <input type="text" v-model="formData.type_diplome" :readonly="!isRectification" :class="inputClass" />
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Série (Bac)</label>
             <input type="text" v-model="formData.serie" :readonly="!isRectification" :class="inputClass" />
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Établissement</label>
+            <input type="text" v-model="formData.etablissement_diplome" :readonly="!isRectification" :class="inputClass" />
           </div>
           <div>
             <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Année d'obtention</label>
@@ -376,7 +384,7 @@ const applyFallbackPhone = () => {
 
 const formData = ref({
   genre: '', nom: '', prenom: '', date_naissance: '', lieu_naissance: '', nationalite: '', adresse: '', tel: '', email: '',
-  serie: '', annee_bac: '',
+  serie: '', annee_bac: '', type_diplome: '', etablissement_diplome: '',
   niveau_nom: '', filiere_nom: '',
   nom_tuteur: '', prenom_tuteur: '', profession_tuteur: '', tel_tuteur: '', email_tuteur: '',
   nom_resp: '', prenom_resp: '', profession_resp: '', tel_resp: '', email_resp: ''
@@ -408,8 +416,10 @@ const initFormData = (data) => {
     email: data.email || '',
     niveau_nom: data.niveau?.nom || data.niveau?.libelle || (typeof data.niveau === 'string' ? data.niveau : ''),
     filiere_nom: data.filiere?.nom || data.filiere?.libelle || (typeof data.filiere === 'string' ? data.filiere : ''),
-    serie: data.serie_bac || data.serie || data.dernier_diplome || '',
+    serie: data.serie_bac || data.serie || '',
     annee_bac: data.annee_bac || data.annee_obtention || '',
+    type_diplome: data.dernier_diplome || data.album?.type_diplome || data.type_diplome || '',
+    etablissement_diplome: data.etablissement_diplome || '',
     
     nom_tuteur: data.tuteur?.nom || data.nom_pere || data.nom_tuteur || '',
     prenom_tuteur: data.tuteur?.prenom || '',

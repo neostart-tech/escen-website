@@ -18,7 +18,10 @@ export const useBlogStore = defineStore('blog', {
         const { $axios } = useNuxtApp()
         const response = await $axios.get('/public/blogs')
         // En supposant que le backend renvoie directement le tableau d'articles
-        this.articles = response.data
+        this.articles = response.data.map((art: any) => ({
+            ...art,
+            author: 'ESCEN'
+        }))
       } catch (err: any) {
         this.error = err.response?.data?.message || 'Erreur lors de la récupération des articles'
         console.error('Erreur fetchArticles:', err)
@@ -35,7 +38,10 @@ export const useBlogStore = defineStore('blog', {
         const { $axios } = useNuxtApp()
         const response = await $axios.get(`/public/blogs/${id}`)
         // En supposant que le backend renvoie directement l'article
-        this.currentArticle = response.data
+        this.currentArticle = {
+            ...response.data,
+            author: 'ESCEN'
+        }
       } catch (err: any) {
         this.error = err.response?.data?.message || 'Erreur lors de la récupération de l\'article'
         console.error('Erreur fetchArticleById:', err)

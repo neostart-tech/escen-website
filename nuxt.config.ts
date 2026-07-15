@@ -14,7 +14,8 @@ export default defineNuxtConfig({
     public: {
       metaPixelId: process.env.META_PIXEL_ID || '',
       googleAnalyticsId: process.env.GOOGLE_ANALYTICS_ID || '',
-      linkedInPixelId: process.env.LINKEDIN_PIXEL_ID || ''
+      linkedInPixelId: process.env.LINKEDIN_PIXEL_ID || '',
+      googleTagManagerId: process.env.GOOGLE_TAG_MANAGER_ID || ''
     }
   },
   

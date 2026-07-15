@@ -131,22 +131,23 @@
                                 </div>
                             </div> -->
 
-                            <div class="flex flex-col sm:flex-row gap-4">
-                                <button type="button" @click="handleDownloadClick(formation)"
+                            <div class="relative z-10 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
+                                <!-- Notice brochure indisponible -->
+                                <div class="flex items-center gap-3 px-5 py-3 rounded-xl bg-gray-50 border border-dashed border-gray-300 text-gray-500 text-sm w-full sm:w-auto justify-center sm:justify-start whitespace-nowrap">
+                                    <span class="flex-shrink-0 w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center">
+                                        <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </span>
+                                    <span>Brochure indisponible</span>
+                                </div>
+                                <!-- <button type="button" @click="handleDownloadClick(formation)"
                                     :disabled="downloadingId === formation.id"
                                     :class="[getPrimaryButtonClasses(index), downloadingId === formation.id ? 'opacity-70 cursor-wait' : '']">
-                                    <svg v-if="downloadingId === formation.id" class="animate-spin w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                    </svg>
-                                    <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                    </svg>
                                     <span v-if="downloadingId === formation.id">Téléchargement...</span>
                                     <span v-else>Télécharger la brochure</span>
-                                </button>
-                                <button :class="getSecondaryButtonClasses(index)" @click="voirDetails(formation.id)">
+                                </button> -->
+                                <button :class="getSecondaryButtonClasses(index)" @click="voirDetails(formation.id)" class="whitespace-nowrap">
                                     En savoir plus
                                 </button>
                             </div>
@@ -218,8 +219,8 @@
             </div>
         </section>
 
-        <!-- Modal Brochure -->
-        <BrochureModal :isOpen="isModalOpen" :brochureName="selectedBrochureTitle" @close="isModalOpen = false" @submit="handleBrochureSubmit" />
+        <!-- Modal Brochure (désactivé temporairement) -->
+        <!-- <BrochureModal :isOpen="isModalOpen" :brochureName="selectedBrochureTitle" @close="isModalOpen = false" @submit="handleBrochureSubmit" /> -->
     </div>
 </template>
 
@@ -228,7 +229,6 @@ import { ref, computed, watch } from 'vue'
 import { useNuxtApp } from '#app'
 import { useRouter } from 'vue-router'
 import Breadcrumb from '~/components/Breadcrumb.vue'
-import BrochureModal from '~/components/BrochureModal.vue'
 
 const router = useRouter()
 
@@ -341,8 +341,8 @@ const formations = [
     {
         id: 4,
         type: "Licence Professionnelle",
-        titre: "Intelligence Artificielle et e-commerce",
-        description: "La licence professionnelle en Intelligence Artificielle et e-commerce forme des spécialistes capables de concevoir, développer et déployer des solutions intelligentes dans divers secteurs.",
+        titre: "Intelligence Artificielle & Génie Logiciel",
+        description: "La licence professionnelle en Intelligence Artificielle & Génie Logiciel forme des spécialistes capables de concevoir, développer et déployer des solutions intelligentes dans divers secteurs.",
         image: "/formations/intelligenceartificielle.jpg",
         icon: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
         pointsCles: [
@@ -394,7 +394,7 @@ const visiblePages = computed(() => {
                 pages.push(i)
             }
         } else if (current >= total - 2) {
-            for (let i = total - 3; i <= total; i++) {
+            for (let i = Math.max(1, total - 3); i <= total; i++) {
                 pages.push(i)
             }
         } else {

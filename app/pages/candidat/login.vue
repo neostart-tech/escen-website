@@ -153,6 +153,11 @@ const handleLogin = async () => {
       localStorage.setItem('candidat_token', response.data.token)
     }
 
+    // Enregistrer les informations du candidat
+    if (response.data?.user) {
+      localStorage.setItem('candidat_info', JSON.stringify(response.data.user))
+    }
+
     toastr.success(response.data?.message || 'Connexion réussie')
     router.push('/candidat/dashboard')
 

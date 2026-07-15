@@ -22,6 +22,28 @@ export default defineNuxtPlugin(() => {
         return config;
     });
 
+    // Interception des erreurs globales (notamment 401 Unauthorized)
+    axios.default.interceptors.response.use(
+        (response) => response,
+        (error) => {
+            if (error.response && error.response.status === 401) {
+                if (typeof window !== 'undefined') {
+                    if (localStorage.getItem('candidat_token')) {
+                        // Vider les informations liées au candidat
+                        localStorage.removeItem('candidat_token');
+                        localStorage.removeItem('candidat_info');
+                        
+                        // Rediriger vers la page de connexion
+                        if (window.location.pathname.startsWith('/candidat') && !window.location.pathname.includes('/login')) {
+                            window.location.href = '/candidat/login';
+                        }
+                    }
+                }
+            }
+            return Promise.reject(error);
+        }
+    );
+
     return {
         provide: {
             axios: axios.default,

@@ -165,7 +165,7 @@
                                         d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
                             </div>
-                            <h2 class="text-2xl font-bold text-gray-900">Compétences Attendues</h2>
+                            <h2 class="text-2xl font-bold text-gray-900">Perspectives de carrière & Compétences</h2>
                         </div>
                         <div class="space-y-8">
                             <div>

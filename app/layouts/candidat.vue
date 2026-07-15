@@ -26,12 +26,12 @@
         <div class="flex items-center space-x-4">
           <div class="relative">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#01b4d5] to-[#009ab5] flex items-center justify-center text-white font-extrabold text-lg shadow-[0_4px_12px_rgba(1,180,213,0.3)]">
-              JA
+              {{ candidatInitials }}
             </div>
             <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-white rounded-full"></span>
           </div>
           <div class="flex-1 min-w-0">
-            <p class="text-[15px] font-bold text-[#1A2238] truncate">--</p>
+            <p class="text-[15px] font-bold text-[#1A2238] truncate" :title="candidatFullName">{{ candidatFullName }}</p>
             <p class="text-[11px] font-bold uppercase tracking-wider text-gray-500 truncate mt-0.5">Candidat</p>
           </div>
         </div>
@@ -163,10 +163,10 @@
           <div class="relative dropdown-container">
             <div @click="isProfileDropdownOpen = !isProfileDropdownOpen" class="flex items-center gap-2 lg:gap-3 cursor-pointer group select-none">
                <div class="hidden sm:block text-right">
-                 <p class="text-sm font-bold text-[#1A2238] leading-none group-hover:text-[#01b4d5] transition-colors">Jordan A.</p>
+                 <p class="text-sm font-bold text-[#1A2238] leading-none group-hover:text-[#01b4d5] transition-colors">{{ candidatShortName }}</p>
                </div>
                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#01b4d5] to-[#009ab5] flex items-center justify-center text-white font-bold shadow-sm group-hover:shadow-md transition-all">
-                JA
+                {{ candidatInitials }}
                </div>
                <svg :class="{'rotate-180 text-[#01b4d5]': isProfileDropdownOpen, 'text-gray-400': !isProfileDropdownOpen}" class="w-4 h-4 transition-transform duration-200 group-hover:text-[#01b4d5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </div>
@@ -185,7 +185,7 @@
                 <!-- En-tête du Dropdown -->
                 <div class="px-4 py-3 mb-2 bg-gradient-to-br from-gray-50 to-white rounded-xl border border-gray-100/50">
                   <p class="text-xs font-bold text-[#01b4d5] uppercase tracking-widest mb-1">Connecté en tant que</p>
-                  <p class="text-sm font-extrabold text-[#1A2238] truncate">Jordan ASSIBI</p>
+                  <p class="text-sm font-extrabold text-[#1A2238] truncate" :title="candidatFullName">{{ candidatFullName }}</p>
                   <p class="text-xs font-medium text-gray-500 truncate">Candidat</p>
                 </div>
                 
@@ -231,6 +231,27 @@ const isNotificationDropdownOpen = ref(false)
 const router = useRouter()
 const { $axios } = useNuxtApp()
 
+const candidat = ref(null)
+
+const candidatInitials = computed(() => {
+  if (!candidat.value) return 'CA'
+  const p = candidat.value.prenom ? String(candidat.value.prenom).charAt(0) : ''
+  const n = candidat.value.nom ? String(candidat.value.nom).charAt(0) : ''
+  return (p + n).toUpperCase() || 'CA'
+})
+
+const candidatFullName = computed(() => {
+  if (!candidat.value) return 'Candidat'
+  return `${candidat.value.prenom || ''} ${candidat.value.nom || ''}`.trim() || 'Candidat'
+})
+
+const candidatShortName = computed(() => {
+  if (!candidat.value) return 'Candidat'
+  const p = candidat.value.prenom || ''
+  const n = candidat.value.nom ? String(candidat.value.nom).charAt(0) + '.' : ''
+  return `${p} ${n}`.trim() || 'Candidat'
+})
+
 const notifications = ref([])
 
 const fetchNotifications = async () => {
@@ -272,9 +293,10 @@ const logout = async () => {
     console.log('Erreur déconnexion serveur:', error)
   }
   
-  // Nettoyage du token localement
+  // Nettoyage des informations localement
   if (typeof window !== 'undefined') {
     localStorage.removeItem('candidat_token')
+    localStorage.removeItem('candidat_info')
   }
   
   // Redirection vers la page de connexion
@@ -289,10 +311,35 @@ const closeDropdowns = (e) => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
+  if (typeof window !== 'undefined') {
+    const info = localStorage.getItem('candidat_info')
+    if (info) {
+      try {
+        candidat.value = JSON.parse(info)
+      } catch (e) {}
+    }
+  }
+
   fetchNotifications()
   if (typeof window !== 'undefined') {
     document.addEventListener('click', closeDropdowns)
+  }
+
+  // Resynchronise avec le candidat réellement connecté : le localStorage n'est
+  // qu'un instantané pris au login, il peut être périmé (profil modifié depuis)
+  // ou provenir d'une session précédente restée dans le navigateur.
+  try {
+    const res = await $axios.get('/mon-dossier')
+    const data = res.data?.candidature || res.data
+    if (data) {
+      candidat.value = data
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('candidat_info', JSON.stringify(data))
+      }
+    }
+  } catch (error) {
+    console.error('Erreur récupération profil candidat:', error)
   }
 })
 

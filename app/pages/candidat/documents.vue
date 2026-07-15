@@ -208,15 +208,32 @@ const fetchDocuments = async () => {
     const rawAlbum = res.data.documents || res.data.album || {}
     candidatureState.value = res.data.candidature || {}
     const expectedDocsList = res.data.expected_docs || []
+    const docMetadata = res.data.documents_metadata || {}
     
     const docArray = []
     
     // Si le serveur nous renvoie une liste dynamique configurée
     if (expectedDocsList.length > 0) {
        for (const docReq of expectedDocsList) {
-          const key = docReq.document_key
-          const name = docReq.nom_affichage
-          const path = rawAlbum[key]
+          const key = docReq.document_key || (docReq.document_type && docReq.document_type.document_key) || docReq.documentType?.document_key
+          const name = docReq.nom_affichage || (docReq.document_type && docReq.document_type.nom_affichage) || docReq.documentType?.nom_affichage
+          let path = rawAlbum[key]
+          
+          if (!path && rawAlbum) {
+             const k = (key || '').toLowerCase();
+             const n = (name || '').toLowerCase();
+             if (k.includes('naissance') || n.includes('naissance')) path = rawAlbum['naissance'];
+             else if (k.includes('photo') || n.includes('photo')) path = rawAlbum['photo'];
+             else if (k.includes('diplome') || n.includes('diplome') || k.includes('attestation') || n.includes('attestation')) path = rawAlbum['diplome'];
+             else if (k.includes('nationalite') || n.includes('nationalite')) path = rawAlbum['nationalite'];
+             else if (k.includes('medical') || n.includes('medical') || k.includes('médical') || n.includes('médical')) path = rawAlbum['certificat_medical'];
+             else if (k.includes('motivation') || n.includes('motivation')) path = rawAlbum['lettre_motivation'];
+             else if (k.includes('cv') || n.includes('cv') || k.includes('vitae') || n.includes('vitae')) path = rawAlbum['cv'];
+             else if (k.includes('recommandation') || n.includes('recommandation')) path = rawAlbum['lettre'];
+             else if (k.includes('bac 1') || n.includes('bac 1') || k.includes('bac1') || n.includes('bac1')) path = rawAlbum['releve_bac1_path'];
+             else if (k.includes('bac 2') || n.includes('bac 2') || k.includes('bac2') || n.includes('bac2')) path = rawAlbum['releve_bac2_path'];
+          }
+
           const fourni = !!path && typeof path === 'string'
           let ext = ''
           if (fourni) {
@@ -236,8 +253,8 @@ const fetchDocuments = async () => {
              fourni: fourni,
              is_obligatoire: docReq.is_obligatoire,
              extension: ext.toLowerCase(),
-             taille: null,
-             date_ajout: null,
+             taille: docMetadata[key] ? docMetadata[key].size : null,
+             date_ajout: docMetadata[key] ? docMetadata[key].date : null,
              statut: fourni ? 'Soumis' : (docReq.is_obligatoire ? 'Requis (Manquant)' : 'Facultatif'),
              url: fourni ? (path.startsWith('http') ? path : `http://localhost:8000/storage/${path}`) : null
           })
@@ -279,8 +296,8 @@ const fetchDocuments = async () => {
              fourni: fourni,
              is_obligatoire: true,
              extension: ext.toLowerCase(),
-             taille: null,
-             date_ajout: null,
+             taille: docMetadata[key] ? docMetadata[key].size : null,
+             date_ajout: docMetadata[key] ? docMetadata[key].date : null,
              statut: fourni ? 'Soumis' : 'Non fourni',
              url: fourni ? (path.startsWith('http') ? path : `http://localhost:8000/storage/${path}`) : null
           })
