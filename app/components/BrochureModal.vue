@@ -238,8 +238,7 @@ const submitForm = async () => {
     console.error("Erreur lors de l'envoi des informations de contact:", e)
   }
 
-  // Sauvegarder en localStorage après toute issue (sauf 422) pour éviter de reposer
-  // la question à l'utilisateur lors des prochains téléchargements
+  
   localStorage.setItem('escen_prospect_registered', JSON.stringify({
     name: form.value.name,
     email: form.value.email,

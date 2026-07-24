@@ -95,6 +95,10 @@
             <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Prénoms</label>
             <input type="text" v-model="formData.prenom" :readonly="!isRectification" :class="inputClass" />
           </div>
+          <div v-if="champsSimplesConfig.nom_jeune_fille?.afficher || formData.nom_jeune_fille">
+            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">{{ champsSimplesConfig.nom_jeune_fille?.label || 'Nom de jeune fille' }}</label>
+            <input type="text" v-model="formData.nom_jeune_fille" :readonly="!isRectification" :class="inputClass" />
+          </div>
           <div>
             <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Date de naissance</label>
             <input type="date" v-model="formData.date_naissance" :readonly="!isRectification" :class="inputClass" />
@@ -102,6 +106,10 @@
           <div>
             <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Lieu de naissance</label>
             <input type="text" v-model="formData.lieu_naissance" :readonly="!isRectification" :class="inputClass" />
+          </div>
+          <div v-if="champsSimplesConfig.numero_bordereau?.afficher || formData.numero_bordereau">
+            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">{{ champsSimplesConfig.numero_bordereau?.label || 'Numéro de bordereau' }}</label>
+            <input type="text" v-model="formData.numero_bordereau" :readonly="!isRectification" :class="inputClass" />
           </div>
           <div>
             <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Nationalité</label>
@@ -136,6 +144,14 @@
                 <span class="text-[#1A2238] font-medium">{{ formData.nationalite || 'Non renseigné' }}</span>
             </div>
           </div>
+          <div v-if="champsSimplesConfig.comment_connu_ecole?.afficher" class="sm:col-span-2">
+            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Comment avez-vous connu {{ sigleEtablissement || "l'établissement" }} ?</label>
+            <select v-if="isRectification" v-model="formData.moyen_connaissance_id" :class="inputClass">
+              <option value="">Sélectionner</option>
+              <option v-for="moyen in moyensConnaissance" :key="moyen.id" :value="moyen.id">{{ moyen.libelle }}</option>
+            </select>
+            <div v-else :class="inputClass">{{ moyenConnaissanceNom || 'Non renseigné' }}</div>
+          </div>
           <div class="sm:col-span-2">
             <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Quartier (Adresse)</label>
             <input type="text" v-model="formData.adresse" :readonly="!isRectification" :class="inputClass" />
@@ -144,6 +160,18 @@
             <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Téléphone</label>
             <div class="w-full" :class="{ 'pointer-events-none opacity-80': !isRectification }">
                <input type="tel" ref="phoneInput" :class="inputClass" />
+            </div>
+          </div>
+          <div v-if="champsSimplesConfig.tel2?.afficher || formData.tel2">
+            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">{{ champsSimplesConfig.tel2?.label || 'Téléphone secondaire' }}</label>
+            <div class="w-full" :class="{ 'pointer-events-none opacity-80': !isRectification }">
+               <input type="tel" ref="phone2Input" :class="inputClass" />
+            </div>
+          </div>
+          <div v-if="champsSimplesConfig.tel3?.afficher || formData.tel3">
+            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">{{ champsSimplesConfig.tel3?.label || 'Téléphone supplémentaire' }}</label>
+            <div class="w-full" :class="{ 'pointer-events-none opacity-80': !isRectification }">
+               <input type="tel" ref="phone3Input" :class="inputClass" />
             </div>
           </div>
           <div class="sm:col-span-3">
@@ -184,17 +212,29 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-5">
           <div>
             <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Type de diplôme</label>
-            <input type="text" v-model="formData.type_diplome" :readonly="!isRectification" :class="inputClass" />
+            <select v-if="isRectification" v-model="formData.type_diplome_id" :class="inputClass">
+              <option value="">Sélectionner</option>
+              <option v-for="type in typesDiplome" :key="type.id" :value="type.id">{{ type.nom }}</option>
+            </select>
+            <div v-else :class="inputClass">{{ typeDiplomeNom || 'Non renseigné' }}</div>
           </div>
-          <div>
+          <div v-if="!isRectification || 'numero_table' in champsParcoursConfig">
+            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Numéro de table</label>
+            <input type="text" v-model="formData.numero_table" :readonly="!isRectification" :class="inputClass" />
+          </div>
+          <div v-if="!isRectification || 'serie' in champsParcoursConfig">
             <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Série (Bac)</label>
             <input type="text" v-model="formData.serie" :readonly="!isRectification" :class="inputClass" />
           </div>
-          <div>
+          <div v-if="!isRectification || 'mention_bac' in champsParcoursConfig">
+            <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Mention</label>
+            <input type="text" v-model="formData.mention_bac" :readonly="!isRectification" :class="inputClass" />
+          </div>
+          <div v-if="!isRectification || 'etablissement_diplome' in champsParcoursConfig">
             <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Établissement</label>
             <input type="text" v-model="formData.etablissement_diplome" :readonly="!isRectification" :class="inputClass" />
           </div>
-          <div>
+          <div v-if="!isRectification || 'annee_bac' in champsParcoursConfig">
             <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Année d'obtention</label>
             <input type="text" v-model="formData.annee_bac" :readonly="!isRectification" :class="inputClass" />
           </div>
@@ -301,12 +341,56 @@ const isSubmitting = ref(false)
 const candidature = ref(null)
 
 const phoneInput = ref(null)
+const phone2Input = ref(null)
+const phone3Input = ref(null)
 const phoneTuteurInput = ref(null)
 const phoneRespInput = ref(null)
 
 let itiTel = null
+let itiTel2 = null
+let itiTel3 = null
 let itiTelTuteur = null
 let itiTelResp = null
+
+// Configuration des champs (par école) — mêmes données que le formulaire public
+// d'inscription : quels champs sont affichés/obligatoires, le sigle de
+// l'établissement, les types de diplôme et les moyens de connaissance.
+const champsSimplesConfig = ref({})
+const sigleEtablissement = ref('')
+const typesDiplome = ref([])
+const moyensConnaissance = ref([])
+
+const champsParcoursConfig = computed(() => {
+  const type = typesDiplome.value.find(t => t.id === Number(formData.value.type_diplome_id))
+  if (!type) return {}
+  const map = {}
+  ;(type.champs || []).forEach(c => { map[c.champ_key] = !!c.obligatoire })
+  return map
+})
+
+const typeDiplomeNom = computed(() => {
+  const type = typesDiplome.value.find(t => t.id === Number(formData.value.type_diplome_id))
+  return type?.nom || formData.value.type_diplome || ''
+})
+
+const moyenConnaissanceNom = computed(() => {
+  const moyen = moyensConnaissance.value.find(m => m.id === Number(formData.value.moyen_connaissance_id))
+  return moyen?.libelle || ''
+})
+
+const fetchCandidatureConfig = async () => {
+  try {
+    const res = await $axios.get('/public/candidature-config')
+    typesDiplome.value = res.data?.types_diplome || []
+    moyensConnaissance.value = res.data?.moyens_connaissance || []
+    sigleEtablissement.value = res.data?.sigle || ''
+    const map = {}
+    ;(res.data?.champs || []).forEach(c => { map[c.champ_key] = { obligatoire: !!c.obligatoire, label: c.label } })
+    champsSimplesConfig.value = map
+  } catch (e) {
+    console.error('Erreur chargement configuration candidature', e)
+  }
+}
 
 const searchNat = ref('');
 const isDropdownOpen = ref(false);
@@ -364,6 +448,22 @@ const applyFallbackPhone = () => {
                formData.value.tel = (cd ? '+' + cd.dialCode : '') + ' ' + phoneInput.value.value;
            }
        }
+       if (itiTel2) {
+           const num = itiTel2.getNumber();
+           if (num) formData.value.tel2 = num;
+           else if (phone2Input.value && phone2Input.value.value) {
+               const cd = itiTel2.getSelectedCountryData();
+               formData.value.tel2 = (cd ? '+' + cd.dialCode : '') + ' ' + phone2Input.value.value;
+           }
+       }
+       if (itiTel3) {
+           const num = itiTel3.getNumber();
+           if (num) formData.value.tel3 = num;
+           else if (phone3Input.value && phone3Input.value.value) {
+               const cd = itiTel3.getSelectedCountryData();
+               formData.value.tel3 = (cd ? '+' + cd.dialCode : '') + ' ' + phone3Input.value.value;
+           }
+       }
        if (itiTelTuteur) {
            const num = itiTelTuteur.getNumber();
            if (num) formData.value.tel_tuteur = num;
@@ -383,8 +483,9 @@ const applyFallbackPhone = () => {
 }
 
 const formData = ref({
-  genre: '', nom: '', prenom: '', date_naissance: '', lieu_naissance: '', nationalite: '', adresse: '', tel: '', email: '',
-  serie: '', annee_bac: '', type_diplome: '', etablissement_diplome: '',
+  genre: '', nom: '', prenom: '', nom_jeune_fille: '', date_naissance: '', lieu_naissance: '', nationalite: '', adresse: '', tel: '', tel2: '', tel3: '', email: '',
+  numero_bordereau: '', moyen_connaissance_id: '',
+  numero_table: '', serie: '', mention_bac: '', annee_bac: '', type_diplome: '', type_diplome_id: '', etablissement_diplome: '',
   niveau_nom: '', filiere_nom: '',
   nom_tuteur: '', prenom_tuteur: '', profession_tuteur: '', tel_tuteur: '', email_tuteur: '',
   nom_resp: '', prenom_resp: '', profession_resp: '', tel_resp: '', email_resp: ''
@@ -408,19 +509,27 @@ const initFormData = (data) => {
     genre: data.genre || data.sexe || '',
     nom: data.nom || '',
     prenom: data.prenoms || data.prenom || '',
+    nom_jeune_fille: data.nom_jeune_fille || '',
     date_naissance: data.date_naissance ? data.date_naissance.split('T')[0] : '',
     lieu_naissance: data.lieu_naissance || '',
     nationalite: data.nationalite || '',
     adresse: data.adresse || data.quartier || '',
     tel: data.telephone || data.tel || '',
+    tel2: data.tel2 || '',
+    tel3: data.tel3 || '',
     email: data.email || '',
+    numero_bordereau: data.numero_bordereau || '',
+    moyen_connaissance_id: data.moyen_connaissance_id || data.moyen_connaissance?.id || '',
     niveau_nom: data.niveau?.nom || data.niveau?.libelle || (typeof data.niveau === 'string' ? data.niveau : ''),
     filiere_nom: data.filiere?.nom || data.filiere?.libelle || (typeof data.filiere === 'string' ? data.filiere : ''),
+    numero_table: data.numero_table || '',
     serie: data.serie_bac || data.serie || '',
+    mention_bac: data.mention_bac || '',
     annee_bac: data.annee_bac || data.annee_obtention || '',
     type_diplome: data.dernier_diplome || data.album?.type_diplome || data.type_diplome || '',
+    type_diplome_id: data.type_diplome_id || data.type_diplome?.id || '',
     etablissement_diplome: data.etablissement_diplome || '',
-    
+
     nom_tuteur: data.tuteur?.nom || data.nom_pere || data.nom_tuteur || '',
     prenom_tuteur: data.tuteur?.prenom || '',
     profession_tuteur: data.tuteur?.profession || data.profession_pere || data.profession_tuteur || '',
@@ -494,6 +603,7 @@ const submitRectifications = async () => {
 }
 
 onMounted(async () => {
+  fetchCandidatureConfig()
   try {
     const res = await $axios.get('/mon-dossier')
     candidature.value = res.data?.candidature || res.data
@@ -523,6 +633,12 @@ onMounted(async () => {
     await nextTick()
     itiTel = initIti(phoneInput);
     if (itiTel && formData.value.tel) itiTel.setNumber(formData.value.tel);
+
+    itiTel2 = initIti(phone2Input);
+    if (itiTel2 && formData.value.tel2) itiTel2.setNumber(formData.value.tel2);
+
+    itiTel3 = initIti(phone3Input);
+    if (itiTel3 && formData.value.tel3) itiTel3.setNumber(formData.value.tel3);
 
     itiTelTuteur = initIti(phoneTuteurInput);
     if (itiTelTuteur && formData.value.tel_tuteur) itiTelTuteur.setNumber(formData.value.tel_tuteur);

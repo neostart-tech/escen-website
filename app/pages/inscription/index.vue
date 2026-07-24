@@ -1,6 +1,80 @@
 <template>
   <div class="page-root">
 
+    <!-- Modal de Préparation (Affiché si showPreparationModal est true) -->
+    <div v-if="showPreparationModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-[#12192B]/80 backdrop-blur-sm">
+      <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[95vh] sm:max-h-[90vh]">
+        
+        <!-- En-tête -->
+        <div class="relative p-6 sm:p-8 flex-shrink-0 overflow-hidden bg-gradient-to-br from-[#01b4d5]/10 to-[#01b4d5]/5 border-b border-gray-100">
+          <div class="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-[#01b4d5]/10 rounded-full blur-2xl"></div>
+          
+          <div class="flex items-start gap-4 sm:gap-5 relative z-10">
+            <div class="hidden sm:flex flex-shrink-0 w-14 h-14 rounded-full bg-white shadow-sm items-center justify-center text-[#01b4d5]">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <div>
+              <h2 class="text-xl sm:text-2xl font-bold text-[#12192B]" style="font-family: 'Fraunces', serif;">Un instant avant de commencer !</h2>
+              <p class="text-gray-600 mt-2 text-sm sm:text-base leading-relaxed">
+                Afin de faciliter votre inscription, voici les documents que vous devrez fournir. 
+                <strong class="text-[#12192B] font-semibold">Pas d'inquiétude :</strong> si vous n'avez pas tout sous la main, vous pourrez enregistrer votre dossier et le terminer plus tard.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Corps -->
+        <div class="p-6 sm:p-8 flex-1 overflow-y-auto bg-white">
+          <div class="mb-8 p-5 bg-[#F9FAFB] rounded-2xl border border-gray-100">
+            <label class="block text-sm font-semibold text-[#12192B] mb-2">Pour quel niveau postulez-vous ? <span class="text-red-500">*</span></label>
+            <select v-model="prepNiveauId" @change="fetchPrepDocs" class="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:border-[#01b4d5] focus:ring-2 focus:ring-[#01b4d5]/20 bg-white transition-all text-sm outline-none font-medium text-gray-700">
+              <option value="">Veuillez sélectionner un niveau...</option>
+              <option v-for="n in niveaux" :key="n.id" :value="n.id">{{ n.libelle || n.nom }}</option>
+            </select>
+          </div>
+
+          <div v-if="prepLoading" class="text-center py-10">
+            <svg class="animate-spin h-8 w-8 text-[#01b4d5] mx-auto" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+            <p class="mt-3 text-sm font-medium text-gray-500">Recherche des pièces requises...</p>
+          </div>
+
+          <div v-else-if="prepNiveauId && prepDocs.length" class="space-y-3">
+            <div class="flex items-center justify-between mb-4">
+              <p class="text-xs font-bold uppercase tracking-widest text-[#01b4d5]">Votre Check-list</p>
+              <span class="text-xs font-semibold text-gray-400 bg-gray-100 px-2 py-1 rounded-md">{{ prepDocs.length }} document(s)</span>
+            </div>
+            
+            <label v-for="doc in prepDocs" :key="doc.key" class="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-white border cursor-pointer transition-all duration-200" :class="prepChecked[doc.key] ? 'border-[#01b4d5] bg-[#01b4d5]/[0.02] shadow-sm' : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'">
+              <div class="relative flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 border-2 rounded border-gray-300 flex items-center justify-center transition-colors" :class="{'bg-[#01b4d5] border-[#01b4d5]': prepChecked[doc.key]}">
+                <input type="checkbox" v-model="prepChecked[doc.key]" class="opacity-0 absolute inset-0 cursor-pointer">
+                <svg v-if="prepChecked[doc.key]" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <span class="text-sm sm:text-base font-semibold truncate block" :class="prepChecked[doc.key] ? 'text-[#12192B]' : 'text-gray-700'">{{ doc.label }}</span>
+              </div>
+              <span v-if="doc.is_obligatoire" class="flex-shrink-0 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-[#01b4d5]/10 text-[#01899f]">Requis</span>
+              <span v-else class="flex-shrink-0 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-gray-100 text-gray-500">Optionnel</span>
+            </label>
+          </div>
+
+          <div v-else-if="prepNiveauId" class="text-center py-10 bg-gray-50 rounded-2xl border border-dashed border-gray-200">
+            <p class="text-gray-500 text-sm font-medium">Aucun document spécifique configuré pour ce niveau.</p>
+          </div>
+        </div>
+
+        <!-- Pied de page (Actions) -->
+        <div class="p-4 sm:p-6 border-t border-gray-100 flex flex-col-reverse sm:flex-row items-center justify-between gap-3 flex-shrink-0 bg-gray-50/50">
+          <NuxtLink to="/" class="w-full sm:w-auto px-6 py-3.5 sm:py-3 rounded-xl font-semibold text-gray-600 bg-white border border-gray-200 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm shadow-sm text-center">
+            Quitter
+          </NuxtLink>
+          <button @click="closePreparationModal" :disabled="!prepNiveauId" class="w-full sm:w-auto px-8 py-3.5 sm:py-3 rounded-xl font-bold text-white transition-all text-sm flex items-center justify-center gap-2 group" :class="!prepNiveauId ? 'bg-gray-300 cursor-not-allowed' : 'bg-[#12192B] hover:bg-black shadow-lg shadow-[#12192B]/20 hover:-translate-y-0.5'">
+            J'ai compris, commencer 
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- ═══════════════════ PANNEAU GAUCHE ══════════════════════════════════ -->
     <aside class="left-panel">
       <img src="/slider/slider-1.jpg" alt="" class="left-bg">
@@ -23,8 +97,12 @@
           <span class="left-note-icon">
             <svg fill="currentColor" viewBox="0 0 256 256"><path d="M236,128a108,108,0,1,1-108-108A108.12,108.12,0,0,1,236,128Zm-96-52v56a12,12,0,0,1-24,0V76a12,12,0,0,1,24,0Zm-12,92a12,12,0,1,0,12,12A12,12,0,0,0,128,168Z"/></svg>
           </span>
-          <p><strong>Important :</strong> seules les séries <strong>C, D, E</strong> et <strong>F2</strong> sont acceptées pour cette procédure.</p>
+          <p><strong>Important :</strong> les séries <strong>A, C, D, E, F1, F2, F3, F4, G1, G2, G3</strong> sont acceptées pour cette procédure.</p>
         </div>
+        <button type="button" @click="showPreparationModal = true" class="left-doc-link text-left">
+          Voir la liste des documents à préparer
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
       </div>
     </aside>
 
@@ -73,7 +151,7 @@
           <Transition name="slide-step" mode="out-in" @after-enter="initPhoneWidgetsForStep">
           <div :key="etapeActive">
 
-            <!-- ─── ÉTAPE 0 : Identité ─────────────────────────────────────── -->
+            <!-- ─── ÉTAPE 0 : Identité & Coordonnées ───────────────────────── -->
             <form v-if="etapeActive === 0" @submit.prevent="nextStep" class="form-body">
               <div class="field-grid">
                 <div class="field">
@@ -84,9 +162,9 @@
                   <label class="field-label">Prénom(s) <span class="req">*</span></label>
                   <input v-model="formData.prenom" @input="formData.prenom = formData.prenom.replace(/\d/g, '')" type="text" required class="field-input" placeholder="Prénom(s)">
                 </div>
-                <div class="field">
-                  <label class="field-label">Nom de jeune fille <span class="opt">(si mariée)</span></label>
-                  <input v-model="formData.nom_jeune_fille" type="text" class="field-input" placeholder="Nom de jeune fille">
+                <div class="field" v-if="'nom_jeune_fille' in champsSimplesConfig">
+                  <label class="field-label">{{ champsSimplesConfig.nom_jeune_fille.label }} <span :class="champsSimplesConfig.nom_jeune_fille.obligatoire ? 'req' : 'opt'">{{ champsSimplesConfig.nom_jeune_fille.obligatoire ? '*' : '(si mariée)' }}</span></label>
+                  <input v-model="formData.nom_jeune_fille" type="text" :required="champsSimplesConfig.nom_jeune_fille.obligatoire" class="field-input" :placeholder="champsSimplesConfig.nom_jeune_fille.label">
                 </div>
                 <div class="field">
                   <label class="field-label">Sexe <span class="req">*</span></label>
@@ -103,6 +181,10 @@
                 <div class="field">
                   <label class="field-label">Lieu de naissance <span class="req">*</span></label>
                   <input v-model="formData.lieu_naissance" type="text" required class="field-input" placeholder="Ville, Pays">
+                </div>
+                <div class="field" v-if="'numero_bordereau' in champsSimplesConfig">
+                  <label class="field-label">{{ champsSimplesConfig.numero_bordereau.label }} <span :class="champsSimplesConfig.numero_bordereau.obligatoire ? 'req' : 'opt'">{{ champsSimplesConfig.numero_bordereau.obligatoire ? '*' : '(optionnel)' }}</span></label>
+                  <input v-model="formData.numero_bordereau" type="text" :required="champsSimplesConfig.numero_bordereau.obligatoire" class="field-input" :placeholder="champsSimplesConfig.numero_bordereau.label">
                 </div>
                 <div class="field field--full">
                   <label class="field-label">Nationalité <span class="req">*</span></label>
@@ -131,74 +213,100 @@
                     </div>
                   </div>
                 </div>
+                <div class="field field--full" v-if="'comment_connu_ecole' in champsSimplesConfig">
+                  <label class="field-label">Comment avez-vous connu {{ sigleEtablissement || "notre établissement" }} ? <span :class="champsSimplesConfig.comment_connu_ecole.obligatoire ? 'req' : 'opt'">{{ champsSimplesConfig.comment_connu_ecole.obligatoire ? '*' : '(optionnel)' }}</span></label>
+                  <select v-model="formData.moyen_connaissance_id" :required="champsSimplesConfig.comment_connu_ecole.obligatoire" class="field-input">
+                    <option value="">Sélectionner</option>
+                    <option v-for="moyen in moyensConnaissance" :key="moyen.id" :value="moyen.id">{{ moyen.libelle }}</option>
+                  </select>
+                </div>
               </div>
 
               <div class="section-sep">
-                <span class="section-sep-label">Informations du BAC</span>
+                <span class="section-sep-label">Coordonnées</span>
               </div>
 
-              <div class="field-grid">
-                <div class="field">
-                  <label class="field-label">Numéro de table <span class="opt">(optionnel)</span></label>
-                  <input v-model="formData.numero_table" @input="formData.numero_table = formData.numero_table.replace(/\D/g, '')" type="text" class="field-input" placeholder="Numéro de table BAC">
-                </div>
-                <div class="field">
-                  <label class="field-label">Année d'obtention du BAC <span class="opt">(optionnel)</span></label>
-                  <input v-model="formData.annee_bac" type="number" :min="1990" :max="today.getFullYear()" class="field-input" :placeholder="today.getFullYear().toString()">
-                </div>
-                <div class="field">
-                  <label class="field-label">Série du BAC <span class="opt">(optionnel)</span></label>
-                  <select v-model="formData.serie" class="field-input">
-                    <option value="">Sélectionner</option>
-                    <option>C</option><option>D</option><option>E</option><option>F2</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label class="field-label">Mention au BAC <span class="opt">(optionnel)</span></label>
-                  <select v-model="formData.mention_bac" class="field-input">
-                    <option value="">Sélectionner</option>
-                    <option>Passable</option><option>Assez Bien</option><option>Bien</option><option>Très Bien</option>
-                  </select>
-                </div>
-                <div class="field field--full">
-                  <label class="field-label">Type du dernier diplôme <span class="opt">(optionnel)</span></label>
-                  <select v-model="formData.type_diplome" class="field-input">
-                    <option value="">Sélectionner</option>
-                    <option>Bac 2</option><option>BTS</option><option>Licence</option><option>Master</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="step-actions">
-                <div></div>
-                <button type="submit" class="btn-primary">Continuer <span aria-hidden="true">→</span></button>
-              </div>
-            </form>
-
-            <!-- ─── ÉTAPE 1 : Coordonnées ──────────────────────────────────── -->
-            <form v-else-if="etapeActive === 1" @submit.prevent="nextStep" class="form-body">
-              <div class="field-grid field-grid--1col">
+              <div class="field-grid field-grid--tight-y">
                 <div class="field">
                   <label class="field-label">Téléphone principal <span class="req">*</span></label>
                   <div class="w-full"><input type="tel" ref="phoneInput" required class="field-input"></div>
                   <p class="field-hint">Numéro togolais ou étranger.</p>
                 </div>
-                <div class="field">
-                  <label class="field-label">Téléphone 2 <span class="opt">(optionnel)</span></label>
-                  <div class="w-full"><input type="tel" ref="phone2Input" class="field-input"></div>
+                <div class="field" v-if="'tel2' in champsSimplesConfig">
+                  <label class="field-label">{{ champsSimplesConfig.tel2.label }} <span :class="champsSimplesConfig.tel2.obligatoire ? 'req' : 'opt'">{{ champsSimplesConfig.tel2.obligatoire ? '*' : '(optionnel)' }}</span></label>
+                  <div class="w-full"><input type="tel" ref="phone2Input" :required="champsSimplesConfig.tel2.obligatoire" class="field-input"></div>
                 </div>
-                <div class="field">
-                  <label class="field-label">Téléphone 3 <span class="opt">(optionnel)</span></label>
-                  <div class="w-full"><input type="tel" ref="phone3Input" class="field-input"></div>
+                <div class="field" v-if="'tel3' in champsSimplesConfig">
+                  <label class="field-label">{{ champsSimplesConfig.tel3.label }} <span :class="champsSimplesConfig.tel3.obligatoire ? 'req' : 'opt'">{{ champsSimplesConfig.tel3.obligatoire ? '*' : '(optionnel)' }}</span></label>
+                  <div class="w-full"><input type="tel" ref="phone3Input" :required="champsSimplesConfig.tel3.obligatoire" class="field-input"></div>
                 </div>
                 <div class="field">
                   <label class="field-label">Adresse email <span class="req">*</span></label>
                   <input v-model="formData.email" type="email" required class="field-input" placeholder="mon.adresse@domaine.com">
                 </div>
               </div>
+
+              <div class="step-actions">
+                <div></div>
+                <button type="submit" class="btn-primary" :disabled="isSubmitting">
+                  <svg v-if="isSubmitting" class="animate-spin w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                  </svg>
+                  {{ isSubmitting ? 'Enregistrement...' : 'Continuer' }} <span v-if="!isSubmitting" aria-hidden="true">→</span>
+                </button>
+              </div>
+            </form>
+
+            <!-- ─── ÉTAPE 1 : Informations du BAC ──────────────────────────── -->
+            <form v-else-if="etapeActive === 1" @submit.prevent="nextStep" class="form-body">
+              <div class="field-grid">
+                <div class="field field--full">
+                  <label class="field-label">Type du dernier diplôme <span class="req">*</span></label>
+                  <select v-model="formData.type_diplome_id" required class="field-input">
+                    <option value="">Sélectionner</option>
+                    <option v-for="type in typesDiplome" :key="type.id" :value="type.id">{{ type.nom }}</option>
+                  </select>
+                </div>
+                <div class="field" v-if="'numero_table' in champsParcoursConfig">
+                  <label class="field-label">Numéro de table <span :class="champsParcoursConfig.numero_table ? 'req' : 'opt'">{{ champsParcoursConfig.numero_table ? '*' : '(optionnel)' }}</span></label>
+                  <input v-model="formData.numero_table" @input="formData.numero_table = formData.numero_table.replace(/\D/g, '')" type="text" :required="champsParcoursConfig.numero_table" class="field-input" placeholder="Numéro de table BAC">
+                </div>
+                <div class="field" v-if="'annee_bac' in champsParcoursConfig">
+                  <label class="field-label">Année d'obtention du BAC <span :class="champsParcoursConfig.annee_bac ? 'req' : 'opt'">{{ champsParcoursConfig.annee_bac ? '*' : '(optionnel)' }}</span></label>
+                  <input v-model="formData.annee_bac" type="number" :min="1990" :max="today.getFullYear()" :required="champsParcoursConfig.annee_bac" class="field-input" :placeholder="today.getFullYear().toString()">
+                </div>
+                <div class="field" v-if="'serie' in champsParcoursConfig">
+                  <label class="field-label">Série du BAC <span :class="champsParcoursConfig.serie ? 'req' : 'opt'">{{ champsParcoursConfig.serie ? '*' : '(optionnel)' }}</span></label>
+                  <select v-model="formData.serie" :required="champsParcoursConfig.serie" class="field-input">
+                    <option value="">Sélectionner</option>
+                    <option>A</option><option>C</option><option>D</option><option>E</option>
+                    <option>F1</option><option>F2</option><option>F3</option><option>F4</option>
+                    <option>G1</option><option>G2</option><option>G3</option><option>Autre</option>
+                  </select>
+                </div>
+                <div class="field" v-if="'mention_bac' in champsParcoursConfig">
+                  <label class="field-label">Mention au BAC <span :class="champsParcoursConfig.mention_bac ? 'req' : 'opt'">{{ champsParcoursConfig.mention_bac ? '*' : '(optionnel)' }}</span></label>
+                  <select v-model="formData.mention_bac" :required="champsParcoursConfig.mention_bac" class="field-input">
+                    <option value="">Sélectionner</option>
+                    <option>Passable</option><option>Assez Bien</option><option>Bien</option><option>Très Bien</option>
+                  </select>
+                </div>
+                <div class="field field--full" v-if="'etablissement_diplome' in champsParcoursConfig">
+                  <label class="field-label">Dernier établissement fréquenté <span :class="champsParcoursConfig.etablissement_diplome ? 'req' : 'opt'">{{ champsParcoursConfig.etablissement_diplome ? '*' : '(optionnel)' }}</span></label>
+                  <input v-model="formData.etablissement_diplome" type="text" :required="champsParcoursConfig.etablissement_diplome" class="field-input" placeholder="Établissement">
+                </div>
+              </div>
+
               <div class="step-actions">
                 <button type="button" @click="prevStep" class="btn-ghost">← Retour</button>
-                <button type="submit" class="btn-primary">Continuer <span aria-hidden="true">→</span></button>
+                <button type="submit" class="btn-primary" :disabled="isSubmitting">
+                  <svg v-if="isSubmitting" class="animate-spin w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                  </svg>
+                  {{ isSubmitting ? 'Enregistrement...' : 'Continuer' }} <span v-if="!isSubmitting" aria-hidden="true">→</span>
+                </button>
               </div>
             </form>
 
@@ -274,7 +382,13 @@
 
               <div class="step-actions">
                 <button type="button" @click="prevStep" class="btn-ghost">← Retour</button>
-                <button type="submit" class="btn-primary">Continuer <span aria-hidden="true">→</span></button>
+                <button type="submit" class="btn-primary" :disabled="isSubmitting">
+                  <svg v-if="isSubmitting" class="animate-spin w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                  </svg>
+                  {{ isSubmitting ? 'Envoi...' : 'Continuer' }} <span v-if="!isSubmitting" aria-hidden="true">→</span>
+                </button>
               </div>
             </form>
 
@@ -295,27 +409,27 @@
                       <label class="field-label">Prénom <span class="req">*</span></label>
                       <input v-model="tuteur.prenom" @input="tuteur.prenom = tuteur.prenom.replace(/\d/g, '')" type="text" required class="field-input" placeholder="Prénom">
                     </div>
-                    <div class="field">
-                      <label class="field-label">Profession <span class="req">*</span></label>
-                      <input v-model="tuteur.profession" type="text" required class="field-input" placeholder="Profession">
+                    <div class="field" v-if="'tuteur_profession' in champsSimplesConfig">
+                      <label class="field-label">{{ champsSimplesConfig.tuteur_profession.label }} <span :class="champsSimplesConfig.tuteur_profession.obligatoire ? 'req' : 'opt'">{{ champsSimplesConfig.tuteur_profession.obligatoire ? '*' : '(optionnel)' }}</span></label>
+                      <input v-model="tuteur.profession" type="text" :required="champsSimplesConfig.tuteur_profession.obligatoire" class="field-input" :placeholder="champsSimplesConfig.tuteur_profession.label">
                     </div>
-                    <div class="field">
-                      <label class="field-label">Employeur <span class="opt">(optionnel)</span></label>
-                      <input v-model="tuteur.employeur" type="text" class="field-input" placeholder="Nom de l'employeur">
+                    <div class="field" v-if="'tuteur_employeur' in champsSimplesConfig">
+                      <label class="field-label">{{ champsSimplesConfig.tuteur_employeur.label }} <span :class="champsSimplesConfig.tuteur_employeur.obligatoire ? 'req' : 'opt'">{{ champsSimplesConfig.tuteur_employeur.obligatoire ? '*' : '(optionnel)' }}</span></label>
+                      <input v-model="tuteur.employeur" type="text" :required="champsSimplesConfig.tuteur_employeur.obligatoire" class="field-input" :placeholder="champsSimplesConfig.tuteur_employeur.label">
                     </div>
-                    <div class="field">
-                      <label class="field-label">Email <span class="opt">(optionnel)</span></label>
-                      <input v-model="tuteur.email" type="email" class="field-input" placeholder="Email">
+                    <div class="field" v-if="'tuteur_email' in champsSimplesConfig">
+                      <label class="field-label">{{ champsSimplesConfig.tuteur_email.label }} <span :class="champsSimplesConfig.tuteur_email.obligatoire ? 'req' : 'opt'">{{ champsSimplesConfig.tuteur_email.obligatoire ? '*' : '(optionnel)' }}</span></label>
+                      <input v-model="tuteur.email" type="email" :required="champsSimplesConfig.tuteur_email.obligatoire" class="field-input" :placeholder="champsSimplesConfig.tuteur_email.label">
                     </div>
-                    <div class="field">
-                      <label class="field-label">Téléphone <span class="req">*</span></label>
+                    <div class="field" v-if="'tuteur_tel' in champsSimplesConfig">
+                      <label class="field-label">{{ champsSimplesConfig.tuteur_tel.label }} <span :class="champsSimplesConfig.tuteur_tel.obligatoire ? 'req' : 'opt'">{{ champsSimplesConfig.tuteur_tel.obligatoire ? '*' : '(optionnel)' }}</span></label>
                       <div class="w-full">
-                        <input :ref="el => { if(el) tuteurPhoneEls[index] = el }" type="tel" required class="field-input">
+                        <input :ref="el => { if(el) tuteurPhoneEls[index] = el }" type="tel" :required="champsSimplesConfig.tuteur_tel.obligatoire" class="field-input">
                       </div>
                     </div>
-                    <div class="field field--full">
-                      <label class="field-label">Adresse / Quartier <span class="req">*</span></label>
-                      <input v-model="tuteur.adresse" type="text" required class="field-input" placeholder="Adresse / Quartier de résidence">
+                    <div class="field field--full" v-if="'tuteur_adresse' in champsSimplesConfig">
+                      <label class="field-label">{{ champsSimplesConfig.tuteur_adresse.label }} <span :class="champsSimplesConfig.tuteur_adresse.obligatoire ? 'req' : 'opt'">{{ champsSimplesConfig.tuteur_adresse.obligatoire ? '*' : '(optionnel)' }}</span></label>
+                      <input v-model="tuteur.adresse" type="text" :required="champsSimplesConfig.tuteur_adresse.obligatoire" class="field-input" :placeholder="champsSimplesConfig.tuteur_adresse.label">
                     </div>
                     <div class="field field--full">
                       <label class="check-label">
@@ -393,17 +507,17 @@ const tuteurPhoneEls = ref([])
 let itiTelTuteurs = []
 
 // ── Panel labels ──────────────────────────────────────────────────────────────
-const etapes = ['Identité', 'Coordonnées', 'Documents', 'Tuteur(s)']
+const etapes = ['Identité & Coordonnées', 'Diplôme', 'Documents', 'Tuteur(s)']
 
 const panelTitles = [
-  'Identité',
-  'Coordonnées',
+  'Identité & Coordonnées',
+  'Votre diplôme',
   'Vos pièces à fournir',
   'Parent(s) ou tuteur(s)',
 ]
 const panelSubs = [
-  'Renseignez vos informations personnelles et votre parcours académique.',
-  'Vos coordonnées permettront à notre équipe de vous contacter.',
+  'Renseignez vos informations personnelles et vos coordonnées.',
+  'Précisez votre dernier diplôme obtenu.',
   'Sélectionnez votre niveau et filière pour voir les pièces à joindre à votre dossier.',
   'Renseignez au moins un parent ou tuteur légal. Vous pouvez en ajouter plusieurs si nécessaire.',
 ]
@@ -545,16 +659,138 @@ const loadingFilieres = ref(false)
 const isSubmitting = ref(false)
 const acceptCgu = ref(false)
 const etapeActive = ref(0)
+
+// ── Modal Préparation State ───────────────────────────────────────────────────
+const showPreparationModal = ref(typeof window !== 'undefined' ? !localStorage.getItem('candidature_prep_seen') : false)
+const prepNiveauId = ref('')
+const prepDocs = ref([])
+const prepChecked = reactive({})
+const prepLoading = ref(false)
+
+const allRequiredChecked = computed(() => {
+  if (!prepDocs.value.length) return true
+  const requiredDocs = prepDocs.value.filter(d => d.is_obligatoire)
+  return requiredDocs.every(d => prepChecked[d.key])
+})
+
+const fetchPrepDocs = async () => {
+  if (!prepNiveauId.value) {
+    prepDocs.value = []
+    Object.keys(prepChecked).forEach(k => delete prepChecked[k])
+    return
+  }
+  prepLoading.value = true
+  try {
+    const { $axios } = useNuxtApp()
+    const res = await $axios.get(`/public/niveau/${prepNiveauId.value}/document-requirements`)
+    const reqs = res.data || []
+    prepDocs.value = reqs.map(r => ({
+      key: r.document_key,
+      label: r.nom_affichage,
+      is_obligatoire: r.is_obligatoire == 1 || r.is_obligatoire === true
+    }))
+    if (!prepDocs.value.length) {
+      prepDocs.value = [
+        { key: 'photo_identite_file', label: "Photo d'identité", is_obligatoire: true },
+        { key: 'nationalite_file', label: "Pièce d'identité", is_obligatoire: true },
+        { key: 'naissance_file', label: 'Acte de naissance', is_obligatoire: true },
+        { key: 'diplome_file', label: 'Dernier Diplôme', is_obligatoire: true },
+        { key: 'certificat_medical_file', label: 'Certificat médical', is_obligatoire: false },
+        { key: 'cv_file', label: 'Curriculum Vitae', is_obligatoire: false },
+        { key: 'releve_bac1', label: 'Relevés Année 1', is_obligatoire: false },
+        { key: 'releve_bac2', label: 'Relevés Année 2', is_obligatoire: false },
+      ]
+    }
+    // Reset checks
+    Object.keys(prepChecked).forEach(k => delete prepChecked[k])
+  } catch (e) {
+    console.error('Erreur chargement des documents pour la préparation', e)
+  } finally {
+    prepLoading.value = false
+  }
+}
+
+const closePreparationModal = () => {
+  showPreparationModal.value = false
+  if (typeof window !== 'undefined') localStorage.setItem('candidature_prep_seen', '1')
+  if (prepNiveauId.value && !formData.niveau_id) {
+    formData.niveau_id = prepNiveauId.value
+    updateFilieres()
+  }
+}
+
+const cancelPreparation = () => {
+  window.location.href = '/'
+}
+
+// Jeton du dossier en cours de constitution (créé à l'étape 0, requis par les
+// étapes suivantes pour le compléter). Persisté en localStorage pour survivre
+// à un rechargement de page pendant que le candidat progresse dans le formulaire.
+const draftToken = ref(typeof window !== 'undefined' ? localStorage.getItem('candidature_draft_token') : null)
+const setDraftToken = (token) => {
+  draftToken.value = token
+  if (typeof window !== 'undefined') localStorage.setItem('candidature_draft_token', token)
+}
+const clearDraftToken = () => {
+  draftToken.value = null
+  if (typeof window !== 'undefined') localStorage.removeItem('candidature_draft_token')
+}
+
 const today = new Date()
 const maxDateString = `${today.getFullYear() - 15}-12-31`
 const minDateString = `${today.getFullYear() - 60}-01-01`
 
 const formData = reactive({
   nom: '', prenom: '', nom_jeune_fille: '', genre: '', date_naissance: '', lieu_naissance: '', nationalite: '',
-  numero_table: '', annee_bac: '', serie: '', mention_bac: '', type_diplome: '',
+  numero_bordereau: '',
+  moyen_connaissance_id: '',
+  numero_table: '', annee_bac: '', serie: '', mention_bac: '', type_diplome_id: '', etablissement_diplome: '',
   email: '', tel: '', tel2: '', tel3: '',
   niveau_id: '', filiere_id: '',
 })
+
+// ── Configuration des champs (par école) ──────────────────────────────────────
+// Quels champs simples sont obligatoires, et quels types de diplôme (+ leurs
+// champs de parcours scolaire) proposer — configuré dans Paramètres > l'admin.
+const typesDiplome = ref([])
+const champsSimplesConfig = ref({})
+const moyensConnaissance = ref([])
+const sigleEtablissement = ref('')
+
+const champsParcoursConfig = computed(() => {
+  const type = typesDiplome.value.find(t => t.id === Number(formData.type_diplome_id))
+  if (!type) return {}
+  const map = {}
+  ;(type.champs || []).forEach(c => { map[c.champ_key] = !!c.obligatoire })
+  return map
+})
+
+const fetchCandidatureConfig = async () => {
+  try {
+    const { $axios } = useNuxtApp()
+    const res = await $axios.get('/public/candidature-config')
+    typesDiplome.value = res.data?.types_diplome || []
+    // Présélectionne le premier type de diplôme de la liste, plutôt que de laisser
+    // le candidat face à un select vide sur "Sélectionner".
+    if (typesDiplome.value.length && !formData.type_diplome_id) {
+      formData.type_diplome_id = typesDiplome.value[0].id
+    }
+    const map = {}
+    // Seuls les champs affichés (afficher = true) sont renvoyés par l'API : leur simple
+    // présence ici suffit à décider s'il faut afficher le bloc correspondant (voir les `v-if`).
+    ;(res.data?.champs || []).forEach(c => { map[c.champ_key] = { obligatoire: !!c.obligatoire, label: c.label } })
+    champsSimplesConfig.value = map
+    moyensConnaissance.value = res.data?.moyens_connaissance || []
+    sigleEtablissement.value = res.data?.sigle || ''
+    
+    // Les champs optionnels (tel2, tel3, tuteurs) viennent d'apparaître dans le DOM
+    // Il faut initialiser intl-tel-input pour eux
+    await nextTick()
+    initPhoneWidgetsForStep()
+  } catch (e) {
+    console.error('Erreur chargement configuration candidature', e)
+  }
+}
 
 // Tuteurs — dynamic array
 const tuteurs = ref([{ nom: '', prenom: '', profession: '', employeur: '', email: '', tel: '', adresse: '', responsable_des_frais: false }])
@@ -647,7 +883,7 @@ const getItiNumber = (iti, inputEl) => {
 // (avec mode="out-in", le nouveau contenu n'est monté dans le DOM qu'après la fin
 // de la transition de sortie précédente : un simple nextTick() est trop tôt.)
 const initPhoneWidgetsForStep = () => {
-  if (etapeActive.value === 1) {
+  if (etapeActive.value === 0) {
     if (itiTel) itiTel.destroy()
     if (itiTel2) itiTel2.destroy()
     if (itiTel3) itiTel3.destroy()
@@ -701,7 +937,7 @@ const updateFilieres = async () => {
 
 // ── Navigation ────────────────────────────────────────────────────────────────
 const savePhoneFields = () => {
-  if (etapeActive.value === 1) {
+  if (etapeActive.value === 0) {
     formData.tel  = getItiNumber(itiTel,  phoneInput.value)
     formData.tel2 = getItiNumber(itiTel2, phone2Input.value)
     formData.tel3 = getItiNumber(itiTel3, phone3Input.value)
@@ -713,12 +949,60 @@ const savePhoneFields = () => {
   }
 }
 
-const nextStep = () => {
+// Message d'erreur cohérent avec la gestion existante : premier message de
+// validation s'il y en a, sinon le message générique renvoyé par l'API.
+const messageErreur = (e, fallback) => {
+  if (e.response?.data?.errors) return Object.values(e.response.data.errors).flat().join('\n')
+  return e.response?.data?.message || fallback
+}
+
+const nextStep = async () => {
   savePhoneFields()
 
   if (etapeActive.value === 0) {
     if (!formData.genre)      { toastr.error('Veuillez sélectionner un sexe.'); return }
     if (!formData.nationalite){ toastr.error('Veuillez sélectionner une nationalité.'); return }
+
+    isSubmitting.value = true
+    try {
+      const payload = {
+        nom: formData.nom, prenom: formData.prenom, nom_jeune_fille: formData.nom_jeune_fille,
+        genre: formData.genre, date_naissance: formData.date_naissance, lieu_naissance: formData.lieu_naissance,
+        nationalite: formData.nationalite, numero_bordereau: formData.numero_bordereau,
+        moyen_connaissance_id: formData.moyen_connaissance_id,
+        tel: formData.tel, tel2: formData.tel2, tel3: formData.tel3, email: formData.email,
+      }
+      // Un jeton existe déjà (dossier créé plus tôt, ou retrouvé après rechargement) :
+      // on met à jour ce même dossier au lieu d'essayer d'en créer un nouveau, qui
+      // échouerait sur son propre email déjà utilisé par le brouillon en cours.
+      if (draftToken.value) {
+        await candidatureStore.mettreAJourEtape1(draftToken.value, payload)
+      } else {
+        const res = await candidatureStore.creerEtape1(payload)
+        setDraftToken(res.draft_token)
+      }
+    } catch (e) {
+      toastr.error(messageErreur(e, "Une erreur est survenue lors de la création du dossier."), 'Erreur')
+      return
+    } finally {
+      isSubmitting.value = false
+    }
+  }
+
+  if (etapeActive.value === 1) {
+    isSubmitting.value = true
+    try {
+      await candidatureStore.mettreAJourEtape2Bac(draftToken.value, {
+        type_diplome_id: formData.type_diplome_id, numero_table: formData.numero_table,
+        annee_bac: formData.annee_bac, serie: formData.serie, mention_bac: formData.mention_bac,
+        etablissement_diplome: formData.etablissement_diplome,
+      })
+    } catch (e) {
+      toastr.error(messageErreur(e, "Une erreur est survenue lors de l'enregistrement du diplôme."), 'Erreur')
+      return
+    } finally {
+      isSubmitting.value = false
+    }
   }
 
   if (etapeActive.value === 2) {
@@ -728,6 +1012,26 @@ const nextStep = () => {
     if (missingRequired.length > 0) {
       toastr.error(`Documents obligatoires manquants : <strong>${missingRequired.map(d => d.label).join(', ')}</strong>`, 'Documents manquants', { escapeHtml: false })
       return
+    }
+
+    isSubmitting.value = true
+    try {
+      const data = new FormData()
+      data.append('niveau_id', formData.niveau_id)
+      if (formData.filiere_id) data.append('filiere_id', formData.filiere_id)
+      fileInputs.value.forEach(doc => {
+        if (doc.multiple) {
+          if (files.value[doc.key]?.length) files.value[doc.key].forEach((f, j) => data.append(`${doc.key}[${j}]`, f))
+        } else {
+          if (files.value[doc.key]) data.append(doc.key, files.value[doc.key])
+        }
+      })
+      await candidatureStore.soumettreEtape3Documents(draftToken.value, data)
+    } catch (e) {
+      toastr.error(messageErreur(e, "Une erreur est survenue lors de l'envoi des documents."), 'Erreur')
+      return
+    } finally {
+      isSubmitting.value = false
     }
   }
 
@@ -742,7 +1046,7 @@ const prevStep = () => {
   if (etapeActive.value > 0) { etapeActive.value--; window.scrollTo({ top: 0, behavior: 'smooth' }) }
 }
 
-// ── Submit ────────────────────────────────────────────────────────────────────
+// ── Submit (étape 4 : tuteurs + finalisation) ─────────────────────────────────
 const soumettreFormulaire = async () => {
   savePhoneFields()
 
@@ -759,7 +1063,6 @@ const soumettreFormulaire = async () => {
   isSubmitting.value = true
   try {
     const data = new FormData()
-    Object.entries(formData).forEach(([k, v]) => { if (v) data.append(k, v) })
     data.append('accept_cgu', '1')
     tuteurs.value.forEach((tuteur, i) => {
       Object.entries(tuteur).forEach(([k, v]) => {
@@ -767,43 +1070,71 @@ const soumettreFormulaire = async () => {
         else if (v) data.append(`tuteurs[${i}][${k}]`, v)
       })
     })
-    fileInputs.value.forEach(doc => {
-      if (doc.multiple) {
-        if (files.value[doc.key]?.length) files.value[doc.key].forEach((f, j) => data.append(`${doc.key}[${j}]`, f))
-      } else {
-        if (files.value[doc.key]) data.append(doc.key, files.value[doc.key])
-      }
-    })
-    await candidatureStore.soumettreCandidature(data)
+    await candidatureStore.finaliserEtape4(draftToken.value, data)
     toastr.success('Votre dossier a été envoyé avec succès.', 'Félicitations !')
+    clearDraftToken()
     etapeActive.value = 0
     Object.keys(formData).forEach(k => formData[k] = '')
     tuteurs.value = [{ nom: '', prenom: '', profession: '', employeur: '', email: '', tel: '', adresse: '', responsable_des_frais: false }]
     files.value = {}
     acceptCgu.value = false
   } catch(e) {
-    console.error(e)
-    let msg = "Une erreur est survenue lors de l'envoi."
-    if (e.response?.data?.errors) msg = Object.values(e.response.data.errors).flat().join('\n')
-    else if (e.response?.data?.message) msg = e.response.data.message
-    toastr.error(msg, 'Erreur de soumission')
+    toastr.error(messageErreur(e, "Une erreur est survenue lors de l'envoi."), 'Erreur de soumission')
   } finally {
     isSubmitting.value = false
   }
 }
 
 // ── Lifecycle ─────────────────────────────────────────────────────────────────
+// Reprise d'un dossier déjà commencé (jeton retrouvé en localStorage) : re-remplit
+// le formulaire avec ce qui a déjà été enregistré côté serveur et reprend à la
+// bonne étape, plutôt que de perdre la progression au moindre rechargement de page.
+const reprendreBrouillonExistant = async () => {
+  if (!draftToken.value) return
+  const candidat = await candidatureStore.recupererBrouillon(draftToken.value)
+  if (!candidat) { clearDraftToken(); return }
+
+  Object.keys(formData).forEach(k => {
+    if (candidat[k] === null || candidat[k] === undefined) return
+    formData[k] = k === 'date_naissance' ? String(candidat[k]).split('T')[0] : candidat[k]
+  })
+
+  if (candidat.niveau_id) {
+    formData.niveau_id = candidat.niveau_id
+    await updateFilieres() // recharge les filières du niveau (réinitialise filiere_id au passage)
+    formData.filiere_id = candidat.filiere_id
+    await fetchDynamicDocuments() // recharge la liste des pièces avec la bonne filière
+    etapeActive.value = 3
+  } else if (candidat.type_diplome_id) {
+    etapeActive.value = 2
+  } else {
+    etapeActive.value = 1
+  }
+
+  toastr.info("Votre dossier commencé précédemment a été retrouvé, vous pouvez continuer où vous en étiez.", 'Reprise de votre inscription')
+}
+
 onMounted(async () => {
   niveaux.value = await niveauStore.fetchNiveaux()
+  fetchCandidatureConfig()
   getCountryCode().then(code => {
     if (!formData.nationalite) {
       const nat = nationalitesList.find(n => n.code === code)
       formData.nationalite = nat ? nat.value : 'Togolaise'
     }
   })
+  await reprendreBrouillonExistant()
+  if (draftToken.value) {
+    showPreparationModal.value = false
+  }
   document.addEventListener('click', (e) => {
     if (dropdownRef.value && !dropdownRef.value.contains(e.target)) isDropdownOpen.value = false
   })
+  // La <Transition> n'émet pas @after-enter au tout premier rendu (pas de prop
+  // `appear`) : comme l'étape 0 contient désormais les champs téléphone, il faut
+  // initialiser le widget explicitement ici pour ce tout premier affichage.
+  await nextTick()
+  initPhoneWidgetsForStep()
 })
 </script>
 
@@ -823,22 +1154,22 @@ onMounted(async () => {
 .left-overlay{ @apply absolute inset-0; background: linear-gradient(160deg, rgba(13,24,40,0.92) 0%, rgba(13,24,40,0.85) 100%); }
 .left-body   { @apply relative z-10 flex flex-col h-full p-12 text-white; }
 .left-logo   { @apply h-24 w-auto object-contain object-left -ml-4 -mt-4 opacity-90; }
-.left-text   { @apply mt-10 mb-8; }
+.left-text   { @apply my-auto; }
 .left-kicker {
   @apply text-xs font-bold uppercase tracking-[0.2em] mb-4;
-  color: #C9A84C;
+  color: #01b4d5;
 }
 .left-heading {
   @apply text-4xl xl:text-5xl font-bold leading-tight mb-5 text-white;
 }
 .left-heading-gold {
   @apply not-italic block mt-1;
-  color: #C9A84C;
+  color: #01b4d5;
   font-style: italic !important;
 }
 .left-desc   { @apply text-[15px] leading-relaxed max-w-xs; color: rgba(255,255,255,0.7); }
 .left-note   {
-  @apply flex items-start gap-3 p-4 rounded-xl text-sm leading-relaxed mt-auto;
+  @apply flex items-start gap-3 p-4 rounded-xl text-sm leading-relaxed;
   background: rgba(255,255,255,0.07);
   border: 1px solid rgba(255,255,255,0.12);
   color: rgba(255,255,255,0.75);
@@ -847,9 +1178,14 @@ onMounted(async () => {
 .left-note-icon {
   @apply flex-shrink-0 mt-0.5;
   width: 18px; height: 18px;
-  color: #C9A84C;
+  color: #01b4d5;
 }
 .left-note-icon svg { width: 100%; height: 100%; }
+.left-doc-link {
+  @apply flex items-center gap-2 text-sm font-semibold mt-4 transition-colors duration-200 w-fit;
+  color: #01b4d5;
+}
+.left-doc-link:hover { color: white; }
 
 /* ═══════════════════════════════════════════════════════════════
    PANNEAU DROIT
@@ -945,13 +1281,14 @@ onMounted(async () => {
 /* ═══════════════════════════════════════════════════════════════
    CHAMPS
 ═══════════════════════════════════════════════════════════════ */
-.iti { width: 100%; }
+:deep(.iti) { width: 100%; }
 
 .field-grid  {
   @apply grid gap-x-5 gap-y-5;
   grid-template-columns: repeat(2, 1fr);
 }
 .field-grid--1col { grid-template-columns: 1fr; }
+.field-grid--tight-y { row-gap: 1rem; }
 
 .field       { @apply flex flex-col gap-1.5; }
 .field--full { grid-column: 1 / -1; }
@@ -1153,10 +1490,6 @@ select.field-input { appearance: auto; }
 
 .req { @apply text-red-500; }
 .opt { @apply text-[11px] font-normal normal-case tracking-normal; color: #9CA3AF; }
-
-/* ═══════════════════════════════════════════════════════════════
-   TRANSITION
-═══════════════════════════════════════════════════════════════ */
 .slide-step-enter-active { transition: all 0.28s ease; }
 .slide-step-leave-active { transition: all 0.2s ease; }
 .slide-step-enter-from   { opacity: 0; transform: translateX(18px); }
