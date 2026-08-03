@@ -67,21 +67,25 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
   }
 
-  // Vérifier le consentement au chargement
-  if (localStorage.getItem('escen_cookie_consent') === 'accepted') {
-    initPixels()
-  }
+  // Vérifier le consentement au chargement (côté client uniquement)
+  if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+    if (localStorage.getItem('escen_cookie_consent') === 'accepted') {
+      initPixels()
+    }
 
-  // Écouter le consentement donné en temps réel depuis le CookieBanner
-  window.addEventListener('cookies-accepted', () => {
-    initPixels()
-  })
+    // Écouter le consentement donné en temps réel depuis le CookieBanner
+    window.addEventListener('cookies-accepted', () => {
+      initPixels()
+    })
+  }
 
   // Suivi automatique lors des changements de page (pour les SPA)
   nuxtApp.hook('page:finish', () => {
-    if (localStorage.getItem('escen_cookie_consent') === 'accepted') {
-      if (config.public.metaPixelId && typeof window.fbq !== 'undefined') {
-        window.fbq('track', 'PageView');
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      if (localStorage.getItem('escen_cookie_consent') === 'accepted') {
+        if (config.public.metaPixelId && typeof window.fbq !== 'undefined') {
+          window.fbq('track', 'PageView');
+        }
       }
     }
   })

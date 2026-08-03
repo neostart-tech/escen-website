@@ -2,7 +2,7 @@ name: Déploiement cPanel
 
 on:
   push:
-    branches: [ebenezer]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
