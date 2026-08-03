@@ -15,7 +15,7 @@ jobs:
       - name: Installer Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Installer les dépendances
@@ -32,6 +32,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./.output/public/
           server-dir: escen.university/
+          security: loose
           exclude: |
             **/.git*
             **/.git*/**
