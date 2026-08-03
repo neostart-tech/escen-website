@@ -219,6 +219,10 @@
                     <option value="">Sélectionner</option>
                     <option v-for="moyen in moyensConnaissance" :key="moyen.id" :value="moyen.id">{{ moyen.libelle }}</option>
                   </select>
+                  <div v-if="isMoyenAutre" class="mt-3">
+                    <label class="field-label">Veuillez préciser <span class="req">*</span></label>
+                    <input v-model="formData.moyen_connaissance_precision" type="text" required class="field-input" placeholder="Précisez comment vous avez connu l'établissement...">
+                  </div>
                 </div>
               </div>
 
@@ -482,8 +486,7 @@ definePageMeta({ layout: false })
 
 import { ref, reactive, computed, onMounted, watch, nextTick } from 'vue'
 import swal from 'sweetalert'
-import toastr from 'toastr'
-import 'toastr/build/toastr.min.css'
+import toastr from '~/utils/toast'
 import { useNuxtApp } from '#app'
 import { useNiveauStore } from '~/stores/niveau'
 import { useFiliereStore } from '~/stores/filiere'
@@ -744,9 +747,16 @@ const formData = reactive({
   nom: '', prenom: '', nom_jeune_fille: '', genre: '', date_naissance: '', lieu_naissance: '', nationalite: '',
   numero_bordereau: '',
   moyen_connaissance_id: '',
+  moyen_connaissance_precision: '',
   numero_table: '', annee_bac: '', serie: '', mention_bac: '', type_diplome_id: '', etablissement_diplome: '',
   email: '', tel: '', tel2: '', tel3: '',
   niveau_id: '', filiere_id: '',
+})
+
+const isMoyenAutre = computed(() => {
+  if (!formData.moyen_connaissance_id) return false
+  const moyen = moyensConnaissance.value.find(m => m.id === Number(formData.moyen_connaissance_id))
+  return moyen && (moyen.libelle || '').trim().toLowerCase() === 'autre'
 })
 
 // ── Configuration des champs (par école) ──────────────────────────────────────
@@ -970,6 +980,7 @@ const nextStep = async () => {
         genre: formData.genre, date_naissance: formData.date_naissance, lieu_naissance: formData.lieu_naissance,
         nationalite: formData.nationalite, numero_bordereau: formData.numero_bordereau,
         moyen_connaissance_id: formData.moyen_connaissance_id,
+        moyen_connaissance_precision: isMoyenAutre.value ? formData.moyen_connaissance_precision : '',
         tel: formData.tel, tel2: formData.tel2, tel3: formData.tel3, email: formData.email,
       }
       // Un jeton existe déjà (dossier créé plus tôt, ou retrouvé après rechargement) :

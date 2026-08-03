@@ -93,13 +93,13 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
                 <article v-for="(article, index) in displayedArticles" :key="article.id"
                     class="group bg-white rounded-xl lg:rounded-2xl shadow-sm hover:shadow-lg lg:hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 lg:hover:-translate-y-2 overflow-hidden border border-gray-200">
-                    <!-- Image Container -->
-                    <div class="relative h-40 sm:h-44 lg:h-48 overflow-hidden bg-gray-100">
+                    <!-- Image Container — hauteur adaptée à l'image -->
+                    <div class="relative overflow-hidden bg-gray-100">
                         <!-- Image principale -->
                         <img 
                             :src="article.image" 
                             :alt="article.title"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            class="w-full h-auto max-h-80 object-contain group-hover:scale-105 transition-transform duration-700"
                             loading="lazy"
                         />
                         

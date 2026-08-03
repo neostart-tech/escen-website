@@ -12,18 +12,18 @@
             overlay />
 
         <!-- Contenu Principal -->
-        <main class="container mx-auto px-4 sm:px-6 py-6 lg:py-10">
-            <div class="max-w-6xl mx-auto">
+        <main class="w-full px-3 sm:px-4 lg:px-6 py-6 lg:py-10">
+            <div class="max-w-7xl mx-auto">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <!-- Colonne de gauche : Contenu principal -->
                     <div class="lg:col-span-2">
                         <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                            <!-- Image Hero -->
-                            <div class="relative h-64 md:h-72 lg:h-80">
+                            <!-- Image Hero — hauteur naturelle, pas de crop forcé -->
+                            <div class="relative overflow-hidden bg-gray-100">
                                 <img :src="article.image" 
                                      :alt="article.title"
-                                     class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                                     class="w-full h-auto max-h-[520px] object-contain">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
                                 
                                 <!-- Badges alignés à droite -->
                                 <div class="absolute top-4 right-4 flex flex-col items-end gap-2">
@@ -39,7 +39,7 @@
 
                             <!-- En-tête Premium -->
                             <div class="p-6 lg:p-8">
-                                <div class="mb-8">
+                                <div class="mb-3">
                                     <!-- Titre principal -->
                                     <h1 class="text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight mb-6">
                                         {{ article.title }}
@@ -105,7 +105,7 @@
                                     </div>
                                     
                                     <!-- Tags en dessous -->
-                                    <div v-if="article.tags && article.tags.length > 0" class="flex flex-wrap gap-2 mt-6">
+                                    <div v-if="article.tags && article.tags.length > 0" class="flex flex-wrap gap-2 mt-3">
                                         <span v-for="tag in article.tags" 
                                               :key="tag"
                                               class="px-3 py-1 bg-gray-50 hover:bg-gray-100 text-gray-600 text-xs font-medium rounded-md border border-gray-200 transition-colors cursor-default">
@@ -116,7 +116,7 @@
                             </div>
 
                             <!-- Contenu de l'article -->
-                            <div class="p-6 lg:p-8 border-t border-gray-100" v-if="article">
+                            <div class="px-6 lg:px-8 pb-6 lg:pb-8 pt-4" v-if="article">
                                 <div class="prose prose-lg max-w-none mb-8 text-gray-700 leading-relaxed" v-html="article.content">
                                 </div>
                             </div>
@@ -333,9 +333,10 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useBlogStore } from '~/stores/blog'
-import toastr from 'toastr'
-import 'toastr/build/toastr.min.css'
 import axios from 'axios'
+
+import toastr from '~/utils/toast'
+const toast = toastr
 
 const route = useRoute()
 const router = useRouter()
@@ -418,14 +419,14 @@ const shareOnLinkedIn = () => {
 const copyLink = () => {
     const url = window.location.href
     navigator.clipboard.writeText(url)
-    toastr.success('Lien copié dans le presse-papier !')
+    toast.success('Lien copié dans le presse-papier !')
     openShareMenu.value = false
 }
 
 // Fonctions pour les commentaires
 const submitComment = async () => {
     if (!newComment.value.name || !newComment.value.email || !newComment.value.content) {
-        toastr.warning('Veuillez remplir tous les champs obligatoires')
+        toast.warning('Veuillez remplir tous les champs obligatoires')
         return
     }
 
@@ -469,10 +470,10 @@ const submitComment = async () => {
             saveInfo: newComment.value.saveInfo
         }
 
-        toastr.success('Votre commentaire a été soumis et est en attente d\'approbation !')
+        toast.success('Votre commentaire a été soumis et est en attente d\'approbation !')
     } catch (error) {
         console.error('Erreur:', error)
-        toastr.error('Une erreur est survenue. Veuillez réessayer.')
+        toast.error('Une erreur est survenue. Veuillez réessayer.')
     } finally {
         submittingComment.value = false
     }
@@ -484,18 +485,18 @@ const goToArticle = (slug) => {
 
 const subscribeNewsletter = async () => {
     if (!newsletterEmail.value) {
-        toastr.warning('Veuillez entrer votre email')
+        toast.warning('Veuillez entrer votre email')
         return
     }
     
     subscribingNewsletter.value = true
     try {
         const response = await blogStore.subscribeNewsletter(newsletterEmail.value)
-        toastr.success(response.message || 'Merci pour votre inscription !')
+        toast.success(response.message || 'Merci pour votre inscription !')
         newsletterEmail.value = ''
     } catch (error) {
         console.error('Erreur newsletter:', error)
-        toastr.error(error.response?.data?.message || 'Une erreur est survenue.')
+        toast.error(error.response?.data?.message || 'Une erreur est survenue.')
     } finally {
         subscribingNewsletter.value = false
     }

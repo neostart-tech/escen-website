@@ -354,8 +354,7 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { useNuxtApp } from '#app'
-import toastr from 'toastr'
-import 'toastr/build/toastr.min.css'
+import toastr from '~/utils/toast'
 // Si date-fns n'est pas dispo, on va utiliser une version vanilla JS pour pas faire bugger
 // Format dates
 const formatRelativeTime = (isoString) => {

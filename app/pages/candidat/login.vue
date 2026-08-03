@@ -118,7 +118,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useNuxtApp } from '#app'
-import toastr from 'toastr'
+import toastr from '~/utils/toast'
 
 definePageMeta({
   layout: false

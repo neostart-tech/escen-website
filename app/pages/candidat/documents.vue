@@ -131,8 +131,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useNuxtApp } from '#app'
-import toastr from 'toastr'
-import 'toastr/build/toastr.min.css'
+import toastr from '~/utils/toast'
 
 definePageMeta({
   layout: 'candidat'

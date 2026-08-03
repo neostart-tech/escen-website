@@ -323,8 +323,7 @@
 <script setup>
 import { ref, onMounted, computed, watch, nextTick } from 'vue'
 import { useNuxtApp } from '#app'
-import toastr from 'toastr'
-import 'toastr/build/toastr.min.css'
+import toastr from '~/utils/toast'
 import { useNiveauStore } from '~/stores/niveau'
 import { useFiliereStore } from '~/stores/filiere'
 

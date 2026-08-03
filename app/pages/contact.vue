@@ -205,8 +205,7 @@
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import Breadcrumb from '~/components/Breadcrumb.vue'
 import { useNuxtApp } from '#app'
-import toastr from 'toastr'
-import 'toastr/build/toastr.min.css'
+import toastr from '~/utils/toast'
 
 const { $intlTelInput } = useNuxtApp()
 const phoneInput = ref(null)
